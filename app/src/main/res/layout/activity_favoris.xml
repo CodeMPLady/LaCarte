@@ -8,17 +8,36 @@
     tools:context=".FavorisActivity"
     tools:ignore="RtlHardcoded">
     
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RESTAURANTS"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/rectangle"
+            android:textColor="@color/white"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/favorisRecView"/>
 
         <Button
             android:id="@+id/btnPanneau"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Panneau"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+            android:layout_marginTop="20dp"/>
+
+
+    </LinearLayout>
 
     <include
         layout="@layout/side_sheet_favoris"

@@ -1,13 +1,13 @@
 package com.mplady.lacarte.stat;
 
-import android.widget.ImageView;
+import androidx.annotation.NonNull;
 
 public class Place {
     private int id;
-    private String imgPlaceURL;
+    private final String imgPlaceURL;
     private String name;
-    private String categorie;
-    private String nbVisites;
+    private final String categorie;
+    private final String nbVisites;
 
     public Place(int id, String imgPlaceURL, String name, String categorie, String nbVisites) {
         this.id = id;
@@ -29,10 +29,6 @@ public class Place {
         return imgPlaceURL;
     }
 
-    public void setImgPlace(String imgPlace) {
-        this.imgPlaceURL = imgPlaceURL;
-    }
-
     public String getName() {
         return name;
     }
@@ -45,18 +41,11 @@ public class Place {
         return categorie;
     }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
     public String getNbVisites() {
         return nbVisites;
     }
 
-    public void setNbVisites(String nbVisites) {
-        this.nbVisites = nbVisites;
-    }
-
+    @NonNull
     @Override
     public String toString() {
         return "Place{" +
