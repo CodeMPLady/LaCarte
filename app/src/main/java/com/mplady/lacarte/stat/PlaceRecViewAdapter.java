@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.stat;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,8 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
+import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
 

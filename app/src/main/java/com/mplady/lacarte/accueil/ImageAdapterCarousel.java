@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.accueil;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.mplady.lacarte.R;
 
 public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarousel.ViewHolder> {
     Context context;

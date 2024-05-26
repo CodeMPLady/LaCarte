@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.stat;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
 

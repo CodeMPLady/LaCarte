@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.stat;
 
 import android.widget.ImageView;
 

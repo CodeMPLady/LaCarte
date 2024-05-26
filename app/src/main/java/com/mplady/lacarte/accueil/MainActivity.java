@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.accueil;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mplady.lacarte.R;
+import com.mplady.lacarte.stat.StatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView searchIcon;
