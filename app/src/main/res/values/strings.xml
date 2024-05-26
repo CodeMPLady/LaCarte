@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">La Carte</string>
+    <string name="app_name">LaCarte</string>
+    <string name="btn_aceuil_favoris">Favoris</string>
+    <string name="DESC_bouton_propos">Bouton à propos</string>
+    <string name="DESC_bouton_stats">Bouton stats</string>
+    <string name="DESC_logo">LOGO</string>
+    <string name="DESC_recycler_carousel">Recycler Carousel</string>
+    <string name="DESC_rechercher">Rechercher…</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="DESC_image_carousel">Image Carousel</string>
+    <string name="DESC_icone_de_recherche">Icone de recherche</string>
 </resources>

@@ -32,7 +32,10 @@ dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
+    implementation(libs.glide)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
