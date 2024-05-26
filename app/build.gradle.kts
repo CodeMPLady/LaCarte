@@ -34,6 +34,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.activity)
+    implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     implementation(libs.glide)
     androidTestImplementation(libs.ext.junit)

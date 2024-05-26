@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mplady.lacarte.FavorisActivity;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.stat.StatActivity;
 
@@ -82,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
         fabFavoris.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Favoris clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
+                startActivity(intent);
             }
         });
     }
