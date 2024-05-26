@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.mplady.lacarte.R;
 
 public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarousel.ViewHolder> {
-    Context context;
+    final Context context;
     private final int[] imageRessourceIDs;
 
     public ImageAdapterCarousel(Context context, int[] imageRessourceIDs) {
@@ -34,12 +34,7 @@ public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarou
         Glide.with(context)
                 .load(imageRessourceID)
                 .into(holder.imageView);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Image: " + (holder.getAdapterPosition() + 1), Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.imageView.setOnClickListener(v -> Toast.makeText(context, "Image: " + (holder.getAdapterPosition() + 1), Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -48,7 +43,7 @@ public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarou
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        final ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.list_item_image_carousel);

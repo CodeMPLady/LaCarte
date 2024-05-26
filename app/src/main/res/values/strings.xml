@@ -11,4 +11,9 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="DESC_image_carousel">Image Carousel</string>
     <string name="DESC_icone_de_recherche">Icone de recherche</string>
+    <string name="txtPlacelistitemstat">Nom</string>
+    <string name="imgplacestat">imgPlaceStat</string>
+    <string name="categorie_placeStat">Catégorie</string>
+    <string name="nombre_de_visites_stat">Nombre de visites</string>
+    <string name="txt_StatTitle">STATISTIQUES</string>
 </resources>

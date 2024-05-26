@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapter.ViewHolder> {
 
     private ArrayList<Place> places = new ArrayList<>();
-    private Context context;
+    private final Context context;
 
     public PlaceRecViewAdapter(Context context) {
         this.context = context;
@@ -43,12 +43,7 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
         holder.textCategorie.setText(places.get(position).getCategorie());
         holder.textNbVisites.setText(places.get(position).getNbVisites());
 
-        holder.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, places.get(position).getName() + " selected", Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.parent.setOnClickListener(v -> Toast.makeText(context, places.get(position).getName() + " selected", Toast.LENGTH_SHORT).show());
 
     }
 
@@ -62,13 +57,12 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView parent;
-        private ImageView imgPlace;
-        private TextView placeName;
-        private TextView textCategorie;
-        private TextView textDescription;
-        private TextView textNbVisites;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final CardView parent;
+        private final ImageView imgPlace;
+        private final TextView placeName;
+        private final TextView textCategorie;
+        private final TextView textNbVisites;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

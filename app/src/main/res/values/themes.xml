@@ -6,5 +6,7 @@
 
     </style>
 
-    <style name="Theme.LaCarte" parent="Base.Theme.LaCarte" />
+    <style name="Theme.LaCarte" parent="Base.Theme.LaCarte" >
+
+    </style>
 </resources>

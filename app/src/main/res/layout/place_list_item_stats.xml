@@ -19,12 +19,13 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:id="@+id/imgPlace"
+            android:contentDescription="@string/imgplacestat"
             android:src="@drawable/iconerestaurant"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nom"
+            android:text="@string/txtPlacelistitemstat"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -42,7 +43,7 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="7dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Catégorie"
+            android:text="@string/categorie_placeStat"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -50,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textNbVisites"
-            android:text="Nombre de visites"
+            android:text="@string/nombre_de_visites_stat"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:fontFamily="@font/fira_sans"
