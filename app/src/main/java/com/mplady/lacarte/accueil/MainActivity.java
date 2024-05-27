@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.FavorisActivity;
 import com.mplady.lacarte.R;
+import com.mplady.lacarte.SearchResultsActivity;
 import com.mplady.lacarte.stat.StatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -103,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, "Search submitted: " + query, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
+                intent.putExtra("search_query", query);
+                startActivity(intent);
                 return false;
             }
             @Override
