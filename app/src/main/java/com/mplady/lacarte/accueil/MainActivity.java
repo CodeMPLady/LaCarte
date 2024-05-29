@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView searchCardView;
 
 
+    // TODO: régler le probleme des images du carousel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

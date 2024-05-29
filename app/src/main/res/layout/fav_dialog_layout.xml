@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
+    <!-- TODO: Rendre tout ça plus jolie -->
+
     <TextView
         android:id="@+id/dialogTitle"
         android:layout_width="wrap_content"

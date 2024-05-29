@@ -1,18 +1,11 @@
 package com.mplady.lacarte.favori;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import androidx.appcompat.app.AlertDialog;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -25,13 +18,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FavorisActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     boolean[] filter = new boolean[3];
     ArrayList<Favori> favoris = new ArrayList<>();
+    ArrayList<Favori> filteredFavoris = new ArrayList<>();
     RecyclerView favorisRecView;
+    FavoriRecViewAdapter adapter;
 
 
     @Override
@@ -46,30 +40,15 @@ public class FavorisActivity extends AppCompatActivity {
         FloatingActionButton btnFilter = findViewById(R.id.bntFiltre);
         drawerLayout = findViewById(R.id.main);
         favorisRecView = findViewById(R.id.favorisRecView);
-        FavoriRecViewAdapter adapter = new FavoriRecViewAdapter(this);
+        adapter = new FavoriRecViewAdapter(this);
         setData(favoris);
 
 
-        btnPanneau.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.END);
-            }
-        });
+        btnPanneau.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.END));
 
-        btnFermer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawer(GravityCompat.END);
-            }
-        });
+        btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
 
-        btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
+        btnFilter.setOnClickListener(v -> showDialog());
 
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
@@ -81,65 +60,47 @@ public class FavorisActivity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.fav_dialog_layout, null);
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this).setView(dialogView);
-        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
         CheckBox checkRestaurant = dialogView.findViewById(R.id.checkRestaurant);
         CheckBox checkSupermarche = dialogView.findViewById(R.id.checkSupermache);
         CheckBox checkMode = dialogView.findViewById(R.id.checkMode);
         Button btnValider = dialogView.findViewById(R.id.btnValider);
 
         AlertDialog dialog = builder.create();
-        btnValider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isRestaurant = checkRestaurant.isChecked();
-                boolean isSupermarche = checkSupermarche.isChecked();
-                boolean isMode = checkMode.isChecked();
-                if (isRestaurant)
-                    filter[0] = true;
-                if (isSupermarche)
-                    filter[1] = true;
-                if (isMode)
-                    filter[2] = true;
-                dialog.dismiss();
-                filtre();
-            }
+        btnValider.setOnClickListener(v -> {
+            boolean isRestaurant = checkRestaurant.isChecked();
+            boolean isSupermarche = checkSupermarche.isChecked();
+            boolean isMode = checkMode.isChecked();
+
+            filter[0] = isRestaurant;
+            filter[1] = isSupermarche;
+            filter[2] = isMode;
+            dialog.dismiss();
+            filtre();
         });
         dialog.show();
     }
 
     private void filtre() {
-        System.out.println("filtre: " + filter[0] + filter[1] + filter[2]);
+        filteredFavoris.clear();
         for (Favori fav : favoris) {
             String categorie = fav.getCategorie();
-            System.out.println(categorie);
-            if (filter[0] && categorie.equals("Restaurant")) {
-                System.out.println("FILTRER !");
-                fav.state = false;
-            }
-            else if (filter[1] && categorie.equals("Supermarche")) {
-                System.out.println("FILTRER !");
-                fav.state = true;
-            }
-            else {
-                System.out.println("PAS FILTRER !");
+            if ((filter[0] && categorie.equals("Restaurant")) ||
+                    (filter[1] && categorie.equals("Supermarche")) ||
+                    (filter[2] && categorie.equals("Mode"))) {
+                filteredFavoris.add(fav);
             }
         }
-
-
+        adapter.updateFavoris(filteredFavoris);
     }
-    private void restartActivity() {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
-    private void setView() {
+     private void setView() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
     }
 
-    private void setData(ArrayList<Favori> favoris) {
+    private static void setData(ArrayList<Favori> favoris) {
+        // TODO : Mettre 6 favoris 2 pour chaque categories
+
         Favori resto = new Favori(1, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Shin-ya Ramen", "Restaurant");
         resto.state = true;
         favoris.add(resto);
@@ -149,9 +110,5 @@ public class FavorisActivity extends AppCompatActivity {
         Favori resto3 = new Favori(3, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Cocorico", "lady");
         resto3.state = true;
         favoris.add(resto3);
-       // favoris.add(new Favori(1, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Shin-ya Ramen", "Restaurant"));
-      //  favoris.add(new Favori(2, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdiNlirY34rzkkar1CXN2DLUagEd0mtmr2A", "Les Cabochards", "resto"));
-       // favoris.add(new Favori(3, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Cocorico", "lady"));
-
     }
 }

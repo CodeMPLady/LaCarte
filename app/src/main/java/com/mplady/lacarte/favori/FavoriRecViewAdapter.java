@@ -62,6 +62,12 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         notifyDataSetChanged();
     }
 
+    public void updateFavoris(ArrayList<Favori> newFavoris) {
+        this.favoris.clear();
+        this.favoris.addAll(newFavoris);
+        notifyDataSetChanged();
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
