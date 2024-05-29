@@ -35,7 +35,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtName.setText(favoris.get(position).getNom());
-        holder.txtDescription.setText(favoris.get(position).getDescription());
+        holder.txtDescription.setText(favoris.get(position).getCategorie());
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +43,13 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
                 Toast.makeText(context, "click", Toast.LENGTH_SHORT).show();
             }
         });
+        System.out.println("state = " + favoris.get(position).state);
+
+        if (favoris.get(position).state) {
+            holder.makeVisible(holder.parent);
+        } else {
+            holder.makeInvisible(holder.parent);
+        }
     }
 
     @Override
@@ -55,18 +62,26 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         notifyDataSetChanged();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final CardView parent;
         private final TextView txtName;
         private final TextView txtDescription;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.parent);
             txtName = itemView.findViewById(R.id.txtName);
             txtDescription = itemView.findViewById(R.id.txtDescription);
         }
+
+        public void makeVisible(CardView parent) {
+            parent.setVisibility(View.VISIBLE);
+        }
+
+        public void makeInvisible(CardView parent) {
+            parent.setVisibility(View.INVISIBLE);
+        }
     }
-
-
 }

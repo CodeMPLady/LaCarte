@@ -1,19 +1,33 @@
 package com.mplady.lacarte.favori;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 
 public class Favori {
     private int id;
     private String imgLieuURL;
     private String nom;
-    private String description;
+    private String categorie;
 
-    public Favori(int id, String imgLieuURL, String nom, String description) {
+    public boolean state = true;
+
+
+    public Favori(int id, String imgLieuURL, String nom, String categorie) {
         this.id = id;
         this.imgLieuURL = imgLieuURL;
         this.nom = nom;
-        this.description = description;
+        this.categorie = categorie;
     }
+
+    public void makeVisible(CardView parent) {
+        parent.setVisibility(CardView.VISIBLE);
+    }
+
+    public void makeInvisible(CardView parent) {
+        parent.setVisibility(CardView.INVISIBLE);
+    }
+
+
 
     public int getId() {
         return id;
@@ -39,12 +53,12 @@ public class Favori {
         this.nom = nom;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCategorie() {
+        return categorie;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 
     @NonNull
@@ -54,7 +68,7 @@ public class Favori {
                 "id=" + id +
                 ", imgLieuURL='" + imgLieuURL + '\'' +
                 ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
+                ", description='" + categorie + '\'' +
                 '}';
     }
 }

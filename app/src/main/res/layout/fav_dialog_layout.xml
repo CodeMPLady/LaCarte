@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Filtre"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkRestaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant"
+        android:layout_below="@+id/dialogTitle"/>
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkSupermache"
+        android:text="Supermache"
+        android:layout_below="@+id/checkRestaurant" />
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkMode"
+        android:text="Mode"
+        android:layout_below="@+id/checkSupermache"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/btnValider"
+        android:text="Valider"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/checkMode"/>
+
+
+</RelativeLayout>

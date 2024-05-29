@@ -41,60 +41,13 @@
             app:layout_constraintStart_toEndOf="@+id/tabFavoris"
             app:layout_constraintTop_toTopOf="@+id/tabFavoris" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/bntFiltre">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/filtresChipGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:elevation="4dp"
-                android:gravity="center">
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#950202"
-                    android:text="Restaurant"
-                    android:textColor="@color/white" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#950202"
-                    android:text="Mode"
-                    android:textColor="@color/white" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#950202"
-                    android:text="Supermarche"
-                    android:textColor="@color/white" />
-
-
-            </com.google.android.material.chip.ChipGroup>
-        </LinearLayout>
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorisRecView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tabFavoris"
             android:layout_marginTop="28dp"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintHorizontal_bias="0.579"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabFavoris" />
