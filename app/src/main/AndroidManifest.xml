@@ -18,7 +18,7 @@
             android:name=".SearchResultsActivity"
             android:exported="false" />
         <activity
-            android:name=".FavorisActivity"
+            android:name=".favori.FavorisActivity"
             android:exported="false" />
         <activity
             android:name=".stat.StatActivity"

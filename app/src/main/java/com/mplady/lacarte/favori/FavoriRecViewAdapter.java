@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.favori;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,13 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
 
 public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdapter.ViewHolder>{
     private ArrayList<Favori> favoris = new ArrayList<>();
-    private Context context;
+    private final Context context;
 
     public FavoriRecViewAdapter(Context context) {
         this.context = context;
@@ -55,11 +55,11 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private CardView parent;
-        private TextView txtName;
-        private TextView txtDescription;
+        private final CardView parent;
+        private final TextView txtName;
+        private final TextView txtDescription;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.parent);

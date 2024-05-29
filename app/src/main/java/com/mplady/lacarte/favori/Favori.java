@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.favori;
 
 import androidx.annotation.NonNull;
 

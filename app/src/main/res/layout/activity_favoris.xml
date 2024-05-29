@@ -5,39 +5,120 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavorisActivity"
+    tools:context=".favori.FavorisActivity"
     tools:ignore="RtlHardcoded">
-    
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="HardcodedText">
+
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tabFavoris"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="      RESTAURANTS"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_vertical"
+            android:layout_marginTop="32dp"
             android:background="@drawable/rectangle"
-            android:textColor="@color/white"/>
+            android:gravity="center_vertical"
+            android:text="       FAVORIS"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bntFiltre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnPanneau"
+            android:contentDescription="Filtre favoris"
+            android:src="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="@+id/tabFavoris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tabFavoris"
+            app:layout_constraintTop_toTopOf="@+id/tabFavoris" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/bntFiltre">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filtresChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:elevation="4dp"
+                android:gravity="center">
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#950202"
+                    android:text="Restaurant"
+                    android:textColor="@color/white" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#950202"
+                    android:text="Mode"
+                    android:textColor="@color/white" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#950202"
+                    android:text="Supermarche"
+                    android:textColor="@color/white" />
+
+
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:id="@+id/favorisRecView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/favorisRecView"/>
+            android:layout_below="@+id/tabFavoris"
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintHorizontal_bias="0.579"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabFavoris" />
 
         <Button
             android:id="@+id/btnPanneau"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/favorisRecView"
             android:layout_gravity="center"
+            android:layout_marginTop="32dp"
             android:text="Panneau"
-            android:layout_marginTop="20dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/favorisRecView" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="275dp" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         layout="@layout/side_sheet_favoris"
