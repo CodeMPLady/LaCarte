@@ -68,7 +68,7 @@ public class FavorisActivity extends AppCompatActivity {
         FloatingActionButton btnAnnuler = dialogView.findViewById(R.id.btnAnnuler);
 
         AlertDialog dialog = builder.create();
-        btnAnnuler.setOnClickListener(v -> recreate());
+        btnAnnuler.setOnClickListener(v -> dialog.dismiss());
         btnValider.setOnClickListener(v -> {
             boolean isRestaurant = checkRestaurant.isChecked();
             boolean isSupermarche = checkSupermarche.isChecked();
