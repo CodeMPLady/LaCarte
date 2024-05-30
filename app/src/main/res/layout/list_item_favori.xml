@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
@@ -13,16 +13,20 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingStart="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nom"
             android:textStyle="bold"
+            android:fontFamily="@font/alegreya"
             android:id="@+id/txtName"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="9dp"/>
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"/>
 
         <!--<Button
             android:id="@+id/plusPannel"
@@ -38,10 +42,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="Catégorie"
+            android:fontFamily="@font/alegreya"
             android:id="@+id/txtDescription"
             android:layout_below="@+id/txtName"
-            android:layout_margin="10dp"/>
+            android:layout_margin="6dp"/>
 
     </RelativeLayout>
 

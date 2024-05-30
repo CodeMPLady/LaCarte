@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".favori.FavorisActivity"
-    tools:ignore="RtlHardcoded">
+    tools:ignore="RtlHardcoded"
+    android:background="#C6C6C6">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

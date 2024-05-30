@@ -50,6 +50,8 @@ public class FavorisActivity extends AppCompatActivity {
 
         btnFilter.setOnClickListener(v -> showDialog());
 
+
+
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
         adapter.setFavoris(favoris);
@@ -63,9 +65,11 @@ public class FavorisActivity extends AppCompatActivity {
         CheckBox checkRestaurant = dialogView.findViewById(R.id.checkRestaurant);
         CheckBox checkSupermarche = dialogView.findViewById(R.id.checkSupermache);
         CheckBox checkMode = dialogView.findViewById(R.id.checkMode);
-        Button btnValider = dialogView.findViewById(R.id.btnValider);
+        FloatingActionButton btnValider = dialogView.findViewById(R.id.btnValider);
+        FloatingActionButton btnAnnuler = dialogView.findViewById(R.id.btnAnnuler);
 
         AlertDialog dialog = builder.create();
+        btnAnnuler.setOnClickListener(v -> dialog.dismiss());
         btnValider.setOnClickListener(v -> {
             boolean isRestaurant = checkRestaurant.isChecked();
             boolean isSupermarche = checkSupermarche.isChecked();
@@ -101,14 +105,9 @@ public class FavorisActivity extends AppCompatActivity {
     private static void setData(ArrayList<Favori> favoris) {
         // TODO : Mettre 6 favoris 2 pour chaque categories
 
-        Favori resto = new Favori(1, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Shin-ya Ramen", "Restaurant");
-        resto.state = true;
-        favoris.add(resto);
-        Favori resto2 = new Favori(2, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdiNlirY34rzkkar1CXN2DLUagEd0mtmr", "Les Cabochards", "resto");
-        resto2.state = true;
-        favoris.add(resto2);
-        Favori resto3 = new Favori(3, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Cocorico", "lady");
-        resto3.state = true;
-        favoris.add(resto3);
+        favoris.add(new Favori(1, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Shin-ya Ramen", "Restaurant"));
+        favoris.add(new Favori(2, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdiNlirY34rzkkar1CXN2DLUagEd0mt", "Leclerc", "Supermarche"));
+        favoris.add(new Favori(3, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie de Brienne", "Pharmacie"));
+
     }
 }
