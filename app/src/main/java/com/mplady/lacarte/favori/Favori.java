@@ -9,8 +9,6 @@ public class Favori {
     private String nom;
     private String categorie;
 
-    public boolean state = true;
-
 
     public Favori(int id, String imgLieuURL, String nom, String categorie) {
         this.id = id;
@@ -18,17 +16,6 @@ public class Favori {
         this.nom = nom;
         this.categorie = categorie;
     }
-
-    public void makeVisible(CardView parent) {
-        parent.setVisibility(CardView.VISIBLE);
-    }
-
-    public void makeInvisible(CardView parent) {
-        parent.setVisibility(CardView.INVISIBLE);
-    }
-
-
-
     public int getId() {
         return id;
     }

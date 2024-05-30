@@ -43,13 +43,6 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
                 Toast.makeText(context, "click", Toast.LENGTH_SHORT).show();
             }
         });
-        System.out.println("state = " + favoris.get(position).state);
-
-        if (favoris.get(position).state) {
-            holder.makeVisible(holder.parent);
-        } else {
-            holder.makeInvisible(holder.parent);
-        }
     }
 
     @Override
