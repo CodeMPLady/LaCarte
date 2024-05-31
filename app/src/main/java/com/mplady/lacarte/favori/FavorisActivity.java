@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class FavorisActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
-    boolean[] filter = new boolean[3];
+    boolean[] filter = new boolean[5];
     ArrayList<Favori> favoris = new ArrayList<>();
     ArrayList<Favori> filteredFavoris = new ArrayList<>();
     RecyclerView favorisRecView;
@@ -61,9 +61,13 @@ public class FavorisActivity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.fav_dialog_layout, null);
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this).setView(dialogView);
+
         CheckBox checkRestaurant = dialogView.findViewById(R.id.checkRestaurant);
+        CheckBox checkEssence = dialogView.findViewById(R.id.checkEssence);
         CheckBox checkSupermarche = dialogView.findViewById(R.id.checkSupermache);
+        CheckBox checkPharmacie = dialogView.findViewById(R.id.checkPharmacie);
         CheckBox checkMode = dialogView.findViewById(R.id.checkMode);
+
         FloatingActionButton btnValider = dialogView.findViewById(R.id.btnValider);
         FloatingActionButton btnAnnuler = dialogView.findViewById(R.id.btnAnnuler);
 
@@ -71,12 +75,16 @@ public class FavorisActivity extends AppCompatActivity {
         btnAnnuler.setOnClickListener(v -> dialog.dismiss());
         btnValider.setOnClickListener(v -> {
             boolean isRestaurant = checkRestaurant.isChecked();
+            boolean isEssence = checkEssence.isChecked();
             boolean isSupermarche = checkSupermarche.isChecked();
+            boolean isPharmacie = checkPharmacie.isChecked();
             boolean isMode = checkMode.isChecked();
 
             filter[0] = isRestaurant;
-            filter[1] = isSupermarche;
-            filter[2] = isMode;
+            filter[1] = isEssence;
+            filter[2] = isSupermarche;
+            filter[3] = isPharmacie;
+            filter[4] = isMode;
             filtre();
             dialog.dismiss();
         });
@@ -89,13 +97,15 @@ public class FavorisActivity extends AppCompatActivity {
             String categorie = fav.getCategorie();
             System.out.println(fav.getNom());
             if ((filter[0] && categorie.equals("Restaurant")) ||
-                    (filter[1] && categorie.equals("Supermarche")) ||
-                    (filter[2] && categorie.equals("Mode"))) {
+                    (filter[1] && categorie.equals("Station essence")) ||
+                    (filter[2] && categorie.equals("Supermarche")) ||
+                    (filter[3] && categorie.equals("Pharmacie")) ||
+                    (filter[4] && categorie.equals("Mode"))) {
                 filteredFavoris.add(fav);
                 System.out.println(fav.getNom());
             }
         }
-        if (!filter[0] && !filter[1] && !filter[2])
+        if (!filter[0] && !filter[1] && !filter[2] && !filter[3] && !filter[4])
             recreate();
         adapter.updateFavoris(filteredFavoris);
     }
@@ -107,10 +117,14 @@ public class FavorisActivity extends AppCompatActivity {
 
     private static void setData(ArrayList<Favori> favoris) {
         favoris.add(new Favori(1, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Shin-ya Ramen", "Restaurant"));
-        favoris.add(new Favori(2, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdiNlirY34rzkkar1CXN2DLUagEd0mt", "PhoSaigon", "Restaurant"));
-        favoris.add(new Favori(3, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdiNlirY34rzkkar1CXN2DLUagEd0mt", "Leclerc", "Supermarche"));
-        favoris.add(new Favori(4, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Carfour City", "Supermarche"));
-        favoris.add(new Favori(5, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdiNlirY34rzkkar1CXN2DLUagEd0mt", "Celio", "Mode"));
-        favoris.add(new Favori(6, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdiNlirY34rzkkar1CXN2DLUagEd", "H&M", "Mode"));
+        favoris.add(new Favori(2, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "PhoSaigon", "Restaurant"));
+        favoris.add(new Favori(3, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Leclerc", "Supermarche"));
+        favoris.add(new Favori(4, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Carrefour City", "Supermarche"));
+        favoris.add(new Favori(5, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Celio", "Mode"));
+        favoris.add(new Favori(6, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "H&M", "Mode"));
+        favoris.add(new Favori(7, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Total", "Station essence"));
+        favoris.add(new Favori(8, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Esso", "Station essence"));
+        favoris.add(new Favori(9, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie de Brienne", "Pharmacie"));
+        favoris.add(new Favori(10, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie des Tuileries", "Pharmacie"));
     }
 }

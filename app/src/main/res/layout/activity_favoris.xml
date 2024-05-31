@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".favori.FavorisActivity"
     tools:ignore="RtlHardcoded"
-    android:background="#C6C6C6">
+    android:background="@drawable/bgfavoris">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,11 +20,13 @@
             android:id="@+id/tabFavoris"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:background="@drawable/rectangle"
             android:gravity="center_vertical"
-            android:text="       FAVORIS"
+            android:text="        FAVORIS"
             android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline13"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,23 +37,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnPanneau"
+            android:backgroundTint="#950202"
             android:contentDescription="Filtre favoris"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/tuneicon"
+            app:fabCustomSize="50dp"
+            app:fabSize="auto"
             app:layout_constraintBottom_toBottomOf="@+id/tabFavoris"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tabFavoris"
-            app:layout_constraintTop_toTopOf="@+id/tabFavoris" />
+            app:layout_constraintTop_toTopOf="@+id/tabFavoris"
+            app:layout_constraintVertical_bias="0.444"
+            app:tint="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorisRecView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_below="@+id/tabFavoris"
-            android:layout_marginTop="28dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="0.579"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabFavoris" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline14"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/guideline13" />
 
         <Button
             android:id="@+id/btnPanneau"
@@ -59,11 +65,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/favorisRecView"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/black"
             android:text="Panneau"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/favorisRecView" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline14"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -71,6 +79,34 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="275dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="110dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="395dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="731dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
