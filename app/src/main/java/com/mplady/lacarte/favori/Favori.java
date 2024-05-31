@@ -1,7 +1,6 @@
 package com.mplady.lacarte.favori;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 
 public class Favori {
     private int id;

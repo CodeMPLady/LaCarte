@@ -7,22 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.card.MaterialCardView;
 import com.mplady.lacarte.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdapter.ViewHolder>{
-    private ArrayList<Favori> favoris = new ArrayList<>();
+    private ArrayList<Favori> favoris;
     private final FavorisActivity activity;
     private final Context context;
 
@@ -53,12 +48,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
                 .load(favoris.get(position).getImgLieuURL())
                         .into(holder.imgLieu);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.openDrawer(favoriNom, favoriCategorie, favoriImg);
-            }
-        });
+        holder.itemView.setOnClickListener(v -> activity.openDrawer(favoriNom, favoriCategorie, favoriImg));
     }
 
     @Override
@@ -80,14 +70,12 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final MaterialCardView parent;
         private final TextView txtName;
         private final TextView txtDescription;
         private final ImageView imgLieu;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            parent = itemView.findViewById(R.id.parent);
             txtName = itemView.findViewById(R.id.txtName);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             imgLieu = itemView.findViewById(R.id.imgLieu);
