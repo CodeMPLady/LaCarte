@@ -17,13 +17,18 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.mplady.lacarte.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdapter.ViewHolder>{
     private ArrayList<Favori> favoris = new ArrayList<>();
+    private final FavorisActivity activity;
     private final Context context;
 
-    public FavoriRecViewAdapter(Context context) {
+    public FavoriRecViewAdapter(ArrayList<Favori> favoris, FavorisActivity activity, Context context) {
+        this.favoris = favoris;
+        this.activity = activity;
         this.context = context;
     }
 
@@ -37,6 +42,10 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     @SuppressLint("CheckResult")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String favoriNom = String.valueOf(favoris.get(position).getNom());
+        String favoriCategorie = String.valueOf(favoris.get(position).getCategorie());
+        String favoriImg = String.valueOf(favoris.get(position).getImgLieuURL());
+
         holder.txtName.setText(favoris.get(position).getNom());
         holder.txtDescription.setText(favoris.get(position).getCategorie());
         Glide.with(context)
@@ -44,10 +53,10 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
                 .load(favoris.get(position).getImgLieuURL())
                         .into(holder.imgLieu);
 
-        holder.parent.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "click", Toast.LENGTH_SHORT).show();
+                activity.openDrawer(favoriNom, favoriCategorie, favoriImg);
             }
         });
     }
@@ -82,14 +91,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
             txtName = itemView.findViewById(R.id.txtName);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             imgLieu = itemView.findViewById(R.id.imgLieu);
-        }
 
-        public void makeVisible(CardView parent) {
-            parent.setVisibility(View.VISIBLE);
-        }
-
-        public void makeInvisible(CardView parent) {
-            parent.setVisibility(View.INVISIBLE);
         }
     }
 }

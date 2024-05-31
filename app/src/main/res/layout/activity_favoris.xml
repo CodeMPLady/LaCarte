@@ -36,7 +36,6 @@
             android:id="@+id/bntFiltre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnPanneau"
             android:backgroundTint="#950202"
             android:contentDescription="Filtre favoris"
             android:src="@drawable/tuneicon"
@@ -54,24 +53,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_below="@+id/tabFavoris"
-            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
             app:layout_constraintStart_toStartOf="@+id/guideline15"
             app:layout_constraintTop_toTopOf="@+id/guideline13" />
-
-        <Button
-            android:id="@+id/btnPanneau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/favorisRecView"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/black"
-            android:text="Panneau"
-            app:layout_constraintEnd_toStartOf="@+id/guideline14"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="@+id/guideline15"
-            app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"

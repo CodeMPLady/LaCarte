@@ -6,6 +6,8 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -13,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
@@ -27,6 +30,10 @@ public class FavorisActivity extends AppCompatActivity {
     RecyclerView favorisRecView;
     FavoriRecViewAdapter adapter;
 
+    private ImageView imgLieuDetails;
+    private TextView txtNomLieu;
+    private TextView txtTypeLieu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +41,19 @@ public class FavorisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favoris);
         setView();
 
-        Button btnPanneau = findViewById(R.id.btnPanneau);
         Button btnFermer = findViewById(R.id.btnFermer);
         FloatingActionButton btnFilter = findViewById(R.id.bntFiltre);
         drawerLayout = findViewById(R.id.main);
+
+        txtNomLieu = findViewById(R.id.txtNomLieu);
+        txtTypeLieu = findViewById(R.id.txtTypeLieu);
+        imgLieuDetails = findViewById(R.id.imgLieuDetails);
+
         favorisRecView = findViewById(R.id.favorisRecView);
-        adapter = new FavoriRecViewAdapter(this);
+        adapter = new FavoriRecViewAdapter(favoris, this, this);
         setData(favoris);
 
 
-        btnPanneau.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.END));
         btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
         btnFilter.setOnClickListener(v -> {
             favoris.clear();
@@ -54,6 +64,13 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
         adapter.setFavoris(favoris);
+    }
+
+    void openDrawer(String nom, String categorie, String imfURL) {
+        drawerLayout.openDrawer(GravityCompat.END);
+        txtNomLieu.setText(nom);
+        txtTypeLieu.setText(categorie);
+        Glide.with(this).load(imfURL).into(imgLieuDetails);
     }
 
     private void showDialog() {
@@ -95,14 +112,12 @@ public class FavorisActivity extends AppCompatActivity {
         filteredFavoris.clear();
         for (Favori fav : favoris) {
             String categorie = fav.getCategorie();
-            System.out.println(fav.getNom());
             if ((filter[0] && categorie.equals("Restaurant")) ||
                     (filter[1] && categorie.equals("Station essence")) ||
                     (filter[2] && categorie.equals("Supermarche")) ||
                     (filter[3] && categorie.equals("Pharmacie")) ||
                     (filter[4] && categorie.equals("Mode"))) {
                 filteredFavoris.add(fav);
-                System.out.println(fav.getNom());
             }
         }
         if (!filter[0] && !filter[1] && !filter[2] && !filter[3] && !filter[4])
