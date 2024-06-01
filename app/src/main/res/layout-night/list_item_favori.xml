@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#1e223c"
+    app:strokeWidth="1dp"
+    android:layout_margin="8dp"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingStart="5dp"
+        android:background="#31384A">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/imgLieu"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:fontFamily="@font/alegreya"
+            android:id="@+id/txtName"
+            android:layout_below="@+id/imgLieu"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"/>
+
+        <!--<Button
+            android:id="@+id/plusPannel"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-5dp"
+            android:layout_marginEnd="-5dp"
+            app:icon="@drawable/ic_add" />-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Catégorie"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/alegreya"
+            android:id="@+id/txtDescription"
+            android:layout_below="@+id/txtName"
+            android:layout_margin="6dp"/>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
