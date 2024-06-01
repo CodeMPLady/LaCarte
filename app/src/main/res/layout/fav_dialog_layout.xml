@@ -8,9 +8,6 @@
     android:paddingTop="13dp"
     android:paddingBottom="10dp">
 
-    <!-- TODO: Rendre tout ça plus jolie -->
-    <!-- TODO 2: Faire les layouts Nuit et horizontal -->
-
     <TextView
         android:id="@+id/dialogTitle"
         android:layout_width="wrap_content"
