@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.fitness)
     implementation(libs.places)
+    implementation(libs.fragment)
     testImplementation(libs.junit)
     implementation(libs.glide)
     androidTestImplementation(libs.ext.junit)

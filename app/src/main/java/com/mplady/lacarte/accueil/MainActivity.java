@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                         .setSessionToken(token)
                         .setQuery(newText)
+                        .setCountries("FR")
                         .build();
 
                 placesClient.findAutocompletePredictions(request).addOnSuccessListener(response -> {
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     adapter.notifyDataSetChanged();
                 }).addOnFailureListener(exception -> {
-                    System.out.println("Error: ");
+                    System.out.println("Error fetching predictions: " + exception.getMessage());
                 });
                 return false;
             }
