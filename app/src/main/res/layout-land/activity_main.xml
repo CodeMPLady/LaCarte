@@ -120,6 +120,16 @@
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         app:layout_constraintVertical_bias="0.8" />
 
+    <ListView
+        android:id="@+id/suggestionsListView"
+        android:layout_width="400dp"
+        android:layout_height="170dp"
+        android:divider="@color/black"
+        android:dividerHeight="0.5dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"

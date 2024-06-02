@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setSearchView() {
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, suggestionList);
+        adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
         listView.setAdapter(adapter);
         searchIcon.setOnClickListener(v -> toggleSearchView());
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

@@ -110,15 +110,6 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintWidth_max="700dp" />
 
-    <ListView
-        android:id="@+id/suggestionsListView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="70dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCarousel"
         android:layout_width="0dp"
@@ -130,9 +121,21 @@
         app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/fabFavoris"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.647" />
+
+    <ListView
+        android:id="@+id/suggestionsListView"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="70dp"
+        android:divider="@color/black"
+        android:dividerHeight="0.5dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
