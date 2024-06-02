@@ -36,8 +36,12 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.fitness)
+    implementation(libs.places)
     testImplementation(libs.junit)
     implementation(libs.glide)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.secrets.gradle.plugin)
 }

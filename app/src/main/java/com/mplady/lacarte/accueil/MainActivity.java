@@ -6,9 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
+
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.AutocompletePrediction;
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +22,17 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.SearchResultsActivity;
+import com.mplady.lacarte.searchResult.SearchResultsActivity;
 import com.mplady.lacarte.stat.StatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView searchIcon;
@@ -29,9 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private ExtendedFloatingActionButton fabFavoris;
     private FloatingActionButton  fabStat, fabAbout;
     private CardView searchCardView;
+    private ArrayAdapter<String> adapter;
+    private ListView listView;
+    private final List<String> suggestionList = new ArrayList<>();
 
 
-    // TODO: régler le probleme des images du carousel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
         setSearchView();
         btnOnClicks();
         animatedBackgroundSearchIcon();
-    }
 
+        Places.initialize(getApplicationContext(), "AIzaSyBWR8TQ6LpbSQCSrha4LlFE_VaElizIBpQ");
+    }
     private void setView() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -95,11 +109,13 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("A propos de La Carte");
         builder.setMessage("La Carte vous permet de chercher des lieux, d'accéder à une liste en fonction de leur catégorie et de votre position et de les mettre dans vos favoris afin d'y retourner facilement.\n\n" +
-                "Cette application a été développée par Michel PUGLIESE et Naémie CATHALA.\n\n" + "Nous avons également développé un site de cuisine.");
+                "Cette application a été développée par Michel P. et Naémie C.\n\n" + "Nous avons également développé un site de cuisine.");
         return builder;
     }
 
     private void setSearchView() {
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, suggestionList);
+        listView.setAdapter(adapter);
         searchIcon.setOnClickListener(v -> toggleSearchView());
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -109,12 +125,39 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
+                PlacesClient placesClient = Places.createClient(MainActivity.this);
+
+                AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
+                FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
+                        .setSessionToken(token)
+                        .setQuery(newText)
+                        .build();
+
+                placesClient.findAutocompletePredictions(request).addOnSuccessListener(response -> {
+                    suggestionList.clear();
+                    for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
+                        suggestionList.add(prediction.getFullText(null).toString());
+                    }
+                    adapter.notifyDataSetChanged();
+                }).addOnFailureListener(exception -> {
+                    System.out.println("Error: ");
+                });
                 return false;
             }
         });
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedSuggestion = suggestionList.get(position);
+
+            Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
+            intent.putExtra("search_query", selectedSuggestion);
+            startActivity(intent);
+        });
     }
+
     private void toggleSearchView() {
         if (searchView.getVisibility() == View.GONE) {
             Animation slideIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -152,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        listView = findViewById(R.id.suggestionsListView);
         searchView = findViewById(R.id.searchView);
         searchIcon = findViewById(R.id.searchIcon);
         fabFavoris = findViewById(R.id.fabFavoris);
