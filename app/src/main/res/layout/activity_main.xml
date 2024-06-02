@@ -90,6 +90,7 @@
             android:src="@drawable/searchiconfinal"
             android:visibility="visible"/>
 
+
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.SearchView
@@ -108,6 +109,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintWidth_max="700dp" />
+
+    <ListView
+        android:id="@+id/suggestionsListView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCarousel"
