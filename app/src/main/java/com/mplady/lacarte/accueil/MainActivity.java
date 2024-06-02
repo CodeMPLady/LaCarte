@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton  fabStat, fabAbout;
     private CardView searchCardView;
     private ArrayAdapter<String> adapter;
-    ListView listView;
+    private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
 
 
@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         animatedBackgroundSearchIcon();
 
         Places.initialize(getApplicationContext(), "AIzaSyBWR8TQ6LpbSQCSrha4LlFE_VaElizIBpQ");
-
-
     }
     private void setView() {
         View decorView = getWindow().getDecorView();
@@ -118,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
     private void setSearchView() {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, suggestionList);
         listView.setAdapter(adapter);
-
         searchIcon.setOnClickListener(v -> toggleSearchView());
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -198,14 +195,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        listView = findViewById(R.id.suggestionsListView);
         searchView = findViewById(R.id.searchView);
         searchIcon = findViewById(R.id.searchIcon);
         fabFavoris = findViewById(R.id.fabFavoris);
         fabStat = findViewById(R.id.fabStat);
         fabAbout = findViewById(R.id.fabAbout);
         searchCardView = findViewById(R.id.searchCardView);
-
-        listView = findViewById(R.id.suggestionsListView);
-
     }
 }
