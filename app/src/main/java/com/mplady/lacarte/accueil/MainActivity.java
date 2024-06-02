@@ -26,6 +26,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.searchResult.SearchResultsActivity;
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         btnOnClicks();
         animatedBackgroundSearchIcon();
 
-        Places.initialize(getApplicationContext(), "AIzaSyBWR8TQ6LpbSQCSrha4LlFE_VaElizIBpQ");
+        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
     }
     private void setView() {
         View decorView = getWindow().getDecorView();

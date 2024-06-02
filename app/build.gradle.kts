@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -5,6 +7,8 @@ plugins {
 android {
     namespace = "com.mplady.lacarte"
     compileSdk = 34
+
+    android.buildFeatures.buildConfig = true
 
     defaultConfig {
         applicationId = "com.mplady.lacarte"
@@ -14,6 +18,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "MAPS_API_KEY", "\"${properties.getProperty("MAPS_API_KEY")}\"")
+        val apiKey = properties.getProperty("MAPS_API_KEY") ?: ""
+        manifestPlaceholders["GOOGLE_KEY"] = apiKey
     }
 
     buildTypes {
@@ -26,6 +36,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
