@@ -31,6 +31,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private String query;
     GoogleMap gMap;
     FragmentContainerView map;
+    private boolean isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +53,20 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
         adresseLieuSearch.setText(query);
 
+        isFavorite = false;
+
         imageBtnFavoris.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SearchResultsActivity.this, query + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
+                if (!isFavorite) {
+                    imageBtnFavoris.setImageResource(R.drawable.starfill);
+                    isFavorite = true;
+                    Toast.makeText(SearchResultsActivity.this, query + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
+                } else {
+                    imageBtnFavoris.setImageResource(R.drawable.starempty);
+                    isFavorite = false;
+                    Toast.makeText(SearchResultsActivity.this, query + " retiré des favoris !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

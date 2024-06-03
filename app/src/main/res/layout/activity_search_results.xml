@@ -78,7 +78,6 @@
         android:layout_marginEnd="24dp"
         android:contentDescription="Bouton favoris"
         android:src="@drawable/starempty"
-        app:tint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline19" />
 
