@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         if (searchView.getVisibility() == View.GONE) {
             Animation slideIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
             searchView.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.VISIBLE);
             searchIcon.setVisibility(View.GONE);
             searchCardView.setVisibility(View.GONE);
             searchView.startAnimation(slideIn);
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
             searchView.startAnimation(slideOut);
             searchView.setVisibility(View.GONE);
+            listView.setVisibility(View.GONE);
             searchIcon.setVisibility(View.VISIBLE);
             searchIcon.setVisibility(View.VISIBLE);
         }
