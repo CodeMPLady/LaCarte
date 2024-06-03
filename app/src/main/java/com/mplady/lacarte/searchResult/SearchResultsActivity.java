@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -33,6 +37,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search_results);
+        setView();
+
+        TextView adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
+        ImageView imageBtnFavoris = findViewById(R.id.imageBtnFavoris);
 
         Intent intent = getIntent();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -41,6 +49,22 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+        adresseLieuSearch.setText(query);
+
+        imageBtnFavoris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SearchResultsActivity.this, query + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setView() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
