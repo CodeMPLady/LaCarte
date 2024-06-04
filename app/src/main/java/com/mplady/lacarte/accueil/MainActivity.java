@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
                 intent.putExtra("search_query", query);
                 startActivity(intent);
+                recreate();
                 return false;
             }
 
@@ -156,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
             intent.putExtra("search_query", selectedSuggestion);
             startActivity(intent);
+            recreate();
         });
     }
 
