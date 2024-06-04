@@ -123,8 +123,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
                 intent.putExtra("search_query", query);
                 startActivity(intent);
+                //TODO: ligne du bas a tester si elle résout le bug
+                searchView.clearFocus();
                 recreate();
-                return false;
+                return true;
             }
 
             @Override
