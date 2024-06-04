@@ -20,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.mplady.lacarte.R;
 
 import java.io.IOException;
@@ -31,7 +32,12 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private String query;
     GoogleMap gMap;
     FragmentContainerView map;
+
     private boolean isFavorite;
+
+    private TextView nomLieuSearch;
+    private TextView categorieLieuSearch;
+    private TextView descriptionLieuSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +65,11 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             @Override
             public void onClick(View v) {
                 if (!isFavorite) {
-                    imageBtnFavoris.setImageResource(R.drawable.starfill);
+                    imageBtnFavoris.setImageResource(R.drawable.starfillorange);
                     isFavorite = true;
                     Toast.makeText(SearchResultsActivity.this, query + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
                 } else {
-                    imageBtnFavoris.setImageResource(R.drawable.starempty);
+                    imageBtnFavoris.setImageResource(R.drawable.staremptyorange);
                     isFavorite = false;
                     Toast.makeText(SearchResultsActivity.this, query + " retiré des favoris !", Toast.LENGTH_SHORT).show();
                 }
