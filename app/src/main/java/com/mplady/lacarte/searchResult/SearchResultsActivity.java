@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentContainerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,24 +19,27 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.AutocompletePrediction;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.mplady.lacarte.R;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 public class SearchResultsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private String query;
-    GoogleMap gMap;
-    FragmentContainerView map;
-
     private boolean isFavorite;
-
     private TextView nomLieuSearch;
     private TextView categorieLieuSearch;
-    private TextView descriptionLieuSearch;
+    private TextView adresseLieuSearch;
+    private ImageView imgBtnFavoris;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,36 +47,61 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search_results);
         setView();
+        initView();
+        initMap();
+        setFields(query);
 
-        TextView adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
-        ImageView imageBtnFavoris = findViewById(R.id.imageBtnFavoris);
+        isFavorite = false;
+        imgBtnFavoris.setOnClickListener(v -> {
+            if (!isFavorite) {
+                imgBtnFavoris.setImageResource(R.drawable.starfillorange);
+                isFavorite = true;
+                Toast.makeText(SearchResultsActivity.this, query + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
+            } else {
+                imgBtnFavoris.setImageResource(R.drawable.staremptyorange);
+                isFavorite = false;
+                Toast.makeText(SearchResultsActivity.this, query + " retiré des favoris !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
+    private void setFields(String query) {
+        adresseLieuSearch.setText(query);
+
+        PlacesClient placesClient = Places.createClient(getApplicationContext());
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS);
+        FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
+                .setQuery(query)
+                .build();
+        placesClient.findAutocompletePredictions(request).addOnSuccessListener((response) -> {
+            for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
+                String placeId = prediction.getPlaceId();
+                FetchPlaceRequest requests = FetchPlaceRequest.builder(placeId, fields).build();
+
+                placesClient.fetchPlace(requests).addOnSuccessListener((responses) -> {
+                    Place place = responses.getPlace();
+                    nomLieuSearch.setText(place.getName());
+                }).addOnFailureListener((exception) -> {
+                    nomLieuSearch.setText("Erreur");
+                    System.out.println("Error fetching place: " + exception.getMessage());
+                });
+            }
+        });
+
+    }
+
+    private void initMap() {
         Intent intent = getIntent();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         query = intent.getStringExtra("search_query");
-        map = findViewById(R.id.map);
-
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+    }
 
-        adresseLieuSearch.setText(query);
-
-        isFavorite = false;
-
-        imageBtnFavoris.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isFavorite) {
-                    imageBtnFavoris.setImageResource(R.drawable.starfillorange);
-                    isFavorite = true;
-                    Toast.makeText(SearchResultsActivity.this, query + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
-                } else {
-                    imageBtnFavoris.setImageResource(R.drawable.staremptyorange);
-                    isFavorite = false;
-                    Toast.makeText(SearchResultsActivity.this, query + " retiré des favoris !", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+    private void initView() {
+        nomLieuSearch = findViewById(R.id.nomLieuSearch);
+        adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
+        imgBtnFavoris = findViewById(R.id.imageBtnFavoris);
     }
 
     private void setView() {
@@ -86,7 +113,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        this.gMap = googleMap;
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
         try {
@@ -95,8 +121,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 Address address = addresses.get(0);
                 LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
 
-                this.gMap.addMarker(new MarkerOptions().position(location).title(query));
-                this.gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+                googleMap.addMarker(new MarkerOptions().position(location).title(query));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+
+
             } else {
                 System.out.println("No address found for location: " + query);
             }

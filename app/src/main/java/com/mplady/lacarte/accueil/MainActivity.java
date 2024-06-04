@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
+    private PlacesClient placesClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         animatedBackgroundSearchIcon();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+        placesClient = Places.createClient(MainActivity.this);
+
     }
     private void setView() {
         View decorView = getWindow().getDecorView();
@@ -124,14 +127,13 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("search_query", query);
                 startActivity(intent);
                 //TODO: ligne du bas a tester si elle résout le bug
-                searchView.clearFocus();
+                //searchView.clearFocus();
                 recreate();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                PlacesClient placesClient = Places.createClient(MainActivity.this);
 
                 AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
                 FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
