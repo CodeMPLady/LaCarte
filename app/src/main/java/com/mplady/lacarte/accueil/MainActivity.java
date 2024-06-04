@@ -78,12 +78,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void btnOnClicks() {
-        fabStat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StatActivity.class);
-                startActivity(intent);
-            }
+        fabStat.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, StatActivity.class);
+            startActivity(intent);
         });
 
         fabAbout.setOnClickListener(v -> {
@@ -98,12 +95,9 @@ public class MainActivity extends AppCompatActivity {
             builder.create().show();
         });
 
-        fabFavoris.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
-                startActivity(intent);
-            }
+        fabFavoris.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -131,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
                 return true;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
 
@@ -140,17 +133,17 @@ public class MainActivity extends AppCompatActivity {
                         .setSessionToken(token)
                         .setQuery(newText)
                         .setCountries("FR")
+                //        .setTypesFilter(Collections.singletonList(PlaceTypes.CITIES))
                         .build();
-
                 placesClient.findAutocompletePredictions(request).addOnSuccessListener(response -> {
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
+                        System.out.println("SSSS" + prediction.getTypes());
+                        //TODO: récupérer l'le placeID avec prediction.getPlaceId() et l'envoyer pour simplifié le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();
-                }).addOnFailureListener(exception -> {
-                    System.out.println("Error fetching predictions: " + exception.getMessage());
-                });
+                }).addOnFailureListener(exception -> System.out.println("Error fetching predictions: " + exception.getMessage()));
                 return false;
             }
         });
