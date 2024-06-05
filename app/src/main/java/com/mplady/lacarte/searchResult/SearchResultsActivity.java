@@ -25,6 +25,8 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
 
 import java.io.IOException;
@@ -40,6 +42,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private TextView categorieLieuSearch;
     private TextView adresseLieuSearch;
     private ImageView imgBtnFavoris;
+    private ExtendedFloatingActionButton btnYAller;
+
+    String nameLieuSearch;
+    String adresse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,23 +57,25 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         initMap();
         setFields(query);
 
+        btnYAller.setOnClickListener(v -> {
+            Toast.makeText(SearchResultsActivity.this, "Vous allez vous rendre à " + nameLieuSearch, Toast.LENGTH_SHORT).show();
+        });
+
         isFavorite = false;
         imgBtnFavoris.setOnClickListener(v -> {
             if (!isFavorite) {
                 imgBtnFavoris.setImageResource(R.drawable.starfillorange);
                 isFavorite = true;
-                Toast.makeText(SearchResultsActivity.this, query + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
                 imgBtnFavoris.setImageResource(R.drawable.staremptyorange);
                 isFavorite = false;
-                Toast.makeText(SearchResultsActivity.this, query + " retiré des favoris !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setFields(String query) {
-        adresseLieuSearch.setText(query);
-
         PlacesClient placesClient = Places.createClient(getApplicationContext());
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
@@ -80,7 +88,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
                 placesClient.fetchPlace(requests).addOnSuccessListener((responses) -> {
                     Place place = responses.getPlace();
-                    nomLieuSearch.setText(place.getName());
+                    nameLieuSearch = place.getName();
+                    nomLieuSearch.setText(nameLieuSearch);
+                    adresse = place.getAddress();
+                    adresseLieuSearch.setText(adresse);
                 }).addOnFailureListener((exception) -> {
                     nomLieuSearch.setText("Erreur");
                     System.out.println("Error fetching place: " + exception.getMessage());
@@ -102,6 +113,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         nomLieuSearch = findViewById(R.id.nomLieuSearch);
         adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
         imgBtnFavoris = findViewById(R.id.imageBtnFavoris);
+        btnYAller = findViewById(R.id.btnYAller);
     }
 
     private void setView() {
