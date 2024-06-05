@@ -5,12 +5,15 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,15 +24,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.search.SearchBar;
 import com.mplady.lacarte.R;
+import com.mplady.lacarte.accueil.MainActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -43,7 +50,11 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private TextView adresseLieuSearch;
     private ImageView imgBtnFavoris;
     private ExtendedFloatingActionButton btnYAller;
-
+    private SearchBar searchBarResults;
+    private ArrayAdapter<String> adapter;
+    private ListView listView;
+    private final List<String> suggestionList = new ArrayList<>();
+    private PlacesClient placesClient;
     String nameLieuSearch;
     String adresse;
 
@@ -74,6 +85,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             }
         });
     }
+
 
     private void setFields(String query) {
         PlacesClient placesClient = Places.createClient(getApplicationContext());
@@ -114,6 +126,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
         imgBtnFavoris = findViewById(R.id.imageBtnFavoris);
         btnYAller = findViewById(R.id.btnYAller);
+        searchBarResults = findViewById(R.id.searchBarResults);
+        listView = findViewById(R.id.suggestionsListViewResults);
     }
 
     private void setView() {
