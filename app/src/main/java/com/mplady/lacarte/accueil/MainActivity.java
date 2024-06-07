@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
                 FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                         .setSessionToken(token)

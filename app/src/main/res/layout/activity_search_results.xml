@@ -4,18 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6E6E6">
-
-    <com.google.android.material.search.SearchBar
-        android:id="@+id/searchBarResults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:backgroundTint="@color/white"
-        android:hint="Rechercher..."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="#E6E6E6"
+    android:animateLayoutChanges="true">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
@@ -23,14 +13,35 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline20"
-        app:layout_constraintEnd_toEndOf="@+id/searchBarResults"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/searchBarResults"
+        app:layout_constraintEnd_toEndOf="@+id/searchViewResults"
+        app:layout_constraintStart_toStartOf="@+id/searchViewResults"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         tools:context=".searchResult.SearchResultsActivity">
 
     </androidx.fragment.app.FragmentContainerView>
+
+    <ListView
+        android:id="@+id/suggestionsListViewResults"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:divider="@color/black"
+        android:dividerHeight="0.5dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintTop_toBottomOf="@+id/searchViewResults"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -52,12 +63,13 @@
 
     <TextView
         android:id="@+id/nomLieuSearch"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Nom du lieu"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
         app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
@@ -111,18 +123,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
         app:layout_constraintVertical_bias="0.461" />
-
-    <ListView
-        android:id="@+id/suggestionsListViewResults"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:divider="@color/black"
-        android:dividerHeight="0.5dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline21"
-        app:layout_constraintTop_toBottomOf="@+id/searchBarResults"
-        android:visibility="gone"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"

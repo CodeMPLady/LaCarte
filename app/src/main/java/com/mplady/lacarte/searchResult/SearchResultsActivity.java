@@ -30,10 +30,8 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.search.SearchBar;
+import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.accueil.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,13 +48,17 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private TextView adresseLieuSearch;
     private ImageView imgBtnFavoris;
     private ExtendedFloatingActionButton btnYAller;
-    private SearchBar searchBarResults;
-    private ArrayAdapter<String> adapter;
+    private SearchView searchViewResults;
     private ListView listView;
-    private final List<String> suggestionList = new ArrayList<>();
-    private PlacesClient placesClient;
     String nameLieuSearch;
     String adresse;
+    private GoogleMap gMap;
+
+
+    private ArrayAdapter<String> adapter;
+    private final List<String> suggestionList = new ArrayList<>();
+    private PlacesClient placesClientResults;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         initView();
         initMap();
         setFields(query);
+        setSearchViewResults();
+
+        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+        placesClientResults = Places.createClient(SearchResultsActivity.this);
 
         btnYAller.setOnClickListener(v -> {
             Toast.makeText(SearchResultsActivity.this, "Vous allez vous rendre à " + nameLieuSearch, Toast.LENGTH_SHORT).show();
@@ -86,6 +92,69 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         });
     }
 
+    private void setSearchViewResults () {
+        adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
+        listView.setAdapter(adapter);
+
+        searchViewResults.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String newQuery) {
+
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listView.setVisibility(View.VISIBLE);
+                AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
+                FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
+                        .setSessionToken(token)
+                        .setQuery(newText)
+                        .setCountries("FR")
+                        //        .setTypesFilter(Collections.singletonList(PlaceTypes.CITIES))
+                        .build();
+                placesClientResults.findAutocompletePredictions(request).addOnSuccessListener(response -> {
+                    suggestionList.clear();
+                    for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
+                        suggestionList.add(prediction.getFullText(null).toString());
+                        //TODO: récupérer l'le placeID avec prediction.getPlaceId() et l'envoyer pour simplifié le code de SearchResultsActivity
+                    }
+                    adapter.notifyDataSetChanged();
+                }).addOnFailureListener(exception -> System.out.println("Error fetching predictions: " + exception.getMessage()));
+                return false;
+            }
+        });
+
+                /*ViewGroup.LayoutParams layoutParams = searchViewResults.getLayoutParams();
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                searchViewResults.setLayoutParams(layoutParams);*/
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            String newSelectedSuggestion = suggestionList.get(position);
+            newMap(newSelectedSuggestion);
+            setFields(newSelectedSuggestion);
+            listView.setVisibility(View.GONE);
+        });
+    }
+
+    private void newMap(@NonNull String newQuery) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(newQuery, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
+
+                gMap.clear();
+                gMap.addMarker(new MarkerOptions().position(location).title(newQuery));
+                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+            } else {
+                System.out.println("No address found for location: " + newQuery);
+            }
+        } catch (IOException e) {
+            System.out.println("Geocoder error: " + e.getMessage());
+        }
+    }
 
     private void setFields(String query) {
         PlacesClient placesClient = Places.createClient(getApplicationContext());
@@ -110,7 +179,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 });
             }
         });
-
     }
 
     private void initMap() {
@@ -126,7 +194,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
         imgBtnFavoris = findViewById(R.id.imageBtnFavoris);
         btnYAller = findViewById(R.id.btnYAller);
-        searchBarResults = findViewById(R.id.searchBarResults);
+        searchViewResults = findViewById(R.id.searchViewResults);
         listView = findViewById(R.id.suggestionsListViewResults);
     }
 
@@ -140,6 +208,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        this.gMap = googleMap;
 
         try {
             List<Address> addresses = geocoder.getFromLocationName(query, 1);
