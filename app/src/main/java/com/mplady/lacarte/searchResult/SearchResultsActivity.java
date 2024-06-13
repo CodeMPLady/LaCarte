@@ -53,6 +53,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     String nameLieuSearch;
     String adresse;
     private GoogleMap gMap;
+    private PlacesClient placesClient;
 
 
     private ArrayAdapter<String> adapter;
@@ -134,6 +135,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             newMap(newSelectedSuggestion);
             setFields(newSelectedSuggestion);
             listView.setVisibility(View.GONE);
+            searchViewResults.setQuery("", false);
+            searchViewResults.clearFocus();
         });
     }
 
@@ -157,7 +160,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void setFields(String query) {
-        PlacesClient placesClient = Places.createClient(getApplicationContext());
+        placesClient = Places.createClient(getApplicationContext());
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                 .setQuery(query)
