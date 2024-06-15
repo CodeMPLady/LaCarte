@@ -17,4 +17,5 @@
     <string name="nombre_de_visites_stat">Nombre de visites</string>
     <string name="txt_StatTitle">STATISTIQUES</string>
     <string name="Title_restaurants">RESTAURANTS</string>
+    <string name="google_maps_key">@null</string>
 </resources>

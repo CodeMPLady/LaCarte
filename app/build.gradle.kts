@@ -1,5 +1,11 @@
 import java.util.Properties
 
+val secretPropsFile = rootProject.file("secrets.properties")
+val secretProps = Properties()
+if (secretPropsFile.exists()) {
+    secretProps.load(secretPropsFile.inputStream())
+}
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -15,15 +21,11 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val properties = Properties()
-        properties.load(project.rootProject.file("local.properties").inputStream())
-        buildConfigField("String", "MAPS_API_KEY", "\"${properties.getProperty("MAPS_API_KEY")}\"")
-        val apiKey = properties.getProperty("MAPS_API_KEY") ?: ""
-        manifestPlaceholders["GOOGLE_KEY"] = apiKey
+        buildConfigField("String", "MAPS_API_KEY", "\"${secretProps["MAPS_API_KEY"]}\"")
     }
 
     buildTypes {

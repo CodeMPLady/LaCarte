@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
+    private int uiOptions;
+    private View decorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void setView() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        decorView = getWindow().getDecorView();
+        uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
     }
@@ -121,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("search_query", query);
                 startActivity(intent);
                 //TODO: ligne du bas a tester si elle résout le bug
-                //searchView.clearFocus();
+                searchView.clearFocus();
                 recreate();
-                return true;
+                return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -132,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
                         .setSessionToken(token)
                         .setQuery(newText)
                         .setCountries("FR")
-                //        .setTypesFilter(Collections.singletonList(PlaceTypes.CITIES))
                         .build();
                 placesClient.findAutocompletePredictions(request).addOnSuccessListener(response -> {
                     suggestionList.clear();

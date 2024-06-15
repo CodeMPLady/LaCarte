@@ -16,9 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LaCarte"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${GOOGLE_KEY}" />
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="test"/>
+
         <activity
             android:name=".searchResult.SearchResultsActivity"
             android:exported="false" />
