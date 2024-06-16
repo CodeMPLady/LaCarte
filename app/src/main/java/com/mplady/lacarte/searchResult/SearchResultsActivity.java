@@ -1,6 +1,7 @@
 package com.mplady.lacarte.searchResult;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -25,7 +26,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
+import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -43,21 +46,17 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
     private String query;
     private boolean isFavorite;
-    private TextView nomLieuSearch;
-    private TextView categorieLieuSearch;
-    private TextView adresseLieuSearch;
-    private ImageView imgBtnFavoris;
+    private TextView nomLieuSearch, CategorieLieuSearch, adresseLieuSearch;
+    private ImageView imgBtnFavoris, placePhoto;
     private ExtendedFloatingActionButton btnYAller;
     private SearchView searchViewResults;
     private ListView listView;
-    String nameLieuSearch;
-    String adresse;
     private GoogleMap gMap;
     private PlacesClient placesClient;
     private ArrayAdapter<String> adapter;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
-
+    String adresse, nameLieuSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +158,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
     private void setFields(String query) {
         placesClient = Places.createClient(getApplicationContext());
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS);
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                 .setQuery(query)
                 .build();
@@ -174,9 +173,25 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     nomLieuSearch.setText(nameLieuSearch);
                     adresse = place.getAddress();
                     adresseLieuSearch.setText(adresse);
+                    List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
+                    if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
+                        PhotoMetadata photoMetadata = photoMetadataList.get(0);
+                        FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                                .setMaxWidth(150)
+                                .setMaxHeight(150)
+                                .build();
+                        placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
+                            Bitmap bitmap = fetchPhotoResponse.getBitmap();
+                            placePhoto.setImageBitmap(bitmap);
+                        }).addOnFailureListener((exception) -> {
+                            System.out.println("Error fetching photo");
+                        });
+                    }
+
                 }).addOnFailureListener((exception) -> {
                     nomLieuSearch.setText("Erreur");
                     System.out.println("Error fetching place: " + exception.getMessage());
+
                 });
             }
         });
@@ -197,6 +212,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         btnYAller = findViewById(R.id.btnYAller);
         searchViewResults = findViewById(R.id.searchViewResults);
         listView = findViewById(R.id.suggestionsListViewResults);
+        placePhoto = findViewById(R.id.placePhoto);
     }
 
     private void setView() {

@@ -54,10 +54,11 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
+            android:id="@+id/placePhoto"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:contentDescription="Image du lieu recherché"
-            android:src="@mipmap/ic_launcher" />
+            />
 
     </androidx.cardview.widget.CardView>
 
