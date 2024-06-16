@@ -57,8 +57,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     String adresse;
     private GoogleMap gMap;
     private PlacesClient placesClient;
-
-
     private ArrayAdapter<String> adapter;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
