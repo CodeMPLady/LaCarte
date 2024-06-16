@@ -132,14 +132,9 @@ public class FavorisActivity extends AppCompatActivity {
 
     private static void setData(ArrayList<Favori> favoris) {
         favoris.add(new Favori(1, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Shin-ya Ramen", "Restaurant"));
-        favoris.add(new Favori(2, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "PhoSaigon", "Restaurant"));
-        favoris.add(new Favori(3, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Leclerc", "Supermarche"));
-        favoris.add(new Favori(4, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Carrefour City", "Supermarche"));
-        favoris.add(new Favori(5, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Celio", "Mode"));
-        favoris.add(new Favori(6, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "H&M", "Mode"));
-        favoris.add(new Favori(7, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Total", "Station essence"));
-        favoris.add(new Favori(8, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Esso", "Station essence"));
-        favoris.add(new Favori(9, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie de Brienne", "Pharmacie"));
-        favoris.add(new Favori(10, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie des Tuileries", "Pharmacie"));
+        favoris.add(new Favori(2, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Leclerc", "Supermarche"));
+        favoris.add(new Favori(3, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Celio", "Mode"));
+        favoris.add(new Favori(4, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Total", "Station essence"));
+        favoris.add(new Favori(5, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie de Brienne", "Pharmacie"));
     }
 }
