@@ -154,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
             intent.putExtra("search_query", selectedSuggestion);
             startActivity(intent);
+            searchView.setQuery("", false);
+            searchView.clearFocus();
             recreate();
         });
     }
