@@ -20,14 +20,13 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.4"
+        versionCode = 5
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "MAPS_API_KEY", "\"${secretProps["MAPS_API_KEY"]}\"")
         val properties = Properties()
-        properties.load(project.rootProject.file("local.properties").inputStream())
+        properties.load(project.rootProject.file("secrets.properties").inputStream())
         buildConfigField("String", "MAPS_API_KEY", "\"${secretProps["MAPS_API_KEY"]}\"")
         val apiKey = properties.getProperty("MAPS_API_KEY") ?: ""
         manifestPlaceholders["MAPS_API_KEY"] = apiKey
@@ -47,7 +46,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.navigation.fragment)
@@ -63,4 +61,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.secrets.gradle.plugin)
+    implementation(libs.play.services.location)
 }
