@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6E6E6"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:background="#E6E6E6">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
@@ -25,14 +25,14 @@
         android:id="@+id/suggestionsListViewResults"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxHeight="250dp"
+        android:background="@color/white"
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
-        android:background="@color/white"
+        android:maxHeight="250dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
-        app:layout_constraintTop_toBottomOf="@+id/searchViewResults"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewResults"
@@ -47,16 +47,17 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="24dp"
         app:cardElevation="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
-        app:layout_constraintStart_toStartOf="@+id/guideline21">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline20">
 
         <ImageView
             android:id="@+id/placePhoto"
-            android:layout_width="180dp"
-            android:layout_height="150dp"
+            android:layout_width="210dp"
+            android:layout_height="210dp"
             android:contentDescription="@string/image_du_lieu_recherch" />
 
     </androidx.cardview.widget.CardView>
@@ -66,25 +67,24 @@
         android:id="@+id/nomLieuSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/nom_du_lieu"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline20" />
+        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintTop_toBottomOf="@+id/map" />
 
     <TextView
         android:id="@+id/adresseLieuSearch"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="55dp"
         android:text="@string/adresse"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toBottomOf="@+id/nomLieuSearch" />
+        app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
     <TextView
         android:id="@+id/categorieLieuSearch"
@@ -100,51 +100,50 @@
         android:id="@+id/imageBtnFavoris"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/bouton_favoris"
         android:src="@drawable/staremptyorange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnYAller"
-        app:layout_constraintTop_toTopOf="@+id/guideline19" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnYAller"
-        android:layout_width="330dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginStart="16dp"
         android:backgroundTint="@color/white"
         android:contentDescription="@string/bouton_y_aller"
+        android:maxWidth="150dp"
         android:text="@string/s_y_rendre"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:icon="@drawable/iconnav"
+        app:iconSize="20dp"
         app:iconTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintStart_toStartOf="@+id/guideline18"
+        app:layout_constraintTop_toTopOf="@+id/guideline19" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        app:layout_constraintGuide_begin="245dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="814dp" />
+        app:layout_constraintGuide_begin="837dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="642dp" />
+        app:layout_constraintGuide_begin="619dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline21"
@@ -158,6 +157,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="395dp" />
+        app:layout_constraintGuide_begin="404dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

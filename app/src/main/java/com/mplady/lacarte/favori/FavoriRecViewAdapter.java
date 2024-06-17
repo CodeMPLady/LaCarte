@@ -21,6 +21,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     private final FavorisActivity activity;
     private final Context context;
 
+
     public FavoriRecViewAdapter(ArrayList<Favori> favoris, FavorisActivity activity, Context context) {
         this.favoris = favoris;
         this.activity = activity;

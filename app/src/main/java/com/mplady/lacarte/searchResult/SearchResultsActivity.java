@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
@@ -35,6 +36,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.R;
+import com.mplady.lacarte.favori.FavorisActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,6 +82,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             if (!isFavorite) {
                 imgBtnFavoris.setImageResource(R.drawable.starfillorange);
                 isFavorite = true;
+
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
                 imgBtnFavoris.setImageResource(R.drawable.staremptyorange);
@@ -167,6 +170,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
                 placesClient.fetchPlace(requests).addOnSuccessListener((responses) -> {
                     Place place = responses.getPlace();
+
                     nameLieuSearch = place.getName();
                     nomLieuSearch.setText(nameLieuSearch);
                     adresse = place.getAddress();
@@ -175,8 +179,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                         PhotoMetadata photoMetadata = photoMetadataList.get(0);
                         FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                                .setMaxWidth(180)
-                                .setMaxHeight(150)
+                                .setMaxWidth(210)
+                                .setMaxHeight(240)
                                 .build();
                         placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
                             Bitmap bitmap = fetchPhotoResponse.getBitmap();
