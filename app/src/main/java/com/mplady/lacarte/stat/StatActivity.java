@@ -23,7 +23,6 @@ public class StatActivity extends AppCompatActivity {
 
         RecyclerView placesRecView = findViewById(R.id.placesRecView);
         PlaceRecViewAdapter adapter = new PlaceRecViewAdapter(this);
-
         placesRecView.setAdapter(adapter);
         placesRecView.setLayoutManager(new GridLayoutManager(this, 2));
 

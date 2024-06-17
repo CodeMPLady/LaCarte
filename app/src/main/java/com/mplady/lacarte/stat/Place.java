@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
 
 public class Place {
     private int id;
-    private final String imgPlaceURL;
+    private final String imgPlaceURL, categorie, nbVisites;
     private String name;
-    private final String categorie;
-    private final String nbVisites;
 
     public Place(int id, String imgPlaceURL, String name, String categorie, String nbVisites) {
         this.id = id;

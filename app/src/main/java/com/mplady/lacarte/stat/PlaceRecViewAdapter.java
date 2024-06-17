@@ -42,9 +42,7 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
                 .into(holder.imgPlace);
         holder.textCategorie.setText(places.get(position).getCategorie());
         holder.textNbVisites.setText(places.get(position).getNbVisites());
-
         holder.parent.setOnClickListener(v -> Toast.makeText(context, places.get(position).getName() + " selected", Toast.LENGTH_SHORT).show());
-
     }
 
     @Override
@@ -60,9 +58,7 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final CardView parent;
         private final ImageView imgPlace;
-        private final TextView placeName;
-        private final TextView textCategorie;
-        private final TextView textNbVisites;
+        private final TextView placeName, textCategorie, textNbVisites;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

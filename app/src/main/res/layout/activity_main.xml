@@ -90,7 +90,6 @@
             android:src="@drawable/searchiconfinal"
             android:visibility="visible"/>
 
-
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.SearchView

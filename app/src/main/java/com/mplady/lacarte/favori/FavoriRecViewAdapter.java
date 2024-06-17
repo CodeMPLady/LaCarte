@@ -26,7 +26,6 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         this.activity = activity;
         this.context = context;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -70,8 +69,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView txtName;
-        private final TextView txtDescription;
+        private final TextView txtName, txtDescription;
         private final ImageView imgLieu;
 
         public ViewHolder(@NonNull View itemView) {

@@ -44,7 +44,7 @@ import java.util.Locale;
 
 public class SearchResultsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private String query;
+    private String query, adresse, nameLieuSearch;
     private boolean isFavorite;
     private TextView nomLieuSearch, CategorieLieuSearch, adresseLieuSearch;
     private ImageView imgBtnFavoris, placePhoto;
@@ -56,7 +56,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private ArrayAdapter<String> adapter;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
-    String adresse, nameLieuSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +97,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
             @Override
             public boolean onQueryTextSubmit(String newQuery) {
-
                 return false;
             }
             @Override
@@ -177,22 +175,16 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                         PhotoMetadata photoMetadata = photoMetadataList.get(0);
                         FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                                .setMaxWidth(150)
+                                .setMaxWidth(180)
                                 .setMaxHeight(150)
                                 .build();
                         placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
                             Bitmap bitmap = fetchPhotoResponse.getBitmap();
                             placePhoto.setImageBitmap(bitmap);
-                        }).addOnFailureListener((exception) -> {
-                            System.out.println("Error fetching photo");
-                        });
+                        }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
                     }
 
-                }).addOnFailureListener((exception) -> {
-                    nomLieuSearch.setText("Erreur");
-                    System.out.println("Error fetching place: " + exception.getMessage());
-
-                });
+                }).addOnFailureListener((exception) -> System.out.println("Error fetching place: " + exception.getMessage()));
             }
         });
     }
@@ -232,11 +224,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             if (addresses != null && !addresses.isEmpty()) {
                 Address address = addresses.get(0);
                 LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
-
                 googleMap.addMarker(new MarkerOptions().position(location).title(query));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
-
-
             } else {
                 System.out.println("No address found for location: " + query);
             }

@@ -86,12 +86,10 @@ public class MainActivity extends AppCompatActivity {
         fabAbout.setOnClickListener(v -> {
             AlertDialog.Builder builder = aboutBuilder();
             builder.setNegativeButton("Retour", (dialog, which) -> {});
-
             builder.setPositiveButton("Voir le site", (dialog, which) -> {
                 Intent intent = new Intent(MainActivity.this, Website_activity.class);
                 startActivity(intent);
             });
-
             builder.create().show();
         });
 
@@ -147,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedSuggestion = suggestionList.get(position);
-
             Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
             intent.putExtra("search_query", selectedSuggestion);
             startActivity(intent);

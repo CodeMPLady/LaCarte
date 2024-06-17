@@ -1,5 +1,6 @@
 package com.mplady.lacarte.accueil;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -10,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mplady.lacarte.R;
 
 public class Website_activity extends AppCompatActivity {
-
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,5 @@ public class Website_activity extends AppCompatActivity {
         webView.loadUrl("https://www.mpladycook.fr");
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-
     }
 }

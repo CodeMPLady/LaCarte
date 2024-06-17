@@ -29,10 +29,10 @@ public class FavorisActivity extends AppCompatActivity {
     ArrayList<Favori> filteredFavoris = new ArrayList<>();
     RecyclerView favorisRecView;
     FavoriRecViewAdapter adapter;
-
     private ImageView imgLieuDetails;
-    private TextView txtNomLieu;
-    private TextView txtTypeLieu;
+    private TextView txtNomLieu, txtTypeLieu;
+    private Button btnFermer;
+    private FloatingActionButton btnFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +40,8 @@ public class FavorisActivity extends AppCompatActivity {
         //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_favoris);
         setView();
-
-        Button btnFermer = findViewById(R.id.btnFermer);
-        FloatingActionButton btnFilter = findViewById(R.id.bntFiltre);
-        drawerLayout = findViewById(R.id.main);
-
-        txtNomLieu = findViewById(R.id.txtNomLieu);
-        txtTypeLieu = findViewById(R.id.txtTypeLieu);
-        imgLieuDetails = findViewById(R.id.imgLieuDetails);
-
-        favorisRecView = findViewById(R.id.favorisRecView);
-        adapter = new FavoriRecViewAdapter(favoris, this, this);
-        setData(favoris);
-
+        initView();
+        setFavAdapter();
 
         btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
         btnFilter.setOnClickListener(v -> {
@@ -60,7 +49,11 @@ public class FavorisActivity extends AppCompatActivity {
             setData(favoris);
             showDialog();
         });
+    }
 
+    private void setFavAdapter() {
+        adapter = new FavoriRecViewAdapter(favoris, this, this);
+        setData(favoris);
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
         adapter.setFavoris(favoris);
@@ -136,5 +129,15 @@ public class FavorisActivity extends AppCompatActivity {
         favoris.add(new Favori(3, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Celio", "Mode"));
         favoris.add(new Favori(4, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Total", "Station essence"));
         favoris.add(new Favori(5, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie de Brienne", "Pharmacie"));
+    }
+
+    private void initView() {
+        btnFermer = findViewById(R.id.btnFermer);
+        btnFilter = findViewById(R.id.bntFiltre);
+        drawerLayout = findViewById(R.id.main);
+        txtNomLieu = findViewById(R.id.txtNomLieu);
+        txtTypeLieu = findViewById(R.id.txtTypeLieu);
+        imgLieuDetails = findViewById(R.id.imgLieuDetails);
+        favorisRecView = findViewById(R.id.favorisRecView);
     }
 }

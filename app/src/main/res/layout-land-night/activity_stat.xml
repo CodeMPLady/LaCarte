@@ -8,7 +8,6 @@
     tools:context=".stat.StatActivity"
     android:background="@drawable/gradient_stats_list">
 
-
     <TextView
         android:id="@+id/textPageStats"
         android:layout_width="wrap_content"
@@ -34,4 +33,5 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPageStats" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,4 +18,19 @@
     <string name="txt_StatTitle">STATISTIQUES</string>
     <string name="Title_restaurants">RESTAURANTS</string>
     <string name="google_maps_key">@null</string>
+    <string name="image_du_lieu_recherch">Image du lieu recherché</string>
+    <string name="nom_du_lieu">Nom du lieu</string>
+    <string name="adresse">Adresse</string>
+    <string name="cat_gorie_du_lieu">Catégorie du lieu</string>
+    <string name="bouton_favoris">Bouton favoris</string>
+    <string name="bouton_y_aller">Bouton y aller</string>
+    <string name="s_y_rendre">S\'y rendre</string>
+    <string name="filtres">Filtres</string>
+    <string name="txt_restaurant">Restaurant</string>
+    <string name="txt_supermach">Supermaché</string>
+    <string name="txt_mode">Mode</string>
+    <string name="txt_pharmacie">Pharmacie</string>
+    <string name="txt_station_essence">Station essence</string>
+    <string name="txt_bouton_de_validation">Bouton de validation</string>
+    <string name="txt_bouton_d_annulation">Bouton d\'annulation</string>
 </resources>
