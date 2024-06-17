@@ -20,8 +20,8 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 9
-        versionName = "we got photo from place"
+        versionCode = 10
+        versionName = "fix photo"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

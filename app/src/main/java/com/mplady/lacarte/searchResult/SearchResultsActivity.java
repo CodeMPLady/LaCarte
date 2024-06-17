@@ -34,6 +34,7 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.FavorisActivity;
@@ -49,8 +50,9 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private String query, adresse, nameLieuSearch;
     private boolean isFavorite;
     private TextView nomLieuSearch, CategorieLieuSearch, adresseLieuSearch;
-    private ImageView imgBtnFavoris, placePhoto;
+    private ImageView placePhoto;
     private ExtendedFloatingActionButton btnYAller;
+    private FloatingActionButton btnFavoris;
     private SearchView searchViewResults;
     private ListView listView;
     private GoogleMap gMap;
@@ -78,14 +80,14 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         });
 
         isFavorite = false;
-        imgBtnFavoris.setOnClickListener(v -> {
+        btnFavoris.setOnClickListener(v -> {
             if (!isFavorite) {
-                imgBtnFavoris.setImageResource(R.drawable.starfillorange);
+                btnFavoris.setImageResource(R.drawable.bookmarkfill);
                 isFavorite = true;
 
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
-                imgBtnFavoris.setImageResource(R.drawable.staremptyorange);
+                btnFavoris.setImageResource(R.drawable.bookmarkempty);
                 isFavorite = false;
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }
@@ -131,6 +133,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String newSelectedSuggestion = suggestionList.get(position);
             newMap(newSelectedSuggestion);
+            placePhoto.setImageResource(R.drawable.imgmapsdefaultresized);
             setFields(newSelectedSuggestion);
             listView.setVisibility(View.GONE);
             searchViewResults.setQuery("", false);
@@ -179,8 +182,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                         PhotoMetadata photoMetadata = photoMetadataList.get(0);
                         FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                                .setMaxWidth(210)
-                                .setMaxHeight(240)
+                                .setMaxWidth(500)
+                                .setMaxHeight(500)
                                 .build();
                         placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
                             Bitmap bitmap = fetchPhotoResponse.getBitmap();
@@ -204,7 +207,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private void initView() {
         nomLieuSearch = findViewById(R.id.nomLieuSearch);
         adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
-        imgBtnFavoris = findViewById(R.id.imageBtnFavoris);
+        btnFavoris = findViewById(R.id.imageBtnFavoris);
         btnYAller = findViewById(R.id.btnYAller);
         searchViewResults = findViewById(R.id.searchViewResults);
         listView = findViewById(R.id.suggestionsListViewResults);
