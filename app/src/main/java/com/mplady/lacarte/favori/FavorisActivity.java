@@ -1,5 +1,6 @@
 package com.mplady.lacarte.favori;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
+import com.mplady.lacarte.Utils;
+import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.util.ArrayList;
 
@@ -46,17 +49,19 @@ public class FavorisActivity extends AppCompatActivity {
         btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
         btnFilter.setOnClickListener(v -> {
             favoris.clear();
-            setData(favoris);
             showDialog();
         });
+
+        Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
+        intent.putParcelableArrayListExtra("listeFavoris", favoris);
     }
+
 
     private void setFavAdapter() {
         adapter = new FavoriRecViewAdapter(favoris, this, this);
-        setData(favoris);
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
-        adapter.setFavoris(favoris);
+        adapter.setFavoris(Utils.getInstance().getLieuxFavoris());
     }
 
     void openDrawer(String nom, String categorie, String imfURL) {
@@ -121,14 +126,6 @@ public class FavorisActivity extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
-    }
-
-    private static void setData(ArrayList<Favori> favoris) {
-        favoris.add(new Favori(1, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Shin-ya Ramen", "Restaurant"));
-        favoris.add(new Favori(2, "https://benedictelarre.wordpress.com/wp-content/uploads/2016/11/pa280017.jpg?w=1200", "Leclerc", "Supermarche"));
-        favoris.add(new Favori(3, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Celio", "Mode"));
-        favoris.add(new Favori(4, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Total", "Station essence"));
-        favoris.add(new Favori(5, "https://img.cuisineaz.com/660x660/2016/10/23/i113627-poulet-roti-au-four.webp", "Pharmacie de Brienne", "Pharmacie"));
     }
 
     private void initView() {

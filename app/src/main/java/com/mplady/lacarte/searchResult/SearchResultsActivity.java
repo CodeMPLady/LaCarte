@@ -22,7 +22,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
@@ -37,7 +36,8 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.favori.FavorisActivity;
+import com.mplady.lacarte.Utils;
+import com.mplady.lacarte.favori.Favori;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -85,6 +85,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 btnFavoris.setImageResource(R.drawable.bookmarkfill);
                 isFavorite = true;
 
+                ArrayList<Favori> favoris = Utils.getInstance().getLieuxFavoris();
+
+                handleFavoris(favoris);
+
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
                 btnFavoris.setImageResource(R.drawable.bookmarkempty);
@@ -92,6 +96,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void handleFavoris(ArrayList<Favori> favoris) {
+        favoris.add(new Favori(placePhoto.toString(), nameLieuSearch, adresseLieuSearch.getText().toString()));
     }
 
     private void setSearchViewResults () {
