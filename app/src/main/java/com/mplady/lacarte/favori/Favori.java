@@ -16,7 +16,6 @@ public class Favori implements Parcelable {
 
 
     protected Favori(Parcel in) {
-        //id = in.readInt();
         imgLieuURL = in.readString();
         nom = in.readString();
         categorie = in.readString();
@@ -56,7 +55,6 @@ public class Favori implements Parcelable {
     @Override
     public String toString() {
         return "Favori{" +
-                ", imgLieuURL='" + imgLieuURL + '\'' +
                 ", nom='" + nom + '\'' +
                 ", description='" + categorie + '\'' +
                 '}';
@@ -69,7 +67,6 @@ public class Favori implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(imgLieuURL);
         dest.writeString(nom);
         dest.writeString(categorie);
     }

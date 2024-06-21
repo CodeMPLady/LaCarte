@@ -40,6 +40,7 @@ import com.mplady.lacarte.Utils;
 import com.mplady.lacarte.favori.Favori;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,9 +48,9 @@ import java.util.Locale;
 
 public class SearchResultsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private String query, adresse, nameLieuSearch;
+    private String query, adresse, nameLieuSearch, categorie;
     private boolean isFavorite;
-    private TextView nomLieuSearch, CategorieLieuSearch, adresseLieuSearch;
+    private TextView nomLieuSearch, adresseLieuSearch, categorieLieuSearch;
     private ImageView placePhoto;
     private ExtendedFloatingActionButton btnYAller;
     private FloatingActionButton btnFavoris;
@@ -132,6 +133,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
+                        System.out.println("SSSS" + prediction.getTypes());
                         //TODO: récupérer le placeID avec prediction.getPlaceId() et l'envoyer pour simplifier le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();
@@ -200,6 +202,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     nomLieuSearch.setText(nameLieuSearch);
                     adresse = place.getAddress();
                     adresseLieuSearch.setText(adresse);
+
                     List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
                     if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                         PhotoMetadata photoMetadata = photoMetadataList.get(0);
@@ -241,6 +244,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private void initView() {
         nomLieuSearch = findViewById(R.id.nomLieuSearch);
         adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
+        categorieLieuSearch = findViewById(R.id.categorieLieuSearch);
         btnFavoris = findViewById(R.id.imageBtnFavoris);
         btnYAller = findViewById(R.id.btnYAller);
         searchViewResults = findViewById(R.id.searchViewResults);
