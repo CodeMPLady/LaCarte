@@ -82,24 +82,30 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         isFavorite = false;
         btnFavoris.setOnClickListener(v -> {
             if (!isFavorite) {
+                Utils.getInstance();
+                ArrayList<Favori> favoris = Utils.getLieuxFavoris();
+                Favori ajoutFavori = new Favori(placePhoto.toString(), nameLieuSearch, adresseLieuSearch.getText().toString());
+                favoris.add(ajoutFavori);
+
                 btnFavoris.setImageResource(R.drawable.bookmarkfill);
                 isFavorite = true;
 
-                ArrayList<Favori> favoris = Utils.getInstance().getLieuxFavoris();
-
-                handleFavoris(favoris);
-
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
+                Utils.getInstance();
+                ArrayList<Favori> favoris = Utils.getLieuxFavoris();
+                for(Favori favori : favoris){
+                    if(favori.getNom().equals(nameLieuSearch)){
+                        favoris.remove(favori);
+                        break;
+                    }
+                }
                 btnFavoris.setImageResource(R.drawable.bookmarkempty);
                 isFavorite = false;
+
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void handleFavoris(ArrayList<Favori> favoris) {
-        favoris.add(new Favori(placePhoto.toString(), nameLieuSearch, adresseLieuSearch.getText().toString()));
     }
 
     private void setSearchViewResults () {
@@ -134,10 +140,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             }
         });
 
-                /*ViewGroup.LayoutParams layoutParams = searchViewResults.getLayoutParams();
-                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                searchViewResults.setLayoutParams(layoutParams);*/
-
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String newSelectedSuggestion = suggestionList.get(position);
             newMap(newSelectedSuggestion);
@@ -146,6 +148,18 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             listView.setVisibility(View.GONE);
             searchViewResults.setQuery("", false);
             searchViewResults.clearFocus();
+
+            Utils.getInstance();
+            ArrayList<Favori> favoris = Utils.getLieuxFavoris();
+            for(Favori favori : favoris){
+                if(favori.getNom().equals(nameLieuSearch)){
+                    btnFavoris.setImageResource(R.drawable.bookmarkfill);
+                    isFavorite = true;
+                } else {
+                    btnFavoris.setImageResource(R.drawable.bookmarkempty);
+                    isFavorite = false;
+                }
+            }
         });
     }
 
@@ -197,6 +211,18 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                             Bitmap bitmap = fetchPhotoResponse.getBitmap();
                             placePhoto.setImageBitmap(bitmap);
                         }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
+                    }
+
+                    Utils.getInstance();
+                    ArrayList<Favori> favoris = Utils.getLieuxFavoris();
+                    for(Favori favori : favoris){
+                        if(favori.getNom().equals(nameLieuSearch)){
+                            btnFavoris.setImageResource(R.drawable.bookmarkfill);
+                            isFavorite = true;
+                        } else {
+                            btnFavoris.setImageResource(R.drawable.bookmarkempty);
+                            isFavorite = false;
+                        }
                     }
 
                 }).addOnFailureListener((exception) -> System.out.println("Error fetching place: " + exception.getMessage()));

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.4.1"
+agp = "8.5.0"
 firebaseBom = "33.1.0"
 glide = "4.16.0"
 googlePlaces = "2.5.0"

@@ -61,7 +61,8 @@ public class FavorisActivity extends AppCompatActivity {
         adapter = new FavoriRecViewAdapter(favoris, this, this);
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
-        adapter.setFavoris(Utils.getInstance().getLieuxFavoris());
+        Utils.getInstance();
+        adapter.setFavoris(Utils.getLieuxFavoris());
     }
 
     void openDrawer(String nom, String categorie, String imfURL) {
