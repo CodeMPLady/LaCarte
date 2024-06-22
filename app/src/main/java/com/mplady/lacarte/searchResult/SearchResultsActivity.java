@@ -40,7 +40,6 @@ import com.mplady.lacarte.Utils;
 import com.mplady.lacarte.favori.Favori;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,7 +97,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             if (!isFavorite) {
                 Utils.getInstance();
                 ArrayList<Favori> favoris = Utils.getLieuxFavoris();
-                Favori ajoutFavori = new Favori(placePhoto.toString(), nameLieuSearch, adresseLieuSearch.getText().toString());
+                Favori ajoutFavori = new Favori(placePhoto.toString(), nameLieuSearch, categorie);
                 favoris.add(ajoutFavori);
 
                 btnFavoris.setImageResource(R.drawable.bookmarkfill);

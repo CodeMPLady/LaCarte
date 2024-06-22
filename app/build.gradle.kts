@@ -20,8 +20,8 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 12
-        versionName = "fix photo"
+        versionCode = 13
+        versionName = "Favoris avec catégories"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
