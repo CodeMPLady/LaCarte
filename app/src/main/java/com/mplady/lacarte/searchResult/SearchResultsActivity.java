@@ -49,6 +49,18 @@ import java.util.Locale;
 public class SearchResultsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private String query, adresse, nameLieuSearch, categorie;
+    private List<String> listCategories;
+    private final String[] tableauCategories = {
+            "restaurant",
+            "supermarket",
+            "gas_station"
+
+    };
+    private final String[] tableauJolieCategories = {
+            "Restaurant",
+            "Supermarché",
+            "Station essence"
+    };
     private boolean isFavorite;
     private TextView nomLieuSearch, adresseLieuSearch, categorieLieuSearch;
     private ImageView placePhoto;
@@ -67,6 +79,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search_results);
+
         setView();
         initView();
         initMap();
@@ -133,7 +146,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
-                        System.out.println("SSSS" + prediction.getTypes());
+                        //System.out.println("SSSS" + prediction.getTypes());
                         //TODO: récupérer le placeID avec prediction.getPlaceId() et l'envoyer pour simplifier le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();
@@ -186,7 +199,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
     private void setFields(String query) {
         placesClient = Places.createClient(getApplicationContext());
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS);
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                 .setQuery(query)
                 .build();
@@ -202,6 +215,19 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     nomLieuSearch.setText(nameLieuSearch);
                     adresse = place.getAddress();
                     adresseLieuSearch.setText(adresse);
+                    listCategories = place.getPlaceTypes();
+                    assert listCategories != null;
+                    System.out.println("Catégorie : " + listCategories);
+
+                    for (int i = 0; i < tableauCategories.length; i++) {
+                        for (int j = 0; j < listCategories.size(); j++) {
+                            if (tableauCategories[i].equals(listCategories.get(j))) {
+                                categorie = tableauJolieCategories[i];
+                                break;
+                            }
+                        }
+                    }
+                    categorieLieuSearch.setText(categorie);
 
                     List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
                     if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
