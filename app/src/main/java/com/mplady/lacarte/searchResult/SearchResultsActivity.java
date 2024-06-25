@@ -32,6 +32,7 @@ import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
@@ -61,7 +62,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             "Station essence"
     };
     private boolean isFavorite;
-    private TextView nomLieuSearch, adresseLieuSearch, categorieLieuSearch;
+    private TextView nomLieuSearch, adresseLieuSearch;
+    private Chip categorieLieuSearch;
     private ImageView placePhoto;
     private ExtendedFloatingActionButton btnYAller;
     private FloatingActionButton btnFavoris;

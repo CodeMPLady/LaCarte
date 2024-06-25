@@ -47,32 +47,35 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         app:cardElevation="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline20">
+        app:layout_constraintTop_toBottomOf="@+id/adresseLieuSearch"
+        app:layout_constraintVertical_bias="0.37">
 
         <ImageView
             android:id="@+id/placePhoto"
-            android:src="@drawable/imgmapsdefaultresized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/image_du_lieu_recherch" />
+            android:contentDescription="@string/image_du_lieu_recherch"
+            android:maxWidth="400dp"
+            android:maxHeight="400dp"
+            android:src="@drawable/imgmapsdefaultresized" />
 
     </androidx.cardview.widget.CardView>
 
 
     <TextView
         android:id="@+id/nomLieuSearch"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/nom_du_lieu"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
         app:layout_constraintTop_toBottomOf="@+id/map" />
@@ -81,59 +84,66 @@
         android:id="@+id/adresseLieuSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/adresse"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toTopOf="@+id/guideline20" />
+        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintTop_toBottomOf="@+id/nomLieuSearch" />
 
-    <TextView
+    <com.google.android.material.chip.Chip
         android:id="@+id/categorieLieuSearch"
+        style="@style/Widget.Material3.Chip.Suggestion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/cat_gorie_du_lieu"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#E6E6E6"
+        android:maxWidth="40dp"
+        android:text="Catégorie du lieu"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        app:chipStrokeColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/btnYAller"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toBottomOf="@+id/adresseLieuSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/adresseLieuSearch"
+        app:layout_constraintVertical_bias="0.7" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/imageBtnFavoris"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="@string/bouton_favoris"
         android:backgroundTint="#E6E6E6"
-        app:srcCompat="@drawable/bookmarkempty"
-        app:tint="#F85C2B"
-        app:maxImageSize="30dp"
+        android:contentDescription="@string/bouton_favoris"
         app:layout_constraintBottom_toTopOf="@+id/guideline20"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"/>
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/bookmarkempty"
+        app:tint="#F85C2B" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnYAller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="55dp"
         android:backgroundTint="@color/white"
         android:contentDescription="@string/bouton_y_aller"
-        android:maxWidth="150dp"
+        android:maxWidth="170dp"
         android:text="@string/s_y_rendre"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:icon="@drawable/iconnav"
-        app:iconSize="20dp"
+        app:iconSize="22dp"
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
@@ -151,7 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="648dp" />
+        app:layout_constraintGuide_begin="586dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline21"
