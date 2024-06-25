@@ -15,12 +15,11 @@ public class Utils {
             lieuxFavoris = new ArrayList<>();
             initData();
         }
-
     }
 
     private void initData() {
-        lieuxFavoris.add(new Favori("imageLieu", "Shin-ya Ramen", "Restaurant"));
-        lieuxFavoris.add(new Favori("imageLieu", "Leclerc", "Supermarche"));
+        //lieuxFavoris.add(new Favori("imageLieu", "Shin-ya Ramen", "Restaurant"));
+        //lieuxFavoris.add(new Favori("imageLieu", "Leclerc", "Supermarche"));
     }
 
     public static Utils getInstance() {

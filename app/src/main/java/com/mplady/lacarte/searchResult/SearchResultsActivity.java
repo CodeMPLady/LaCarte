@@ -74,6 +74,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private ArrayAdapter<String> adapter;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
+    private Bitmap bitmap, resizedBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             if (!isFavorite) {
                 Utils.getInstance();
                 ArrayList<Favori> favoris = Utils.getLieuxFavoris();
-                Favori ajoutFavori = new Favori(placePhoto.toString(), nameLieuSearch, categorie);
+                Favori ajoutFavori = new Favori(nameLieuSearch, categorie, resizedBitmap);
                 favoris.add(ajoutFavori);
 
                 btnFavoris.setImageResource(R.drawable.bookmarkfill);
@@ -238,8 +239,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                                 .setMaxHeight(500)
                                 .build();
                         placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
-                            Bitmap bitmap = fetchPhotoResponse.getBitmap();
-                            placePhoto.setImageBitmap(bitmap);
+                            bitmap = fetchPhotoResponse.getBitmap();
+                            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 500, 500, true);
+                            placePhoto.setImageBitmap(resizedBitmap);
+
                         }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
                     }
 

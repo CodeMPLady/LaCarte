@@ -1,22 +1,22 @@
 package com.mplady.lacarte.favori;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
 public class Favori implements Parcelable {
-    private String imgLieuURL, nom, categorie;
+    private String nom, categorie;
+    Bitmap bitmap;
 
-    public Favori(String imgLieuURL, String nom, String categorie) {
-        this.imgLieuURL = imgLieuURL;
+    public Favori(String nom, String categorie, Bitmap bitmap) {
         this.nom = nom;
         this.categorie = categorie;
+        this.bitmap = bitmap;
     }
 
-
     protected Favori(Parcel in) {
-        imgLieuURL = in.readString();
         nom = in.readString();
         categorie = in.readString();
     }
@@ -33,12 +33,6 @@ public class Favori implements Parcelable {
         }
     };
 
-    public String getImgLieuURL() {
-        return imgLieuURL;
-    }
-    public void setImgLieuURL(String imgLieuURL) {
-        this.imgLieuURL = imgLieuURL;
-    }
     public String getNom() {
         return nom;
     }
@@ -47,6 +41,12 @@ public class Favori implements Parcelable {
     }
     public String getCategorie() {
         return categorie;
+    }
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
     public void setCategorie(String categorie) {
         this.categorie = categorie;

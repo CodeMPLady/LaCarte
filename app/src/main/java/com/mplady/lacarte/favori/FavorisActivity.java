@@ -1,6 +1,7 @@
 package com.mplady.lacarte.favori;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
@@ -40,7 +40,6 @@ public class FavorisActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_favoris);
         setView();
         initView();
@@ -58,18 +57,18 @@ public class FavorisActivity extends AppCompatActivity {
 
 
     private void setFavAdapter() {
-        adapter = new FavoriRecViewAdapter(favoris, this, this);
+        adapter = new FavoriRecViewAdapter(favoris, this);
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
         Utils.getInstance();
         adapter.setFavoris(Utils.getLieuxFavoris());
     }
 
-    void openDrawer(String nom, String categorie, String imfURL) {
+    void openDrawer(String nom, String categorie, Bitmap bitmap) {
         drawerLayout.openDrawer(GravityCompat.END);
         txtNomLieu.setText(nom);
         txtTypeLieu.setText(categorie);
-        Glide.with(this).load(imfURL).into(imgLieuDetails);
+        imgLieuDetails.setImageBitmap(bitmap);
     }
 
     private void showDialog() {

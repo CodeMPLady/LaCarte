@@ -1,51 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:visibility="visible"
     app:cardCornerRadius="7dp"
     app:cardElevation="4dp"
     app:strokeColor="#950202"
-    app:strokeWidth="1dp"
-    android:layout_margin="8dp"
-    android:visibility="visible">
+    app:strokeWidth="1dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:paddingStart="5dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:paddingBottom="3dp">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/imgLieu"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:src="@mipmap/ic_launcher"
-            android:id="@+id/imgLieu"/>
+            android:layout_centerHorizontal="true"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nom"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/alegreya"
             android:id="@+id/txtName"
-            android:layout_below="@+id/imgLieu"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Catégorie"
-            android:textSize="16sp"
+            android:layout_below="@+id/imgLieu"
+            android:layout_marginTop="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:fontFamily="@font/alegreya"
+            android:text="Nom"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/txtDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txtName"
-            android:layout_margin="6dp"/>
+            android:fontFamily="@font/alegreya"
+            android:text="Catégorie"
+            android:paddingBottom="6dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

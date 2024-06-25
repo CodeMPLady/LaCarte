@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(MainActivity.this);
-
     }
     private void setView() {
         View decorView = getWindow().getDecorView();
