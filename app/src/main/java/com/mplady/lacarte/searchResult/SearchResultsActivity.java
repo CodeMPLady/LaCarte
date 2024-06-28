@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -58,7 +59,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             "store"
 
     };
-    private final String[] tableauJolieCategories = {
+    private String[] tableauJolieCategories = {
             "Restaurant",
             "Supermarché",
             "Station essence",
@@ -97,6 +98,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
         btnYAller.setOnClickListener(v -> {
             Toast.makeText(SearchResultsActivity.this, "Vous allez vous rendre à " + nameLieuSearch, Toast.LENGTH_SHORT).show();
+            openGoogleMaps();
         });
 
         isFavorite = false;
@@ -126,6 +128,19 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void openGoogleMaps() {
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + nameLieuSearch);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Uri webIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" + nameLieuSearch);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, webIntentUri);
+            startActivity(webIntent);
+        }
     }
 
     private void setSearchViewResults () {
@@ -224,18 +239,22 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     assert listCategories != null;
                     System.out.println("Catégorie : " + listCategories);
 
+                    categorie = null;
                     selectionCategorie:
                     for (int i = 0; i < tableauCategories.length; i++) {
                         for (int j = 0; j < listCategories.size(); j++) {
                             System.out.println("test " + tableauCategories[i] + " " + listCategories.get(j));
                             if (tableauCategories[i].equals(listCategories.get(j))) {
                                 categorie = tableauJolieCategories[i];
-                                System.out.println("Categorie choisie: " + categorie);
                                 break selectionCategorie;
                             }
                         }
                     }
+                    if (categorie == null)
+                        //TODO : est-ce qu'on met rien ou on met plutot la premiere catégoris ? l'inconvenient c'est qu'on ne filtre pas les autres catégories
+                        categorie = "";
                     categorieLieuSearch.setText(categorie);
+
 
                     List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
                     if (photoMetadataList != null && !photoMetadataList.isEmpty()) {

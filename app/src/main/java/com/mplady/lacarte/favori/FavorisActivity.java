@@ -105,13 +105,14 @@ public class FavorisActivity extends AppCompatActivity {
     }
     private void filtre() {
         filteredFavoris.clear();
+        assert preFilteredFavoris != null;
         for (Favori fav : preFilteredFavoris) {
             String categorie = fav.getCategorie();
             if ((filter[0] && categorie.equals("Restaurant")) ||
                     (filter[1] && categorie.equals("Station essence")) ||
                     (filter[2] && categorie.equals("Supermarche")) ||
                     (filter[3] && categorie.equals("Pharmacie")) ||
-                    (filter[4] && categorie.equals("Mode"))) {
+                    (filter[4] && categorie.equals("Magasin"))) {
                 filteredFavoris.add(fav);
             }
         }
