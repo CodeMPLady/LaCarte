@@ -29,6 +29,7 @@ public class FavorisActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     boolean[] filter = new boolean[5];
     ArrayList<Favori> favoris = new ArrayList<>();
+    ArrayList<Favori> preFilteredFavoris = new ArrayList<>();
     ArrayList<Favori> filteredFavoris = new ArrayList<>();
     RecyclerView favorisRecView;
     FavoriRecViewAdapter adapter;
@@ -44,17 +45,15 @@ public class FavorisActivity extends AppCompatActivity {
         setView();
         initView();
         setFavAdapter();
+        Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
+        intent.putParcelableArrayListExtra("listeFavoris", favoris);
 
         btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
         btnFilter.setOnClickListener(v -> {
-            favoris.clear();
+            preFilteredFavoris = Utils.getLieuxFavoris();
             showDialog();
         });
-
-        Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
-        intent.putParcelableArrayListExtra("listeFavoris", favoris);
     }
-
 
     private void setFavAdapter() {
         adapter = new FavoriRecViewAdapter(favoris, this);
@@ -70,7 +69,6 @@ public class FavorisActivity extends AppCompatActivity {
         txtTypeLieu.setText(categorie);
         imgLieuDetails.setImageBitmap(bitmap);
     }
-
     private void showDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.fav_dialog_layout, null);
@@ -105,10 +103,9 @@ public class FavorisActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-
     private void filtre() {
         filteredFavoris.clear();
-        for (Favori fav : favoris) {
+        for (Favori fav : preFilteredFavoris) {
             String categorie = fav.getCategorie();
             if ((filter[0] && categorie.equals("Restaurant")) ||
                     (filter[1] && categorie.equals("Station essence")) ||
@@ -122,12 +119,11 @@ public class FavorisActivity extends AppCompatActivity {
             recreate();
         adapter.updateFavoris(filteredFavoris);
     }
-     private void setView() {
+    private void setView() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
     }
-
     private void initView() {
         btnFermer = findViewById(R.id.btnFermer);
         btnFilter = findViewById(R.id.bntFiltre);

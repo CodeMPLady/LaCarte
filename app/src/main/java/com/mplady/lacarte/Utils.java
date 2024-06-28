@@ -11,25 +11,26 @@ public class Utils {
     private static ArrayList<Favori> lieuxFavoris;
 
     public Utils() {
-        if (null == lieuxFavoris) {
+        if (null == lieuxFavoris)
             lieuxFavoris = new ArrayList<>();
-            initData();
-        }
-    }
-
-    private void initData() {
-        //lieuxFavoris.add(new Favori("imageLieu", "Shin-ya Ramen", "Restaurant"));
-        //lieuxFavoris.add(new Favori("imageLieu", "Leclerc", "Supermarche"));
     }
 
     public static Utils getInstance() {
-        if (null == instance) {
+        if (null == instance)
             instance = new Utils();
-        }
         return instance;
     }
 
     public static ArrayList<Favori> getLieuxFavoris() {
         return lieuxFavoris;
+    }
+
+    public static ArrayList<String> getCategorie() {
+        ArrayList<String> categorieLieux = new ArrayList<>();
+        for (Favori favori : lieuxFavoris) {
+            String categorie = favori.getCategorie();
+            categorieLieux.add(categorie);
+        }
+        return categorieLieux;
     }
 }
