@@ -20,7 +20,7 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 13
+        versionCode = 14
         versionName = "Favoris avec catégories"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

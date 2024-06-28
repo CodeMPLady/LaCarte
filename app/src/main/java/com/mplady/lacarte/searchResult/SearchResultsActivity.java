@@ -53,13 +53,17 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private final String[] tableauCategories = {
             "restaurant",
             "supermarket",
-            "gas_station"
+            "gas_station",
+            "pharmacy",
+            "store"
 
     };
     private final String[] tableauJolieCategories = {
             "Restaurant",
             "Supermarché",
-            "Station essence"
+            "Station essence",
+            "Pharmacie",
+            "Magasin"
     };
     private boolean isFavorite;
     private TextView nomLieuSearch, adresseLieuSearch;
@@ -212,7 +216,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
                 placesClient.fetchPlace(requests).addOnSuccessListener((responses) -> {
                     Place place = responses.getPlace();
-
                     nameLieuSearch = place.getName();
                     nomLieuSearch.setText(nameLieuSearch);
                     adresse = place.getAddress();
@@ -221,11 +224,14 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     assert listCategories != null;
                     System.out.println("Catégorie : " + listCategories);
 
+                    selectionCategorie:
                     for (int i = 0; i < tableauCategories.length; i++) {
                         for (int j = 0; j < listCategories.size(); j++) {
+                            System.out.println("test " + tableauCategories[i] + " " + listCategories.get(j));
                             if (tableauCategories[i].equals(listCategories.get(j))) {
                                 categorie = tableauJolieCategories[i];
-                                break;
+                                System.out.println("Categorie choisie: " + categorie);
+                                break selectionCategorie;
                             }
                         }
                     }
