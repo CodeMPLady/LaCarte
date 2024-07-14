@@ -40,6 +40,8 @@ public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarou
                 .into(holder.imageView);
         holder.imageView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PropositionsActivity.class);
+            int positionType = holder.getAdapterPosition();
+            intent.putExtra("position", positionType);
             startActivity(context, intent, null);
         });
     }

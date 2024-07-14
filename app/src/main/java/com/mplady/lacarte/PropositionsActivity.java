@@ -1,5 +1,7 @@
 package com.mplady.lacarte;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,15 @@ public class PropositionsActivity extends AppCompatActivity {
     private TextView textTypeTitle;
     private ExtendedFloatingActionButton selectionFAB;
     private RecyclerView selectionRecView;
+    private final String[] tableauSelectionCategories = {
+            "Restaurants",
+            "Magasins",
+            "Stations essence",
+            "Pharmacies",
+            "Supermarchés"
+    };
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +39,22 @@ public class PropositionsActivity extends AppCompatActivity {
 
         setView();
         initViews();
+        setTitle();
 
         selectionFAB.setOnClickListener(v -> showDialog());
 
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setTitle() {
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position", 0);
+        for (int i = 0; i < tableauSelectionCategories.length; i++) {
+            if (i == position) {
+                textTypeTitle.setText(tableauSelectionCategories[i] + " autour de vous");
+            }
+        }
     }
 
     private void showDialog() {
