@@ -7,17 +7,22 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:enableOnBackInvokedCallback="true"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_lacarte"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_lacarte_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LaCarte"
         tools:targetApi="31">
+        <activity
+            android:name=".PropositionsActivity"
+            android:exported="false" />
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
         <activity
             android:name=".searchResult.SearchResultsActivity"
             android:exported="false" />

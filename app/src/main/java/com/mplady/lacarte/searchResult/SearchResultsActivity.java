@@ -251,7 +251,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                         }
                     }
                     if (categorie == null)
-                        //TODO : est-ce qu'on met rien ou on met plutot la premiere catégoris ? l'inconvenient c'est qu'on ne filtre pas les autres catégories
+                        //TODO : est-ce qu'on met rien ou on met plutôt la premiere catégorie ? l'inconvénient c'est qu'on ne filtre pas les autres catégories
                         categorie = "";
                     categorieLieuSearch.setText(categorie);
 
