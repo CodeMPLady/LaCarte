@@ -10,12 +10,15 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class PropositionsActivity extends AppCompatActivity {
 
@@ -30,6 +33,8 @@ public class PropositionsActivity extends AppCompatActivity {
             "Supermarchés"
     };
 
+    private SuggestionRecViewAdapter adapter;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,14 @@ public class PropositionsActivity extends AppCompatActivity {
 
         selectionFAB.setOnClickListener(v -> showDialog());
 
+        adapter = new SuggestionRecViewAdapter(this);
+        selectionRecView.setAdapter(adapter);
+        selectionRecView.setLayoutManager(new LinearLayoutManager(this));
+
+        ArrayList<Suggestion> suggestions = new ArrayList<>();
+        suggestions.add(new Suggestion("Shin-Ya Ramen", "Restaurant"));
+        suggestions.add(new Suggestion("Les Cabochards", "Restaurant"));
+        adapter.setSuggestions(suggestions);
 
     }
 
