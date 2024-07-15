@@ -38,13 +38,13 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
         String favoriNom = String.valueOf(favoris.get(position).getNom());
         String favoriCategorie = String.valueOf(favoris.get(position).getCategorie());
-        Bitmap favorisBitmap = favoris.get(position).getBitmap();
+        byte[] favorisBitmap = favoris.get(position).getBitmap();
 
         holder.txtName.setText(favoris.get(position).getNom());
         holder.txtDescription.setText(favoris.get(position).getCategorie());
-        holder.imgLieu.setImageBitmap(favorisBitmap);
+        //holder.imgLieu.setImageBitmap(favorisBitmap);
 
-        holder.itemView.setOnClickListener(v -> activity.openDrawer(favoriNom, favoriCategorie, favorisBitmap));
+        //holder.itemView.setOnClickListener(v -> activity.openDrawer(favoriNom, favoriCategorie, favorisBitmap));
     }
 
     @Override

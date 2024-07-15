@@ -5,15 +5,34 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "Favoris")
 public class Favori implements Parcelable {
-    private String nom, categorie;
-    Bitmap bitmap;
 
-    public Favori(String nom, String categorie, Bitmap bitmap) {
+    @PrimaryKey
+    @ColumnInfo(name = "nomLieu")
+    @NonNull
+    private String nom;
+
+    @ColumnInfo(name = "categorieLieu")
+    private String categorie;
+
+    @ColumnInfo(name = "bitmapLieu")
+    public byte[] bitmapData;
+
+    @Ignore
+    public Favori() {
+        nom = "";
+    }
+
+    public Favori(String nom, String categorie, byte[] bitmapData) {
         this.nom = nom;
         this.categorie = categorie;
-        this.bitmap = bitmap;
+        this.bitmapData = bitmapData;
     }
 
     protected Favori(Parcel in) {
@@ -42,11 +61,11 @@ public class Favori implements Parcelable {
     public String getCategorie() {
         return categorie;
     }
-    public Bitmap getBitmap() {
-        return bitmap;
+    public byte[] getBitmap() {
+        return bitmapData;
     }
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setBitmap(byte[] bitmapData) {
+        this.bitmapData = bitmapData;
     }
     public void setCategorie(String categorie) {
         this.categorie = categorie;

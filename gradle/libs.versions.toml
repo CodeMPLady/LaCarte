@@ -16,6 +16,8 @@ placesVersion = "2.4.0"
 playServicesLocation = "21.3.0"
 playServicesMapsVersion = "17.0.0"
 playServicesPlaces = "18.0.0"
+roomCompiler = "2.6.1"
+roomRuntime = "2.6.1"
 secretsGradlePlugin = "2.0.1"
 playServicesMaps = "18.2.0"
 playServicesFitness = "21.2.0"
@@ -41,6 +43,8 @@ places-v250 = { module = "com.google.android.libraries.places:places", version.r
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps-v1700 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
 play-services-places = { module = "com.google.android.gms:play-services-places", version.ref = "playServicesPlaces" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 play-services-fitness = { group = "com.google.android.gms", name = "play-services-fitness", version.ref = "playServicesFitness" }

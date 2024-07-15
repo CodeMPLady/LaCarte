@@ -6,6 +6,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -17,6 +19,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,6 +42,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
+import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.Utils;
 import com.mplady.lacarte.favori.Favori;
@@ -46,6 +52,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SearchResultsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -80,6 +88,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
     private Bitmap bitmap, resizedBitmap;
+    private byte[] bitmapData;
+
+    FavorisDB favorisDB;
+    List<Favori> favorisList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +108,22 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientResults = Places.createClient(SearchResultsActivity.this);
 
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+        };
+
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+                .addCallback(myCallback)
+                .build();
+
         btnYAller.setOnClickListener(v -> {
             Toast.makeText(SearchResultsActivity.this, "Vous allez vous rendre à " + nameLieuSearch, Toast.LENGTH_SHORT).show();
             openGoogleMaps();
@@ -104,28 +132,84 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         isFavorite = false;
         btnFavoris.setOnClickListener(v -> {
             if (!isFavorite) {
-                Utils.getInstance();
-                ArrayList<Favori> favoris = Utils.getLieuxFavoris();
-                Favori ajoutFavori = new Favori(nameLieuSearch, categorie, resizedBitmap);
-                favoris.add(ajoutFavori);
+//                Utils.getInstance();
+//                ArrayList<Favori> favoris = Utils.getLieuxFavoris();
+//                Favori ajoutFavori = new Favori(nameLieuSearch, categorie, resizedBitmap);
+//                favoris.add(ajoutFavori);
+
+                String nomLieu = nomLieuSearch.getText().toString();
+                String categorieLieu = categorieLieuSearch.getText().toString();
+
+
+
+                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData);
+
+                addFavoriInBackground(favori1);
 
                 btnFavoris.setImageResource(R.drawable.bookmarkfill);
                 isFavorite = true;
-
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
                 Utils.getInstance();
                 ArrayList<Favori> favoris = Utils.getLieuxFavoris();
                 for(Favori favori : favoris){
                     if(favori.getNom().equals(nameLieuSearch)){
-                        favoris.remove(favori);
+                        //favoris.remove(favori);
+                        favorisDB.getFavoriDAO().deleteFavori(favori);
                         break;
                     }
                 }
                 btnFavoris.setImageResource(R.drawable.bookmarkempty);
                 isFavorite = false;
-
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void addFavoriInBackground(Favori favori) {
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                favorisDB.getFavoriDAO().addFavori(favori);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        StringBuilder sb = new StringBuilder();
+//                        for(Favori f : favorisList) {
+//                            sb.append(f.getNom()+" : "+f.getCategorie());
+//                            sb.append("\n");
+//                        }
+                        String finalData = sb.toString();
+                        Toast.makeText(SearchResultsActivity.this, ""+ finalData, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+    }
+
+    public void getFavoriListInBackground() {
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SearchResultsActivity.this, "Ajouté à la BDD", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
     }
@@ -144,7 +228,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void setSearchViewResults () {
-        adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
+        adapter = new ArrayAdapter<>(this, R.layout.list_item_carousel_suggestions, suggestionList);
         listView.setAdapter(adapter);
 
         searchViewResults.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

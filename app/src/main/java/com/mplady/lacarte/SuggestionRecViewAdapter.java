@@ -35,7 +35,7 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_suggestions, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_carousel_suggestions, parent, false);
         return new ViewHolder(view);
     }
 

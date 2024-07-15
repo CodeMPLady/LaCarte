@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.fragment)
     testImplementation(libs.junit)
     implementation(libs.glide)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.secrets.gradle.plugin)

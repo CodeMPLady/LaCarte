@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
@@ -21,12 +22,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
+import com.mplady.lacarte.FavorisDB;
+import com.mplady.lacarte.favori.Favori;
 import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.searchResult.SearchResultsActivity;
@@ -46,8 +54,14 @@ public class MainActivity extends AppCompatActivity {
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
 
+    FavorisDB favorisDB;
+    List<Favori> favorisList;
+
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -58,8 +72,25 @@ public class MainActivity extends AppCompatActivity {
         btnOnClicks();
         animatedBackgroundSearchIcon();
 
+
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(MainActivity.this);
+
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+        };
+
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+                .addCallback(myCallback)
+                .build();
     }
     private void setView() {
         View decorView = getWindow().getDecorView();
@@ -93,8 +124,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
         fabFavoris.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
-            startActivity(intent);
+            executorService.execute(() -> {
+                favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+
+                StringBuilder sb = new StringBuilder();
+                for (Favori f : favorisList) {
+                    sb.append(f.getNom()).append(" : ").append(f.getCategorie()).append("\n");
+                }
+                String finalData = sb.toString();
+
+                runOnUiThread(() -> Toast.makeText(this, finalData, Toast.LENGTH_SHORT).show());
+
+                Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
+                startActivity(intent);
+            });
         });
     }
 

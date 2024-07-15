@@ -3,27 +3,39 @@ package com.mplady.lacarte.favori;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.Utils;
 import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FavorisActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -38,13 +50,33 @@ public class FavorisActivity extends AppCompatActivity {
     private Button btnFermer;
     private FloatingActionButton btnFilter;
 
+    FavorisDB favorisDB;
+    List<Favori> favorisList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoris);
+
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+        };
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+                .addCallback(myCallback)
+                .build();
+
         setView();
         initView();
         setFavAdapter();
+        getFavoriListInBackground();
         Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
         intent.putParcelableArrayListExtra("listeFavoris", favoris);
 
@@ -52,6 +84,30 @@ public class FavorisActivity extends AppCompatActivity {
         btnFilter.setOnClickListener(v -> {
             preFilteredFavoris = Utils.getLieuxFavoris();
             showDialog();
+        });
+
+
+
+    }
+
+    public void getFavoriListInBackground() {
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(FavorisActivity.this, "Ajouté à la BDD", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
         });
     }
 
