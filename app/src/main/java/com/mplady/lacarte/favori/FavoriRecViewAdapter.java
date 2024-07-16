@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdapter.ViewHolder>{
-    private ArrayList<Favori> favoris;
+    private List<Favori> favoris;
     private final FavorisActivity activity;
 
 
-    public FavoriRecViewAdapter(ArrayList<Favori> favoris, FavorisActivity activity) {
+    public FavoriRecViewAdapter(List<Favori> favoris, FavorisActivity activity) {
         this.favoris = favoris;
         this.activity = activity;
     }
@@ -52,12 +53,12 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         return favoris.size();
     }
 
-    public void setFavoris(ArrayList<Favori> favoris) {
+    public void setFavoris(List<Favori> favoris) {
         this.favoris = favoris;
         notifyDataSetChanged();
     }
 
-    public void updateFavoris(ArrayList<Favori> newFavoris) {
+    public void updateFavoris(List<Favori> newFavoris) {
         this.favoris.clear();
         this.favoris.addAll(newFavoris);
         notifyDataSetChanged();

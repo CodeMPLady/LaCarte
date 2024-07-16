@@ -93,30 +93,22 @@ public class FavorisActivity extends AppCompatActivity {
     public void getFavoriListInBackground() {
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-
         Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                favorisList = favorisDB.getFavoriDAO().getAllFavoris();
-
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(FavorisActivity.this, "Ajouté à la BDD", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
+        executorService.execute(() -> {
+            favoris = (ArrayList<Favori>) favorisDB.getFavoriDAO().getAllFavoris();
+            handler.post(() -> {
+                Toast.makeText(FavorisActivity.this, "Favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show();
+                adapter.setFavoris(favoris);
+                //adapter.setFavoris(favorisDB.getFavoriDAO().getAllFavoris());
+            });
         });
+
     }
 
     private void setFavAdapter() {
         adapter = new FavoriRecViewAdapter(favoris, this);
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
-        Utils.getInstance();
-        adapter.setFavoris(Utils.getLieuxFavoris());
     }
 
     void openDrawer(String nom, String categorie, Bitmap bitmap) {

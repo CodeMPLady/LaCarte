@@ -8,7 +8,9 @@ import androidx.room.Update;
 
 import com.mplady.lacarte.favori.Favori;
 
+import java.util.ArrayList;
 import java.util.List;
+
 @Dao
 public interface FavoriDAO {
 
