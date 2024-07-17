@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
-                        System.out.println("SSSS" + prediction.getTypes());
+                        //System.out.println("SSSS" + prediction.getTypes());
                         //TODO: récupérer l'le placeID avec prediction.getPlaceId() et l'envoyer pour simplifié le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();

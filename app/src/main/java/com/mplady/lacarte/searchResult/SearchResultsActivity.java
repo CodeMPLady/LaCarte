@@ -96,11 +96,12 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search_results);
         setView();
+        callBackDatabase();
+        getFavoriListInBackground();
         initView();
         initMap();
         setFields(query);
         setSearchViewResults();
-        callBackDatabase();
         ajouterAuxFavoris();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
@@ -143,12 +144,13 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 isFavorite = true;
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
-                Utils.getInstance();
-                ArrayList<Favori> favoris = Utils.getLieuxFavoris();
-                for(Favori favori : favoris){
+                for(Favori favori : favorisList){
                     if(favori.getNom().equals(nameLieuSearch)){
-                        //favoris.remove(favori);
-                        favorisDB.getFavoriDAO().deleteFavori(favori);
+                        String nomLieu = nomLieuSearch.getText().toString();
+                        String categorieLieu = categorieLieuSearch.getText().toString();
+
+                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData);
+                        deleteFavoriInBackground(favori1);
                         break;
                     }
                 }
@@ -159,18 +161,24 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         });
     }
 
+    public void deleteFavoriInBackground(Favori favori) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisDB.getFavoriDAO().deleteFavori(favori);
+            handler.post(() -> {
+                Toast.makeText(SearchResultsActivity.this, "", Toast.LENGTH_SHORT).show();
+            });
+
+        });
+    }
+
     public void addFavoriInBackground(Favori favori) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
             favorisDB.getFavoriDAO().addFavori(favori);
             handler.post(() -> {
-//                StringBuilder sb = new StringBuilder();
-////                        for(Favori f : favorisList) {
-////                            sb.append(f.getNom()+" : "+f.getCategorie());
-////                            sb.append("\n");
-////                        }
-//                String finalData = sb.toString();
                 Toast.makeText(SearchResultsActivity.this, "", Toast.LENGTH_SHORT).show();
             });
 
@@ -178,16 +186,11 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     public void getFavoriListInBackground() {
-
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
-
             favorisList = favorisDB.getFavoriDAO().getAllFavoris();
-
             handler.post(() -> Toast.makeText(SearchResultsActivity.this, "Ajouté à la BDD", Toast.LENGTH_SHORT).show());
-
         });
     }
 
@@ -205,7 +208,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void setSearchViewResults () {
-        adapter = new ArrayAdapter<>(this, R.layout.list_item_carousel_suggestions, suggestionList);
+        adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
         listView.setAdapter(adapter);
         searchViewResults.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -246,15 +249,15 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             searchViewResults.setQuery("", false);
             searchViewResults.clearFocus();
 
-            Utils.getInstance();
-            ArrayList<Favori> favoris = Utils.getLieuxFavoris();
-            for(Favori favori : favoris){
+            for(Favori favori : favorisList){
                 if(favori.getNom().equals(nameLieuSearch)){
                     btnFavoris.setImageResource(R.drawable.bookmarkfill);
                     isFavorite = true;
+                    System.out.println("Le favoris est la");
                 } else {
                     btnFavoris.setImageResource(R.drawable.bookmarkempty);
                     isFavorite = false;
+                    System.out.println("Le favoris est pas la");
                 }
             }
         });
@@ -328,22 +331,19 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                             bitmap = fetchPhotoResponse.getBitmap();
                             resizedBitmap = Bitmap.createScaledBitmap(bitmap, 500, 500, true);
                             placePhoto.setImageBitmap(resizedBitmap);
-
                         }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
                     }
-
-                    Utils.getInstance();
-                    ArrayList<Favori> favoris = Utils.getLieuxFavoris();
-                    for(Favori favori : favoris){
+                    for(Favori favori : favorisList){
+                        System.out.println("Lieu : " + favori.getNom() + " Recherche : " + nameLieuSearch);
                         if(favori.getNom().equals(nameLieuSearch)){
                             btnFavoris.setImageResource(R.drawable.bookmarkfill);
                             isFavorite = true;
+                            break;
                         } else {
                             btnFavoris.setImageResource(R.drawable.bookmarkempty);
                             isFavorite = false;
                         }
                     }
-
                 }).addOnFailureListener((exception) -> System.out.println("Error fetching place: " + exception.getMessage()));
             }
         });
