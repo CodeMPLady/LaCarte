@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
@@ -53,15 +52,12 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
-
     FavorisDB favorisDB;
     List<Favori> favorisList;
-
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -71,11 +67,20 @@ public class MainActivity extends AppCompatActivity {
         setSearchView();
         btnOnClicks();
         animatedBackgroundSearchIcon();
-
+        callBackDatabase();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(MainActivity.this);
+    }
 
+    private void setView() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    private void callBackDatabase() {
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
             public void onOpen(@NonNull SupportSQLiteDatabase db) {
@@ -91,12 +96,6 @@ public class MainActivity extends AppCompatActivity {
         favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
                 .addCallback(myCallback)
                 .build();
-    }
-    private void setView() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
     }
 
     private void animatedBackgroundSearchIcon() {
@@ -123,22 +122,12 @@ public class MainActivity extends AppCompatActivity {
             builder.create().show();
         });
 
-        fabFavoris.setOnClickListener(v -> {
-            executorService.execute(() -> {
-                favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+        fabFavoris.setOnClickListener(v -> executorService.execute(() -> {
+            favorisList = favorisDB.getFavoriDAO().getAllFavoris();
 
-                StringBuilder sb = new StringBuilder();
-                for (Favori f : favorisList) {
-                    sb.append(f.getNom()).append(" : ").append(f.getCategorie()).append("\n");
-                }
-                String finalData = sb.toString();
-
-                runOnUiThread(() -> Toast.makeText(this, finalData, Toast.LENGTH_SHORT).show());
-
-                Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
-                startActivity(intent);
-            });
-        });
+            Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
+            startActivity(intent);
+        }));
     }
 
     @NonNull
@@ -164,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();

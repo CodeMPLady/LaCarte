@@ -29,7 +29,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.Utils;
 import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class FavorisActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     boolean[] filter = new boolean[5];
     ArrayList<Favori> favoris = new ArrayList<>();
-    ArrayList<Favori> preFilteredFavoris = new ArrayList<>();
+    List<Favori> preFilteredFavoris;
     ArrayList<Favori> filteredFavoris = new ArrayList<>();
     RecyclerView favorisRecView;
     FavoriRecViewAdapter adapter;
@@ -51,13 +50,28 @@ public class FavorisActivity extends AppCompatActivity {
     private FloatingActionButton btnFilter;
 
     FavorisDB favorisDB;
-    List<Favori> favorisList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoris);
 
+        setView();
+        initView();
+        setFavAdapter();
+        callBackDatabase();
+        getFavoriListInBackground();
+        Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
+        intent.putParcelableArrayListExtra("listeFavoris", favoris);
+
+        btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
+        btnFilter.setOnClickListener(v -> {
+            getPreFilteredFavorisInBackground();
+            showDialog();
+        });
+    }
+
+    private void callBackDatabase() {
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
             public void onOpen(@NonNull SupportSQLiteDatabase db) {
@@ -72,26 +86,9 @@ public class FavorisActivity extends AppCompatActivity {
         favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
                 .addCallback(myCallback)
                 .build();
-
-        setView();
-        initView();
-        setFavAdapter();
-        getFavoriListInBackground();
-        Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
-        intent.putParcelableArrayListExtra("listeFavoris", favoris);
-
-        btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
-        btnFilter.setOnClickListener(v -> {
-            preFilteredFavoris = Utils.getLieuxFavoris();
-            showDialog();
-        });
-
-
-
     }
 
     public void getFavoriListInBackground() {
-
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
@@ -102,7 +99,21 @@ public class FavorisActivity extends AppCompatActivity {
                 //adapter.setFavoris(favorisDB.getFavoriDAO().getAllFavoris());
             });
         });
+    }
 
+    private void getPreFilteredFavorisInBackground() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        executorService.execute(() -> {
+            try {
+                List<Favori> favoriList = favorisDB.getFavoriDAO().getAllFavoris();
+                preFilteredFavoris = new ArrayList<>(favoriList);
+                handler.post(() -> Toast.makeText(FavorisActivity.this, "Pré-filtrés favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show());
+            } catch (Exception e) {
+                handler.post(() -> Toast.makeText(FavorisActivity.this, "Erreur lors de la récupération des pré-filtrés favoris", Toast.LENGTH_SHORT).show());
+            }
+        });
     }
 
     private void setFavAdapter() {
@@ -111,12 +122,13 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
     }
 
-    void openDrawer(String nom, String categorie, Bitmap bitmap) {
+    void openDrawer(String nom, String categorie) {
         drawerLayout.openDrawer(GravityCompat.END);
         txtNomLieu.setText(nom);
         txtTypeLieu.setText(categorie);
-        imgLieuDetails.setImageBitmap(bitmap);
+        //imgLieuDetails.setImageBitmap(bitmap);
     }
+
     private void showDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.fav_dialog_layout, null);
@@ -146,14 +158,16 @@ public class FavorisActivity extends AppCompatActivity {
             filter[2] = isSupermarche;
             filter[3] = isPharmacie;
             filter[4] = isMode;
-            filtre();
             dialog.dismiss();
+            filtre();
         });
         dialog.show();
     }
+
     private void filtre() {
         filteredFavoris.clear();
         assert preFilteredFavoris != null;
+        //preFilteredFavoris = favorisDB.getFavoriDAO().getAllFavoris();
         for (Favori fav : preFilteredFavoris) {
             String categorie = fav.getCategorie();
             if ((filter[0] && categorie.equals("Restaurant")) ||
@@ -168,11 +182,13 @@ public class FavorisActivity extends AppCompatActivity {
             recreate();
         adapter.updateFavoris(filteredFavoris);
     }
+
     private void setView() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
     }
+
     private void initView() {
         btnFermer = findViewById(R.id.btnFermer);
         btnFilter = findViewById(R.id.bntFiltre);

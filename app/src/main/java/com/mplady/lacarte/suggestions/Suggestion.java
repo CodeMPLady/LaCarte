@@ -1,6 +1,4 @@
-package com.mplady.lacarte;
-
-import android.graphics.Bitmap;
+package com.mplady.lacarte.suggestions;
 
 public class Suggestion {
     private String nom, categorie;

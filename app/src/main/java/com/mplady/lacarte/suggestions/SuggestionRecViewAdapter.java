@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
 

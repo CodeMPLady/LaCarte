@@ -2,6 +2,8 @@ package com.mplady.lacarte.favori;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,26 +12,31 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdapter.ViewHolder>{
     private List<Favori> favoris;
     private final FavorisActivity activity;
-
+    FavorisDB favorisDB;
 
     public FavoriRecViewAdapter(List<Favori> favoris, FavorisActivity activity) {
         this.favoris = favoris;
         this.activity = activity;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_favori, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -45,7 +52,37 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         holder.txtDescription.setText(favoris.get(position).getCategorie());
         //holder.imgLieu.setImageBitmap(favorisBitmap);
 
-        //holder.itemView.setOnClickListener(v -> activity.openDrawer(favoriNom, favoriCategorie, favorisBitmap));
+        callBackDatabase();
+
+        holder.itemView.setOnClickListener(v -> {
+            getFavoriListInBackground();
+            activity.openDrawer(favoriNom,favoriCategorie);
+        });
+    }
+
+    private void callBackDatabase() {
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+        };
+        favorisDB = Room.databaseBuilder(activity.getApplicationContext(), FavorisDB.class, "FavorisDB")
+                .addCallback(myCallback)
+                .build();
+    }
+
+    public void getFavoriListInBackground() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            List<Favori> favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+            new Handler(Looper.getMainLooper()).post(() -> setFavoris(favorisList));
+        });
     }
 
     @Override

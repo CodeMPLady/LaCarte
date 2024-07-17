@@ -1,4 +1,4 @@
-package com.mplady.lacarte;
+package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,6 @@ public class PropositionsActivity extends AppCompatActivity {
             "Pharmacies",
             "Supermarchés"
     };
-
     private SuggestionRecViewAdapter adapter;
 
     @SuppressLint("SetTextI18n")
