@@ -46,6 +46,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
         String favoriNom = String.valueOf(favoris.get(position).getNom());
         String favoriCategorie = String.valueOf(favoris.get(position).getCategorie());
+        //String favoriAdresse = String.valueOf(favoris.get(position).getAdresse());
         byte[] favorisBitmap = favoris.get(position).getBitmap();
 
         holder.txtName.setText(favoris.get(position).getNom());
@@ -56,7 +57,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
         holder.itemView.setOnClickListener(v -> {
             getFavoriListInBackground();
-            activity.openDrawer(favoriNom,favoriCategorie);
+            activity.openDrawer(favoris.get(position));
         });
     }
 

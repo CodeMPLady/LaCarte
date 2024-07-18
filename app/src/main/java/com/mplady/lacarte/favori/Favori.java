@@ -21,6 +21,9 @@ public class Favori implements Parcelable {
     @ColumnInfo(name = "categorieLieu")
     private String categorie;
 
+//    @ColumnInfo(name = "adresseLieu")
+//    private String adresse;
+
     @ColumnInfo(name = "bitmapLieu")
     public byte[] bitmapData;
 
@@ -61,6 +64,15 @@ public class Favori implements Parcelable {
     public String getCategorie() {
         return categorie;
     }
+
+//    public String getAdresse() {
+//        return adresse;
+//    }
+//
+//    public void setAdresse(String adresse) {
+//        this.adresse = adresse;
+//    }
+
     public byte[] getBitmap() {
         return bitmapData;
     }

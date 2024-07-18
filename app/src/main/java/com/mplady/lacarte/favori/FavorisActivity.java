@@ -23,9 +23,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
@@ -45,9 +47,9 @@ public class FavorisActivity extends AppCompatActivity {
     RecyclerView favorisRecView;
     FavoriRecViewAdapter adapter;
     private ImageView imgLieuDetails;
-    private TextView txtNomLieu, txtTypeLieu;
-    private Button btnFermer;
-    private FloatingActionButton btnFilter;
+    private TextView txtNomLieu, txtTypeLieu, txtAdresseLieu;
+    private FloatingActionButton btnFermer, btnFilter, btnSupprimerFavori;
+    private ExtendedFloatingActionButton btnYAllerFavori;
 
     FavorisDB favorisDB;
 
@@ -96,7 +98,6 @@ public class FavorisActivity extends AppCompatActivity {
             handler.post(() -> {
                 Toast.makeText(FavorisActivity.this, "Favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show();
                 adapter.setFavoris(favoris);
-                //adapter.setFavoris(favorisDB.getFavoriDAO().getAllFavoris());
             });
         });
     }
@@ -104,7 +105,6 @@ public class FavorisActivity extends AppCompatActivity {
     private void getPreFilteredFavorisInBackground() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
-
         executorService.execute(() -> {
             try {
                 List<Favori> favoriList = favorisDB.getFavoriDAO().getAllFavoris();
@@ -122,10 +122,21 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
     }
 
-    void openDrawer(String nom, String categorie) {
+    void openDrawer(Favori favori) {
         drawerLayout.openDrawer(GravityCompat.END);
-        txtNomLieu.setText(nom);
-        txtTypeLieu.setText(categorie);
+        txtNomLieu.setText(favori.getNom());
+        txtTypeLieu.setText(favori.getCategorie());
+
+        btnSupprimerFavori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteFavoriInBackground(favori);
+                drawerLayout.closeDrawer(GravityCompat.END);
+                Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
+                recreate();
+            }
+        });
+        //txtAdresseLieu.setText(adresse);
         //imgLieuDetails.setImageBitmap(bitmap);
     }
 
@@ -183,6 +194,15 @@ public class FavorisActivity extends AppCompatActivity {
         adapter.updateFavoris(filteredFavoris);
     }
 
+    public void deleteFavoriInBackground(Favori favori) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisDB.getFavoriDAO().deleteFavori(favori);
+            handler.post(() -> {});
+        });
+    }
+
     private void setView() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
@@ -195,7 +215,10 @@ public class FavorisActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.main);
         txtNomLieu = findViewById(R.id.txtNomLieu);
         txtTypeLieu = findViewById(R.id.txtTypeLieu);
+        txtAdresseLieu = findViewById(R.id.txtAdresseLieu);
         imgLieuDetails = findViewById(R.id.imgLieuDetails);
         favorisRecView = findViewById(R.id.favorisRecView);
+        btnYAllerFavori = findViewById(R.id.btnYAllerFavori);
+        btnSupprimerFavori = findViewById(R.id.btnSupprimerFavori);
     }
 }

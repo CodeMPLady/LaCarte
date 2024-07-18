@@ -166,10 +166,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
             favorisDB.getFavoriDAO().deleteFavori(favori);
-            handler.post(() -> {
-                Toast.makeText(SearchResultsActivity.this, "", Toast.LENGTH_SHORT).show();
-            });
-
+            handler.post(() -> {});
         });
     }
 
@@ -178,10 +175,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
             favorisDB.getFavoriDAO().addFavori(favori);
-            handler.post(() -> {
-                Toast.makeText(SearchResultsActivity.this, "", Toast.LENGTH_SHORT).show();
-            });
-
+            handler.post(() -> {});
         });
     }
 
@@ -190,7 +184,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
             favorisList = favorisDB.getFavoriDAO().getAllFavoris();
-            handler.post(() -> Toast.makeText(SearchResultsActivity.this, "Ajouté à la BDD", Toast.LENGTH_SHORT).show());
+            handler.post(() -> {});
         });
     }
 
@@ -253,11 +247,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 if(favori.getNom().equals(nameLieuSearch)){
                     btnFavoris.setImageResource(R.drawable.bookmarkfill);
                     isFavorite = true;
-                    System.out.println("Le favoris est la");
+                    break;
                 } else {
                     btnFavoris.setImageResource(R.drawable.bookmarkempty);
                     isFavorite = false;
-                    System.out.println("Le favoris est pas la");
                 }
             }
         });
@@ -334,7 +327,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                         }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
                     }
                     for(Favori favori : favorisList){
-                        System.out.println("Lieu : " + favori.getNom() + " Recherche : " + nameLieuSearch);
                         if(favori.getNom().equals(nameLieuSearch)){
                             btnFavoris.setImageResource(R.drawable.bookmarkfill);
                             isFavorite = true;
