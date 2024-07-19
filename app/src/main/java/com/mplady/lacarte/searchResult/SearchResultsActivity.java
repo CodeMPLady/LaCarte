@@ -233,6 +233,14 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         });
     }
 
+    private void initMap() {
+        Intent intent = getIntent();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        query = intent.getStringExtra("search_query");
+        assert mapFragment != null;
+        mapFragment.getMapAsync(this);
+    }
+
     private void newMap(@NonNull String newQuery) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
@@ -252,14 +260,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         }
     }
 
-    private void initMap() {
-        Intent intent = getIntent();
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        query = intent.getStringExtra("search_query");
-        assert mapFragment != null;
-        mapFragment.getMapAsync(this);
-    }
-
     private void callBackDatabase() {
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
@@ -272,7 +272,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 super.onCreate(db);
             }
         };
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
                 .addCallback(myCallback)
                 .build();
     }

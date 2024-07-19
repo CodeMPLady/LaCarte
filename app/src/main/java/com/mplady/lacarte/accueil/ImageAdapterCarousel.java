@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.mplady.lacarte.suggestions.PropositionsActivity;
+import com.mplady.lacarte.suggestions.SuggestionActivity;
 import com.mplady.lacarte.R;
 
 public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarousel.ViewHolder> {
@@ -38,7 +38,7 @@ public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarou
                 .load(imageRessourceID)
                 .into(holder.imageView);
         holder.imageView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, PropositionsActivity.class);
+            Intent intent = new Intent(context, SuggestionActivity.class);
             int positionType = holder.getAdapterPosition();
             intent.putExtra("position", positionType);
             startActivity(context, intent, null);

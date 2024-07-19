@@ -24,6 +24,4 @@ public interface FavoriDAO {
 
     @Query("SELECT * FROM Favoris")
     List<Favori> getAllFavoris();
-
-    //LiveData<List<Favori>> getAllFavoris();
 }

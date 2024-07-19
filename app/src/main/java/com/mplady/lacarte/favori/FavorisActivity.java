@@ -57,11 +57,9 @@ public class FavorisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favoris);
         setView();
         initView();
-        setFavAdapter();
         callBackDatabase();
         getFavoriListInBackground();
-        Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
-        intent.putParcelableArrayListExtra("listeFavoris", favoris);
+        //setFavAdapter();
 
         btnFilter.setOnClickListener(v -> {
             getPreFilteredFavorisInBackground();
@@ -70,6 +68,7 @@ public class FavorisActivity extends AppCompatActivity {
     }
 
     private void setFavAdapter() {
+       // getFavoriListInBackground();
         adapter = new FavoriRecViewAdapter(favoris, this);
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
@@ -176,9 +175,10 @@ public class FavorisActivity extends AppCompatActivity {
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
             favoris = (ArrayList<Favori>) favorisDB.getFavoriDAO().getAllFavoris();
+
             handler.post(() -> {
                 Toast.makeText(FavorisActivity.this, "Favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show();
-                adapter.setFavoris(favoris);
+                setFavAdapter();
             });
         });
     }

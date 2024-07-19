@@ -21,9 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -32,8 +29,6 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
-import com.mplady.lacarte.FavorisDB;
-import com.mplady.lacarte.favori.Favori;
 import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.searchResult.SearchResultsActivity;
@@ -52,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
-    FavorisDB favorisDB;
-    List<Favori> favorisList;
+
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
@@ -72,21 +66,6 @@ public class MainActivity extends AppCompatActivity {
         placesClient = Places.createClient(MainActivity.this);
     }
 
-    private void setView() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-    }
-
-    private void animatedBackgroundSearchIcon() {
-        ImageView imageView = findViewById(R.id.searchIcon);
-        AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
-        animationDrawable.setEnterFadeDuration(1500);
-        animationDrawable.setExitFadeDuration(2000);
-        animationDrawable.start();
-    }
-
     private void btnOnClicks() {
         fabStat.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, StatActivity.class);
@@ -103,21 +82,10 @@ public class MainActivity extends AppCompatActivity {
             builder.create().show();
         });
 
-        fabFavoris.setOnClickListener(v -> executorService.execute(() -> {
-            favorisList = favorisDB.getFavoriDAO().getAllFavoris();
-
+        fabFavoris.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
             startActivity(intent);
-        }));
-    }
-
-    @NonNull
-    private AlertDialog.Builder aboutBuilder() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("A propos de La Carte");
-        builder.setMessage("La Carte vous permet de chercher des lieux, d'accéder à une liste en fonction de leur catégorie et de votre position et de les mettre dans vos favoris afin d'y retourner facilement.\n\n" +
-                "Cette application a été développée par Michel P. et Naémie C.\n\n" + "Nous avons également développé un site de cuisine.");
-        return builder;
+        });
     }
 
     private void setSearchView() {
@@ -167,6 +135,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void animatedBackgroundSearchIcon() {
+        ImageView imageView = findViewById(R.id.searchIcon);
+        AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
+        animationDrawable.setEnterFadeDuration(1500);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+    }
+
     private void toggleSearchView() {
         if (searchView.getVisibility() == View.GONE) {
             Animation slideIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -205,6 +181,15 @@ public class MainActivity extends AppCompatActivity {
         return new ImageAdapterCarousel(this, imageRessourceIDs);
     }
 
+    @NonNull
+    private AlertDialog.Builder aboutBuilder() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("A propos de La Carte");
+        builder.setMessage("La Carte vous permet de chercher des lieux, d'accéder à une liste en fonction de leur catégorie et de votre position et de les mettre dans vos favoris afin d'y retourner facilement.\n\n" +
+                "Cette application a été développée par Michel P. et Naémie C.\n\n" + "Nous avons également développé un site de cuisine.");
+        return builder;
+    }
+
     private void initView() {
         listView = findViewById(R.id.suggestionsListView);
         searchView = findViewById(R.id.searchView);
@@ -214,4 +199,12 @@ public class MainActivity extends AppCompatActivity {
         fabAbout = findViewById(R.id.fabAbout);
         searchCardView = findViewById(R.id.searchCardView);
     }
+
+    private void setView() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
 }

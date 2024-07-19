@@ -44,15 +44,16 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        callBackDatabase();
+
         String favoriNom = String.valueOf(favoris.get(position).getNom());
         String favoriCategorie = String.valueOf(favoris.get(position).getCategorie());
-        byte[] favorisBitmap = favoris.get(position).getBitmap();
+        //byte[] favorisBitmap = favoris.get(position).getBitmap();
 
         holder.txtName.setText(favoriNom);
         holder.txtDescription.setText(favoriCategorie);
         //holder.imgLieu.setImageBitmap(favorisBitmap);
 
-        callBackDatabase();
 
         holder.itemView.setOnClickListener(v -> {
             getFavoriListInBackground();

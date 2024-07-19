@@ -21,7 +21,7 @@ import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
 
-public class PropositionsActivity extends AppCompatActivity {
+public class SuggestionActivity extends AppCompatActivity {
 
     private TextView textTypeTitle;
     private ExtendedFloatingActionButton selectionFAB;
