@@ -44,7 +44,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.Utils;
 import com.mplady.lacarte.favori.Favori;
 
 import java.io.IOException;
@@ -65,7 +64,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             "pharmacy",
             "store"
     };
-    private String[] tableauJolieCategories = {
+    private final String[] tableauJolieCategories = {
             "Restaurant",
             "Supermarché",
             "Station essence",
@@ -125,7 +124,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 super.onCreate(db);
             }
         };
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
                 .addCallback(myCallback)
                 .build();
     }
@@ -136,8 +135,9 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             if (!isFavorite) {
                 String nomLieu = nomLieuSearch.getText().toString();
                 String categorieLieu = categorieLieuSearch.getText().toString();
+                String adresseLieu = adresseLieuSearch.getText().toString();
 
-                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData);
+                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
                 addFavoriInBackground(favori1);
 
                 btnFavoris.setImageResource(R.drawable.bookmarkfill);
@@ -148,8 +148,9 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     if(favori.getNom().equals(nameLieuSearch)){
                         String nomLieu = nomLieuSearch.getText().toString();
                         String categorieLieu = categorieLieuSearch.getText().toString();
+                        String adresseLieu = adresseLieuSearch.getText().toString();
 
-                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData);
+                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
                         deleteFavoriInBackground(favori1);
                         break;
                     }

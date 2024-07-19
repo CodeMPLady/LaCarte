@@ -119,10 +119,10 @@
         android:orientation="horizontal"
         app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/fabFavoris"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchCardView"
         app:layout_constraintVertical_bias="0.647" />
 
     <ListView

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
                 .addCallback(myCallback)
                 .build();
     }

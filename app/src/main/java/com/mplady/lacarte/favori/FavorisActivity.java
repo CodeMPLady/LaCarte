@@ -10,7 +10,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +22,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -85,7 +83,7 @@ public class FavorisActivity extends AppCompatActivity {
                 super.onCreate(db);
             }
         };
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
                 .addCallback(myCallback)
                 .build();
     }
@@ -126,17 +124,14 @@ public class FavorisActivity extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.END);
         txtNomLieu.setText(favori.getNom());
         txtTypeLieu.setText(favori.getCategorie());
+        txtAdresseLieu.setText(favori.getAdresse());
 
-        btnSupprimerFavori.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteFavoriInBackground(favori);
-                drawerLayout.closeDrawer(GravityCompat.END);
-                Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
-                recreate();
-            }
+        btnSupprimerFavori.setOnClickListener(v -> {
+            deleteFavoriInBackground(favori);
+            drawerLayout.closeDrawer(GravityCompat.END);
+            Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
+            recreate();
         });
-        //txtAdresseLieu.setText(adresse);
         //imgLieuDetails.setImageBitmap(bitmap);
     }
 

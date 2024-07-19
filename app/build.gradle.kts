@@ -16,6 +16,7 @@ android {
 
     android.buildFeatures.buildConfig = true
 
+
     defaultConfig {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
