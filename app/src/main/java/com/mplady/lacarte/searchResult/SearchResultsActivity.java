@@ -112,6 +112,154 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         });
     }
 
+    private void setSearchViewResults () {
+        adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
+        listView.setAdapter(adapter);
+        searchViewResults.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String newQuery) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listView.setVisibility(View.VISIBLE);
+                AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
+                FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
+                        .setSessionToken(token)
+                        .setQuery(newText)
+                        .setCountries("FR")
+                        //        .setTypesFilter(Collections.singletonList(PlaceTypes.CITIES))
+                        .build();
+                placesClientResults.findAutocompletePredictions(request).addOnSuccessListener(response -> {
+                    suggestionList.clear();
+                    for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
+                        suggestionList.add(prediction.getFullText(null).toString());
+                        //System.out.println("SSSS" + prediction.getTypes());
+                        //TODO: récupérer le placeID avec prediction.getPlaceId() et l'envoyer pour simplifier le code de SearchResultsActivity
+                    }
+                    adapter.notifyDataSetChanged();
+                }).addOnFailureListener(exception -> System.out.println("Error fetching predictions: " + exception.getMessage()));
+                return false;
+            }
+        });
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            String newSelectedSuggestion = suggestionList.get(position);
+            newMap(newSelectedSuggestion);
+            placePhoto.setImageResource(R.drawable.imgmapsdefaultresized);
+            setFields(newSelectedSuggestion);
+            listView.setVisibility(View.GONE);
+            searchViewResults.setQuery("", false);
+            searchViewResults.clearFocus();
+
+            for(Favori favori : favorisList){
+                if(favori.getNom().equals(nameLieuSearch)){
+                    btnFavoris.setImageResource(R.drawable.bookmarkfill);
+                    isFavorite = true;
+                    break;
+                } else {
+                    btnFavoris.setImageResource(R.drawable.bookmarkempty);
+                    isFavorite = false;
+                }
+            }
+        });
+    }
+
+    private void setFields(String query) {
+        placesClient = Places.createClient(getApplicationContext());
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
+        FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
+                .setQuery(query)
+                .build();
+        placesClient.findAutocompletePredictions(request).addOnSuccessListener((response) -> {
+            for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
+                String placeId = prediction.getPlaceId();
+                FetchPlaceRequest requests = FetchPlaceRequest.builder(placeId, fields).build();
+
+                placesClient.fetchPlace(requests).addOnSuccessListener((responses) -> {
+                    Place place = responses.getPlace();
+                    nameLieuSearch = place.getName();
+                    nomLieuSearch.setText(nameLieuSearch);
+                    adresse = place.getAddress();
+                    adresseLieuSearch.setText(adresse);
+                    listCategories = place.getPlaceTypes();
+                    assert listCategories != null;
+                    System.out.println("Catégorie : " + listCategories);
+
+                    categorie = null;
+                    selectionCategorie:
+                    for (int i = 0; i < tableauCategories.length; i++) {
+                        for (int j = 0; j < listCategories.size(); j++) {
+                            System.out.println("test " + tableauCategories[i] + " " + listCategories.get(j));
+                            if (tableauCategories[i].equals(listCategories.get(j))) {
+                                categorie = tableauJolieCategories[i];
+                                break selectionCategorie;
+                            }
+                        }
+                    }
+                    if (categorie == null)
+                        //TODO : est-ce qu'on met rien ou on met plutôt la premiere catégorie ? l'inconvénient c'est qu'on ne filtre pas les autres catégories
+                        categorie = "";
+                    categorieLieuSearch.setText(categorie);
+
+
+                    List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
+                    if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
+                        PhotoMetadata photoMetadata = photoMetadataList.get(0);
+                        FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                                .setMaxWidth(500)
+                                .setMaxHeight(500)
+                                .build();
+                        placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
+                            bitmap = fetchPhotoResponse.getBitmap();
+                            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 500, 500, true);
+                            placePhoto.setImageBitmap(resizedBitmap);
+                        }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
+                    }
+                    for(Favori favori : favorisList){
+                        if(favori.getNom().equals(nameLieuSearch)){
+                            btnFavoris.setImageResource(R.drawable.bookmarkfill);
+                            isFavorite = true;
+                            break;
+                        } else {
+                            btnFavoris.setImageResource(R.drawable.bookmarkempty);
+                            isFavorite = false;
+                        }
+                    }
+                }).addOnFailureListener((exception) -> System.out.println("Error fetching place: " + exception.getMessage()));
+            }
+        });
+    }
+
+    private void newMap(@NonNull String newQuery) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(newQuery, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
+
+                gMap.clear();
+                gMap.addMarker(new MarkerOptions().position(location).title(newQuery));
+                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+            } else {
+                System.out.println("No address found for location: " + newQuery);
+            }
+        } catch (IOException e) {
+            System.out.println("Geocoder error: " + e.getMessage());
+        }
+    }
+
+    private void initMap() {
+        Intent intent = getIntent();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        query = intent.getStringExtra("search_query");
+        assert mapFragment != null;
+        mapFragment.getMapAsync(this);
+    }
+
     private void callBackDatabase() {
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
@@ -200,154 +348,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             Intent webIntent = new Intent(Intent.ACTION_VIEW, webIntentUri);
             startActivity(webIntent);
         }
-    }
-
-    private void setSearchViewResults () {
-        adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
-        listView.setAdapter(adapter);
-        searchViewResults.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String newQuery) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                listView.setVisibility(View.VISIBLE);
-                AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
-                FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
-                        .setSessionToken(token)
-                        .setQuery(newText)
-                        .setCountries("FR")
-                        //        .setTypesFilter(Collections.singletonList(PlaceTypes.CITIES))
-                        .build();
-                placesClientResults.findAutocompletePredictions(request).addOnSuccessListener(response -> {
-                    suggestionList.clear();
-                    for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
-                        suggestionList.add(prediction.getFullText(null).toString());
-                        //System.out.println("SSSS" + prediction.getTypes());
-                        //TODO: récupérer le placeID avec prediction.getPlaceId() et l'envoyer pour simplifier le code de SearchResultsActivity
-                    }
-                    adapter.notifyDataSetChanged();
-                }).addOnFailureListener(exception -> System.out.println("Error fetching predictions: " + exception.getMessage()));
-                return false;
-            }
-        });
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            String newSelectedSuggestion = suggestionList.get(position);
-            newMap(newSelectedSuggestion);
-            placePhoto.setImageResource(R.drawable.imgmapsdefaultresized);
-            setFields(newSelectedSuggestion);
-            listView.setVisibility(View.GONE);
-            searchViewResults.setQuery("", false);
-            searchViewResults.clearFocus();
-
-            for(Favori favori : favorisList){
-                if(favori.getNom().equals(nameLieuSearch)){
-                    btnFavoris.setImageResource(R.drawable.bookmarkfill);
-                    isFavorite = true;
-                    break;
-                } else {
-                    btnFavoris.setImageResource(R.drawable.bookmarkempty);
-                    isFavorite = false;
-                }
-            }
-        });
-    }
-
-    private void newMap(@NonNull String newQuery) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocationName(newQuery, 1);
-            if (addresses != null && !addresses.isEmpty()) {
-                Address address = addresses.get(0);
-                LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
-
-                gMap.clear();
-                gMap.addMarker(new MarkerOptions().position(location).title(newQuery));
-                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
-            } else {
-                System.out.println("No address found for location: " + newQuery);
-            }
-        } catch (IOException e) {
-            System.out.println("Geocoder error: " + e.getMessage());
-        }
-    }
-
-    private void setFields(String query) {
-        placesClient = Places.createClient(getApplicationContext());
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
-        FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
-                .setQuery(query)
-                .build();
-        placesClient.findAutocompletePredictions(request).addOnSuccessListener((response) -> {
-            for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
-                String placeId = prediction.getPlaceId();
-                FetchPlaceRequest requests = FetchPlaceRequest.builder(placeId, fields).build();
-
-                placesClient.fetchPlace(requests).addOnSuccessListener((responses) -> {
-                    Place place = responses.getPlace();
-                    nameLieuSearch = place.getName();
-                    nomLieuSearch.setText(nameLieuSearch);
-                    adresse = place.getAddress();
-                    adresseLieuSearch.setText(adresse);
-                    listCategories = place.getPlaceTypes();
-                    assert listCategories != null;
-                    System.out.println("Catégorie : " + listCategories);
-
-                    categorie = null;
-                    selectionCategorie:
-                    for (int i = 0; i < tableauCategories.length; i++) {
-                        for (int j = 0; j < listCategories.size(); j++) {
-                            System.out.println("test " + tableauCategories[i] + " " + listCategories.get(j));
-                            if (tableauCategories[i].equals(listCategories.get(j))) {
-                                categorie = tableauJolieCategories[i];
-                                break selectionCategorie;
-                            }
-                        }
-                    }
-                    if (categorie == null)
-                        //TODO : est-ce qu'on met rien ou on met plutôt la premiere catégorie ? l'inconvénient c'est qu'on ne filtre pas les autres catégories
-                        categorie = "";
-                    categorieLieuSearch.setText(categorie);
-
-
-                    List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
-                    if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
-                        PhotoMetadata photoMetadata = photoMetadataList.get(0);
-                        FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                                .setMaxWidth(500)
-                                .setMaxHeight(500)
-                                .build();
-                        placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
-                            bitmap = fetchPhotoResponse.getBitmap();
-                            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 500, 500, true);
-                            placePhoto.setImageBitmap(resizedBitmap);
-                        }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
-                    }
-                    for(Favori favori : favorisList){
-                        if(favori.getNom().equals(nameLieuSearch)){
-                            btnFavoris.setImageResource(R.drawable.bookmarkfill);
-                            isFavorite = true;
-                            break;
-                        } else {
-                            btnFavoris.setImageResource(R.drawable.bookmarkempty);
-                            isFavorite = false;
-                        }
-                    }
-                }).addOnFailureListener((exception) -> System.out.println("Error fetching place: " + exception.getMessage()));
-            }
-        });
-    }
-
-    private void initMap() {
-        Intent intent = getIntent();
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        query = intent.getStringExtra("search_query");
-        assert mapFragment != null;
-        mapFragment.getMapAsync(this);
     }
 
     private void initView() {

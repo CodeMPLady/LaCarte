@@ -72,20 +72,6 @@ public class Favori implements Parcelable {
         return bitmapData;
     }
 
-    public void setBitmap(byte[] bitmapData) {
-        this.bitmapData = bitmapData;
-    }
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-    public void setNom(@NonNull String nom) {
-        this.nom = nom;
-    }
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-
     @NonNull
     @Override
     public String toString() {

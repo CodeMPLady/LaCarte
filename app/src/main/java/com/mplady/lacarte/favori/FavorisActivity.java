@@ -145,14 +145,6 @@ public class FavorisActivity extends AppCompatActivity {
         adapter.updateFavoris(filteredFavoris);
     }
 
-    public void deleteFavoriInBackground(Favori favori) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisDB.getFavoriDAO().deleteFavori(favori);
-            handler.post(() -> {});
-        });
-    }
     private void callBackDatabase() {
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
@@ -168,6 +160,15 @@ public class FavorisActivity extends AppCompatActivity {
         favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
                 .addCallback(myCallback)
                 .build();
+    }
+
+    public void deleteFavoriInBackground(Favori favori) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisDB.getFavoriDAO().deleteFavori(favori);
+            handler.post(() -> {});
+        });
     }
 
     public void getFavoriListInBackground() {
@@ -196,12 +197,6 @@ public class FavorisActivity extends AppCompatActivity {
         });
     }
 
-    private void setView() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
-        decorView.setSystemUiVisibility(uiOptions);
-    }
-
     private void initView() {
         btnFermer = findViewById(R.id.btnFermer);
         btnFilter = findViewById(R.id.bntFiltre);
@@ -213,5 +208,11 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView = findViewById(R.id.favorisRecView);
         btnYAllerFavori = findViewById(R.id.btnYAllerFavori);
         btnSupprimerFavori = findViewById(R.id.btnSupprimerFavori);
+    }
+
+    private void setView() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 }

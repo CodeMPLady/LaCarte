@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         setSearchView();
         btnOnClicks();
         animatedBackgroundSearchIcon();
-        callBackDatabase();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(MainActivity.this);
@@ -78,24 +77,6 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-    }
-
-    private void callBackDatabase() {
-        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
-            @Override
-            public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                super.onOpen(db);
-            }
-
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
-            }
-        };
-
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
-                .addCallback(myCallback)
-                .build();
     }
 
     private void animatedBackgroundSearchIcon() {
