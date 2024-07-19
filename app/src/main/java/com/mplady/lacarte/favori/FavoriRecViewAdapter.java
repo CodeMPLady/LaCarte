@@ -2,6 +2,7 @@ package com.mplady.lacarte.favori;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     public FavoriRecViewAdapter(List<Favori> favoris, FavorisActivity activity) {
         this.favoris = favoris;
         this.activity = activity;
+        callBackDatabase();
+        getFavoriListInBackground();
     }
 
     @NonNull
@@ -44,21 +47,23 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        callBackDatabase();
+        Favori favori = favoris.get(position);
+        holder.txtName.setText(favori.getNom());
+        holder.txtDescription.setText(favori.getCategorie());
+        //holder.imgLieu.setImageBitmap(BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length));
+        if (favori.getBitmap() != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
+            holder.imgLieu.setImageBitmap(bitmap);
+        } else {
+            holder.imgLieu.setImageResource(R.drawable.imgmapsdefaultresized);
+        }
 
-        String favoriNom = String.valueOf(favoris.get(position).getNom());
-        String favoriCategorie = String.valueOf(favoris.get(position).getCategorie());
-        //byte[] favorisBitmap = favoris.get(position).getBitmap();
+        holder.itemView.setOnClickListener(v -> activity.openDrawer(favori));
 
-        holder.txtName.setText(favoriNom);
-        holder.txtDescription.setText(favoriCategorie);
-        //holder.imgLieu.setImageBitmap(favorisBitmap);
-
-
-        holder.itemView.setOnClickListener(v -> {
-            getFavoriListInBackground();
-            activity.openDrawer(favoris.get(position));
-        });
+//        holder.itemView.setOnClickListener(v -> {
+//            getFavoriListInBackground();
+//            activity.openDrawer(favoris.get(position));
+//        });
     }
 
     private void callBackDatabase() {
@@ -75,6 +80,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         };
         favorisDB = Room.databaseBuilder(activity.getApplicationContext(), FavorisDB.class, "FavorisDB")
                 .addCallback(myCallback)
+                .fallbackToDestructiveMigration()
                 .build();
     }
 

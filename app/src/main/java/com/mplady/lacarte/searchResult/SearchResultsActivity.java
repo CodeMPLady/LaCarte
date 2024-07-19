@@ -46,6 +46,7 @@ import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -285,6 +286,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 String categorieLieu = categorieLieuSearch.getText().toString();
                 String adresseLieu = adresseLieuSearch.getText().toString();
 
+                byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
+
                 Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
                 addFavoriInBackground(favori1);
 
@@ -308,6 +311,15 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public byte[] convertBitmapToByteArray(Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        }
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream); // Utilisez PNG ou JPEG selon vos besoins
+        return outputStream.toByteArray();
     }
 
     public void deleteFavoriInBackground(Favori favori) {

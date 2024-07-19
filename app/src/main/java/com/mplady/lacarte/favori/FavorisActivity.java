@@ -2,6 +2,7 @@ package com.mplady.lacarte.favori;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -55,23 +56,28 @@ public class FavorisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoris);
-        setView();
         initView();
         callBackDatabase();
         getFavoriListInBackground();
-        //setFavAdapter();
-
-        btnFilter.setOnClickListener(v -> {
-            getPreFilteredFavorisInBackground();
-            showDialog();
-        });
     }
 
-    private void setFavAdapter() {
-       // getFavoriListInBackground();
+    private void initView() {
+        drawerLayout = findViewById(R.id.main);
+        btnFermer = findViewById(R.id.btnFermer);
+        btnYAllerFavori = findViewById(R.id.btnYAllerFavori);
+        btnSupprimerFavori = findViewById(R.id.btnSupprimerFavori);
+        imgLieuDetails = findViewById(R.id.imgLieuDetails);
+        txtNomLieu = findViewById(R.id.txtNomLieu);
+        txtTypeLieu = findViewById(R.id.txtTypeLieu);
+        txtAdresseLieu = findViewById(R.id.txtAdresseLieu);
+
+        favorisRecView = findViewById(R.id.favorisRecView);
         adapter = new FavoriRecViewAdapter(favoris, this);
         favorisRecView.setAdapter(adapter);
-        favorisRecView.setLayoutManager(new GridLayoutManager(this,2));
+        favorisRecView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        btnFilter = findViewById(R.id.bntFiltre);
+        btnFilter.setOnClickListener(v -> showDialog());
     }
 
     void openDrawer(Favori favori) {
@@ -80,14 +86,20 @@ public class FavorisActivity extends AppCompatActivity {
         txtTypeLieu.setText(favori.getCategorie());
         txtAdresseLieu.setText(favori.getAdresse());
 
+        if (favori.getBitmap() != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
+            imgLieuDetails.setImageBitmap(bitmap);
+        } else {
+            imgLieuDetails.setImageResource(R.drawable.imgmapsdefaultresized);
+        }
+
         btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
         btnSupprimerFavori.setOnClickListener(v -> {
             deleteFavoriInBackground(favori);
             drawerLayout.closeDrawer(GravityCompat.END);
             Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
-            recreate();
+            getFavoriListInBackground();
         });
-        //imgLieuDetails.setImageBitmap(bitmap);
     }
 
     private void showDialog() {
@@ -106,42 +118,36 @@ public class FavorisActivity extends AppCompatActivity {
         FloatingActionButton btnAnnuler = dialogView.findViewById(R.id.btnAnnuler);
 
         AlertDialog dialog = builder.create();
-        btnAnnuler.setOnClickListener(v -> dialog.dismiss());
-        btnValider.setOnClickListener(v -> {
-            boolean isRestaurant = checkRestaurant.isChecked();
-            boolean isEssence = checkEssence.isChecked();
-            boolean isSupermarche = checkSupermarche.isChecked();
-            boolean isPharmacie = checkPharmacie.isChecked();
-            boolean isMode = checkMode.isChecked();
-
-            filter[0] = isRestaurant;
-            filter[1] = isEssence;
-            filter[2] = isSupermarche;
-            filter[3] = isPharmacie;
-            filter[4] = isMode;
-            dialog.dismiss();
-            filtre();
-        });
         dialog.show();
+
+        btnValider.setOnClickListener(v -> {
+            filter[0] = checkRestaurant.isChecked();
+            filter[1] = checkEssence.isChecked();
+            filter[2] = checkSupermarche.isChecked();
+            filter[3] = checkPharmacie.isChecked();
+            filter[4] = checkMode.isChecked();
+            filtre();
+            dialog.dismiss();
+        });
+
+        btnAnnuler.setOnClickListener(v -> dialog.dismiss());
     }
 
-    private void filtre() {
-        filteredFavoris.clear();
-        assert preFilteredFavoris != null;
-        //preFilteredFavoris = favorisDB.getFavoriDAO().getAllFavoris();
-        for (Favori fav : preFilteredFavoris) {
-            String categorie = fav.getCategorie();
-            if ((filter[0] && categorie.equals("Restaurant")) ||
-                    (filter[1] && categorie.equals("Station essence")) ||
-                    (filter[2] && categorie.equals("Supermarche")) ||
-                    (filter[3] && categorie.equals("Pharmacie")) ||
-                    (filter[4] && categorie.equals("Magasin"))) {
-                filteredFavoris.add(fav);
+    private void getFavoriListInBackground() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            try {
+                favoris.clear();
+                favoris.addAll(favorisDB.getFavoriDAO().getAllFavoris());
+                preFilteredFavoris = new ArrayList<>(favoris);
+                handler.post(() -> adapter.setFavoris(favoris));
+            } catch (Exception e) {
+                handler.post(() -> Toast.makeText(FavorisActivity.this, "Erreur lors de la récupération des favoris", Toast.LENGTH_SHORT).show());
+            } finally {
+                executorService.shutdown();
             }
-        }
-        if (!filter[0] && !filter[1] && !filter[2] && !filter[3] && !filter[4])
-            recreate();
-        adapter.updateFavoris(filteredFavoris);
+        });
     }
 
     private void callBackDatabase() {
@@ -156,63 +162,36 @@ public class FavorisActivity extends AppCompatActivity {
                 super.onCreate(db);
             }
         };
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
+
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
                 .addCallback(myCallback)
+                .fallbackToDestructiveMigration()
                 .build();
     }
 
-    public void deleteFavoriInBackground(Favori favori) {
+    private void filtre() {
+        filteredFavoris.clear();
+        for (Favori fav : preFilteredFavoris) {
+            String categorie = fav.getCategorie();
+            if ((filter[0] && "Restaurant".equals(categorie)) ||
+                    (filter[1] && "Station essence".equals(categorie)) ||
+                    (filter[2] && "Supermarche".equals(categorie)) ||
+                    (filter[3] && "Pharmacie".equals(categorie)) ||
+                    (filter[4] && "Magasin".equals(categorie))) {
+                filteredFavoris.add(fav);
+            }
+        }
+        if (!filter[0] && !filter[1] && !filter[2] && !filter[3] && !filter[4])
+            recreate();
+        adapter.updateFavoris(filteredFavoris);
+    }
+
+    private void deleteFavoriInBackground(Favori favori) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
             favorisDB.getFavoriDAO().deleteFavori(favori);
-            handler.post(() -> {});
+            getFavoriListInBackground();
+            executorService.shutdown();
         });
-    }
-
-    public void getFavoriListInBackground() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favoris = (ArrayList<Favori>) favorisDB.getFavoriDAO().getAllFavoris();
-
-            handler.post(() -> {
-                Toast.makeText(FavorisActivity.this, "Favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show();
-                setFavAdapter();
-            });
-        });
-    }
-
-    private void getPreFilteredFavorisInBackground() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            try {
-                List<Favori> favoriList = favorisDB.getFavoriDAO().getAllFavoris();
-                preFilteredFavoris = new ArrayList<>(favoriList);
-                handler.post(() -> Toast.makeText(FavorisActivity.this, "Pré-filtrés favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show());
-            } catch (Exception e) {
-                handler.post(() -> Toast.makeText(FavorisActivity.this, "Erreur lors de la récupération des pré-filtrés favoris", Toast.LENGTH_SHORT).show());
-            }
-        });
-    }
-
-    private void initView() {
-        btnFermer = findViewById(R.id.btnFermer);
-        btnFilter = findViewById(R.id.bntFiltre);
-        drawerLayout = findViewById(R.id.main);
-        txtNomLieu = findViewById(R.id.txtNomLieu);
-        txtTypeLieu = findViewById(R.id.txtTypeLieu);
-        txtAdresseLieu = findViewById(R.id.txtAdresseLieu);
-        imgLieuDetails = findViewById(R.id.imgLieuDetails);
-        favorisRecView = findViewById(R.id.favorisRecView);
-        btnYAllerFavori = findViewById(R.id.btnYAllerFavori);
-        btnSupprimerFavori = findViewById(R.id.btnSupprimerFavori);
-    }
-
-    private void setView() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
-        decorView.setSystemUiVisibility(uiOptions);
     }
 }

@@ -44,6 +44,8 @@ public class Favori implements Parcelable {
     protected Favori(Parcel in) {
         nom = Objects.requireNonNull(in.readString());
         categorie = in.readString();
+        adresse = in.readString();
+        bitmapData = in.createByteArray();
     }
 
     public static final Creator<Favori> CREATOR = new Creator<Favori>() {
@@ -90,5 +92,6 @@ public class Favori implements Parcelable {
         dest.writeString(nom);
         dest.writeString(categorie);
         dest.writeString(adresse);
+        dest.writeByteArray(bitmapData);
     }
 }
