@@ -46,12 +46,10 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
         String favoriNom = String.valueOf(favoris.get(position).getNom());
         String favoriCategorie = String.valueOf(favoris.get(position).getCategorie());
-        String favoriAdresse = String.valueOf(favoris.get(position).getAdresse());
         byte[] favorisBitmap = favoris.get(position).getBitmap();
 
         holder.txtName.setText(favoriNom);
         holder.txtDescription.setText(favoriCategorie);
-        holder.txtAdresse.setText(favoriAdresse);
         //holder.imgLieu.setImageBitmap(favorisBitmap);
 
         callBackDatabase();
@@ -105,7 +103,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView txtName, txtDescription, txtAdresse;
+        private final TextView txtName, txtDescription;
         private final ImageView imgLieu;
 
         public ViewHolder(@NonNull View itemView) {
@@ -113,7 +111,6 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
             txtName = itemView.findViewById(R.id.txtName);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             imgLieu = itemView.findViewById(R.id.imgLieu);
-            txtAdresse = itemView.findViewById(R.id.txtAdresseLieu);
         }
     }
 }

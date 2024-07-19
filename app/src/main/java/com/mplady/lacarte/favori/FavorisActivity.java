@@ -55,7 +55,6 @@ public class FavorisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoris);
-
         setView();
         initView();
         setFavAdapter();
@@ -64,53 +63,9 @@ public class FavorisActivity extends AppCompatActivity {
         Intent intent = new Intent(FavorisActivity.this, SearchResultsActivity.class);
         intent.putParcelableArrayListExtra("listeFavoris", favoris);
 
-        btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
         btnFilter.setOnClickListener(v -> {
             getPreFilteredFavorisInBackground();
             showDialog();
-        });
-    }
-
-    private void callBackDatabase() {
-        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
-            @Override
-            public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                super.onOpen(db);
-            }
-
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
-            }
-        };
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
-                .addCallback(myCallback)
-                .build();
-    }
-
-    public void getFavoriListInBackground() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favoris = (ArrayList<Favori>) favorisDB.getFavoriDAO().getAllFavoris();
-            handler.post(() -> {
-                Toast.makeText(FavorisActivity.this, "Favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show();
-                adapter.setFavoris(favoris);
-            });
-        });
-    }
-
-    private void getPreFilteredFavorisInBackground() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            try {
-                List<Favori> favoriList = favorisDB.getFavoriDAO().getAllFavoris();
-                preFilteredFavoris = new ArrayList<>(favoriList);
-                handler.post(() -> Toast.makeText(FavorisActivity.this, "Pré-filtrés favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show());
-            } catch (Exception e) {
-                handler.post(() -> Toast.makeText(FavorisActivity.this, "Erreur lors de la récupération des pré-filtrés favoris", Toast.LENGTH_SHORT).show());
-            }
         });
     }
 
@@ -126,6 +81,7 @@ public class FavorisActivity extends AppCompatActivity {
         txtTypeLieu.setText(favori.getCategorie());
         txtAdresseLieu.setText(favori.getAdresse());
 
+        btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
         btnSupprimerFavori.setOnClickListener(v -> {
             deleteFavoriInBackground(favori);
             drawerLayout.closeDrawer(GravityCompat.END);
@@ -195,6 +151,48 @@ public class FavorisActivity extends AppCompatActivity {
         executorService.execute(() -> {
             favorisDB.getFavoriDAO().deleteFavori(favori);
             handler.post(() -> {});
+        });
+    }
+    private void callBackDatabase() {
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+        };
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB2")
+                .addCallback(myCallback)
+                .build();
+    }
+
+    public void getFavoriListInBackground() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favoris = (ArrayList<Favori>) favorisDB.getFavoriDAO().getAllFavoris();
+            handler.post(() -> {
+                Toast.makeText(FavorisActivity.this, "Favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show();
+                adapter.setFavoris(favoris);
+            });
+        });
+    }
+
+    private void getPreFilteredFavorisInBackground() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            try {
+                List<Favori> favoriList = favorisDB.getFavoriDAO().getAllFavoris();
+                preFilteredFavoris = new ArrayList<>(favoriList);
+                handler.post(() -> Toast.makeText(FavorisActivity.this, "Pré-filtrés favoris chargés depuis la BDD", Toast.LENGTH_SHORT).show());
+            } catch (Exception e) {
+                handler.post(() -> Toast.makeText(FavorisActivity.this, "Erreur lors de la récupération des pré-filtrés favoris", Toast.LENGTH_SHORT).show());
+            }
         });
     }
 
