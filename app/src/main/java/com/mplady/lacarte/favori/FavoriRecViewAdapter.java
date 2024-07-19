@@ -59,11 +59,6 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         }
 
         holder.itemView.setOnClickListener(v -> activity.openDrawer(favori));
-
-//        holder.itemView.setOnClickListener(v -> {
-//            getFavoriListInBackground();
-//            activity.openDrawer(favoris.get(position));
-//        });
     }
 
     private void callBackDatabase() {

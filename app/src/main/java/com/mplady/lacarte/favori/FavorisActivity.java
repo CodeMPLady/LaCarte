@@ -1,6 +1,5 @@
 package com.mplady.lacarte.favori;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +45,8 @@ public class FavorisActivity extends AppCompatActivity {
     FavoriRecViewAdapter adapter;
     private ImageView imgLieuDetails;
     private TextView txtNomLieu, txtTypeLieu, txtAdresseLieu;
-    private FloatingActionButton btnFermer, btnFilter, btnSupprimerFavori;
+    private FloatingActionButton btnFermer;
+    private FloatingActionButton btnSupprimerFavori;
     private ExtendedFloatingActionButton btnYAllerFavori;
 
     FavorisDB favorisDB;
@@ -76,7 +75,7 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView.setAdapter(adapter);
         favorisRecView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        btnFilter = findViewById(R.id.bntFiltre);
+        FloatingActionButton btnFilter = findViewById(R.id.bntFiltre);
         btnFilter.setOnClickListener(v -> showDialog());
     }
 

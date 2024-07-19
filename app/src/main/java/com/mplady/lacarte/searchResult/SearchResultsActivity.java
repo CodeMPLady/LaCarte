@@ -86,7 +86,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
     private Bitmap bitmap, resizedBitmap;
-    private byte[] bitmapData;
     FavorisDB favorisDB;
     List<Favori> favorisList;
 
@@ -300,6 +299,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                         String nomLieu = nomLieuSearch.getText().toString();
                         String categorieLieu = categorieLieuSearch.getText().toString();
                         String adresseLieu = adresseLieuSearch.getText().toString();
+
+                        byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
 
                         Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
                         deleteFavoriInBackground(favori1);
