@@ -1,7 +1,9 @@
 package com.mplady.lacarte.favori;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -79,6 +81,8 @@ public class FavorisActivity extends AppCompatActivity {
         btnFilter.setOnClickListener(v -> showDialog());
     }
 
+
+
     void openDrawer(Favori favori) {
         drawerLayout.openDrawer(GravityCompat.END);
         txtNomLieu.setText(favori.getNom());
@@ -99,6 +103,8 @@ public class FavorisActivity extends AppCompatActivity {
             Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
             getFavoriListInBackground();
         });
+
+        btnYAllerFavori.setOnClickListener(v -> openGoogleMaps(favori.getNom()));
     }
 
     private void showDialog() {
@@ -192,5 +198,18 @@ public class FavorisActivity extends AppCompatActivity {
             getFavoriListInBackground();
             executorService.shutdown();
         });
+    }
+
+    private void openGoogleMaps(String lieu) {
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + lieu);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Uri webIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" + lieu);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, webIntentUri);
+            startActivity(webIntent);
+        }
     }
 }

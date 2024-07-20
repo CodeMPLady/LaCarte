@@ -352,6 +352,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
     private void openGoogleMaps() {
         Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + nameLieuSearch);
+        System.out.println("lieu1 : " + nameLieuSearch);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
