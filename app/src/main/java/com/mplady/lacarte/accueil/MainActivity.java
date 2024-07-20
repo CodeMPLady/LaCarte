@@ -22,9 +22,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Collections;
 
-import com.google.android.libraries.places.api.model.PlaceTypes;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -109,18 +107,12 @@ public class MainActivity extends AppCompatActivity {
                         .setSessionToken(token)
                         .setQuery(newText)
                         .setCountries("FR")
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.RESTAURANT))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.SUPERMARKET))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.GAS_STATION))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.PHARMACY))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.STORE))
                         .build();
                 placesClient.findAutocompletePredictions(request).addOnSuccessListener(response -> {
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
-                        prediction.getPlaceId();
-                        //System.out.println("SSSS" + prediction.getTypes());
+                        //System.out.println("nom : " + prediction.getFullText(null).toString()  + "type :" + prediction.getTypes());
                         //TODO: récupérer l'le placeID avec prediction.getPlaceId() et l'envoyer pour simplifié le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();
@@ -132,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedSuggestion = suggestionList.get(position);
             Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
+            System.out.println("sugg :  " + selectedSuggestion);
             intent.putExtra("search_query", selectedSuggestion);
             startActivity(intent);
             searchView.setQuery("", false);

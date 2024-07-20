@@ -34,7 +34,6 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.PlaceTypes;
 import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
@@ -51,7 +50,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -132,11 +130,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                         .setSessionToken(token)
                         .setQuery(newText)
                         .setCountries("FR")
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.RESTAURANT))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.SUPERMARKET))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.GAS_STATION))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.PHARMACY))
-                        .setTypesFilter(Collections.singletonList(PlaceTypes.STORE))
                         .build();
                 placesClientResults.findAutocompletePredictions(request).addOnSuccessListener(response -> {
                     suggestionList.clear();
@@ -196,7 +189,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
                     for (int i = 0; i < tableauCategories.length; i++) {
                         for (int j = 0; j < listCategories.size(); j++) {
-                            System.out.println("test " + tableauCategories[i] + " " + listCategories.get(j));
                             if (tableauCategories[i].equals(listCategories.get(j))) {
                                 categorie = tableauJolieCategories[i];
                                 break selectionCategorie;
