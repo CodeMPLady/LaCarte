@@ -26,6 +26,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,7 +47,8 @@ public class FavorisActivity extends AppCompatActivity {
     RecyclerView favorisRecView;
     FavoriRecViewAdapter adapter;
     private ImageView imgLieuDetails;
-    private TextView txtNomLieu, txtTypeLieu, txtAdresseLieu;
+    private TextView txtNomLieu, txtAdresseLieu;
+    private Chip chipTypeLieu;
     private FloatingActionButton btnFermer;
     private FloatingActionButton btnSupprimerFavori;
     private ExtendedFloatingActionButton btnYAllerFavori;
@@ -69,8 +71,8 @@ public class FavorisActivity extends AppCompatActivity {
         btnSupprimerFavori = findViewById(R.id.btnSupprimerFavori);
         imgLieuDetails = findViewById(R.id.imgLieuDetails);
         txtNomLieu = findViewById(R.id.txtNomLieu);
-        txtTypeLieu = findViewById(R.id.txtTypeLieu);
         txtAdresseLieu = findViewById(R.id.txtAdresseLieu);
+        chipTypeLieu = findViewById(R.id.chipTypeLieu);
 
         favorisRecView = findViewById(R.id.favorisRecView);
         adapter = new FavoriRecViewAdapter(favoris, this);
@@ -84,7 +86,7 @@ public class FavorisActivity extends AppCompatActivity {
     void openDrawer(Favori favori) {
         drawerLayout.openDrawer(GravityCompat.END);
         txtNomLieu.setText(favori.getNom());
-        txtTypeLieu.setText(favori.getCategorie());
+        chipTypeLieu.setText(favori.getCategorie());
         txtAdresseLieu.setText(favori.getAdresse());
 
         if (favori.getBitmap() != null) {

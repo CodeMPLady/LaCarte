@@ -20,42 +20,97 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:contentDescription="Image du lieu"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/imgmapsdefaultresized"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline16"
-            app:layout_constraintStart_toStartOf="@+id/guideline17"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.496" />
 
-        <TextView
-            android:id="@+id/txtNomLieu"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnSupprimerFavori"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="130dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="Bouton de suppression du favori"
+            app:backgroundTint="#CECECE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:maxImageSize="33dp"
+            app:srcCompat="@drawable/deleteicon"
+            app:tint="#C10E0E" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnFermer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="Bouton de fermeture du drawer"
+            android:src="@drawable/close24px"
+            app:backgroundTint="#CECECE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/txtNomLieu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginEnd="24dp"
             android:text="Nom du lieu"
+            android:textAlignment="center"
             android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtTypeLieu"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtAdresseLieu"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Type du lieu"
-            android:textSize="24sp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:text="Adresse"
+            android:textAlignment="center"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toBottomOf="@+id/txtNomLieu" />
 
-        <Button
-            android:id="@+id/btnFermer"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtTypeLieu"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="FERMER"
-            android:textSize="25sp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:text="Type du lieu"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@+id/txtAdresseLieu" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btnYAllerFavori"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#F4F4F4"
+            android:contentDescription="@string/bouton_y_aller"
+            android:maxWidth="320dp"
+            android:text="@string/s_y_rendre"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:icon="@drawable/iconnav"
+            app:iconSize="20dp"
+            app:iconTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline16" />
@@ -65,14 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="475dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="77dp" />
+            app:layout_constraintGuide_begin="385dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
