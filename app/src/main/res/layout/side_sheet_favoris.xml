@@ -21,10 +21,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
+            app:backgroundTint="#CECECE"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:maxImageSize="33dp"
             app:srcCompat="@drawable/deleteicon"
-            app:tint="@color/red" />
+            app:tint="#C10E0E" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnFermer"
@@ -42,7 +44,7 @@
             android:layout_height="250dp"
             android:layout_marginTop="140dp"
             android:contentDescription="Image du lieu"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/imgmapsdefaultresized"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +86,7 @@
             android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
             android:layout_marginBottom="55dp"
-            android:backgroundTint="#8E8E8E"
+            android:backgroundTint="#F4F4F4"
             android:contentDescription="@string/bouton_y_aller"
             android:maxWidth="320dp"
             android:text="@string/s_y_rendre"

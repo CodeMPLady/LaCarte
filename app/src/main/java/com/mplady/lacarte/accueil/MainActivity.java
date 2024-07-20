@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
 
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
-
+                        prediction.getPlaceId();
                         //System.out.println("SSSS" + prediction.getTypes());
                         //TODO: récupérer l'le placeID avec prediction.getPlaceId() et l'envoyer pour simplifié le code de SearchResultsActivity
                     }
