@@ -81,8 +81,6 @@ public class FavorisActivity extends AppCompatActivity {
         btnFilter.setOnClickListener(v -> showDialog());
     }
 
-
-
     void openDrawer(Favori favori) {
         drawerLayout.openDrawer(GravityCompat.END);
         txtNomLieu.setText(favori.getNom());

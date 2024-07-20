@@ -21,9 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import java.util.Collections;
+
+import com.google.android.libraries.places.api.model.PlaceTypes;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -47,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
-
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
 
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
@@ -110,11 +110,17 @@ public class MainActivity extends AppCompatActivity {
                         .setSessionToken(token)
                         .setQuery(newText)
                         .setCountries("FR")
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.RESTAURANT))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.SUPERMARKET))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.GAS_STATION))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.PHARMACY))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.STORE))
                         .build();
                 placesClient.findAutocompletePredictions(request).addOnSuccessListener(response -> {
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
+
                         //System.out.println("SSSS" + prediction.getTypes());
                         //TODO: récupérer l'le placeID avec prediction.getPlaceId() et l'envoyer pour simplifié le code de SearchResultsActivity
                     }

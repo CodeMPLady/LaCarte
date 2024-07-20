@@ -34,6 +34,7 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceTypes;
 import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
@@ -50,6 +51,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -130,13 +132,16 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                         .setSessionToken(token)
                         .setQuery(newText)
                         .setCountries("FR")
-                        //        .setTypesFilter(Collections.singletonList(PlaceTypes.CITIES))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.RESTAURANT))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.SUPERMARKET))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.GAS_STATION))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.PHARMACY))
+                        .setTypesFilter(Collections.singletonList(PlaceTypes.STORE))
                         .build();
                 placesClientResults.findAutocompletePredictions(request).addOnSuccessListener(response -> {
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
-                        //System.out.println("SSSS" + prediction.getTypes());
                         //TODO: récupérer le placeID avec prediction.getPlaceId() et l'envoyer pour simplifier le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();
@@ -186,10 +191,9 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     adresseLieuSearch.setText(adresse);
                     listCategories = place.getPlaceTypes();
                     assert listCategories != null;
-                    System.out.println("Catégorie : " + listCategories);
-
                     categorie = null;
                     selectionCategorie:
+
                     for (int i = 0; i < tableauCategories.length; i++) {
                         for (int j = 0; j < listCategories.size(); j++) {
                             System.out.println("test " + tableauCategories[i] + " " + listCategories.get(j));
