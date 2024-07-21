@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="60dp"
+    android:visibility="visible"
     app:cardCornerRadius="7dp"
     app:cardElevation="4dp"
-    app:strokeColor="#1e223c"
-    app:strokeWidth="1dp"
-    android:layout_margin="8dp"
-    android:visibility="visible">
+    app:strokeColor="#950202"
+    app:strokeWidth="1dp">
 
     <RelativeLayout
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="3dp"
-        android:background="#31384A">
+        android:background="@color/white"
+        android:paddingBottom="3dp">
 
         <ImageView
             android:id="@+id/imgLieu"
@@ -34,7 +37,6 @@
             android:paddingEnd="10dp"
             android:fontFamily="@font/alegreya"
             android:text="Nom"
-            android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -45,7 +47,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtName"
             android:fontFamily="@font/alegreya"
-            android:textColor="@color/white"
             android:text="Catégorie"
             android:paddingBottom="6dp"
             android:layout_centerHorizontal="true"

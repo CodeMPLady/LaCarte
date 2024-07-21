@@ -13,12 +13,13 @@
         style="@style/Widget.Material3.SideSheet.Modal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#1e223c"
         app:layout_behavior="com.google.android.material.sidesheet.SideSheetBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_drawer_favoris_land"
+            android:background="@drawable/gradient_drawer_favoris_landnight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline16"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,12 +45,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:contentDescription="Bouton de suppression du favori"
-                app:backgroundTint="#CECECE"
+                app:backgroundTint="#830000"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:maxImageSize="33dp"
                 app:srcCompat="@drawable/deleteicon"
-                app:tint="#C10E0E" />
+                app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,10 +62,10 @@
             android:layout_marginEnd="16dp"
             android:contentDescription="Bouton de fermeture du drawer"
             android:src="@drawable/close24px"
-            app:backgroundTint="#CECECE"
+            app:backgroundTint="#707AAC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black" />
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/txtNomLieu"
@@ -75,6 +76,7 @@
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/fira_sans"
             android:text="Nom du lieu"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -91,6 +93,7 @@
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/fira_sans"
             android:text="Adresse"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -102,12 +105,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#E6E6E6"
+            android:backgroundTint="#353C6A"
             android:text="Catégorie du lieu"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            app:chipStrokeColor="@color/black"
+            app:chipStrokeColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/btnYAllerFavori"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline16" />
@@ -120,15 +123,15 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#F4F4F4"
+            android:backgroundTint="#494F71"
             android:contentDescription="@string/bouton_y_aller"
             android:maxWidth="320dp"
             android:text="@string/s_y_rendre"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             app:icon="@drawable/iconnav"
             app:iconSize="20dp"
-            app:iconTint="@color/black"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline16" />

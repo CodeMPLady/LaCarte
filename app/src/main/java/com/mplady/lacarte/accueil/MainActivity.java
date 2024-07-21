@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCarousel.setAdapter(adapter);
     }
 
+    //TODO: ajouter les images boulangerie, cinéma, musée et parc dans le carousel
     @NonNull
     private ImageAdapterCarousel getImageAdapterCarousel() {
         int[] imageRessourceIDs = {
@@ -204,5 +205,4 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
     }
-
 }

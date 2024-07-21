@@ -1,6 +1,7 @@
 package com.mplady.lacarte.favori;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -64,6 +65,7 @@ public class FavorisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoris);
         initView();
+        setupLayoutManager();
         callBackDatabase();
         getFavoriListInBackground();
     }
@@ -83,10 +85,22 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView = findViewById(R.id.favorisRecView);
         adapter = new FavoriRecViewAdapter(favoris, this);
         favorisRecView.setAdapter(adapter);
-        favorisRecView.setLayoutManager(new GridLayoutManager(this, 2));
+        //favorisRecView.setLayoutManager(new GridLayoutManager(this, 2));
 
         FloatingActionButton btnFilter = findViewById(R.id.bntFiltre);
         btnFilter.setOnClickListener(v -> showDialog());
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setupLayoutManager();
+    }
+
+    private void setupLayoutManager() {
+        int orientation = getResources().getConfiguration().orientation;
+        int spanCount = (orientation == Configuration.ORIENTATION_LANDSCAPE) ? 3 : 2;
+        favorisRecView.setLayoutManager(new GridLayoutManager(this, spanCount));
     }
 
     void openDrawer(Favori favori) {
