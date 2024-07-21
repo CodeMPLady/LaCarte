@@ -50,7 +50,6 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         Favori favori = favoris.get(position);
         holder.txtName.setText(favori.getNom());
         holder.txtDescription.setText(favori.getCategorie());
-        //holder.imgLieu.setImageBitmap(BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length));
         if (favori.getBitmap() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
             holder.imgLieu.setImageBitmap(bitmap);
