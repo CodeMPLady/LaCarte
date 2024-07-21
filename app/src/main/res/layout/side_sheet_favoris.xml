@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/parent"
+    android:id="@+id/parentDrawer"
     android:padding="16dp"
     android:background="@color/white"
     app:cardCornerRadius="8dp">

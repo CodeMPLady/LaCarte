@@ -2,13 +2,21 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/mainFavoris"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".favori.FavorisActivity"
     tools:ignore="RtlHardcoded"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
+
     android:background="@drawable/bgfavoris">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainFrame">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -94,6 +102,7 @@
             app:layout_constraintGuide_begin="731dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
     <include
         layout="@layout/side_sheet_favoris"

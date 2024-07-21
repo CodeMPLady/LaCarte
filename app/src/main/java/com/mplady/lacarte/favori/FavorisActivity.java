@@ -12,6 +12,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,6 +55,8 @@ public class FavorisActivity extends AppCompatActivity {
     private FloatingActionButton btnSupprimerFavori;
     private ExtendedFloatingActionButton btnYAllerFavori;
 
+    private ViewGroup mainContent;
+
     FavorisDB favorisDB;
 
     @Override
@@ -65,7 +69,7 @@ public class FavorisActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        drawerLayout = findViewById(R.id.main);
+        drawerLayout = findViewById(R.id.mainFavoris);
         btnFermer = findViewById(R.id.btnFermer);
         btnYAllerFavori = findViewById(R.id.btnYAllerFavori);
         btnSupprimerFavori = findViewById(R.id.btnSupprimerFavori);
@@ -73,6 +77,8 @@ public class FavorisActivity extends AppCompatActivity {
         txtNomLieu = findViewById(R.id.txtNomLieu);
         txtAdresseLieu = findViewById(R.id.txtAdresseLieu);
         chipTypeLieu = findViewById(R.id.chipTypeLieu);
+
+        mainContent = findViewById(R.id.mainFrame);
 
         favorisRecView = findViewById(R.id.favorisRecView);
         adapter = new FavoriRecViewAdapter(favoris, this);
@@ -92,19 +98,48 @@ public class FavorisActivity extends AppCompatActivity {
         if (favori.getBitmap() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
             imgLieuDetails.setImageBitmap(bitmap);
-        } else {
+        } else
             imgLieuDetails.setImageResource(R.drawable.imgmapsdefaultresized);
-        }
 
-        btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
-        btnSupprimerFavori.setOnClickListener(v -> {
-            deleteFavoriInBackground(favori);
-            drawerLayout.closeDrawer(GravityCompat.END);
-            Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
-            getFavoriListInBackground();
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                setEnableRecursively(mainContent, false);
+                btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
+                btnSupprimerFavori.setOnClickListener(v -> {
+                    deleteFavoriInBackground(favori);
+                    drawerLayout.closeDrawer(GravityCompat.END);
+                    Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
+                    getFavoriListInBackground();
+                    recreate();
+                });
+                btnYAllerFavori.setOnClickListener(v -> openGoogleMaps(favori.getNom()));
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                setEnableRecursively(mainContent, true);
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+            }
         });
+    }
 
-        btnYAllerFavori.setOnClickListener(v -> openGoogleMaps(favori.getNom()));
+    private void setEnableRecursively(ViewGroup viewGroup, boolean enable) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View child = viewGroup.getChildAt(i);
+            child.setEnabled(enable);
+            if (child instanceof ViewGroup) {
+                setEnableRecursively((ViewGroup) child, enable);
+            }
+        }
     }
 
     private void showDialog() {
