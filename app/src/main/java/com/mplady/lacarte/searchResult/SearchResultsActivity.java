@@ -67,7 +67,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             "gas_station",
             "pharmacy",
             "store",
-            "university"
+            "park",
+            "bakery",
+            "movie_theater",
+            "museum"
     };
     private final String[] tableauJolieCategories = {
             "Restaurant",
@@ -75,7 +78,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             "Station essence",
             "Pharmacie",
             "Magasin",
-            "Université"
+            "Parc",
+            "Boulangerie",
+            "Cinéma",
+            "Musée"
     };
     private boolean isFavorite;
     private TextView nomLieuSearch, adresseLieuSearch;

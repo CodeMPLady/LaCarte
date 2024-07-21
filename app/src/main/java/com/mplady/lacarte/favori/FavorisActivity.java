@@ -43,7 +43,7 @@ import java.util.concurrent.Executors;
 
 public class FavorisActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
-    boolean[] filter = new boolean[5];
+    boolean[] filter = new boolean[10];
     ArrayList<Favori> favoris = new ArrayList<>();
     List<Favori> preFilteredFavoris;
     ArrayList<Favori> filteredFavoris = new ArrayList<>();
@@ -85,7 +85,6 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView = findViewById(R.id.favorisRecView);
         adapter = new FavoriRecViewAdapter(favoris, this);
         favorisRecView.setAdapter(adapter);
-        //favorisRecView.setLayoutManager(new GridLayoutManager(this, 2));
 
         FloatingActionButton btnFilter = findViewById(R.id.bntFiltre);
         btnFilter.setOnClickListener(v -> showDialog());
@@ -166,7 +165,12 @@ public class FavorisActivity extends AppCompatActivity {
         CheckBox checkEssence = dialogView.findViewById(R.id.checkEssence);
         CheckBox checkSupermarche = dialogView.findViewById(R.id.checkSupermache);
         CheckBox checkPharmacie = dialogView.findViewById(R.id.checkPharmacie);
-        CheckBox checkMode = dialogView.findViewById(R.id.checkMode);
+        CheckBox checkMagasin = dialogView.findViewById(R.id.checkMagasin);
+        CheckBox checkCinema = dialogView.findViewById(R.id.checkCinema);
+        CheckBox checkParc = dialogView.findViewById(R.id.checkParc);
+        CheckBox checkBoulangerie = dialogView.findViewById(R.id.checkBoulangerie);
+        CheckBox checkMusee = dialogView.findViewById(R.id.checkMusee);
+        CheckBox checkTous = dialogView.findViewById(R.id.checkTous);
 
         FloatingActionButton btnValider = dialogView.findViewById(R.id.btnValider);
         FloatingActionButton btnAnnuler = dialogView.findViewById(R.id.btnAnnuler);
@@ -179,11 +183,15 @@ public class FavorisActivity extends AppCompatActivity {
             filter[1] = checkEssence.isChecked();
             filter[2] = checkSupermarche.isChecked();
             filter[3] = checkPharmacie.isChecked();
-            filter[4] = checkMode.isChecked();
+            filter[4] = checkMagasin.isChecked();
+            filter[5] = checkCinema.isChecked();
+            filter[6] = checkParc.isChecked();
+            filter[7] = checkBoulangerie.isChecked();
+            filter[8] = checkMusee.isChecked();
+            filter[9] = checkTous.isChecked();
             filtre();
             dialog.dismiss();
         });
-
         btnAnnuler.setOnClickListener(v -> dialog.dismiss());
     }
 
@@ -231,11 +239,15 @@ public class FavorisActivity extends AppCompatActivity {
                     (filter[1] && "Station essence".equals(categorie)) ||
                     (filter[2] && "Supermarche".equals(categorie)) ||
                     (filter[3] && "Pharmacie".equals(categorie)) ||
-                    (filter[4] && "Magasin".equals(categorie))) {
+                    (filter[4] && "Magasin".equals(categorie)) ||
+                    (filter[5] && "Cinéma".equals(categorie)) ||
+                    (filter[6] && "Parc".equals(categorie)) ||
+                    (filter[7] && "Boulangerie".equals(categorie)) ||
+                    (filter[8] && "Musée".equals(categorie))) {
                 filteredFavoris.add(fav);
             }
         }
-        if (!filter[0] && !filter[1] && !filter[2] && !filter[3] && !filter[4])
+        if (filter[9])
             recreate();
         adapter.updateFavoris(filteredFavoris);
     }
