@@ -66,14 +66,16 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             "supermarket",
             "gas_station",
             "pharmacy",
-            "store"
+            "store",
+            "university"
     };
     private final String[] tableauJolieCategories = {
             "Restaurant",
             "Supermarché",
             "Station essence",
             "Pharmacie",
-            "Magasin"
+            "Magasin",
+            "Université"
     };
     private boolean isFavorite;
     private TextView nomLieuSearch, adresseLieuSearch;
@@ -224,7 +226,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                         }
                     }
                     if (categorie == null)
-                        categorie = "";
+                        categorieLieuSearch.setVisibility(View.GONE);
                     categorieLieuSearch.setText(categorie);
 
                     List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();

@@ -40,7 +40,7 @@ public class SuggestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_propositions);
+        setContentView(R.layout.activity_suggestions);
 
         setView();
         initViews();
@@ -72,7 +72,7 @@ public class SuggestionActivity extends AppCompatActivity {
 
     private void showDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
-        View dialogView = inflater.inflate(R.layout.propositions_dialog_layout, null);
+        View dialogView = inflater.inflate(R.layout.suggestions_dialog_layout, null);
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this).setView(dialogView);
 

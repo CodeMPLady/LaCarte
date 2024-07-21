@@ -110,12 +110,11 @@
     <com.google.android.material.chip.Chip
         android:id="@+id/categorieLieuSearch"
         style="@style/Widget.Material3.Chip.Suggestion"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#E6E6E6"
-        android:maxWidth="40dp"
         android:text="Catégorie du lieu"
         android:textAlignment="center"
         android:textColor="@color/black"
