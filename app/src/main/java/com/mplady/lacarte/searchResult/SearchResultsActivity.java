@@ -21,7 +21,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -80,7 +79,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private TextView nomLieuSearch, adresseLieuSearch;
     private Chip categorieLieuSearch;
     private ImageView placePhoto;
-    private ExtendedFloatingActionButton btnYAller;
     private FloatingActionButton btnFavoris;
     private SearchView searchViewResults;
     private ListView listView;
@@ -94,7 +92,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private List<Favori> favorisList;
     private ViewGroup mainContent;
     private ImageView logoChargement;
-    private Animation animationChargement;
 
 
     @Override
@@ -106,34 +103,39 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         callBackDatabase();
         getFavoriListInBackground();
         initView();
+        chargement();
         initMap();
         setFields(query);
         setSearchViewResults();
         ajouterAuxFavoris();
+    }
 
-        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
-        placesClientResults = Places.createClient(SearchResultsActivity.this);
+    private void chargement() {
+        Animation animationChargement = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        logoChargement.startAnimation(animationChargement);
 
         animationChargement.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
+            public void onAnimationStart(Animation animation) {}
             @Override
             public void onAnimationEnd(Animation animation) {
-                logoChargement.setVisibility(View.GONE);
+                Animation fadeOutAnimation = AnimationUtils.loadAnimation(SearchResultsActivity.this, R.anim.fade_out);
+                logoChargement.startAnimation(fadeOutAnimation);
+                fadeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {}
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        logoChargement.setVisibility(View.GONE);
+                    }
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {}
+                });
             }
-
             @Override
-            public void onAnimationRepeat(Animation animation) {
-                // Do nothing on animation repeat
-            }
+            public void onAnimationRepeat(Animation animation) {}
         });
 
-        btnYAller.setOnClickListener(v -> {
-            Toast.makeText(SearchResultsActivity.this, "Vous allez vous rendre à " + nameLieuSearch, Toast.LENGTH_SHORT).show();
-            openGoogleMaps();
-        });
     }
 
     private void setSearchViewResults () {
@@ -143,6 +145,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
             @Override
             public boolean onQueryTextSubmit(String newQuery) {
+                searchViewResults.clearFocus();
                 return false;
             }
 
@@ -190,10 +193,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void setFields(String query) {
-        setEnableRecursively(mainContent, false);
-        animationChargement = AnimationUtils.loadAnimation(this, R.anim.rotate_infinite);
-        logoChargement.startAnimation(animationChargement);
-
+        chargement();
         placesClient = Places.createClient(getApplicationContext());
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
@@ -253,17 +253,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 }).addOnFailureListener((exception) -> System.out.println("Error fetching place: " + exception.getMessage()));
             }
         });
-        setEnableRecursively(mainContent, true);
-    }
-
-    private void setEnableRecursively(ViewGroup viewGroup, boolean enable) {
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            View child = viewGroup.getChildAt(i);
-            child.setEnabled(enable);
-            if (child instanceof ViewGroup) {
-                setEnableRecursively((ViewGroup) child, enable);
-            }
-        }
     }
 
     private void initMap() {
@@ -398,16 +387,24 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void initView() {
+        ExtendedFloatingActionButton btnYAller = findViewById(R.id.btnYAller);
         nomLieuSearch = findViewById(R.id.nomLieuSearch);
         adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
         categorieLieuSearch = findViewById(R.id.categorieLieuSearch);
         btnFavoris = findViewById(R.id.imageBtnFavoris);
-        btnYAller = findViewById(R.id.btnYAller);
         searchViewResults = findViewById(R.id.searchViewResults);
         listView = findViewById(R.id.suggestionsListViewResults);
         placePhoto = findViewById(R.id.placePhoto);
         mainContent = findViewById(R.id.mainResult);
         logoChargement = findViewById(R.id.logoChargement);
+
+        btnYAller.setOnClickListener(v -> {
+            Toast.makeText(SearchResultsActivity.this, "Vous allez vous rendre à " + nameLieuSearch, Toast.LENGTH_SHORT).show();
+            openGoogleMaps();
+        });
+
+        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+        placesClientResults = Places.createClient(SearchResultsActivity.this);
     }
 
     private void setView() {
