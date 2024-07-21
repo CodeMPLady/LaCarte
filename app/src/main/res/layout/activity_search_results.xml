@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainResult"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -20,6 +21,18 @@
         tools:context=".searchResult.SearchResultsActivity">
 
     </androidx.fragment.app.FragmentContainerView>
+
+    <ImageView
+        android:id="@+id/logoChargement"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:src="@mipmap/logo2fondblanc"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <ListView
         android:id="@+id/suggestionsListViewResults"
@@ -73,9 +86,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/nom_du_lieu"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
         app:layout_constraintTop_toBottomOf="@+id/map" />

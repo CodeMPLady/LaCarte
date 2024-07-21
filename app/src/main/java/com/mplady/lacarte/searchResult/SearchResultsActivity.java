@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -86,8 +90,12 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
     private Bitmap bitmap, resizedBitmap;
-    FavorisDB favorisDB;
-    List<Favori> favorisList;
+    private FavorisDB favorisDB;
+    private List<Favori> favorisList;
+    private ViewGroup mainContent;
+    private ImageView logoChargement;
+    private Animation animationChargement;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +113,22 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientResults = Places.createClient(SearchResultsActivity.this);
+
+        animationChargement.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                logoChargement.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // Do nothing on animation repeat
+            }
+        });
 
         btnYAller.setOnClickListener(v -> {
             Toast.makeText(SearchResultsActivity.this, "Vous allez vous rendre à " + nameLieuSearch, Toast.LENGTH_SHORT).show();
@@ -166,6 +190,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void setFields(String query) {
+        setEnableRecursively(mainContent, false);
+        animationChargement = AnimationUtils.loadAnimation(this, R.anim.rotate_infinite);
+        logoChargement.startAnimation(animationChargement);
+
         placesClient = Places.createClient(getApplicationContext());
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
@@ -225,6 +253,17 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 }).addOnFailureListener((exception) -> System.out.println("Error fetching place: " + exception.getMessage()));
             }
         });
+        setEnableRecursively(mainContent, true);
+    }
+
+    private void setEnableRecursively(ViewGroup viewGroup, boolean enable) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View child = viewGroup.getChildAt(i);
+            child.setEnabled(enable);
+            if (child instanceof ViewGroup) {
+                setEnableRecursively((ViewGroup) child, enable);
+            }
+        }
     }
 
     private void initMap() {
@@ -367,6 +406,8 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         searchViewResults = findViewById(R.id.searchViewResults);
         listView = findViewById(R.id.suggestionsListViewResults);
         placePhoto = findViewById(R.id.placePhoto);
+        mainContent = findViewById(R.id.mainResult);
+        logoChargement = findViewById(R.id.logoChargement);
     }
 
     private void setView() {
