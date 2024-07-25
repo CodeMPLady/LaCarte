@@ -25,25 +25,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dialogTitle"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_tous"
         android:textSize="16sp"
         app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkEssence"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkEssence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkTous"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_station_essence"
         android:textSize="16sp"
         app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkSupermache"
+        app:layout_constraintStart_toStartOf="@+id/checkTous"
         app:layout_constraintTop_toBottomOf="@+id/checkTous" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -51,13 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkRestaurant"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
-        android:text="@string/txt_supermach"
+        android:text="@string/txt_supermarket"
         android:textSize="16sp"
         app:buttonTint="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/checkEssence"
         app:layout_constraintTop_toBottomOf="@+id/checkEssence" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -66,20 +67,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dialogTitle"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_pharmacie"
         android:textSize="16sp"
         app:buttonTint="@color/black"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkMagasin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkSupermache"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_magasin"
         android:textSize="16sp"
@@ -92,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkMagasin"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_cinema"
         android:textSize="16sp"
@@ -105,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkSupermache"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_parc"
         android:textSize="16sp"
@@ -118,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkCinema"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_bakery"
         android:textSize="16sp"
@@ -131,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkParc"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_musee"
         android:textSize="16sp"
@@ -144,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkBoulangerie"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/carme"
         android:text="@string/txt_restaurant"
         android:textSize="16sp"
@@ -187,7 +188,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="30dp"
             app:srcCompat="@drawable/close24px"
-            app:tint="#FFFFFF" />
+            app:tint="@color/white" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline9"
@@ -203,13 +204,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="165dp" />
+        app:layout_constraintGuide_begin="188dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="355dp" />
+        app:layout_constraintGuide_begin="31dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="94dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
