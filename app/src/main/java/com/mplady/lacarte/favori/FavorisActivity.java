@@ -37,7 +37,9 @@ import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -155,6 +157,14 @@ public class FavorisActivity extends AppCompatActivity {
         }
     }
 
+    private Set<String> getCategoriesFromFavoris() {
+        Set<String> categories = new HashSet<>();
+        for (Favori favori : favoris) {
+            categories.add(favori.getCategorie());
+        }
+        return categories;
+    }
+
     private void showDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.fav_dialog_layout, null);
@@ -172,8 +182,20 @@ public class FavorisActivity extends AppCompatActivity {
         CheckBox checkMusee = dialogView.findViewById(R.id.checkMusee);
         CheckBox checkTous = dialogView.findViewById(R.id.checkTous);
 
+        Set<String> categories = getCategoriesFromFavoris();
+
         FloatingActionButton btnValider = dialogView.findViewById(R.id.btnValider);
         FloatingActionButton btnAnnuler = dialogView.findViewById(R.id.btnAnnuler);
+
+        checkRestaurant.setVisibility(categories.contains("Restaurant") ? View.VISIBLE : View.GONE);
+        checkEssence.setVisibility(categories.contains("Station essence") ? View.VISIBLE : View.GONE);
+        checkSupermarche.setVisibility(categories.contains("Supermarché") ? View.VISIBLE : View.GONE);
+        checkPharmacie.setVisibility(categories.contains("Pharmacie") ? View.VISIBLE : View.GONE);
+        checkMagasin.setVisibility(categories.contains("Magasin") ? View.VISIBLE : View.GONE);
+        checkCinema.setVisibility(categories.contains("Cinéma") ? View.VISIBLE : View.GONE);
+        checkParc.setVisibility(categories.contains("Parc") ? View.VISIBLE : View.GONE);
+        checkBoulangerie.setVisibility(categories.contains("Boulangerie") ? View.VISIBLE : View.GONE);
+        checkMusee.setVisibility(categories.contains("Musée") ? View.VISIBLE : View.GONE);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -192,6 +214,7 @@ public class FavorisActivity extends AppCompatActivity {
             filtre();
             dialog.dismiss();
         });
+        System.out.println("FAVORIS FILTRES : " + filteredFavoris);
         btnAnnuler.setOnClickListener(v -> dialog.dismiss());
     }
 
@@ -237,7 +260,7 @@ public class FavorisActivity extends AppCompatActivity {
             String categorie = fav.getCategorie();
             if ((filter[0] && "Restaurant".equals(categorie)) ||
                     (filter[1] && "Station essence".equals(categorie)) ||
-                    (filter[2] && "Supermarche".equals(categorie)) ||
+                    (filter[2] && "Supermarché".equals(categorie)) ||
                     (filter[3] && "Pharmacie".equals(categorie)) ||
                     (filter[4] && "Magasin".equals(categorie)) ||
                     (filter[5] && "Cinéma".equals(categorie)) ||

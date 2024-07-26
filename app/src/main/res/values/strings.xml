@@ -26,16 +26,16 @@
     <string name="bouton_y_aller">Bouton y aller</string>
     <string name="s_y_rendre">S\'y rendre</string>
     <string name="filtres">Filtres</string>
-    <string name="txt_restaurant">Restaurant</string>
-    <string name="txt_supermach">Supermaché</string>
-    <string name="txt_magasin">Magasin</string>
-    <string name="txt_pharmacie">Pharmacie</string>
-    <string name="txt_station_essence">Station essence</string>
+    <string name="txt_restaurant">Restaurants</string>
+    <string name="txt_supermarket">Supermarchés</string>
+    <string name="txt_magasin">Magasins</string>
+    <string name="txt_pharmacie">Pharmacies</string>
+    <string name="txt_station_essence">Stations essence</string>
     <string name="txt_bouton_de_validation">Bouton de validation</string>
     <string name="txt_bouton_d_annulation">Bouton d\'annulation</string>
-    <string name="txt_bakery">Boulangerie</string>
-    <string name="txt_musee">Musée</string>
-    <string name="txt_parc">Parc</string>
-    <string name="txt_cinema">Cinéma</string>
+    <string name="txt_bakery">Boulangeries</string>
+    <string name="txt_musee">Musées</string>
+    <string name="txt_parc">Parcs</string>
+    <string name="txt_cinema">Cinémas</string>
     <string name="txt_tous">TOUS</string>
 </resources>
