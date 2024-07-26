@@ -3,35 +3,21 @@ package com.mplady.lacarte.suggestions;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.CircularBounds;
@@ -45,17 +31,12 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.favori.Favori;
-import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.favori.Favori;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -63,7 +44,7 @@ import java.util.Objects;
 public class SuggestionActivity extends AppCompatActivity {
 
     private TextView textTypeTitle;
-    ArrayList<Suggestion> suggestions;
+    ArrayList<Favori> suggestions;
     private ExtendedFloatingActionButton selectionFAB;
     private RecyclerView selectionRecView;
     private final String[] tableauSelectionCategories = {
@@ -92,21 +73,16 @@ public class SuggestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggestions);
-
         initViews();
         setTitle();
 
         selectionFAB.setOnClickListener(v -> showDialog());
-
         adapter = new SuggestionRecViewAdapter(suggestions,this);
         selectionRecView.setAdapter(adapter);
         selectionRecView.setLayoutManager(new LinearLayoutManager(this));
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);
-        ArrayList<Suggestion> suggestions = new ArrayList<>();
-        suggestions.add(new Suggestion("Shin-Ya Ramen", "Restaurant", "Compans"));
-        suggestions.add(new Suggestion("Les Cabochards", "Restaurant", "Cugnaux"));
         adapter.setSuggestions(suggestions);
 
         fetchNearbyPlaces();
@@ -176,22 +152,6 @@ public class SuggestionActivity extends AppCompatActivity {
         return bitmapData[0];
     }
 
-
-    private void initViews() {
-        textTypeTitle = findViewById(R.id.textTypeTitle);
-        selectionFAB = findViewById(R.id.selectionFiltresFAB);
-        selectionRecView = findViewById(R.id.selectionRecView);
-
-        drawerLayoutSuggestions = findViewById(R.id.mainSuggestions);
-        btnFermerSuggestions = findViewById(R.id.btnFermerSuggestions);
-        btnYAllerSuggestions = findViewById(R.id.btnYAllerSuggestions);
-        btnAjouterAuxFavoris = findViewById(R.id.btnAjouterAuxFavoris);
-        imgLieuDetailsSuggestions = findViewById(R.id.imgLieuDetailsSuggestions);
-        txtNomLieuSuggestions = findViewById(R.id.txtNomLieuSuggestions);
-        txtAdresseLieuSuggestions = findViewById(R.id.txtAdresseLieuSuggestions);
-        chipTypeLieuSuggestions = findViewById(R.id.chipTypeLieuSuggestions);
-    }
-
     @SuppressLint("SetTextI18n")
     private void setTitle() {
         Intent intent = getIntent();
@@ -199,7 +159,7 @@ public class SuggestionActivity extends AppCompatActivity {
         textTypeTitle.setText(tableauSelectionCategories[position] + " autour de vous");
     }
 
-    void openDrawer(Suggestion suggestion) {
+    void openDrawer(Favori suggestion) {
         drawerLayoutSuggestions.openDrawer(GravityCompat.END);
         txtNomLieuSuggestions.setText(suggestion.getNom());
         chipTypeLieuSuggestions.setText(suggestion.getCategorie());
@@ -244,15 +204,6 @@ public class SuggestionActivity extends AppCompatActivity {
             dialog.dismiss();
         });
         dialog.show();
-
-
-    public byte[] convertBitmapToByteArray(Bitmap bitmap) {
-        if (bitmap == null) {
-            return null;
-        }
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        return outputStream.toByteArray();
     }
 
     private void openGoogleMaps(String lieu) {
@@ -268,9 +219,22 @@ public class SuggestionActivity extends AppCompatActivity {
         }
     }
 
-    private void setView() {
+    private void initViews() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
+
+        textTypeTitle = findViewById(R.id.textTypeTitle);
+        selectionFAB = findViewById(R.id.selectionFiltresFAB);
+        selectionRecView = findViewById(R.id.selectionRecView);
+
+        drawerLayoutSuggestions = findViewById(R.id.mainSuggestions);
+        btnFermerSuggestions = findViewById(R.id.btnFermerSuggestions);
+        btnYAllerSuggestions = findViewById(R.id.btnYAllerSuggestions);
+        btnAjouterAuxFavoris = findViewById(R.id.btnAjouterAuxFavoris);
+        imgLieuDetailsSuggestions = findViewById(R.id.imgLieuDetailsSuggestions);
+        txtNomLieuSuggestions = findViewById(R.id.txtNomLieuSuggestions);
+        txtAdresseLieuSuggestions = findViewById(R.id.txtAdresseLieuSuggestions);
+        chipTypeLieuSuggestions = findViewById(R.id.chipTypeLieuSuggestions);
     }
 }

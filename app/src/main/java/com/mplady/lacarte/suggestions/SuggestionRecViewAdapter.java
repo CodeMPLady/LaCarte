@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -25,9 +26,9 @@ import java.util.ArrayList;
 public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRecViewAdapter.ViewHolder>{
 
     private ArrayList<Favori> suggestions = new ArrayList<>();
-    private final Context context;
+    private final SuggestionActivity activity;
 
-    public SuggestionRecViewAdapter(ArrayList<Suggestion> suggestions, SuggestionActivity activity) {
+    public SuggestionRecViewAdapter(ArrayList<Favori> suggestions, SuggestionActivity activity) {
         this.suggestions = suggestions;
         this.activity = activity;
     }
@@ -46,10 +47,10 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Favori favori = suggestions.get(position);
+        Favori suggestion = suggestions.get(position);
 
-        holder.cardSuggestionName.setText(favori.getNom());
-        holder.cardSuggestionCategorie.setText(favori.getCategorie());
+        holder.cardSuggestionName.setText(suggestion.getNom());
+        holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
 
         holder.detailsFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,16 +60,12 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
                 activity.openDrawer(suggestion);
             }
         });
-        if (favori.getBitmap() != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
+        if (suggestion.getBitmap() != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(suggestion.getBitmap(), 0, suggestion.getBitmap().length);
             holder.cardSuggestionImage.setImageBitmap(bitmap);
         } else {
             holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
         }
-
-        holder.addFAB.setOnClickListener(v ->
-                Toast.makeText(context, "Détails à venir sur " + favori.getNom(), Toast.LENGTH_SHORT).show()
-        );
     }
 
     @Override
@@ -82,11 +79,7 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         private final ImageView cardSuggestionImage;
         private final TextView cardSuggestionName;
         private final TextView cardSuggestionCategorie;
-        private final FloatingActionButton addFAB;
-        private MaterialCardView cardViewSuggestion;
-        private ImageView cardSuggestionImage;
-        private TextView cardSuggestionName, cardSuggestionCategorie;
-        private FloatingActionButton detailsFAB;
+        private final FloatingActionButton detailsFAB;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
