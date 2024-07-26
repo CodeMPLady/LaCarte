@@ -1,7 +1,6 @@
 package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -9,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -28,8 +25,7 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
     private ArrayList<Favori> suggestions = new ArrayList<>();
     private final SuggestionActivity activity;
 
-    public SuggestionRecViewAdapter(ArrayList<Favori> suggestions, SuggestionActivity activity) {
-        this.suggestions = suggestions;
+    public SuggestionRecViewAdapter(SuggestionActivity activity) {
         this.activity = activity;
     }
 
@@ -52,20 +48,13 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         holder.cardSuggestionName.setText(suggestion.getNom());
         holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
 
-        holder.detailsFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Suggestions : " + suggestions);
-                System.out.println("Suggestion choisie : " + suggestion);
-                activity.openDrawer(suggestion);
-            }
-        });
-        if (suggestion.getBitmap() != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(suggestion.getBitmap(), 0, suggestion.getBitmap().length);
-            holder.cardSuggestionImage.setImageBitmap(bitmap);
-        } else {
-            holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
-        }
+        holder.detailsFAB.setOnClickListener(v -> activity.openDrawer(suggestion));
+//        if (suggestion.getBitmap() != null) {
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(suggestion.getBitmap(), 0, suggestion.getBitmap().length);
+//            holder.cardSuggestionImage.setImageBitmap(bitmap);
+//        } else {
+//            holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
+//        }
     }
 
     @Override

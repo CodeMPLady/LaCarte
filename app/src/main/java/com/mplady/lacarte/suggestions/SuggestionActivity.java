@@ -44,7 +44,6 @@ import java.util.Objects;
 public class SuggestionActivity extends AppCompatActivity {
 
     private TextView textTypeTitle;
-    ArrayList<Favori> suggestions;
     private ExtendedFloatingActionButton selectionFAB;
     private RecyclerView selectionRecView;
     private final String[] tableauSelectionCategories = {
@@ -75,17 +74,18 @@ public class SuggestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_suggestions);
         initViews();
         setTitle();
-
-        selectionFAB.setOnClickListener(v -> showDialog());
-        adapter = new SuggestionRecViewAdapter(suggestions,this);
-        selectionRecView.setAdapter(adapter);
-        selectionRecView.setLayoutManager(new LinearLayoutManager(this));
+        setAdapter();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);
-        adapter.setSuggestions(suggestions);
 
         fetchNearbyPlaces();
+    }
+
+    private void setAdapter() {
+        adapter = new SuggestionRecViewAdapter(this);
+        selectionRecView.setAdapter(adapter);
+        selectionRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void fetchNearbyPlaces() {
@@ -109,9 +109,7 @@ public class SuggestionActivity extends AppCompatActivity {
                     System.out.println("Place trouvé :" + placesTrouve);
                     updateRecyclerView();
                 })
-                .addOnFailureListener(response -> {
-                    System.out.println("Erreur :" + response);
-                });
+                .addOnFailureListener(response -> System.out.println("Erreur :" + response));
     }
 
     private void updateRecyclerView() {
@@ -146,9 +144,7 @@ public class SuggestionActivity extends AppCompatActivity {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
             bitmapData[0] = outputStream.toByteArray();
-        }).addOnFailureListener((exception) -> {
-            Log.e("SuggestionActivity", "Error fetching photo", exception);
-        });
+        }).addOnFailureListener((exception) -> Log.e("SuggestionActivity", "Error fetching photo", exception));
         return bitmapData[0];
     }
 
@@ -157,6 +153,8 @@ public class SuggestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
         textTypeTitle.setText(tableauSelectionCategories[position] + " autour de vous");
+
+        selectionFAB.setOnClickListener(v -> showDialog());
     }
 
     void openDrawer(Favori suggestion) {
@@ -168,12 +166,7 @@ public class SuggestionActivity extends AppCompatActivity {
 
         btnYAllerSuggestions.setOnClickListener(v -> openGoogleMaps(suggestion.getNom()));
 
-        btnFermerSuggestions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayoutSuggestions.closeDrawer(GravityCompat.END);
-            }
-        });
+        btnFermerSuggestions.setOnClickListener(v -> drawerLayoutSuggestions.closeDrawer(GravityCompat.END));
 
 //        if (suggestion.getBitmap() != null) {
 //            Bitmap bitmap = BitmapFactory.decodeByteArray(suggestion.getBitmap(), 0, suggestion.getBitmap().length);
