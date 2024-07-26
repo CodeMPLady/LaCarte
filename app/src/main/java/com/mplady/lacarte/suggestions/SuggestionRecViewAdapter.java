@@ -2,6 +2,8 @@ package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
@@ -19,18 +22,17 @@ import com.mplady.lacarte.favori.Favori;
 
 import java.util.ArrayList;
 
-
 public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRecViewAdapter.ViewHolder>{
 
-    ArrayList<Suggestion> suggestions;
-    private final SuggestionActivity activity;
+    private ArrayList<Favori> suggestions = new ArrayList<>();
+    private final Context context;
 
     public SuggestionRecViewAdapter(ArrayList<Suggestion> suggestions, SuggestionActivity activity) {
         this.suggestions = suggestions;
         this.activity = activity;
     }
 
-    public void setSuggestions(ArrayList<Suggestion> suggestions) {
+    public void setSuggestions(ArrayList<Favori> suggestions) {
         this.suggestions = suggestions;
         notifyDataSetChanged();
     }
@@ -44,13 +46,10 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Suggestion suggestion = suggestions.get(position);
-        holder.cardSuggestionName.setText(suggestions.get(position).getNom());
-        holder.cardSuggestionCategorie.setText(suggestions.get(position).getCategorie());
-        //holder.cardSuggestionImage.setImageBitmap(suggestions.get(position).getBitmap());
-        ArrayList<Suggestion> suggestions = new ArrayList<>();
-        suggestions.add(new Suggestion("Shin-Ya Ramen", "Restaurant", "Compans"));
-        suggestions.add(new Suggestion("Les Cabochards", "Restaurant", "Cugnaux"));
+        Favori favori = suggestions.get(position);
+
+        holder.cardSuggestionName.setText(favori.getNom());
+        holder.cardSuggestionCategorie.setText(favori.getCategorie());
 
         holder.detailsFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +59,16 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
                 activity.openDrawer(suggestion);
             }
         });
+        if (favori.getBitmap() != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
+            holder.cardSuggestionImage.setImageBitmap(bitmap);
+        } else {
+            holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
+        }
+
+        holder.addFAB.setOnClickListener(v ->
+                Toast.makeText(context, "Détails à venir sur " + favori.getNom(), Toast.LENGTH_SHORT).show()
+        );
     }
 
     @Override
@@ -67,8 +76,13 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         return suggestions.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final MaterialCardView cardViewSuggestion;
+        private final ImageView cardSuggestionImage;
+        private final TextView cardSuggestionName;
+        private final TextView cardSuggestionCategorie;
+        private final FloatingActionButton addFAB;
         private MaterialCardView cardViewSuggestion;
         private ImageView cardSuggestionImage;
         private TextView cardSuggestionName, cardSuggestionCategorie;
