@@ -2,28 +2,48 @@ package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
+import com.mplady.lacarte.favori.Favori;
+import com.mplady.lacarte.favori.FavorisActivity;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SuggestionActivity extends AppCompatActivity {
 
     private TextView textTypeTitle;
+    ArrayList<Suggestion> suggestions;
     private ExtendedFloatingActionButton selectionFAB;
     private RecyclerView selectionRecView;
     private final String[] tableauSelectionCategories = {
@@ -34,6 +54,14 @@ public class SuggestionActivity extends AppCompatActivity {
             "Supermarchés"
     };
     private SuggestionRecViewAdapter adapter;
+
+    private DrawerLayout drawerLayoutSuggestions;
+    private ImageView imgLieuDetailsSuggestions;
+    private TextView txtNomLieuSuggestions, txtAdresseLieuSuggestions;
+    private Chip chipTypeLieuSuggestions;
+    private FloatingActionButton btnAjouterAuxFavoris;
+    private FloatingActionButton btnFermerSuggestions;
+    private ExtendedFloatingActionButton btnYAllerSuggestions;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -48,15 +76,30 @@ public class SuggestionActivity extends AppCompatActivity {
 
         selectionFAB.setOnClickListener(v -> showDialog());
 
-        adapter = new SuggestionRecViewAdapter(this);
+        adapter = new SuggestionRecViewAdapter(suggestions,this);
         selectionRecView.setAdapter(adapter);
         selectionRecView.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<Suggestion> suggestions = new ArrayList<>();
-        suggestions.add(new Suggestion("Shin-Ya Ramen", "Restaurant"));
-        suggestions.add(new Suggestion("Les Cabochards", "Restaurant"));
+        suggestions.add(new Suggestion("Shin-Ya Ramen", "Restaurant", "Compans"));
+        suggestions.add(new Suggestion("Les Cabochards", "Restaurant", "Cugnaux"));
         adapter.setSuggestions(suggestions);
 
+    }
+
+    private void initViews() {
+        textTypeTitle = findViewById(R.id.textTypeTitle);
+        selectionFAB = findViewById(R.id.selectionFiltresFAB);
+        selectionRecView = findViewById(R.id.selectionRecView);
+
+        drawerLayoutSuggestions = findViewById(R.id.mainSuggestions);
+        btnFermerSuggestions = findViewById(R.id.btnFermerSuggestions);
+        btnYAllerSuggestions = findViewById(R.id.btnYAllerSuggestions);
+        btnAjouterAuxFavoris = findViewById(R.id.btnAjouterAuxFavoris);
+        imgLieuDetailsSuggestions = findViewById(R.id.imgLieuDetailsSuggestions);
+        txtNomLieuSuggestions = findViewById(R.id.txtNomLieuSuggestions);
+        txtAdresseLieuSuggestions = findViewById(R.id.txtAdresseLieuSuggestions);
+        chipTypeLieuSuggestions = findViewById(R.id.chipTypeLieuSuggestions);
     }
 
     @SuppressLint("SetTextI18n")
@@ -68,6 +111,29 @@ public class SuggestionActivity extends AppCompatActivity {
                 textTypeTitle.setText(tableauSelectionCategories[i] + " autour de vous");
             }
         }
+    }
+
+    void openDrawer(Suggestion suggestion) {
+        drawerLayoutSuggestions.openDrawer(GravityCompat.END);
+        txtNomLieuSuggestions.setText(suggestion.getNom());
+        chipTypeLieuSuggestions.setText(suggestion.getCategorie());
+        txtAdresseLieuSuggestions.setText(suggestion.getAdresse());
+        imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
+
+        btnYAllerSuggestions.setOnClickListener(v -> openGoogleMaps(suggestion.getNom()));
+
+        btnFermerSuggestions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayoutSuggestions.closeDrawer(GravityCompat.END);
+            }
+        });
+
+//        if (suggestion.getBitmap() != null) {
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(suggestion.getBitmap(), 0, suggestion.getBitmap().length);
+//            imgLieuDetailsSuggestions.setImageBitmap(bitmap);
+//        } else
+//            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
     }
 
     private void showDialog() {
@@ -98,10 +164,17 @@ public class SuggestionActivity extends AppCompatActivity {
 
     }
 
-    private void initViews() {
-        textTypeTitle = findViewById(R.id.textTypeTitle);
-        selectionFAB = findViewById(R.id.selectionFiltresFAB);
-        selectionRecView = findViewById(R.id.selectionRecView);
+    private void openGoogleMaps(String lieu) {
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + lieu);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Uri webIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" + lieu);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, webIntentUri);
+            startActivity(webIntent);
+        }
     }
 
     private void setView() {
