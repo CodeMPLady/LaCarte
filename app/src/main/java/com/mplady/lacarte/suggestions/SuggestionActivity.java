@@ -2,12 +2,10 @@ package com.mplady.lacarte.suggestions;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,8 +51,6 @@ import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
-import com.mplady.lacarte.favori.FavorisActivity;
-import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -167,8 +163,6 @@ public class SuggestionActivity extends AppCompatActivity {
         selectionRecView.setAdapter(adapter);
         selectionRecView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-    private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
     private void callBackDatabase() {
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
@@ -261,7 +255,7 @@ public class SuggestionActivity extends AppCompatActivity {
         return outputStream.toByteArray();
     }
 
-    private void fetchNearbyPlaces() {
+    private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
         final List<Place.Field> placeFields = Arrays.asList(
                 Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,
                 Place.Field.TYPES, Place.Field.PHOTO_METADATAS);
