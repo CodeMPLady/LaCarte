@@ -1,8 +1,13 @@
 package com.mplady.lacarte.suggestions;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,14 +16,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.CircularBounds;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
@@ -66,6 +78,9 @@ public class SuggestionActivity extends AppCompatActivity {
     private FloatingActionButton btnAjouterAuxFavoris;
     private FloatingActionButton btnFermerSuggestions;
     private ExtendedFloatingActionButton btnYAllerSuggestions;
+    private FusedLocationProviderClient fusedLocationClient;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private double latitude, longitude;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -73,13 +88,60 @@ public class SuggestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggestions);
         initViews();
+        setLocaltion();
         setTitle();
         setAdapter();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);
+    }
 
-        fetchNearbyPlaces();
+    private void setLocaltion() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            getLastLocation();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+    }
+
+    private void getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+            return;
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnCompleteListener(this, new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            Location location = task.getResult();
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                            System.out.println("Latitude: " + latitude + ", Longitude: " + longitude);
+                            fetchNearbyPlaces(latitude, longitude);
+                        } else {
+                            System.out.println("Location not found");
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation();
+            } else {
+                System.out.println("Location permission denied");
+            }
+        }
     }
 
     private void setAdapter() {
@@ -88,13 +150,13 @@ public class SuggestionActivity extends AppCompatActivity {
         selectionRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void fetchNearbyPlaces() {
+    private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
         final List<Place.Field> placeFields = Arrays.asList(
                 Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,
                 Place.Field.TYPES, Place.Field.PHOTO_METADATAS);
 
-        LatLng center = new LatLng(43.607027, 1.426917);
-        CircularBounds circle = CircularBounds.newInstance(center, 1500);
+        LatLng center = new LatLng(latitudeA, longitudeA);
+        CircularBounds circle = CircularBounds.newInstance(center, 5000);
         final List<String> includedTypes = Arrays.asList("restaurant", "cafe");
 
         final SearchNearbyRequest searchNearbyRequest =
