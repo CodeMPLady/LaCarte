@@ -349,7 +349,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             return null;
         }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream); // Utilisez PNG ou JPEG selon vos besoins
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
         return outputStream.toByteArray();
     }
 

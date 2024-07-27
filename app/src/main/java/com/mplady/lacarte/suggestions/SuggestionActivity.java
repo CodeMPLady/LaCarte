@@ -5,12 +5,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,14 +33,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.CircularBounds;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPhotoRequest;
-import com.google.android.libraries.places.api.net.FetchPhotoResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.api.net.SearchNearbyRequest;
 import com.google.android.material.chip.Chip;
@@ -55,6 +52,7 @@ import com.mplady.lacarte.favori.Favori;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -82,8 +80,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private SuggestionRecViewAdapter adapter;
     private PlacesClient placesClientSuggestion;
     private List<Place> placesTrouve = new ArrayList<>();
-    private ImageView placePhoto;
-    private Bitmap bitmap, resizedBitmap;
+    private Bitmap bitmapClassique, resizedBitmap;
 
     private DrawerLayout drawerLayoutSuggestions;
     private ImageView imgLieuDetailsSuggestions;
@@ -257,7 +254,7 @@ public class SuggestionActivity extends AppCompatActivity {
             return null;
         }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream); // Utilisez PNG ou JPEG selon vos besoins
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
         return outputStream.toByteArray();
     }
 
@@ -268,7 +265,7 @@ public class SuggestionActivity extends AppCompatActivity {
 
         LatLng center = new LatLng(latitudeA, longitudeA);
         CircularBounds circle = CircularBounds.newInstance(center, 5000);
-        final List<String> includedTypes = Arrays.asList(categorieTitle);
+        final List<String> includedTypes = Collections.singletonList(categorieTitle);
 
         final SearchNearbyRequest searchNearbyRequest =
                 SearchNearbyRequest.builder(circle, placeFields)
@@ -279,46 +276,37 @@ public class SuggestionActivity extends AppCompatActivity {
         placesClientSuggestion.searchNearby(searchNearbyRequest)
                 .addOnSuccessListener(response -> {
                     placesTrouve = response.getPlaces();
-                    System.out.println("Place trouvé :" + placesTrouve);
                     updateRecyclerView();
                 })
                 .addOnFailureListener(response -> System.out.println("Erreur :" + response));
     }
 
     private void updateRecyclerView() {
-        if (placesTrouve != null && placesTrouve.size() >= 3) {
+        if (placesTrouve != null && placesTrouve.size() >= 5) {
             ArrayList<Favori> places = new ArrayList<>();
             for (Place place : placesTrouve) {
-                Favori favori = new Favori(
-                        Objects.requireNonNull(place.getName()),
-                        Objects.requireNonNull(place.getPlaceTypes()).get(0),
-                        photoMetadataToByte(Objects.requireNonNull(place.getPhotoMetadatas()).get(0)),
-                        place.getAddress()
-                );
-                places.add(favori);
+                List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
+                if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
+                    PhotoMetadata photoMetadata = photoMetadataList.get(0);
+                    FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                            .setMaxWidth(500)
+                            .setMaxHeight(500)
+                            .build();
+                    placesClientSuggestion.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
+                        bitmapClassique = fetchPhotoResponse.getBitmap();
+                        resizedBitmap = Bitmap.createScaledBitmap(bitmapClassique, 500, 500, true);
+                        Favori favori = new Favori(
+                                Objects.requireNonNull(place.getName()),
+                                (Objects.requireNonNull(place.getPlaceTypes())).get(0),
+                                resizedBitmap,
+                                place.getAddress()
+                        );
+                        places.add(favori);
+                        adapter.setSuggestions(places);
+                    }).addOnFailureListener((exception) -> System.out.println("Error fetching photo: " + exception.getMessage()));
+                }
             }
-            adapter.setSuggestions(places);
         }
-    }
-
-    private byte[] photoMetadataToByte(PhotoMetadata photoMetadata) {
-        if (photoMetadata == null)
-            return null;
-        if (placesClientSuggestion == null)
-            return null;
-        FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                .setMaxWidth(500)
-                .setMaxHeight(500)
-                .build();
-
-        final byte[][] bitmapData = {null};
-        placesClientSuggestion.fetchPhoto(photoRequest).addOnSuccessListener((FetchPhotoResponse fetchPhotoResponse) -> {
-            Bitmap bitmap = fetchPhotoResponse.getBitmap();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-            bitmapData[0] = outputStream.toByteArray();
-        }).addOnFailureListener((exception) -> Log.e("SuggestionActivity", "Error fetching photo", exception));
-        return bitmapData[0];
     }
 
     @SuppressLint("SetTextI18n")
@@ -336,16 +324,13 @@ public class SuggestionActivity extends AppCompatActivity {
         chipTypeLieuSuggestions.setText(suggestion.getCategorie());
         txtAdresseLieuSuggestions.setText(suggestion.getAdresse());
         imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
-
         btnYAllerSuggestions.setOnClickListener(v -> openGoogleMaps(suggestion.getNom()));
-
         btnFermerSuggestions.setOnClickListener(v -> drawerLayoutSuggestions.closeDrawer(GravityCompat.END));
 
-//        if (suggestion.getBitmap() != null) {
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(suggestion.getBitmap(), 0, suggestion.getBitmap().length);
-//            imgLieuDetailsSuggestions.setImageBitmap(bitmap);
-//        } else
-//            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
+        if (suggestion.getPhoto() != null)
+            imgLieuDetailsSuggestions.setImageBitmap(suggestion.getPhoto());
+        else
+            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
 
         String nomLieu = txtNomLieuSuggestions.getText().toString();
         getFavoriListInBackground();

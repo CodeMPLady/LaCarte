@@ -30,6 +30,9 @@ public class Favori implements Parcelable {
     public byte[] bitmapData;
 
     @Ignore
+    private Bitmap photo;
+
+    @Ignore
     public Favori() {
         nom = "";
     }
@@ -39,6 +42,13 @@ public class Favori implements Parcelable {
         this.categorie = categorie;
         this.bitmapData = bitmapData;
         this.adresse = adresse;
+    }
+
+    public Favori(@NonNull String nom, String categorie,Bitmap photo, String adresse) {
+        this.nom = nom;
+        this.categorie = categorie;
+        this.adresse = adresse;
+        this.photo = photo;
     }
 
     protected Favori(Parcel in) {
@@ -73,14 +83,19 @@ public class Favori implements Parcelable {
     public byte[] getBitmap() {
         return bitmapData;
     }
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
 
     @NonNull
     @Override
     public String toString() {
         return "Favori{" +
-                ", nom='" + nom + '\'' +
-                ", adress='" + adresse + '\'' +
-                ", description='" + categorie + '\'' +
+                "Nom='" + nom + '\'' +
+                ", Adresse='" + adresse + '\'' +
+                ", Categorie='" + categorie + '\'' +
+                ", has Photo = " + (photo != null) +
                 '}';
     }
     @Override

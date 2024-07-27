@@ -1,8 +1,6 @@
 package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
@@ -22,15 +19,16 @@ import java.util.ArrayList;
 
 public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRecViewAdapter.ViewHolder>{
 
-    private ArrayList<Favori> suggestions = new ArrayList<>();
+    private final ArrayList<Favori> suggestions = new ArrayList<>();
     private final SuggestionActivity activity;
 
     public SuggestionRecViewAdapter(SuggestionActivity activity) {
         this.activity = activity;
     }
 
-    public void setSuggestions(ArrayList<Favori> suggestions) {
-        this.suggestions = suggestions;
+    public void setSuggestions(ArrayList<Favori> newSuggestions) {
+        this.suggestions.clear();
+        this.suggestions.addAll(newSuggestions);
         notifyDataSetChanged();
     }
 
@@ -49,12 +47,11 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
 
         holder.detailsFAB.setOnClickListener(v -> activity.openDrawer(suggestion));
-//        if (suggestion.getBitmap() != null) {
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(suggestion.getBitmap(), 0, suggestion.getBitmap().length);
-//            holder.cardSuggestionImage.setImageBitmap(bitmap);
-//        } else {
-//            holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
-//        }
+        if (suggestion.getPhoto() != null) {
+            holder.cardSuggestionImage.setImageBitmap(suggestion.getPhoto());
+        } else {
+            holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
+        }
     }
 
     @Override
