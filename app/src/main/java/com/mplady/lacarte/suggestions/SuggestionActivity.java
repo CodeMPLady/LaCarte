@@ -5,18 +5,25 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
@@ -32,14 +39,19 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.BuildConfig;
+import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
+import com.mplady.lacarte.favori.FavorisActivity;
+import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SuggestionActivity extends AppCompatActivity {
 
@@ -57,7 +69,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private PlacesClient placesClientSuggestion;
     private List<Place> placesTrouve = new ArrayList<>();
     private ImageView placePhoto;
-    private Bitmap bitmap;
+    private Bitmap bitmap, resizedBitmap;
 
     private DrawerLayout drawerLayoutSuggestions;
     private ImageView imgLieuDetailsSuggestions;
@@ -67,6 +79,10 @@ public class SuggestionActivity extends AppCompatActivity {
     private FloatingActionButton btnFermerSuggestions;
     private ExtendedFloatingActionButton btnYAllerSuggestions;
 
+    FavorisDB favorisDB;
+    private List<Favori> favorisList;
+    private boolean isFavorite;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +91,9 @@ public class SuggestionActivity extends AppCompatActivity {
         initViews();
         setTitle();
         setAdapter();
+        callBackDatabase();
+        getFavoriListInBackground();
+        ajouterAuxFavoris();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);
@@ -86,6 +105,98 @@ public class SuggestionActivity extends AppCompatActivity {
         adapter = new SuggestionRecViewAdapter(this);
         selectionRecView.setAdapter(adapter);
         selectionRecView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void callBackDatabase() {
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+        };
+
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+                .addCallback(myCallback)
+                .fallbackToDestructiveMigration()
+                .build();
+    }
+
+    public void getFavoriListInBackground() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+            handler.post(() -> {});
+        });
+    }
+
+    public void addFavoriInBackground(Favori favori) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisDB.getFavoriDAO().addFavori(favori);
+            handler.post(() -> {});
+        });
+    }
+
+    public void deleteFavoriInBackground(Favori favori) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisDB.getFavoriDAO().deleteFavori(favori);
+            handler.post(() -> {});
+        });
+    }
+
+    private void ajouterAuxFavoris() {
+        isFavorite = false;
+        btnAjouterAuxFavoris.setOnClickListener(v -> {
+            if (!isFavorite) {
+                String nomLieu = txtNomLieuSuggestions.getText().toString();
+                String categorieLieu = chipTypeLieuSuggestions.getText().toString();
+                String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
+
+                byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
+
+                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                addFavoriInBackground(favori1);
+
+                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
+                isFavorite = true;
+                Toast.makeText(SuggestionActivity.this, nomLieu + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
+            } else {
+                for(Favori favori : favorisList){
+                    if(favori.getNom().equals(txtNomLieuSuggestions.getText().toString())){
+                        String nomLieu = txtNomLieuSuggestions.getText().toString();
+                        String categorieLieu = chipTypeLieuSuggestions.getText().toString();
+                        String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
+
+                        byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
+
+                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                        deleteFavoriInBackground(favori1);
+                        break;
+                    }
+                }
+                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
+                isFavorite = false;
+                Toast.makeText(SuggestionActivity.this, txtNomLieuSuggestions.getText().toString() + " retiré des favoris !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public byte[] convertBitmapToByteArray(Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        }
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream); // Utilisez PNG ou JPEG selon vos besoins
+        return outputStream.toByteArray();
     }
 
     private void fetchNearbyPlaces() {
@@ -173,6 +284,19 @@ public class SuggestionActivity extends AppCompatActivity {
 //            imgLieuDetailsSuggestions.setImageBitmap(bitmap);
 //        } else
 //            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
+
+        String nomLieu = txtNomLieuSuggestions.getText().toString();
+        getFavoriListInBackground();
+        for(Favori favori : favorisList) {
+            if (favori.getNom().equals(nomLieu)) {
+                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
+                isFavorite = true;
+                break;
+            } else {
+                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
+                isFavorite = false;
+            }
+        }
     }
 
     private void showDialog() {
