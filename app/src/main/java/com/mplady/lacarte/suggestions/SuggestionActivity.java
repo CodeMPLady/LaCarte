@@ -65,12 +65,19 @@ public class SuggestionActivity extends AppCompatActivity {
     private TextView textTypeTitle;
     private ExtendedFloatingActionButton selectionFAB;
     private RecyclerView selectionRecView;
-    private final String[] tableauSelectionCategories = {
+    private final String[] tableauSelectionCategoriesTitle = {
             "Restaurants",
             "Magasins",
             "Stations essence",
             "Pharmacies",
             "Supermarchés"
+    };
+    private String[] tableauTypes = {
+            "restaurant",
+            "store",
+            "gas_station",
+            "pharmacy",
+            "supermarket"
     };
     private SuggestionRecViewAdapter adapter;
     private PlacesClient placesClientSuggestion;
@@ -92,6 +99,9 @@ public class SuggestionActivity extends AppCompatActivity {
     FavorisDB favorisDB;
     private List<Favori> favorisList;
     private boolean isFavorite;
+
+    private String categorieTitle;
+    private List<String> listCategories;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -129,21 +139,17 @@ public class SuggestionActivity extends AppCompatActivity {
             return;
         }
         fusedLocationClient.getLastLocation()
-                .addOnCompleteListener(this, new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful() && task.getResult() != null) {
-                            Location location = task.getResult();
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-                            System.out.println("Latitude: " + latitude + ", Longitude: " + longitude);
-                            fetchNearbyPlaces(latitude, longitude);
-                        } else {
-                            System.out.println("Location not found");
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        Location location = task.getResult();
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                        System.out.println("Latitude: " + latitude + ", Longitude: " + longitude);
+                        fetchNearbyPlaces(latitude, longitude);
+                    } else {
+                        System.out.println("Location not found");
                     }
                 });
-
     }
 
     @Override
@@ -163,6 +169,7 @@ public class SuggestionActivity extends AppCompatActivity {
         selectionRecView.setAdapter(adapter);
         selectionRecView.setLayoutManager(new LinearLayoutManager(this));
     }
+
     private void callBackDatabase() {
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
@@ -175,7 +182,6 @@ public class SuggestionActivity extends AppCompatActivity {
                 super.onCreate(db);
             }
         };
-
         favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
                 .addCallback(myCallback)
                 .fallbackToDestructiveMigration()
@@ -262,12 +268,12 @@ public class SuggestionActivity extends AppCompatActivity {
 
         LatLng center = new LatLng(latitudeA, longitudeA);
         CircularBounds circle = CircularBounds.newInstance(center, 5000);
-        final List<String> includedTypes = Arrays.asList("restaurant", "cafe");
+        final List<String> includedTypes = Arrays.asList(categorieTitle);
 
         final SearchNearbyRequest searchNearbyRequest =
                 SearchNearbyRequest.builder(circle, placeFields)
                         .setIncludedTypes(includedTypes)
-                        .setMaxResultCount(3)
+                        .setMaxResultCount(5)
                         .build();
 
         placesClientSuggestion.searchNearby(searchNearbyRequest)
@@ -319,8 +325,8 @@ public class SuggestionActivity extends AppCompatActivity {
     private void setTitle() {
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
-        textTypeTitle.setText(tableauSelectionCategories[position] + " autour de vous");
-
+        textTypeTitle.setText(tableauSelectionCategoriesTitle[position] + " autour de vous");
+        categorieTitle = tableauTypes[position];
         selectionFAB.setOnClickListener(v -> showDialog());
     }
 
