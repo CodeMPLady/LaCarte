@@ -13,6 +13,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,7 @@ import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
+import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -81,6 +84,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private PlacesClient placesClientSuggestion;
     private List<Place> placesTrouve = new ArrayList<>();
     private Bitmap bitmapClassique, resizedBitmap;
+    private ImageView logoChargement;
 
     private DrawerLayout drawerLayoutSuggestions;
     private ImageView imgLieuDetailsSuggestions;
@@ -113,8 +117,7 @@ public class SuggestionActivity extends AppCompatActivity {
         getFavoriListInBackground();
         ajouterAuxFavoris();
 
-        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
-        placesClientSuggestion = Places.createClient(SuggestionActivity.this);
+
     }
 
     private void setLocaltion() {
@@ -259,6 +262,7 @@ public class SuggestionActivity extends AppCompatActivity {
     }
 
     private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
+        //TODO : a faire fonctinner : chargement();
         final List<Place.Field> placeFields = Arrays.asList(
                 Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,
                 Place.Field.TYPES, Place.Field.PHOTO_METADATAS);
@@ -383,6 +387,32 @@ public class SuggestionActivity extends AppCompatActivity {
         }
     }
 
+    private void chargement() {
+        Animation animationChargement = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        logoChargement.startAnimation(animationChargement);
+        animationChargement.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Animation fadeOutAnimation = AnimationUtils.loadAnimation(SuggestionActivity.this, R.anim.fade_out);
+                logoChargement.startAnimation(fadeOutAnimation);
+                fadeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {}
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        logoChargement.setVisibility(View.GONE);
+                    }
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {}
+                });
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+    }
+
     private void initViews() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
@@ -400,5 +430,9 @@ public class SuggestionActivity extends AppCompatActivity {
         txtNomLieuSuggestions = findViewById(R.id.txtNomLieuSuggestions);
         txtAdresseLieuSuggestions = findViewById(R.id.txtAdresseLieuSuggestions);
         chipTypeLieuSuggestions = findViewById(R.id.chipTypeLieuSuggestions);
+        logoChargement = findViewById(R.id.logoChargement);
+
+        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+        placesClientSuggestion = Places.createClient(SuggestionActivity.this);
     }
 }

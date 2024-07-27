@@ -121,7 +121,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     private void chargement() {
         Animation animationChargement = AnimationUtils.loadAnimation(this, R.anim.pulse);
         logoChargement.startAnimation(animationChargement);
-
         animationChargement.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {}
@@ -143,7 +142,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
             @Override
             public void onAnimationRepeat(Animation animation) {}
         });
-
     }
 
     private void setSearchViewResults () {
@@ -417,8 +415,7 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
     private void setView() {
         View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
     }
 
