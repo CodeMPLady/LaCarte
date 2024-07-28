@@ -262,7 +262,7 @@ public class SuggestionActivity extends AppCompatActivity {
     }
 
     private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
-        //TODO : a faire fonctinner : chargement();
+        chargement();
         final List<Place.Field> placeFields = Arrays.asList(
                 Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,
                 Place.Field.TYPES, Place.Field.PHOTO_METADATAS);
@@ -430,7 +430,7 @@ public class SuggestionActivity extends AppCompatActivity {
         txtNomLieuSuggestions = findViewById(R.id.txtNomLieuSuggestions);
         txtAdresseLieuSuggestions = findViewById(R.id.txtAdresseLieuSuggestions);
         chipTypeLieuSuggestions = findViewById(R.id.chipTypeLieuSuggestions);
-        logoChargement = findViewById(R.id.logoChargement);
+        logoChargement = findViewById(R.id.logoChargementS);
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);
