@@ -5,7 +5,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +35,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.CircularBounds;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
@@ -50,13 +56,14 @@ import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
-import com.mplady.lacarte.searchResult.SearchResultsActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -64,7 +71,7 @@ import java.util.concurrent.Executors;
 public class SuggestionActivity extends AppCompatActivity {
 
     private TextView textTypeTitle;
-    private ExtendedFloatingActionButton selectionFAB;
+    private ExtendedFloatingActionButton selectionFAB, carteDisplay;
     private RecyclerView selectionRecView;
     private final String[] tableauSelectionCategoriesTitle = {
             "Restaurants",
@@ -86,6 +93,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private Bitmap bitmapClassique, resizedBitmap;
     private ImageView logoChargement;
 
+
     private DrawerLayout drawerLayoutSuggestions;
     private ImageView imgLieuDetailsSuggestions;
     private TextView txtNomLieuSuggestions, txtAdresseLieuSuggestions;
@@ -102,7 +110,8 @@ public class SuggestionActivity extends AppCompatActivity {
     private boolean isFavorite;
 
     private String categorieTitle;
-    private List<String> listCategories;
+    private AlertDialog dialogMap;
+    SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +124,8 @@ public class SuggestionActivity extends AppCompatActivity {
         callBackDatabase();
         getFavoriListInBackground();
         ajouterAuxFavoris();
+        openMapsWithPlaces();
+
     }
 
     private void setAdapter() {
@@ -225,6 +236,56 @@ public class SuggestionActivity extends AppCompatActivity {
             dialog.dismiss();
         });
         dialog.show();
+    }
+
+    void openMapsWithPlaces() {
+        carteDisplay.setOnClickListener(v -> {
+            LayoutInflater inflater = LayoutInflater.from(SuggestionActivity.this);
+            View dialogView = inflater.inflate(R.layout.suggestion_dialog_map, null);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SuggestionActivity.this)
+                    .setView(dialogView);
+            dialogMap = builder.create();
+            dialogMap.show();
+
+            mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapSuggestion);
+            if (mapFragment == null) {
+                mapFragment = SupportMapFragment.newInstance();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.mapSuggestion, mapFragment)
+                        .commit();
+            }
+            mapFragment.getMapAsync(this::updateMapWithPlaces);
+        });
+    }
+
+    public void updateMapWithPlaces(@NonNull GoogleMap googleMap) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        if (placesTrouve != null && !placesTrouve.isEmpty()) {
+            LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+
+            for (Place place : placesTrouve) {
+                String addressStr = place.getAddress();
+                try {
+                    assert addressStr != null;
+                    List<Address> addresses = geocoder.getFromLocationName(addressStr, 1);
+                    if (addresses != null && !addresses.isEmpty()) {
+                        Address address = addresses.get(0);
+                        LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
+                        googleMap.addMarker(new MarkerOptions().position(location).title(place.getName()));
+                        boundsBuilder.include(location);
+                    } else
+                        System.out.println("No address found for: " + addressStr);
+                } catch (IOException e) {
+                    System.out.println("Geocoder error: " + e.getMessage());
+                }
+            }
+
+            LatLngBounds bounds = boundsBuilder.build();
+            int padding = 100;
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
+        } else
+            System.out.println("No places found");
     }
 
     private void openGoogleMaps(String lieu) {
@@ -409,6 +470,7 @@ public class SuggestionActivity extends AppCompatActivity {
         textTypeTitle = findViewById(R.id.textTypeTitle);
         selectionFAB = findViewById(R.id.selectionFiltresFAB);
         selectionRecView = findViewById(R.id.selectionRecView);
+        carteDisplay = findViewById(R.id.mapFAB);
 
         drawerLayoutSuggestions = findViewById(R.id.mainSuggestions);
         btnFermerSuggestions = findViewById(R.id.btnFermerSuggestions);
