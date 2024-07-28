@@ -104,7 +104,6 @@ public class SuggestionActivity extends AppCompatActivity {
     private String categorieTitle;
     private List<String> listCategories;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,149 +115,12 @@ public class SuggestionActivity extends AppCompatActivity {
         callBackDatabase();
         getFavoriListInBackground();
         ajouterAuxFavoris();
-
-
-    }
-
-    private void setLocaltion() {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            getLastLocation();
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-    }
-
-    private void getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    LOCATION_PERMISSION_REQUEST_CODE);
-            return;
-        }
-        fusedLocationClient.getLastLocation()
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        Location location = task.getResult();
-                        latitude = location.getLatitude();
-                        longitude = location.getLongitude();
-                        System.out.println("Latitude: " + latitude + ", Longitude: " + longitude);
-                        fetchNearbyPlaces(latitude, longitude);
-                    } else {
-                        System.out.println("Location not found");
-                    }
-                });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLastLocation();
-            } else {
-                System.out.println("Location permission denied");
-            }
-        }
     }
 
     private void setAdapter() {
         adapter = new SuggestionRecViewAdapter(this);
         selectionRecView.setAdapter(adapter);
         selectionRecView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    private void callBackDatabase() {
-        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
-            @Override
-            public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                super.onOpen(db);
-            }
-
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
-            }
-        };
-        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
-                .addCallback(myCallback)
-                .fallbackToDestructiveMigration()
-                .build();
-    }
-
-    public void getFavoriListInBackground() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisList = favorisDB.getFavoriDAO().getAllFavoris();
-            handler.post(() -> {});
-        });
-    }
-
-    public void addFavoriInBackground(Favori favori) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisDB.getFavoriDAO().addFavori(favori);
-            handler.post(() -> {});
-        });
-    }
-
-    public void deleteFavoriInBackground(Favori favori) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisDB.getFavoriDAO().deleteFavori(favori);
-            handler.post(() -> {});
-        });
-    }
-
-    private void ajouterAuxFavoris() {
-        isFavorite = false;
-        btnAjouterAuxFavoris.setOnClickListener(v -> {
-            if (!isFavorite) {
-                String nomLieu = txtNomLieuSuggestions.getText().toString();
-                String categorieLieu = chipTypeLieuSuggestions.getText().toString();
-                String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
-
-                byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
-
-                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
-                addFavoriInBackground(favori1);
-
-                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
-                isFavorite = true;
-                Toast.makeText(SuggestionActivity.this, nomLieu + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
-            } else {
-                for(Favori favori : favorisList){
-                    if(favori.getNom().equals(txtNomLieuSuggestions.getText().toString())){
-                        String nomLieu = txtNomLieuSuggestions.getText().toString();
-                        String categorieLieu = chipTypeLieuSuggestions.getText().toString();
-                        String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
-
-                        byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
-
-                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
-                        deleteFavoriInBackground(favori1);
-                        break;
-                    }
-                }
-                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
-                isFavorite = false;
-                Toast.makeText(SuggestionActivity.this, txtNomLieuSuggestions.getText().toString() + " retiré des favoris !", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public byte[] convertBitmapToByteArray(Bitmap bitmap) {
-        if (bitmap == null) {
-            return null;
-        }
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        return outputStream.toByteArray();
     }
 
     private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
@@ -311,15 +173,6 @@ public class SuggestionActivity extends AppCompatActivity {
                 }
             }
         }
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void setTitle() {
-        Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
-        textTypeTitle.setText(tableauSelectionCategoriesTitle[position] + " autour de vous");
-        categorieTitle = tableauTypes[position];
-        selectionFAB.setOnClickListener(v -> showDialog());
     }
 
     void openDrawer(Favori suggestion) {
@@ -413,6 +266,141 @@ public class SuggestionActivity extends AppCompatActivity {
         });
     }
 
+    private void callBackDatabase() {
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+        };
+        favorisDB = Room.databaseBuilder(getApplicationContext(), FavorisDB.class, "FavorisDB")
+                .addCallback(myCallback)
+                .fallbackToDestructiveMigration()
+                .build();
+    }
+
+    public void getFavoriListInBackground() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+            handler.post(() -> {});
+        });
+    }
+
+    public void addFavoriInBackground(Favori favori) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisDB.getFavoriDAO().addFavori(favori);
+            handler.post(() -> {});
+        });
+    }
+
+    public void deleteFavoriInBackground(Favori favori) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+            favorisDB.getFavoriDAO().deleteFavori(favori);
+            handler.post(() -> {});
+        });
+    }
+
+    private void ajouterAuxFavoris() {
+        isFavorite = false;
+        btnAjouterAuxFavoris.setOnClickListener(v -> {
+            if (!isFavorite) {
+                String nomLieu = txtNomLieuSuggestions.getText().toString();
+                String categorieLieu = chipTypeLieuSuggestions.getText().toString();
+                String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
+
+                byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
+
+                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                addFavoriInBackground(favori1);
+
+                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
+                isFavorite = true;
+                Toast.makeText(SuggestionActivity.this, nomLieu + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
+            } else {
+                for(Favori favori : favorisList){
+                    if(favori.getNom().equals(txtNomLieuSuggestions.getText().toString())){
+                        String nomLieu = txtNomLieuSuggestions.getText().toString();
+                        String categorieLieu = chipTypeLieuSuggestions.getText().toString();
+                        String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
+
+                        byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
+
+                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                        deleteFavoriInBackground(favori1);
+                        break;
+                    }
+                }
+                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
+                isFavorite = false;
+                Toast.makeText(SuggestionActivity.this, txtNomLieuSuggestions.getText().toString() + " retiré des favoris !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setLocaltion() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            getLastLocation();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+    }
+
+    private void getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+            return;
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        Location location = task.getResult();
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                        System.out.println("Latitude: " + latitude + ", Longitude: " + longitude);
+                        fetchNearbyPlaces(latitude, longitude);
+                    } else {
+                        System.out.println("Location not found");
+                    }
+                });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation();
+            } else {
+                System.out.println("Location permission denied");
+            }
+        }
+    }
+
+    public byte[] convertBitmapToByteArray(Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        }
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        return outputStream.toByteArray();
+    }
+
     private void initViews() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
@@ -434,5 +422,14 @@ public class SuggestionActivity extends AppCompatActivity {
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setTitle() {
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position", 0);
+        textTypeTitle.setText(tableauSelectionCategoriesTitle[position] + " autour de vous");
+        categorieTitle = tableauTypes[position];
+        selectionFAB.setOnClickListener(v -> showDialog());
     }
 }
