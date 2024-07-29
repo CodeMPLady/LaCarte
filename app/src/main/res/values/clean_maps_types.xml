@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tableauJolisTypesGMaps">
+        <item>Restaurant</item>
+        <item>Magasin</item>
+        <item>Station-service</item>
+        <item>Pharmacie</item>
+        <item>Supermarché</item>
+        <item>Concessionnaire automobile</item>
+        <item>Location de voiture</item>
+        <item>Réparation de voiture</item>
+        <item>Lavage de voiture</item>
+        <item>Borne de recharge pour véhicules électriques</item>
+        <item>Parking</item>
+        <item>Aire de repos</item>
+        <item>Ferme</item>
+        <item>Galerie d\'art</item>
+        <item>Musée</item>
+        <item>Théâtre</item>
+        <item>Bibliothèque</item>
+        <item>Préscolaire</item>
+        <item>École primaire</item>
+        <item>École</item>
+        <item>École secondaire</item>
+        <item>Université</item>
+        <item>Centre d\'amusement</item>
+        <item>Parc d\'attractions</item>
+        <item>Aquarium</item>
+        <item>Salle de banquet</item>
+        <item>Bowling</item>
+        <item>Casino</item>
+        <item>Centre communautaire</item>
+        <item>Centre de congrès</item>
+        <item>Centre culturel</item>
+        <item>Parc canin</item>
+        <item>Zone de randonnée</item>
+        <item>Monument historique</item>
+        <item>Marina</item>
+        <item>Location de films</item>
+        <item>Cinéma</item>
+        <item>Parc national</item>
+        <item>Boîte de nuit</item>
+        <item>Parc</item>
+        <item>Attraction touristique</item>
+        <item>Centre d\'accueil</item>
+        <item>Lieu de mariage</item>
+        <item>Zoo</item>
+        <item>Cabinet comptable</item>
+        <item>Distributeur automatique de billets</item>
+        <item>Banque</item>
+        <item>Restaurant américain</item>
+        <item>Boulangerie</item>
+        <item>Bar</item>
+        <item>Restaurant barbecue</item>
+        <item>Restaurant brésilien</item>
+        <item>Restaurant pour le petit-déjeuner</item>
+        <item>Restaurant brunch</item>
+        <item>Café</item>
+        <item>Restaurant chinois</item>
+        <item>Café</item>
+        <item>Restaurant fast-food</item>
+        <item>Restaurant français</item>
+        <item>Restaurant grec</item>
+        <item>Restaurant de hamburgers</item>
+        <item>Glacier</item>
+        <item>Restaurant indien</item>
+        <item>Restaurant indonésien</item>
+        <item>Restaurant italien</item>
+        <item>Restaurant japonais</item>
+        <item>Restaurant coréen</item>
+        <item>Restaurant libanais</item>
+        <item>Livraison de repas</item>
+        <item>Repas à emporter</item>
+        <item>Restaurant méditerranéen</item>
+        <item>Restaurant mexicain</item>
+        <item>Restaurant du Moyen-Orient</item>
+        <item>Pizzeria</item>
+        <item>Restaurant de ramen</item>
+        <item>Sandwicherie</item>
+        <item>Restaurant de fruits de mer</item>
+        <item>Restaurant espagnol</item>
+        <item>Steakhouse</item>
+        <item>Restaurant de sushi</item>
+        <item>Restaurant thaïlandais</item>
+        <item>Restaurant turc</item>
+        <item>Restaurant végétalien</item>
+        <item>Restaurant végétarien</item>
+        <item>Restaurant vietnamien</item>
+        <item>Mairie</item>
+        <item>Palais de justice</item>
+        <item>Ambassade</item>
+        <item>Casernes de pompiers</item>
+        <item>Mairie</item>
+        <item>Police</item>
+        <item>Bureau de poste</item>
+        <item>Clinique dentaire</item>
+        <item>Dentiste</item>
+        <item>Médecin</item>
+        <item>Hôpital</item>
+        <item>Laboratoire médical</item>
+        <item>Physiothérapeute</item>
+        <item>Spa</item>
+        <item>Chambre d\'hôtes</item>
+        <item>Terrain de camping</item>
+        <item>Cabine de camping</item>
+        <item>Gîte</item>
+        <item>Hôtel pour séjour prolongé</item>
+        <item>Ferme-auberge</item>
+        <item>Maison d\'hôtes</item>
+        <item>Auberge</item>
+        <item>Hôtel</item>
+        <item>Hébergement</item>
+        <item>Motel</item>
+        <item>Chambre d\'hôtes privée</item>
+        <item>Hôtel de villégiature</item>
+        <item>Parc pour camping-car</item>
+        <item>Église</item>
+        <item>Temple hindou</item>
+        <item>Mosquée</item>
+        <item>Synagogue</item>
+        <item>Salon de coiffure</item>
+        <item>Salon de beauté</item>
+        <item>Cimetière</item>
+        <item>Agence de garde d\'enfants</item>
+        <item>Consultant</item>
+        <item>Service de messagerie</item>
+        <item>Électricien</item>
+        <item>Fleuriste</item>
+        <item>Pompes funèbres</item>
+        <item>Soin des cheveux</item>
+        <item>Salon de coiffure</item>
+        <item>Assurance</item>
+        <item>Blanchisserie</item>
+        <item>Avocat</item>
+        <item>Serrurier</item>
+        <item>Entreprise de déménagement</item>
+        <item>Peintre</item>
+        <item>Plombier</item>
+        <item>Agence immobilière</item>
+        <item>Entrepreneur en toiture</item>
+        <item>Stockage</item>
+        <item>Tailleur</item>
+        <item>Fournisseur de services de télécommunications</item>
+        <item>Agence de voyage</item>
+        <item>Soin vétérinaire</item>
+        <item>Magasin de pièces auto</item>
+        <item>Magasin de vélos</item>
+        <item>Librairie</item>
+        <item>Magasin de téléphones portables</item>
+        <item>Magasin de vêtements</item>
+        <item>Dépanneur</item>
+        <item>Grand magasin</item>
+        <item>Magasin de rabais</item>
+        <item>Magasin d\'électronique</item>
+        <item>Magasin de meubles</item>
+        <item>Magasin de cadeaux</item>
+        <item>Épicerie</item>
+        <item>Quincaillerie</item>
+        <item>Magasin de décoration</item>
+        <item>Magasin de bricolage</item>
+        <item>Bijouterie</item>
+        <item>Magasin de boissons alcoolisées</item>
+        <item>Marché</item>
+        <item>Magasin pour animaux</item>
+        <item>Magasin de chaussures</item>
+        <item>Centre commercial</item>
+        <item>Magasin d\'articles de sport</item>
+        <item>Grossiste</item>
+        <item>Terrain de sport</item>
+        <item>Centre de fitness</item>
+        <item>Terrain de golf</item>
+        <item>Gymnase</item>
+        <item>Terrain de jeu</item>
+        <item>Station de ski</item>
+        <item>Club sportif</item>
+        <item>Complexe sportif</item>
+        <item>Stade</item>
+        <item>Piscine</item>
+        <item>Aéroport</item>
+        <item>Gare routière</item>
+        <item>Arrêt de bus</item>
+        <item>Terminal de ferry</item>
+        <item>Héliport</item>
+        <item>Station de métro</item>
+        <item>Station de taxi</item>
+        <item>Gare</item>
+        <item>Dépot de transit</item>
+        <item>Station de transit</item>
+        <item>Arrêt pour camions</item>
+    </string-array>
+</resources>
+
+
+
+
+

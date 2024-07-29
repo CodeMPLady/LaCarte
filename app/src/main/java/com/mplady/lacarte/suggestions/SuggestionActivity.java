@@ -4,7 +4,11 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -12,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -27,6 +32,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -80,13 +86,8 @@ public class SuggestionActivity extends AppCompatActivity {
             "Pharmacies",
             "Supermarchés"
     };
-    private String[] tableauTypes = {
-            "restaurant",
-            "store",
-            "gas_station",
-            "pharmacy",
-            "supermarket"
-    };
+    private String[] tableauTypes;
+    private String[] tableauJolisTypes;
     private SuggestionRecViewAdapter adapter;
     private PlacesClient placesClientSuggestion;
     private List<Place> placesTrouve = new ArrayList<>();
@@ -108,7 +109,6 @@ public class SuggestionActivity extends AppCompatActivity {
     FavorisDB favorisDB;
     private List<Favori> favorisList;
     private boolean isFavorite;
-
     private String categorieTitle;
     private AlertDialog dialogMap;
     SupportMapFragment mapFragment;
@@ -118,6 +118,8 @@ public class SuggestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggestions);
         initViews();
+        setupLayoutManager();
+        animatedBackground();
         setLocaltion();
         setTitle();
         setAdapter();
@@ -128,10 +130,35 @@ public class SuggestionActivity extends AppCompatActivity {
 
     }
 
+    private void animatedBackground() {
+        View suggestionsLayout = findViewById(R.id.mainSuggestions);
+        AnimationDrawable animationDrawable = (AnimationDrawable) suggestionsLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1500);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setupLayoutManager();
+    }
+
+    private void setupLayoutManager() {
+        LinearLayoutManager layoutManager;
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        } else {
+            layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        }
+        selectionRecView.setLayoutManager(layoutManager);
+    }
+
     private void setAdapter() {
-        adapter = new SuggestionRecViewAdapter(this);
+        adapter = new SuggestionRecViewAdapter(this, getTableauTypes(), getTableauJolisTypes());
         selectionRecView.setAdapter(adapter);
-        selectionRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
@@ -156,6 +183,14 @@ public class SuggestionActivity extends AppCompatActivity {
                     updateRecyclerView();
                 })
                 .addOnFailureListener(response -> System.out.println("Erreur :" + response));
+    }
+
+    public String[] getTableauTypes() {
+        return tableauTypes;
+    }
+
+    public String[] getTableauJolisTypes() {
+        return tableauJolisTypes;
     }
 
     private void updateRecyclerView() {
@@ -210,6 +245,15 @@ public class SuggestionActivity extends AppCompatActivity {
             } else {
                 btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
                 isFavorite = false;
+            }
+        }
+
+        for (int i = 0; i < tableauTypes.length; i++) {
+            for (int j = 0; j < tableauJolisTypes.length; j++) {
+                if (tableauTypes[i].equals(tableauJolisTypes[j])) {
+                    chipTypeLieuSuggestions.setText(tableauJolisTypes[j]);
+                    break;
+                }
             }
         }
     }
@@ -491,6 +535,11 @@ public class SuggestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
         textTypeTitle.setText(tableauSelectionCategoriesTitle[position] + " autour de vous");
+
+        Resources res = getResources();
+        tableauTypes = res.getStringArray(R.array.tableauTypesGMaps);
+        tableauJolisTypes = res.getStringArray(R.array.tableauJolisTypesGMaps);
+
         categorieTitle = tableauTypes[position];
         selectionFAB.setOnClickListener(v -> showDialog());
     }

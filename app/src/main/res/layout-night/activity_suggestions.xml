@@ -6,13 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".suggestions.SuggestionActivity"
-    android:background="@drawable/gradient_list_suggestions">
+    android:background="@drawable/gradient_suggestions_night">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
         <ImageView
             android:id="@+id/logoChargementS"
@@ -32,7 +30,7 @@
             android:layout_marginTop="32dp"
             android:fontFamily="@font/fira_sans"
             android:text="Type de lieu autour de vous"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,13 +45,13 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="40dp"
-            android:backgroundTint="#EFEFEF"
+            android:backgroundTint="#02082C"
             android:text="Afficher la carte"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             app:icon="@drawable/iconglobe"
             app:iconSize="30dp"
-            app:iconTint="@color/black"
+            app:iconTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,9 +62,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:backgroundTint="#D8D8D8"
+            android:backgroundTint="#02082C"
             android:text="Changer la sélection"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

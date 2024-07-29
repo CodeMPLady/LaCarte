@@ -1,6 +1,8 @@
 package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +18,20 @@ import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRecViewAdapter.ViewHolder>{
 
     private final ArrayList<Favori> suggestions = new ArrayList<>();
     private final SuggestionActivity activity;
+    private final String[] tableauTypes;
+    private final String[] tableauJolisTypes;
 
-    public SuggestionRecViewAdapter(SuggestionActivity activity) {
+
+    public SuggestionRecViewAdapter(SuggestionActivity activity, String[] tableauTypes, String[] tableauJolisTypes) {
         this.activity = activity;
+        this.tableauTypes = tableauTypes;
+        this.tableauJolisTypes = tableauJolisTypes;
     }
 
     public void setSuggestions(ArrayList<Favori> newSuggestions) {
@@ -43,8 +51,17 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Favori suggestion = suggestions.get(position);
 
+        for (int i = 0; i < tableauTypes.length; i++) {
+            for (int j = 0; j < tableauJolisTypes.length; j++) {
+                if (tableauTypes[i].equals(tableauJolisTypes[j])) {
+                    holder.cardSuggestionCategorie.setText(tableauJolisTypes[j]);
+                    break;
+                }
+            }
+        }
         holder.cardSuggestionName.setText(suggestion.getNom());
-        holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
+        //holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
+
 
         holder.detailsFAB.setOnClickListener(v -> activity.openDrawer(suggestion));
         if (suggestion.getPhoto() != null) {
