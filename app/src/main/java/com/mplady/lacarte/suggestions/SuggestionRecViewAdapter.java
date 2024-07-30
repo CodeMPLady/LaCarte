@@ -50,17 +50,20 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Favori suggestion = suggestions.get(position);
+        String recupCategorieSuggestion = suggestion.getCategorie();
 
-        for (int i = 0; i < tableauTypes.length; i++) {
-            for (int j = 0; j < tableauJolisTypes.length; j++) {
-                if (tableauTypes[i].equals(tableauJolisTypes[j])) {
-                    holder.cardSuggestionCategorie.setText(tableauJolisTypes[j]);
-                    break;
-                }
-            }
-        }
+//        for (int i = 0; i < tableauTypes.length; i++) {
+//            for (int j = 0; j < tableauJolisTypes.length; j++) {
+//                if (tableauTypes[i].equals(recupCategorieSuggestion)) {
+//                    System.out.println("TYPE GMAPS : " + tableauTypes[i]);
+//                    System.out.println("JOLI TYPE : " + tableauJolisTypes[j]);
+//                    holder.cardSuggestionCategorie.setText(tableauJolisTypes[j]);
+//                    break;
+//                }
+//            }
+//        }
         holder.cardSuggestionName.setText(suggestion.getNom());
-        //holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
+        holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
 
 
         holder.detailsFAB.setOnClickListener(v -> activity.openDrawer(suggestion));

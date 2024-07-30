@@ -112,6 +112,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private String categorieTitle;
     private AlertDialog dialogMap;
     SupportMapFragment mapFragment;
+    private String categorieJolie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,7 +210,8 @@ public class SuggestionActivity extends AppCompatActivity {
                         resizedBitmap = Bitmap.createScaledBitmap(bitmapClassique, 500, 500, true);
                         Favori favori = new Favori(
                                 Objects.requireNonNull(place.getName()),
-                                (Objects.requireNonNull(place.getPlaceTypes())).get(0),
+                                categorieJolie,
+                                //(Objects.requireNonNull(place.getPlaceTypes())).get(0),
                                 resizedBitmap,
                                 place.getAddress()
                         );
@@ -248,14 +250,16 @@ public class SuggestionActivity extends AppCompatActivity {
             }
         }
 
-        for (int i = 0; i < tableauTypes.length; i++) {
-            for (int j = 0; j < tableauJolisTypes.length; j++) {
-                if (tableauTypes[i].equals(tableauJolisTypes[j])) {
-                    chipTypeLieuSuggestions.setText(tableauJolisTypes[j]);
-                    break;
-                }
-            }
-        }
+        chipTypeLieuSuggestions.setText(suggestion.getCategorie());
+//        String recupCategorieSuggestion = suggestion.getCategorie();
+//        for (int i = 0; i < tableauTypes.length; i++) {
+//            for (int j = 0; j < tableauJolisTypes.length; j++) {
+//                if (tableauTypes[i].equals(recupCategorieSuggestion)) {
+//                    chipTypeLieuSuggestions.setText(tableauJolisTypes[j]);
+//                    break;
+//                }
+//            }
+//        }
     }
 
     private void showDialog() {
@@ -541,6 +545,7 @@ public class SuggestionActivity extends AppCompatActivity {
         tableauJolisTypes = res.getStringArray(R.array.tableauJolisTypesGMaps);
 
         categorieTitle = tableauTypes[position];
+        categorieJolie = tableauJolisTypes[position];
         selectionFAB.setOnClickListener(v -> showDialog());
     }
 }
