@@ -10,7 +10,6 @@
         <item>Location de voiture</item>
         <item>Réparation de voiture</item>
         <item>Lavage de voiture</item>
-        <item>Borne de recharge pour véhicules électriques</item>
         <item>Parking</item>
         <item>Aire de repos</item>
         <item>Ferme</item>
@@ -18,10 +17,10 @@
         <item>Musée</item>
         <item>Théâtre</item>
         <item>Bibliothèque</item>
-        <item>Préscolaire</item>
+        <item>Crèche</item>
         <item>École primaire</item>
         <item>École</item>
-        <item>École secondaire</item>
+        <item>Lycée</item>
         <item>Université</item>
         <item>Centre d\'amusement</item>
         <item>Parc d\'attractions</item>
@@ -36,7 +35,7 @@
         <item>Zone de randonnée</item>
         <item>Monument historique</item>
         <item>Marina</item>
-        <item>Location de films</item>
+        <item>Vidéo club</item>
         <item>Cinéma</item>
         <item>Parc national</item>
         <item>Boîte de nuit</item>
@@ -51,13 +50,13 @@
         <item>Restaurant américain</item>
         <item>Boulangerie</item>
         <item>Bar</item>
-        <item>Restaurant barbecue</item>
+        <item>Restaurant de barbecue</item>
         <item>Restaurant brésilien</item>
-        <item>Restaurant pour le petit-déjeuner</item>
-        <item>Restaurant brunch</item>
+        <item>Restaurant de petit-déjeuner</item>
+        <item>Restaurant de brunch</item>
         <item>Café</item>
         <item>Restaurant chinois</item>
-        <item>Café</item>
+        <item>Magasin de café</item>
         <item>Restaurant fast-food</item>
         <item>Restaurant français</item>
         <item>Restaurant grec</item>
@@ -83,26 +82,26 @@
         <item>Restaurant de sushi</item>
         <item>Restaurant thaïlandais</item>
         <item>Restaurant turc</item>
-        <item>Restaurant végétalien</item>
+        <item>Restaurant vegan</item>
         <item>Restaurant végétarien</item>
         <item>Restaurant vietnamien</item>
         <item>Mairie</item>
         <item>Palais de justice</item>
         <item>Ambassade</item>
         <item>Casernes de pompiers</item>
-        <item>Mairie</item>
         <item>Police</item>
         <item>Bureau de poste</item>
         <item>Clinique dentaire</item>
         <item>Dentiste</item>
         <item>Médecin</item>
+        <item>Pharmacie</item>
         <item>Hôpital</item>
         <item>Laboratoire médical</item>
         <item>Physiothérapeute</item>
         <item>Spa</item>
         <item>Chambre d\'hôtes</item>
         <item>Terrain de camping</item>
-        <item>Cabine de camping</item>
+        <item>Bungalows</item>
         <item>Gîte</item>
         <item>Hôtel pour séjour prolongé</item>
         <item>Ferme-auberge</item>
@@ -118,7 +117,7 @@
         <item>Temple hindou</item>
         <item>Mosquée</item>
         <item>Synagogue</item>
-        <item>Salon de coiffure</item>
+        <item>Barbier</item>
         <item>Salon de beauté</item>
         <item>Cimetière</item>
         <item>Agence de garde d\'enfants</item>
@@ -137,7 +136,7 @@
         <item>Peintre</item>
         <item>Plombier</item>
         <item>Agence immobilière</item>
-        <item>Entrepreneur en toiture</item>
+        <item>Couvreur</item>
         <item>Stockage</item>
         <item>Tailleur</item>
         <item>Fournisseur de services de télécommunications</item>
@@ -148,9 +147,9 @@
         <item>Librairie</item>
         <item>Magasin de téléphones portables</item>
         <item>Magasin de vêtements</item>
-        <item>Dépanneur</item>
+        <item>Epicerie</item>
         <item>Grand magasin</item>
-        <item>Magasin de rabais</item>
+        <item>Magasin d\'articles en soldes</item>
         <item>Magasin d\'électronique</item>
         <item>Magasin de meubles</item>
         <item>Magasin de cadeaux</item>
@@ -169,7 +168,7 @@
         <item>Terrain de sport</item>
         <item>Centre de fitness</item>
         <item>Terrain de golf</item>
-        <item>Gymnase</item>
+        <item>Salle de sport</item>
         <item>Terrain de jeu</item>
         <item>Station de ski</item>
         <item>Club sportif</item>

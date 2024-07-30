@@ -10,7 +10,6 @@
         <item>car_rental</item>
         <item>car_repair</item>
         <item>car_wash</item>
-        <item>electric_vehicle_charging_station</item>
         <item>parking</item>
         <item>rest_stop</item>
         <item>farm</item>
@@ -90,7 +89,6 @@
         <item>courthouse</item>
         <item>embassy</item>
         <item>fire_station</item>
-        <item>local_government_office</item>
         <item>police</item>
         <item>post_office</item>
         <item>dental_clinic</item>
