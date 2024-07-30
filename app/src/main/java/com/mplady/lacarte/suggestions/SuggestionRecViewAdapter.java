@@ -54,14 +54,11 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Favori suggestion = suggestions.get(position);
         String recupCategorieSuggestion = suggestion.getSousCategorie();
-        System.out.println("TAb Recup : " + recupCategorieSuggestion);
 
         i=0;
         while (!Objects.equals(tableauTypes[i], recupCategorieSuggestion)) {
-            System.out.println("TAb : " + tableauTypes[i]);
             i++;
         }
-        System.out.println("TAbFinal : " + tableauTypes[i] + " i: " + i);
         holder.cardSuggestionCategorie.setText(tableauJolisTypes[i]);
 
         holder.cardSuggestionName.setText(suggestion.getNom());

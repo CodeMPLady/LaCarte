@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -16,7 +15,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,7 +30,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -71,8 +68,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class SuggestionActivity extends AppCompatActivity {
 
@@ -167,21 +166,24 @@ public class SuggestionActivity extends AppCompatActivity {
         chargement();
         final List<Place.Field> placeFields = Arrays.asList(
                 Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,
-                Place.Field.TYPES, Place.Field.PHOTO_METADATAS);
+                Place.Field.TYPES, Place.Field.PHOTO_METADATAS, Place.Field.PRIMARY_TYPE);
 
         LatLng center = new LatLng(latitudeA, longitudeA);
-        CircularBounds circle = CircularBounds.newInstance(center, 5000);
+        CircularBounds circle = CircularBounds.newInstance(center, 1000);
         final List<String> includedTypes = Collections.singletonList(categorieTitle);
 
         final SearchNearbyRequest searchNearbyRequest =
                 SearchNearbyRequest.builder(circle, placeFields)
                         .setIncludedTypes(includedTypes)
-                        .setMaxResultCount(5)
+                        .setMaxResultCount(20)
+                        .setRankPreference(SearchNearbyRequest.RankPreference.DISTANCE)
                         .build();
 
         placesClientSuggestion.searchNearby(searchNearbyRequest)
                 .addOnSuccessListener(response -> {
-                    placesTrouve = response.getPlaces();
+                    placesTrouve = response.getPlaces().stream()
+                            .filter(place -> Optional.ofNullable(place.getPrimaryType()).map(pt -> pt.contains(categorieTitle)).orElse(false))
+                            .collect(Collectors.toList());
                     updateRecyclerView();
                 })
                 .addOnFailureListener(response -> System.out.println("Erreur :" + response));
@@ -196,9 +198,10 @@ public class SuggestionActivity extends AppCompatActivity {
     }
 
     private void updateRecyclerView() {
-        if (placesTrouve != null && placesTrouve.size() >= 5) {
+        if (placesTrouve != null) {
             ArrayList<Favori> places = new ArrayList<>();
             for (Place place : placesTrouve) {
+                System.out.println("placePrimary" + place.getPrimaryType());
                 List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
                 if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                     PhotoMetadata photoMetadata = photoMetadataList.get(0);
