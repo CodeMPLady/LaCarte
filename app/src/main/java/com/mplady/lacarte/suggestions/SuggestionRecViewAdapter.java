@@ -19,6 +19,7 @@ import com.mplady.lacarte.favori.Favori;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRecViewAdapter.ViewHolder>{
 
@@ -26,6 +27,8 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
     private final SuggestionActivity activity;
     private final String[] tableauTypes;
     private final String[] tableauJolisTypes;
+
+    int i = 0;
 
 
     public SuggestionRecViewAdapter(SuggestionActivity activity, String[] tableauTypes, String[] tableauJolisTypes) {
@@ -50,22 +53,18 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Favori suggestion = suggestions.get(position);
-        String recupCategorieSuggestion = suggestion.getCategorie();
+        String recupCategorieSuggestion = suggestion.getSousCategorie();
+        System.out.println("TAb Recup : " + recupCategorieSuggestion);
 
-//        for (int i = 0; i < tableauTypes.length; i++) {
-//            for (int j = 0; j < tableauJolisTypes.length; j++) {
-//                if (tableauTypes[i].equals(recupCategorieSuggestion)) {
-//                    System.out.println("TYPE GMAPS : " + tableauTypes[i]);
-//                    System.out.println("JOLI TYPE : " + tableauJolisTypes[j]);
-//                    holder.cardSuggestionCategorie.setText(tableauJolisTypes[j]);
-//                    break;
-//                }
-//            }
-//        }
+        i=0;
+        while (!Objects.equals(tableauTypes[i], recupCategorieSuggestion)) {
+            System.out.println("TAb : " + tableauTypes[i]);
+            i++;
+        }
+        System.out.println("TAbFinal : " + tableauTypes[i] + " i: " + i);
+        holder.cardSuggestionCategorie.setText(tableauJolisTypes[i]);
+
         holder.cardSuggestionName.setText(suggestion.getNom());
-        holder.cardSuggestionCategorie.setText(suggestion.getCategorie());
-
-
         holder.detailsFAB.setOnClickListener(v -> activity.openDrawer(suggestion));
         if (suggestion.getPhoto() != null) {
             holder.cardSuggestionImage.setImageBitmap(suggestion.getPhoto());

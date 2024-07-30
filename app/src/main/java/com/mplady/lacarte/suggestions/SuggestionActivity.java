@@ -213,7 +213,8 @@ public class SuggestionActivity extends AppCompatActivity {
                                 categorieJolie,
                                 //(Objects.requireNonNull(place.getPlaceTypes())).get(0),
                                 resizedBitmap,
-                                place.getAddress()
+                                place.getAddress(),
+                                Objects.requireNonNull(place.getPlaceTypes()).get(0)
                         );
                         places.add(favori);
                         adapter.setSuggestions(places);
