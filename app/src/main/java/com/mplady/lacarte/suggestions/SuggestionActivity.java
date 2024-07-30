@@ -113,6 +113,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private AlertDialog dialogMap;
     SupportMapFragment mapFragment;
     private String categorieJolie;
+    private FloatingActionButton fermerMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,7 +212,6 @@ public class SuggestionActivity extends AppCompatActivity {
                         Favori favori = new Favori(
                                 Objects.requireNonNull(place.getName()),
                                 categorieJolie,
-                                //(Objects.requireNonNull(place.getPlaceTypes())).get(0),
                                 resizedBitmap,
                                 place.getAddress(),
                                 Objects.requireNonNull(place.getPlaceTypes()).get(0)
@@ -252,15 +252,6 @@ public class SuggestionActivity extends AppCompatActivity {
         }
 
         chipTypeLieuSuggestions.setText(suggestion.getCategorie());
-//        String recupCategorieSuggestion = suggestion.getCategorie();
-//        for (int i = 0; i < tableauTypes.length; i++) {
-//            for (int j = 0; j < tableauJolisTypes.length; j++) {
-//                if (tableauTypes[i].equals(recupCategorieSuggestion)) {
-//                    chipTypeLieuSuggestions.setText(tableauJolisTypes[j]);
-//                    break;
-//                }
-//            }
-//        }
     }
 
     private void showDialog() {
@@ -304,6 +295,17 @@ public class SuggestionActivity extends AppCompatActivity {
                         .commit();
             }
             mapFragment.getMapAsync(this::updateMapWithPlaces);
+
+            fermerMap = dialogView.findViewById(R.id.btnFermerMap);
+            fermerMap.setOnClickListener(t -> {
+                dialogMap.dismiss();
+                getSupportFragmentManager().beginTransaction().remove(mapFragment).commit();
+            });
+            dialogMap.setOnDismissListener(dialog -> {
+                SupportMapFragment existingMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapSuggestion);
+                if (existingMapFragment != null)
+                    getSupportFragmentManager().beginTransaction().remove(existingMapFragment).commit();
+            });
         });
     }
 
@@ -530,6 +532,7 @@ public class SuggestionActivity extends AppCompatActivity {
         txtAdresseLieuSuggestions = findViewById(R.id.txtAdresseLieuSuggestions);
         chipTypeLieuSuggestions = findViewById(R.id.chipTypeLieuSuggestions);
         logoChargement = findViewById(R.id.logoChargementS);
+        fermerMap = findViewById(R.id.btnFermerMap);
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);

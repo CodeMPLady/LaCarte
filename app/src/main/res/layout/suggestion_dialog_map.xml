@@ -12,6 +12,20 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
     </androidx.fragment.app.FragmentContainerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnFermerMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/close24px"
+        app:tint="#FFFFFF"
+        android:backgroundTint="#DC2F2F"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
