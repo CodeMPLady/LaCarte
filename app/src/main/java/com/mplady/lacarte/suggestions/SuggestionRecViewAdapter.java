@@ -1,8 +1,6 @@
 package com.mplady.lacarte.suggestions;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,6 @@ import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRecViewAdapter.ViewHolder>{

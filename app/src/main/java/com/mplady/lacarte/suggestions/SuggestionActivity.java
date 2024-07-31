@@ -19,7 +19,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +55,7 @@ import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.api.net.SearchNearbyRequest;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -93,7 +97,6 @@ public class SuggestionActivity extends AppCompatActivity {
     private Bitmap bitmapClassique, resizedBitmap;
     private ImageView logoChargement;
 
-
     private DrawerLayout drawerLayoutSuggestions;
     private ImageView imgLieuDetailsSuggestions;
     private TextView txtNomLieuSuggestions, txtAdresseLieuSuggestions;
@@ -128,7 +131,6 @@ public class SuggestionActivity extends AppCompatActivity {
         getFavoriListInBackground();
         ajouterAuxFavoris();
         openMapsWithPlaces();
-
     }
 
     private void animatedBackground() {
@@ -137,7 +139,6 @@ public class SuggestionActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(1500);
         animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
-
     }
 
     @Override
@@ -253,7 +254,6 @@ public class SuggestionActivity extends AppCompatActivity {
                 isFavorite = false;
             }
         }
-
         chipTypeLieuSuggestions.setText(suggestion.getCategorie());
     }
 
@@ -263,19 +263,25 @@ public class SuggestionActivity extends AppCompatActivity {
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this).setView(dialogView);
 
-        Chip chipRestaurant = dialogView.findViewById(R.id.chipRestaurant);
-        Chip chipSupermarche = dialogView.findViewById(R.id.chipSupermarche);
-        Chip chipPharmacie = dialogView.findViewById(R.id.chipPharmacie);
-        Chip chipStationEssence = dialogView.findViewById(R.id.chipStationEssence);
-        Chip chipMagasin = dialogView.findViewById(R.id.chipMagasin);
+        RadioGroup radioGroupDialogSuggestions = findViewById(R.id.radioGroupDialogSuggestions);
+        RadioButton radioBtnRestaurant = findViewById(R.id.radioBtnRestaurant);
+        RadioButton radioBtnMagasin = findViewById(R.id.radioBtnMagasin);
+        RadioButton radioBtnEssence = findViewById(R.id.radioBtnEssence);
+        RadioButton radioBtnPharmacie = findViewById(R.id.radioBtnPharmacie);
+        RadioButton radioBtnSupermache = findViewById(R.id.radioBtnSupermache);
+        RadioButton radioBtnMusee = findViewById(R.id.radioBtnMusee);
+        RadioButton radioBtnBoulangerie = findViewById(R.id.radioBtnBoulangerie);
+        RadioButton radioBtnParc = findViewById(R.id.radioBtnParc);
+        RadioButton radioBtnCinema = findViewById(R.id.radioBtnCinema);
 
         FloatingActionButton btnValiderSelection = dialogView.findViewById(R.id.btnValiderSelection);
         FloatingActionButton btnAnnulerSelection = dialogView.findViewById(R.id.btnAnnulerSelection);
 
         AlertDialog dialog = builder.create();
+
         btnAnnulerSelection.setOnClickListener(v -> dialog.dismiss());
         btnValiderSelection.setOnClickListener(v -> {
-            // Handle selection logic
+
             dialog.dismiss();
         });
         dialog.show();
