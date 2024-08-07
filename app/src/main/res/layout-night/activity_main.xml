@@ -18,6 +18,39 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchDarkMode1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:thumbIconTint="#E0C4C4"
+        app:thumbTint="#1E2239"
+        app:trackTint="#B6B6B6"
+        app:layout_constraintBottom_toTopOf="@+id/fabAbout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/icone_mode_nuit"
+        android:src="@drawable/darkmodeicon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/switchDarkMode1"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/icone_mode_jour"
+        android:src="@drawable/lightmodeicon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toStartOf="@+id/switchDarkMode1"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabFavoris"
         android:layout_width="0dp"
@@ -28,18 +61,19 @@
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:text="@string/btn_aceuil_favoris"
-        android:textSize="22sp"
         android:textColor="@color/white"
-        app:elevation="2dp"
+        android:textSize="22sp"
+        app:elevation="5dp"
         app:icon="@drawable/ic_favoris"
         app:iconSize="30dp"
+        app:iconPadding="-20dp"
         app:iconTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintWidth_max="300dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabStat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +86,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
         app:maxImageSize="35dp"
-        app:tint="@color/white" />
+        app:tint="@color/white" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAbout"
@@ -60,12 +94,11 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/DESC_bouton_propos"
         android:src="@drawable/ic_about"
-        app:backgroundTint="#1E2239"
+        app:backgroundTint="#3C4575"
         app:fabCustomSize="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
         app:maxImageSize="35dp"
         app:tint="@color/white" />
 
@@ -118,18 +151,19 @@
         android:orientation="horizontal"
         app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/fabFavoris"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchCardView"
+        app:layout_constraintVertical_bias="0.64" />
 
     <ListView
         android:id="@+id/suggestionsListView"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:divider="@color/white"
         android:dividerHeight="0.5dp"
+        android:maxHeight="250dp"
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -150,32 +184,25 @@
         app:layout_constraintGuide_begin="50dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="242dp" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="161dp" />
+        app:layout_constraintGuide_end="220dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="79dp" />
+        app:layout_constraintGuide_end="110dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="718dp" />
+        app:layout_constraintGuide_end="696dp" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -183,6 +210,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="134dp" />
+        app:layout_constraintGuide_end="150dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

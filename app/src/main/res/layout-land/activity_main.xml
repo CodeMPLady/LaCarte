@@ -37,7 +37,40 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchDarkMode1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:thumbIconTint="#E0C4C4"
+        app:thumbTint="#DB0B0B"
+        app:trackTint="#EDE7E7" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/icone_mode_nuit"
+        android:src="@drawable/darkmodeicon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/switchDarkMode1"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/icone_mode_jour"
+        android:src="@drawable/lightmodeicon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/switchDarkMode1"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabStat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,22 +83,22 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:maxImageSize="30dp"
         app:tint="@color/black"
-        android:backgroundTint="@color/white"/>
+        android:backgroundTint="@color/white"/>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
         android:contentDescription="@string/DESC_bouton_propos"
         android:src="@drawable/ic_about"
         app:fabCustomSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:maxImageSize="30dp"
-        app:tint="@color/black"
-        android:backgroundTint="@color/white"/>
+        app:tint="@color/black" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCardView"

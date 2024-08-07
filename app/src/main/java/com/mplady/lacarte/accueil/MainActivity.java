@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
@@ -18,6 +19,7 @@ import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.R;
@@ -40,12 +43,13 @@ public class MainActivity extends AppCompatActivity {
     private ImageView searchIcon;
     private SearchView searchView;
     private ExtendedFloatingActionButton fabFavoris;
-    private FloatingActionButton  fabStat, fabAbout;
+    private FloatingActionButton fabAbout;
     private CardView searchCardView;
     private ArrayAdapter<String> adapter;
     private ListView listView;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
+    private MaterialSwitch switchDarkMode1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +62,17 @@ public class MainActivity extends AppCompatActivity {
         setSearchView();
         btnOnClicks();
         animatedBackgroundSearchIcon();
+        setDarkMode();
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(MainActivity.this);
     }
 
     private void btnOnClicks() {
-        fabStat.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, StatActivity.class);
-            startActivity(intent);
-        });
+//        fabStat.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, StatActivity.class);
+//            startActivity(intent);
+//        });
 
         fabAbout.setOnClickListener(v -> {
             AlertDialog.Builder builder = aboutBuilder();
@@ -189,14 +194,30 @@ public class MainActivity extends AppCompatActivity {
         return builder;
     }
 
+    private void setDarkMode() {
+        int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        switchDarkMode1.setChecked(nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES);
+
+        switchDarkMode1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                Toast.makeText(MainActivity.this, "Dark Mode Activé", Toast.LENGTH_SHORT).show();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                Toast.makeText(MainActivity.this, "Dark Mode Désactivé", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void initView() {
         listView = findViewById(R.id.suggestionsListView);
         searchView = findViewById(R.id.searchView);
         searchIcon = findViewById(R.id.searchIcon);
         fabFavoris = findViewById(R.id.fabFavoris);
-        fabStat = findViewById(R.id.fabStat);
+        //fabStat = findViewById(R.id.fabStat);
         fabAbout = findViewById(R.id.fabAbout);
         searchCardView = findViewById(R.id.searchCardView);
+        switchDarkMode1 = findViewById(R.id.switchDarkMode1);
     }
 
     private void setView() {

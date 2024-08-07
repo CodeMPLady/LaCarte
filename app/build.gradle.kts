@@ -21,8 +21,8 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 17
-        versionName = "Base de donnée implémenter + nouveau logo!"
+        versionCode = 18
+        versionName = "Suggestion fonctionnel"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
