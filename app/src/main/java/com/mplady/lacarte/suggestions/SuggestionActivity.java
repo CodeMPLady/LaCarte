@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -55,7 +54,6 @@ import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.api.net.SearchNearbyRequest;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -116,6 +114,7 @@ public class SuggestionActivity extends AppCompatActivity {
     SupportMapFragment mapFragment;
     private String categorieJolie;
     private FloatingActionButton fermerMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,28 +262,25 @@ public class SuggestionActivity extends AppCompatActivity {
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this).setView(dialogView);
 
-        RadioGroup radioGroupDialogSuggestions = findViewById(R.id.radioGroupDialogSuggestions);
-        RadioButton radioBtnRestaurant = findViewById(R.id.radioBtnRestaurant);
-        RadioButton radioBtnMagasin = findViewById(R.id.radioBtnMagasin);
-        RadioButton radioBtnEssence = findViewById(R.id.radioBtnEssence);
-        RadioButton radioBtnPharmacie = findViewById(R.id.radioBtnPharmacie);
-        RadioButton radioBtnSupermache = findViewById(R.id.radioBtnSupermache);
-        RadioButton radioBtnMusee = findViewById(R.id.radioBtnMusee);
-        RadioButton radioBtnBoulangerie = findViewById(R.id.radioBtnBoulangerie);
-        RadioButton radioBtnParc = findViewById(R.id.radioBtnParc);
-        RadioButton radioBtnCinema = findViewById(R.id.radioBtnCinema);
-
         FloatingActionButton btnValiderSelection = dialogView.findViewById(R.id.btnValiderSelection);
         FloatingActionButton btnAnnulerSelection = dialogView.findViewById(R.id.btnAnnulerSelection);
+        RadioGroup radioGroupDialogSuggestions = dialogView.findViewById(R.id.radioGroupDialogSuggestions);
 
         AlertDialog dialog = builder.create();
 
         btnAnnulerSelection.setOnClickListener(v -> dialog.dismiss());
         btnValiderSelection.setOnClickListener(v -> {
-
+            int selectedId = radioGroupDialogSuggestions.getCheckedRadioButtonId();
+            if (selectedId != -1) {
+                RadioButton selectedRadioButton = dialogView.findViewById(selectedId);
+                String selectedText = selectedRadioButton.getText().toString();
+                Toast.makeText(this, "Catégorie sélectionnée: " + selectedText, Toast.LENGTH_SHORT).show();
+            }
             dialog.dismiss();
         });
+
         dialog.show();
+
     }
 
     void openMapsWithPlaces() {

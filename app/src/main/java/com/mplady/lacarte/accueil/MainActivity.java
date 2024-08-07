@@ -34,7 +34,6 @@ import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.searchResult.SearchResultsActivity;
-import com.mplady.lacarte.stat.StatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +68,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void btnOnClicks() {
-//        fabStat.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, StatActivity.class);
-//            startActivity(intent);
-//        });
-
         fabAbout.setOnClickListener(v -> {
             AlertDialog.Builder builder = aboutBuilder();
             builder.setNegativeButton("Retour", (dialog, which) -> {});
