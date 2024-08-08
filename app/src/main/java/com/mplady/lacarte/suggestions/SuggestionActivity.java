@@ -85,7 +85,11 @@ public class SuggestionActivity extends AppCompatActivity {
             "Magasins",
             "Stations essence",
             "Pharmacies",
-            "Supermarchés"
+            "Supermarchés",
+            "Parcs",
+            "Boulangeries",
+            "Musées",
+            "Cinémas"
     };
     private String[] tableauTypes;
     private String[] tableauJolisTypes;
@@ -256,6 +260,7 @@ public class SuggestionActivity extends AppCompatActivity {
         chipTypeLieuSuggestions.setText(suggestion.getCategorie());
     }
 
+    @SuppressLint("SetTextI18n")
     private void showDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.suggestions_dialog_layout, null);
@@ -265,16 +270,40 @@ public class SuggestionActivity extends AppCompatActivity {
         FloatingActionButton btnValiderSelection = dialogView.findViewById(R.id.btnValiderSelection);
         FloatingActionButton btnAnnulerSelection = dialogView.findViewById(R.id.btnAnnulerSelection);
         RadioGroup radioGroupDialogSuggestions = dialogView.findViewById(R.id.radioGroupDialogSuggestions);
+        RadioGroup radioGroupDialog2 = dialogView.findViewById(R.id.radioGroupDialog2);
 
         AlertDialog dialog = builder.create();
 
+        final boolean[] isSettingByCode = {false};
+
+        radioGroupDialogSuggestions.setOnCheckedChangeListener((group, checkedId) -> {
+            if (!isSettingByCode[0]) {
+                if (checkedId != -1) {
+                    isSettingByCode[0] = true;
+                    radioGroupDialog2.clearCheck();
+                    isSettingByCode[0] = false;
+                }
+            }
+        });
+
+        radioGroupDialog2.setOnCheckedChangeListener((group, checkedId) -> {
+            if (!isSettingByCode[0]) {
+                if (checkedId != -1) {
+                    isSettingByCode[0] = true;
+                    radioGroupDialogSuggestions.clearCheck();
+                    isSettingByCode[0] = false;
+                }
+            }
+        });
+
         btnAnnulerSelection.setOnClickListener(v -> dialog.dismiss());
         btnValiderSelection.setOnClickListener(v -> {
-            int selectedId = radioGroupDialogSuggestions.getCheckedRadioButtonId();
-            if (selectedId != -1) {
-                RadioButton selectedRadioButton = dialogView.findViewById(selectedId);
+            int selectedIdLeft = radioGroupDialogSuggestions.getCheckedRadioButtonId();
+            int selectedIdRight = radioGroupDialog2.getCheckedRadioButtonId();
+
+            if (selectedIdLeft != -1) {
+                RadioButton selectedRadioButton = dialogView.findViewById(selectedIdLeft);
                 String selectedText = selectedRadioButton.getText().toString();
-                Toast.makeText(this, "Catégorie sélectionnée: " + selectedText, Toast.LENGTH_SHORT).show();
 
                 int i=0;
                 while (!selectedText.equals(tableauJolisTypes[i])) {
@@ -282,6 +311,22 @@ public class SuggestionActivity extends AppCompatActivity {
                 }
                 categorieTitle = tableauTypes[i];
                 fetchNearbyPlaces(latitude, longitude);
+                textTypeTitle.setText(tableauJolisTypes[i] + " autour de vous");
+                updateRecyclerView();
+                openMapsWithPlaces();
+            }
+
+            if (selectedIdRight != -1) {
+                RadioButton selectedRadioButton = dialogView.findViewById(selectedIdRight);
+                String selectedText = selectedRadioButton.getText().toString();
+
+                int i=0;
+                while (!selectedText.equals(tableauJolisTypes[i])) {
+                    i++;
+                }
+                categorieTitle = tableauTypes[i];
+                fetchNearbyPlaces(latitude, longitude);
+                textTypeTitle.setText(tableauJolisTypes[i] + " autour de vous");
                 updateRecyclerView();
                 openMapsWithPlaces();
             }

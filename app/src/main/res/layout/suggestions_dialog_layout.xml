@@ -21,10 +21,10 @@
 
     <RadioGroup
         android:id="@+id/radioGroupDialogSuggestions"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogSelectionTitle">
@@ -35,15 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Restaurant"
-            app:buttonTint="@color/black"/>
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioBtnMagasin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Magasin"
-            app:buttonTint="@color/black"/>
+            app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnEssence"
@@ -51,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Station essence"
-            app:buttonTint="@color/black"/>
+            app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnPharmacie"
@@ -60,7 +52,7 @@
             android:layout_marginStart="8dp"
             android:paddingEnd="15dp"
             android:text="Pharmacie"
-            app:buttonTint="@color/black"/>
+            app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnSupermache"
@@ -68,15 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Supermarché"
-            app:buttonTint="@color/black"/>
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioBtnMusee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Musée"
-            app:buttonTint="@color/black"/>
+            app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnBoulangerie"
@@ -84,7 +68,34 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Boulangerie"
-            app:buttonTint="@color/black"/>
+            app:buttonTint="@color/black" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupDialog2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline26"
+        app:layout_constraintTop_toBottomOf="@+id/dialogSelectionTitle">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioBtnMagasin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Magasin"
+            app:buttonTint="@color/black" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioBtnMusee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Musée"
+            app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnCinema"
@@ -92,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Cinéma"
-            app:buttonTint="@color/black"/>
+            app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnParc"
@@ -100,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Parc"
-            app:buttonTint="@color/black"/>
+            app:buttonTint="@color/black" />
 
     </RadioGroup>
 
@@ -109,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#93EA73"
         android:contentDescription="@string/txt_bouton_de_validation"
         app:elevation="0dp"
@@ -127,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#DC2F2F"
         android:contentDescription="@string/txt_bouton_d_annulation"
         app:elevation="0dp"

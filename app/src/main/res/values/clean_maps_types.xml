@@ -3,7 +3,7 @@
     <string-array name="tableauJolisTypesGMaps">
         <item>Restaurant</item>
         <item>Magasin</item>
-        <item>Station-service</item>
+        <item>Station essence</item>
         <item>Pharmacie</item>
         <item>Supermarché</item>
         <item>Concessionnaire automobile</item>
