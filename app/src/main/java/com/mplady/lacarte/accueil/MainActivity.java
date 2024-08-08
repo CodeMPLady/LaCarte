@@ -1,6 +1,7 @@
 package com.mplady.lacarte.accueil;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
     private MaterialSwitch switchDarkMode1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,17 +191,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setDarkMode() {
-        int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
-        switchDarkMode1.setChecked(nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn",false);
+
+        if (isDarkModeOn)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        switchDarkMode1.setChecked(isDarkModeOn);
 
         switchDarkMode1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 Toast.makeText(MainActivity.this, "Dark Mode Activé", Toast.LENGTH_SHORT).show();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor.putBoolean("isDarkModeOn", true);
+
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 Toast.makeText(MainActivity.this, "Dark Mode Désactivé", Toast.LENGTH_SHORT).show();
+                editor.putBoolean("isDarkModeOn", false);
+
             }
+            editor.apply();
+            System.out.println("isDarkModeOn : " + isDarkModeOn);
         });
     }
 
@@ -208,7 +225,6 @@ public class MainActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         searchIcon = findViewById(R.id.searchIcon);
         fabFavoris = findViewById(R.id.fabFavoris);
-        //fabStat = findViewById(R.id.fabStat);
         fabAbout = findViewById(R.id.fabAbout);
         searchCardView = findViewById(R.id.searchCardView);
         switchDarkMode1 = findViewById(R.id.switchDarkMode1);
