@@ -41,12 +41,12 @@
         android:contentDescription="@string/DESC_bouton_propos"
         android:src="@drawable/ic_about"
         app:backgroundTint="#2E355B"
-        app:fabCustomSize="50dp"
+        app:fabCustomSize="45dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:maxImageSize="30dp"
+        app:maxImageSize="32dp"
         app:tint="@color/white" />
 
     <androidx.cardview.widget.CardView
