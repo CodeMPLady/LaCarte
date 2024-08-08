@@ -275,12 +275,19 @@ public class SuggestionActivity extends AppCompatActivity {
                 RadioButton selectedRadioButton = dialogView.findViewById(selectedId);
                 String selectedText = selectedRadioButton.getText().toString();
                 Toast.makeText(this, "Catégorie sélectionnée: " + selectedText, Toast.LENGTH_SHORT).show();
+
+                int i=0;
+                while (!selectedText.equals(tableauJolisTypes[i])) {
+                    i++;
+                }
+                categorieTitle = tableauTypes[i];
+                fetchNearbyPlaces(latitude, longitude);
+                updateRecyclerView();
+                openMapsWithPlaces();
             }
             dialog.dismiss();
         });
-
         dialog.show();
-
     }
 
     void openMapsWithPlaces() {
@@ -336,7 +343,6 @@ public class SuggestionActivity extends AppCompatActivity {
                     System.out.println("Geocoder error: " + e.getMessage());
                 }
             }
-
             LatLngBounds bounds = boundsBuilder.build();
             int padding = 100;
             googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
