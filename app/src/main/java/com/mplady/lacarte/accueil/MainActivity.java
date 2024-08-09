@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean isUserScrolling = false;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
-                        //System.out.println("nom : " + prediction.getFullText(null).toString()  + "type :" + prediction.getTypes());
-                        //TODO: récupérer l'le placeID avec prediction.getPlaceId() et l'envoyer pour simplifié le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();
                 }).addOnFailureListener(exception -> System.out.println("Error fetching predictions: " + exception.getMessage()));
@@ -203,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING) {
                     isUserScrolling = true;
-                    handler.removeCallbacks(runnable); // Arrêter le défilement automatique
+                    handler.removeCallbacks(runnable);
                 }
             }
         });
