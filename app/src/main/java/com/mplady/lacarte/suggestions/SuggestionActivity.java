@@ -58,6 +58,8 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.RangeSlider;
+import com.google.android.material.slider.Slider;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
@@ -120,6 +122,8 @@ public class SuggestionActivity extends AppCompatActivity {
     SupportMapFragment mapFragment;
     private String categorieJolie;
     private FloatingActionButton fermerMap;
+    private int rayonDeRecherche = 500;
+    private Slider sliderRecherche;
 
 
     @Override
@@ -132,10 +136,29 @@ public class SuggestionActivity extends AppCompatActivity {
         setLocaltion();
         setTitle();
         setAdapter();
+        getRadius();
         callBackDatabase();
         getFavoriListInBackground();
         ajouterAuxFavoris();
         openMapsWithPlaces();
+    }
+
+    private void getRadius() {
+
+
+        sliderRecherche.addOnChangeListener((slider, value, fromUser) -> rayonDeRecherche = (int) value);
+
+        sliderRecherche.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull Slider slider) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull Slider slider) {
+                fetchNearbyPlaces(latitude, longitude);
+            }
+        });
     }
 
     private void animatedBackground() {
@@ -175,7 +198,7 @@ public class SuggestionActivity extends AppCompatActivity {
                 Place.Field.TYPES, Place.Field.PHOTO_METADATAS, Place.Field.PRIMARY_TYPE);
 
         LatLng center = new LatLng(latitudeA, longitudeA);
-        CircularBounds circle = CircularBounds.newInstance(center, 1000);
+        CircularBounds circle = CircularBounds.newInstance(center, rayonDeRecherche);
         final List<String> includedTypes = Collections.singletonList(categorieTitle);
 
         final SearchNearbyRequest searchNearbyRequest =
@@ -591,6 +614,7 @@ public class SuggestionActivity extends AppCompatActivity {
         chipTypeLieuSuggestions = findViewById(R.id.chipTypeLieuSuggestions);
         logoChargement = findViewById(R.id.logoChargementS);
         fermerMap = findViewById(R.id.btnFermerMap);
+        sliderRecherche = findViewById(R.id.sliderRecherche);
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);
