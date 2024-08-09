@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedSuggestion = suggestionList.get(position);
             Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
-            System.out.println("sugg :  " + selectedSuggestion);
             intent.putExtra("search_query", selectedSuggestion);
             startActivity(intent);
             searchView.setQuery("", false);

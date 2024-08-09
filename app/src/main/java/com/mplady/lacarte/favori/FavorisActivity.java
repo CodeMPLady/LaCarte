@@ -214,7 +214,6 @@ public class FavorisActivity extends AppCompatActivity {
             filtre();
             dialog.dismiss();
         });
-        System.out.println("FAVORIS FILTRES : " + filteredFavoris);
         btnAnnuler.setOnClickListener(v -> dialog.dismiss());
     }
 

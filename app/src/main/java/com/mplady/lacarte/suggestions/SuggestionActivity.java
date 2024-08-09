@@ -230,7 +230,6 @@ public class SuggestionActivity extends AppCompatActivity {
         if (placesTrouve != null) {
             ArrayList<Favori> places = new ArrayList<>();
             for (Place place : placesTrouve) {
-                System.out.println("placePrimary" + place.getPrimaryType());
                 List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
                 if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                     PhotoMetadata photoMetadata = photoMetadataList.get(0);
@@ -565,7 +564,6 @@ public class SuggestionActivity extends AppCompatActivity {
                         Location location = task.getResult();
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        System.out.println("Latitude: " + latitude + ", Longitude: " + longitude);
                         fetchNearbyPlaces(latitude, longitude);
                     } else {
                         System.out.println("Location not found");

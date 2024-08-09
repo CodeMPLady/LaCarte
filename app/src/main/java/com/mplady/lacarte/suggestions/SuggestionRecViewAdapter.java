@@ -54,8 +54,10 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         String recupCategorieSuggestion = suggestion.getSousCategorie();
 
         i=0;
-        while (!Objects.equals(tableauTypes[i], recupCategorieSuggestion)) {
+        while (!Objects.equals((tableauTypes[i]), recupCategorieSuggestion)) {
             i++;
+            if (i >= 184)
+                break;
         }
         holder.cardSuggestionCategorie.setText(tableauJolisTypes[i]);
 
