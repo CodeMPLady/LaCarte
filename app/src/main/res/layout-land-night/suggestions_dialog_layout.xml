@@ -9,11 +9,12 @@
         android:id="@+id/dialogSelectionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/fira_sans"
         android:text="Autres catégories"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +24,6 @@
         android:id="@+id/radioGroupDialogSuggestions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,42 +33,52 @@
             android:id="@+id/radioBtnRestaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="Restaurant"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnEssence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="Station essence"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnPharmacie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:paddingEnd="15dp"
             android:text="Pharmacie"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnSupermache"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="Supermarché"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnBoulangerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="Boulangerie"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
     </RadioGroup>
 
@@ -76,7 +86,6 @@
         android:id="@+id/radioGroupDialog2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline26"
         app:layout_constraintTop_toBottomOf="@+id/dialogSelectionTitle">
@@ -87,7 +96,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Magasin"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnMusee"
@@ -95,7 +106,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Musée"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnCinema"
@@ -103,7 +116,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Cinéma"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnParc"
@@ -111,7 +126,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Parc"
-            app:buttonTint="@color/black" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
 
     </RadioGroup>
 
@@ -120,32 +137,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#609E4A"
+        android:backgroundTint="#1A420C"
         android:contentDescription="@string/txt_bouton_de_validation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline32"
+        app:layout_constraintEnd_toStartOf="@+id/guideline30"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupDialogSuggestions"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/ic_valider"
-        app:tint="#082506" />
+        app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAnnulerSelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#9E1010"
+        android:backgroundTint="#7A0B0B"
         android:contentDescription="@string/txt_bouton_d_annulation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline32"
+        app:layout_constraintStart_toStartOf="@+id/guideline30"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupDialogSuggestions"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/close24px"
@@ -156,13 +173,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        app:layout_constraintGuide_begin="265dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline32"
+        android:id="@+id/guideline30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="175dp" />
+        app:layout_constraintGuide_begin="236dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
