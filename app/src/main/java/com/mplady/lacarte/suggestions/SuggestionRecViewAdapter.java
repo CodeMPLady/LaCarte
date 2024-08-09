@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,7 +79,7 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         private final ImageView cardSuggestionImage;
         private final TextView cardSuggestionName;
         private final TextView cardSuggestionCategorie;
-        private final FloatingActionButton detailsFAB;
+        private final Button detailsFAB;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

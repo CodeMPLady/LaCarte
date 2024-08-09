@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -77,8 +78,9 @@ import java.util.stream.Collectors;
 
 public class SuggestionActivity extends AppCompatActivity {
 
-    private TextView textTypeTitle;
-    private ExtendedFloatingActionButton selectionFAB, carteDisplay;
+    //private TextView textTypeTitle;
+    private Button textTypeTitle, selectionFAB;
+    private ExtendedFloatingActionButton carteDisplay;
     private RecyclerView selectionRecView;
     private final String[] tableauSelectionCategoriesTitle = {
             "Restaurants",
@@ -104,7 +106,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private TextView txtNomLieuSuggestions, txtAdresseLieuSuggestions;
     private Chip chipTypeLieuSuggestions;
     private FloatingActionButton btnAjouterAuxFavoris;
-    private FloatingActionButton btnFermerSuggestions;
+    private Button btnFermerSuggestions;
     private ExtendedFloatingActionButton btnYAllerSuggestions;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -210,12 +212,12 @@ public class SuggestionActivity extends AppCompatActivity {
                 if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                     PhotoMetadata photoMetadata = photoMetadataList.get(0);
                     FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                            .setMaxWidth(500)
-                            .setMaxHeight(500)
+                            .setMaxWidth(400)
+                            .setMaxHeight(400)
                             .build();
                     placesClientSuggestion.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
                         bitmapClassique = fetchPhotoResponse.getBitmap();
-                        resizedBitmap = Bitmap.createScaledBitmap(bitmapClassique, 500, 500, true);
+                        resizedBitmap = Bitmap.createScaledBitmap(bitmapClassique, 400, 400, true);
                         Favori favori = new Favori(
                                 Objects.requireNonNull(place.getName()),
                                 categorieJolie,

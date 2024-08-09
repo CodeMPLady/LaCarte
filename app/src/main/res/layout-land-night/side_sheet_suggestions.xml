@@ -13,89 +13,95 @@
         style="@style/Widget.Material3.SideSheet.Modal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.sidesheet.SideSheetBehavior"
-        android:background="#1e223c">
+        android:background="#040A2C"
+        app:layout_behavior="com.google.android.material.sidesheet.SideSheetBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_drawer_favoris_night"
+            android:background="@drawable/gradient_drawer_favoris_landnight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imgLieuDetailsSuggestions"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:contentDescription="Image du lieu"
-                android:src="@drawable/imgmapsdefaultresized"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.69"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.57" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnAjouterAuxFavoris"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:contentDescription="Bouton suppression favori"
-                app:backgroundTint="#ACACAC"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:maxImageSize="33dp"
-                app:srcCompat="@drawable/bookmarkempty"
-                app:tint="#C10E0E" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgLieuDetailsSuggestions"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="Image du lieu"
+                    android:src="@drawable/imgmapsdefaultresized"/>
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <Button
             android:id="@+id/btnFermerSuggestions"
+            style="?attr/materialIconButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="Bouton de fermeture du drawer"
-            android:src="@drawable/close24px"
-            app:backgroundTint="#707AAC"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:icon="@drawable/close24px"
+            app:iconSize="24sp"
+            app:iconTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
 
         <TextView
             android:id="@+id/txtNomLieuSuggestions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="70dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/fira_sans"
             android:text="Nom du lieu"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            app:dividerColor="#C5C5C5"
+            app:dividerThickness="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtAdresseLieuSuggestions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@+id/txtNomLieuSuggestions" />
 
         <TextView
             android:id="@+id/txtAdresseLieuSuggestions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
             android:text="Adresse"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toBottomOf="@+id/txtNomLieuSuggestions" />
@@ -105,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="#353C6A"
+            android:backgroundTint="#272E53"
             android:text="Catégorie du lieu"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -120,31 +126,44 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#494F71"
+            android:backgroundTint="#364073"
             android:contentDescription="@string/bouton_y_aller"
             android:maxWidth="320dp"
             android:text="@string/s_y_rendre"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:icon="@drawable/iconnav"
-            app:iconSize="20dp"
+            app:iconSize="24dp"
             app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnAjouterAuxFavoris"
             app:layout_constraintStart_toStartOf="@+id/guideline16" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAjouterAuxFavoris"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:contentDescription="Bouton suppression favori"
+            app:backgroundTint="#272E53"
+            app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions"
+            app:maxImageSize="32dp"
+            app:srcCompat="@drawable/bookmarkempty"
+            app:tint="@color/white" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="385dp" />
+            app:layout_constraintGuide_begin="330dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.cardview.widget.CardView>
