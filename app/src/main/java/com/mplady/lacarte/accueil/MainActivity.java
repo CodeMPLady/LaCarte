@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
     private MaterialSwitch switchDarkMode1;
+    private boolean isUserScrolling = false;
+
 
 
     @Override
@@ -167,13 +170,45 @@ public class MainActivity extends AppCompatActivity {
         ImageAdapterCarousel adapter = getImageAdapterCarousel();
         recyclerViewCarousel.setAdapter(adapter);
 
-        int totalItems = adapter.getItemCount();
-        int middlePosition = (totalItems / 2) ;
-        recyclerViewCarousel.scrollToPosition(middlePosition);
-        recyclerViewCarousel.post(() -> recyclerViewCarousel.smoothScrollToPosition(middlePosition));
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            int scrollAmount = 2;
+            int currentOffset = 0;
+            boolean isScrollingForward = true;
+
+            @Override
+            public void run() {
+                currentOffset += scrollAmount;
+                recyclerViewCarousel.scrollBy(scrollAmount, 0);
+
+                if (!isUserScrolling) {
+                    if (currentOffset >= (recyclerViewCarousel.computeHorizontalScrollRange() - recyclerViewCarousel.getWidth()) + 1800) {
+                        isScrollingForward = false;
+                        scrollAmount = -scrollAmount;
+                    }
+                } else {
+                    if (currentOffset <= 0) {
+                        isScrollingForward = true;
+                        scrollAmount = -scrollAmount;
+                    }
+                }
+                handler.postDelayed(this, 5);
+            }
+        };
+        handler.postDelayed(runnable, 5);
+
+        recyclerViewCarousel.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING) {
+                    isUserScrolling = true;
+                    handler.removeCallbacks(runnable); // Arrêter le défilement automatique
+                }
+            }
+        });
     }
 
-    //TODO: ajouter les images boulangerie, cinéma, musée et parc dans le carousel
     @NonNull
     private ImageAdapterCarousel getImageAdapterCarousel() {
         int[] imageRessourceIDs = {
@@ -181,10 +216,10 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.iconemagasin,
                 R.drawable.iconecarburant,
                 R.drawable.iconepharmacie,
-                R.drawable.iconesupermache,
+                R.drawable.iconesupermarche,
+                R.drawable.iconeboulangerie,
                 R.drawable.iconemusee,
                 R.drawable.iconeparc,
-                R.drawable.iconeboulangerie,
                 R.drawable.iconecinema,
         };
 
