@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,8 +55,7 @@ public class FavorisActivity extends AppCompatActivity {
     private ImageView imgLieuDetails;
     private TextView txtNomLieu, txtAdresseLieu;
     private Chip chipTypeLieu;
-    private FloatingActionButton btnFermer;
-    private FloatingActionButton btnSupprimerFavori;
+    private Button btnFermer, btnSupprimerFavori;
     private ExtendedFloatingActionButton btnYAllerFavori;
 
     private ViewGroup mainContent;

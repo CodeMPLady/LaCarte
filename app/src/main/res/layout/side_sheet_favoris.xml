@@ -39,45 +39,53 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <Button
                 android:id="@+id/btnSupprimerFavori"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:contentDescription="Bouton suppression favori"
-                app:backgroundTint="@color/white"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:iconSize="28sp"
+                style="?attr/materialIconButtonFilledStyle"
+                app:icon="@drawable/deleteicon"
+                android:backgroundTint="#980C0C"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:maxImageSize="33dp"
-                app:srcCompat="@drawable/deleteicon"
-                app:tint="#C10E0E" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <Button
                 android:id="@+id/btnFermer"
+                style="?attr/materialIconButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:contentDescription="Bouton fermer drawer"
-                android:src="@drawable/close24px"
-                app:backgroundTint="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:icon="@drawable/close24px"
+                app:iconTint="#9C0000"
+                app:iconSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black" />
+                app:strokeColor="#9C0000"
+                app:strokeWidth="2dp" />
 
-            <ImageView
-                android:id="@+id/imgLieuDetails"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:contentDescription="Image du lieu"
-                android:src="@drawable/imgmapsdefaultresized"
+                app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgLieuDetails"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="Image du lieu"
+                    android:src="@drawable/imgmapsdefaultresized" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="415dp" />
+            app:layout_constraintGuide_begin="390dp" />
 
         <TextView
             android:id="@+id/txtNomLieu"
@@ -106,12 +114,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            app:dividerColor="#C5C5C5"
+            app:dividerThickness="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtAdresseLieu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtNomLieu" />
+
         <TextView
             android:id="@+id/txtAdresseLieu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/fira_sans"
             android:text="Adresse"
@@ -121,41 +142,43 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNomLieu"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtNomLieu" />
 
         <com.google.android.material.chip.Chip
-                android:id="@+id/chipTypeLieu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="#E6E6E6"
-                android:text="Catégorie du lieu"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:chipStrokeColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/btnYAllerFavori"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/chipTypeLieu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="#E6E6E6"
+            android:text="Catégorie du lieu"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:chipStrokeColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/btnYAllerFavori"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnYAllerFavori"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#E6E6E6"
+            android:backgroundTint="@color/white"
             android:contentDescription="@string/bouton_y_aller"
             android:maxWidth="320dp"
             android:text="@string/s_y_rendre"
             android:textColor="@color/black"
-            android:textSize="28sp"
+            android:textSize="20sp"
             app:icon="@drawable/iconnav"
-            app:iconSize="28dp"
+            app:iconSize="24dp"
             app:iconTint="@color/black"
+            app:strokeColor="#00026E"
+            app:strokeWidth="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
