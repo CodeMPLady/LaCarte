@@ -166,6 +166,11 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerViewCarousel = findViewById(R.id.recyclerCarousel);
         ImageAdapterCarousel adapter = getImageAdapterCarousel();
         recyclerViewCarousel.setAdapter(adapter);
+
+        int totalItems = adapter.getItemCount();
+        int middlePosition = (totalItems / 2) ;
+        recyclerViewCarousel.scrollToPosition(middlePosition);
+        recyclerViewCarousel.post(() -> recyclerViewCarousel.smoothScrollToPosition(middlePosition));
     }
 
     //TODO: ajouter les images boulangerie, cinéma, musée et parc dans le carousel
@@ -173,11 +178,16 @@ public class MainActivity extends AppCompatActivity {
     private ImageAdapterCarousel getImageAdapterCarousel() {
         int[] imageRessourceIDs = {
                 R.drawable.iconerestaurant,
-                R.drawable.iconemode,
+                R.drawable.iconemagasin,
                 R.drawable.iconecarburant,
                 R.drawable.iconepharmacie,
-                R.drawable.iconesupermache
+                R.drawable.iconesupermache,
+                R.drawable.iconemusee,
+                R.drawable.iconeparc,
+                R.drawable.iconeboulangerie,
+                R.drawable.iconecinema,
         };
+
         return new ImageAdapterCarousel(this, imageRessourceIDs);
     }
 

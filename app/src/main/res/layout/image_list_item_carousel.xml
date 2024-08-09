@@ -3,9 +3,9 @@
     android:layout_width="130dp"
     android:layout_height="160dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="0sp"
-    android:layout_marginEnd="9sp"
-    android:elevation="4dp"
+    android:layout_marginStart="5sp"
+    android:layout_marginEnd="0sp"
+    android:elevation="10dp"
     android:foreground="?attr/selectableItemBackground"
     app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
@@ -17,7 +17,6 @@
         android:scaleType="centerInside"
         android:id="@+id/list_item_image_carousel"
         android:background="@color/white"
-        android:layout_marginEnd="9sp"
         android:padding="15dp"/>
 
 </com.google.android.material.carousel.MaskableFrameLayout>
