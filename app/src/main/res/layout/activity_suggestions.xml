@@ -41,37 +41,6 @@
             app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
             app:layout_constraintTop_toBottomOf="@+id/sliderRecherche" />
 
-        <ImageView
-            android:id="@+id/logoChargementS"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
-            android:src="@mipmap/logo2fondblanc"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <Button
-            android:id="@+id/textTypeTitle"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:backgroundTint="#4158AC"
-            android:elevation="20dp"
-            android:text="Type de lieu autour de vous"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-            app:strokeColor="@color/darkblue" />
-
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/mapFAB"
             android:layout_width="150dp"
@@ -104,6 +73,40 @@
             app:layout_constraintStart_toStartOf="@+id/guideline36"
             app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
             app:strokeColor="@color/black" />
+
+
+
+        <ImageView
+            android:id="@+id/logoChargementS"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:src="@mipmap/logo2fondblanc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <Button
+            android:id="@+id/textTypeTitle"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="#4158AC"
+            android:elevation="20dp"
+            android:text="Type de lieu autour de vous"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+            app:strokeColor="@color/darkblue" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectionRecView"

@@ -72,20 +72,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintWidth_max="300dp" />
 
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabStat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/DESC_bouton_stats"
-        android:src="@drawable/ic_stats"
-        app:backgroundTint="@color/white"
-        app:fabCustomSize="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:maxImageSize="35dp"
-        app:tint="@color/black" />-->
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAbout"
         android:layout_width="wrap_content"

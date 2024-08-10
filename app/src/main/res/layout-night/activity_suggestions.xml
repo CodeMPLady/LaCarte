@@ -12,6 +12,68 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderRecherche"
+            android:layout_width="229dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="8dp"
+            android:stepSize="100.0"
+            android:value="1000.0"
+            android:valueFrom="100.0"
+            android:valueTo="5000.0"
+            app:labelBehavior="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapFAB"
+            app:thumbColor="#490000"
+            app:tickColor="#D0C0C0"
+            app:tickVisible="false"
+            app:trackColorActive="#950000"
+            app:trackColorInactive="#F8D8D8" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rayon de recherche (mètres)"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/sliderRecherche"
+            app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
+            app:layout_constraintTop_toBottomOf="@+id/sliderRecherche" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/mapFAB"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#1F406A"
+            android:text="CARTE"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:icon="@drawable/iconglobe"
+            app:iconSize="30dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/guideline37"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
+            app:strokeColor="#5A5A5A"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/selectionFiltresFAB"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#1F406A"
+            android:text="Catégories"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline37"
+            app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
+            app:strokeColor="@color/black" />
+
         <ImageView
             android:id="@+id/logoChargementS"
             android:layout_width="115dp"
@@ -43,51 +105,26 @@
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="#010630" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/mapFAB"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="24dp"
-            android:backgroundTint="#02082C"
-            android:text="CARTE"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:icon="@drawable/iconglobe"
-            app:iconSize="30dp"
-            app:iconTint="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/selectionFiltresFAB"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
-            app:strokeColor="#AAAAAA"
-            app:strokeWidth="1dp" />
 
-        <Button
-            android:id="@+id/selectionFiltresFAB"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="48dp"
-            android:text="Catégories"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/mapFAB"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
-            app:strokeColor="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectionRecView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectionFiltresFAB" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="205dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
