@@ -35,14 +35,15 @@
 
         <TextView
             android:id="@+id/txtName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_below="@+id/imgLieu"
-            android:layout_marginTop="16dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:fontFamily="@font/carme"
             android:text="Nom"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:layout_centerHorizontal="true"
             android:textSize="16sp"

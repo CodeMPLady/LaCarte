@@ -100,6 +100,28 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="731dp" />
 
+        <Button
+            android:id="@+id/textNoFavoris"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"
+            android:backgroundTint="#DFDEDE"
+            android:fontFamily="@font/carme"
+            android:text="Aucun favori \npour le moment"
+            android:textColor="@color/darkblue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/favorisRecView"
+            app:layout_constraintEnd_toEndOf="@+id/favorisRecView"
+            app:layout_constraintStart_toStartOf="@+id/favorisRecView"
+            app:layout_constraintTop_toTopOf="@+id/favorisRecView"
+            app:layout_constraintVertical_bias="0.42000002"
+            app:strokeColor="@color/darkblue" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

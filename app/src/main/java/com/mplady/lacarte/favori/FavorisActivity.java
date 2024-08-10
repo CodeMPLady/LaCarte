@@ -55,7 +55,7 @@ public class FavorisActivity extends AppCompatActivity {
     private ImageView imgLieuDetails;
     private TextView txtNomLieu, txtAdresseLieu;
     private Chip chipTypeLieu;
-    private Button btnFermer, btnSupprimerFavori;
+    private Button btnFermer, btnSupprimerFavori, textNoFavoris;
     private ExtendedFloatingActionButton btnYAllerFavori;
 
     private ViewGroup mainContent;
@@ -70,6 +70,11 @@ public class FavorisActivity extends AppCompatActivity {
         setupLayoutManager();
         callBackDatabase();
         getFavoriListInBackground();
+
+        if (favoris.isEmpty())
+            textNoFavoris.setVisibility(View.VISIBLE);
+        else
+            textNoFavoris.setVisibility(View.GONE);
     }
 
     private void initView() {
@@ -81,6 +86,7 @@ public class FavorisActivity extends AppCompatActivity {
         txtNomLieu = findViewById(R.id.txtNomLieu);
         txtAdresseLieu = findViewById(R.id.txtAdresseLieu);
         chipTypeLieu = findViewById(R.id.chipTypeLieu);
+        textNoFavoris = findViewById(R.id.textNoFavoris);
 
         mainContent = findViewById(R.id.mainFrame);
 
@@ -225,7 +231,14 @@ public class FavorisActivity extends AppCompatActivity {
                 favoris.clear();
                 favoris.addAll(favorisDB.getFavoriDAO().getAllFavoris());
                 preFilteredFavoris = new ArrayList<>(favoris);
-                handler.post(() -> adapter.setFavoris(favoris));
+                handler.post(() -> {
+                    adapter.setFavoris(favoris);
+                    if (favoris.isEmpty())
+                        textNoFavoris.setVisibility(View.VISIBLE);
+                    else
+                        textNoFavoris.setVisibility(View.GONE);
+                });
+
             } catch (Exception e) {
                 handler.post(() -> Toast.makeText(FavorisActivity.this, "Erreur lors de la récupération des favoris", Toast.LENGTH_SHORT).show());
             } finally {
@@ -255,20 +268,35 @@ public class FavorisActivity extends AppCompatActivity {
 
     private void filtre() {
         filteredFavoris.clear();
-        for (Favori fav : preFilteredFavoris) {
-            String categorie = fav.getCategorie();
-            if ((filter[0] && "Restaurant".equals(categorie)) ||
-                    (filter[1] && "Station essence".equals(categorie)) ||
-                    (filter[2] && "Supermarché".equals(categorie)) ||
-                    (filter[3] && "Pharmacie".equals(categorie)) ||
-                    (filter[4] && "Magasin".equals(categorie)) ||
-                    (filter[5] && "Cinéma".equals(categorie)) ||
-                    (filter[6] && "Parc".equals(categorie)) ||
-                    (filter[7] && "Boulangerie".equals(categorie)) ||
-                    (filter[8] && "Musée".equals(categorie))) {
-                filteredFavoris.add(fav);
+
+        boolean isAnyFilterChecked = false;
+
+        for (int i = 0; i < filter.length - 1; i++) {
+            if (filter[i]) {
+                isAnyFilterChecked = true;
+                break;
             }
         }
+
+        if (isAnyFilterChecked) {
+            for (Favori fav : preFilteredFavoris) {
+                String categorie = fav.getCategorie();
+                if ((filter[0] && "Restaurant".equals(categorie)) ||
+                        (filter[1] && "Station essence".equals(categorie)) ||
+                        (filter[2] && "Supermarché".equals(categorie)) ||
+                        (filter[3] && "Pharmacie".equals(categorie)) ||
+                        (filter[4] && "Magasin".equals(categorie)) ||
+                        (filter[5] && "Cinéma".equals(categorie)) ||
+                        (filter[6] && "Parc".equals(categorie)) ||
+                        (filter[7] && "Boulangerie".equals(categorie)) ||
+                        (filter[8] && "Musée".equals(categorie))) {
+                    filteredFavoris.add(fav);
+                }
+            }
+        } else {
+            filteredFavoris.addAll(preFilteredFavoris);
+        }
+
         if (filter[9])
             recreate();
         adapter.updateFavoris(filteredFavoris);
