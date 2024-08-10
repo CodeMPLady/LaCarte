@@ -55,7 +55,7 @@ public class FavorisActivity extends AppCompatActivity {
     private ImageView imgLieuDetails;
     private TextView txtNomLieu, txtAdresseLieu;
     private Chip chipTypeLieu;
-    private Button btnFermer, btnSupprimerFavori;
+    private Button btnFermer, btnSupprimerFavori, textNoFavoris;
     private ExtendedFloatingActionButton btnYAllerFavori;
 
     private ViewGroup mainContent;
@@ -70,6 +70,11 @@ public class FavorisActivity extends AppCompatActivity {
         setupLayoutManager();
         callBackDatabase();
         getFavoriListInBackground();
+
+        if (favoris.isEmpty())
+            textNoFavoris.setVisibility(View.VISIBLE);
+        else
+            textNoFavoris.setVisibility(View.GONE);
     }
 
     private void initView() {
@@ -81,6 +86,7 @@ public class FavorisActivity extends AppCompatActivity {
         txtNomLieu = findViewById(R.id.txtNomLieu);
         txtAdresseLieu = findViewById(R.id.txtAdresseLieu);
         chipTypeLieu = findViewById(R.id.chipTypeLieu);
+        textNoFavoris = findViewById(R.id.textNoFavoris);
 
         mainContent = findViewById(R.id.mainFrame);
 
@@ -225,7 +231,14 @@ public class FavorisActivity extends AppCompatActivity {
                 favoris.clear();
                 favoris.addAll(favorisDB.getFavoriDAO().getAllFavoris());
                 preFilteredFavoris = new ArrayList<>(favoris);
-                handler.post(() -> adapter.setFavoris(favoris));
+                handler.post(() -> {
+                    adapter.setFavoris(favoris);
+                    if (favoris.isEmpty())
+                        textNoFavoris.setVisibility(View.VISIBLE);
+                    else
+                        textNoFavoris.setVisibility(View.GONE);
+                });
+
             } catch (Exception e) {
                 handler.post(() -> Toast.makeText(FavorisActivity.this, "Erreur lors de la récupération des favoris", Toast.LENGTH_SHORT).show());
             } finally {
