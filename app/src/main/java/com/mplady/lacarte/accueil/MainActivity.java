@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     private PlacesClient placesClient;
     private MaterialSwitch switchDarkMode1;
     private boolean isUserScrolling = false;
+    Handler handler;
+    Runnable runnable;
+
 
 
     @Override
@@ -69,6 +72,20 @@ public class MainActivity extends AppCompatActivity {
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(MainActivity.this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (handler != null) {
+            handler.removeCallbacks(runnable);
+        }
     }
 
     private void btnOnClicks() {
@@ -166,8 +183,8 @@ public class MainActivity extends AppCompatActivity {
         ImageAdapterCarousel adapter = getImageAdapterCarousel();
         recyclerViewCarousel.setAdapter(adapter);
 
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
+        handler = new Handler();
+        runnable = new Runnable() {
             int scrollAmount = 2;
             int currentOffset = 0;
             boolean isScrollingForward = true;
@@ -277,4 +294,6 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
     }
+
+
 }
