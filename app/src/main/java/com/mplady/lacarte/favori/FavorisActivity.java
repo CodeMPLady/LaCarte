@@ -268,20 +268,35 @@ public class FavorisActivity extends AppCompatActivity {
 
     private void filtre() {
         filteredFavoris.clear();
-        for (Favori fav : preFilteredFavoris) {
-            String categorie = fav.getCategorie();
-            if ((filter[0] && "Restaurant".equals(categorie)) ||
-                    (filter[1] && "Station essence".equals(categorie)) ||
-                    (filter[2] && "Supermarché".equals(categorie)) ||
-                    (filter[3] && "Pharmacie".equals(categorie)) ||
-                    (filter[4] && "Magasin".equals(categorie)) ||
-                    (filter[5] && "Cinéma".equals(categorie)) ||
-                    (filter[6] && "Parc".equals(categorie)) ||
-                    (filter[7] && "Boulangerie".equals(categorie)) ||
-                    (filter[8] && "Musée".equals(categorie))) {
-                filteredFavoris.add(fav);
+
+        boolean isAnyFilterChecked = false;
+
+        for (int i = 0; i < filter.length - 1; i++) {
+            if (filter[i]) {
+                isAnyFilterChecked = true;
+                break;
             }
         }
+
+        if (isAnyFilterChecked) {
+            for (Favori fav : preFilteredFavoris) {
+                String categorie = fav.getCategorie();
+                if ((filter[0] && "Restaurant".equals(categorie)) ||
+                        (filter[1] && "Station essence".equals(categorie)) ||
+                        (filter[2] && "Supermarché".equals(categorie)) ||
+                        (filter[3] && "Pharmacie".equals(categorie)) ||
+                        (filter[4] && "Magasin".equals(categorie)) ||
+                        (filter[5] && "Cinéma".equals(categorie)) ||
+                        (filter[6] && "Parc".equals(categorie)) ||
+                        (filter[7] && "Boulangerie".equals(categorie)) ||
+                        (filter[8] && "Musée".equals(categorie))) {
+                    filteredFavoris.add(fav);
+                }
+            }
+        } else {
+            filteredFavoris.addAll(preFilteredFavoris);
+        }
+
         if (filter[9])
             recreate();
         adapter.updateFavoris(filteredFavoris);
