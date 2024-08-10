@@ -58,7 +58,6 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
@@ -90,9 +89,9 @@ public class SuggestionActivity extends AppCompatActivity {
             "Stations essence",
             "Pharmacies",
             "Supermarchés",
+            "Boulangerie",
+            "Musee",
             "Parcs",
-            "Boulangeries",
-            "Musées",
             "Cinémas"
     };
     private String[] tableauTypes;
@@ -144,14 +143,11 @@ public class SuggestionActivity extends AppCompatActivity {
     }
 
     private void getRadius() {
-
-
         sliderRecherche.addOnChangeListener((slider, value, fromUser) -> rayonDeRecherche = (int) value);
 
         sliderRecherche.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
             @Override
             public void onStartTrackingTouch(@NonNull Slider slider) {
-
             }
 
             @Override
@@ -200,6 +196,8 @@ public class SuggestionActivity extends AppCompatActivity {
         LatLng center = new LatLng(latitudeA, longitudeA);
         CircularBounds circle = CircularBounds.newInstance(center, rayonDeRecherche);
         final List<String> includedTypes = Collections.singletonList(categorieTitle);
+
+        System.out.println("cat :" + categorieTitle);
 
         final SearchNearbyRequest searchNearbyRequest =
                 SearchNearbyRequest.builder(circle, placeFields)
