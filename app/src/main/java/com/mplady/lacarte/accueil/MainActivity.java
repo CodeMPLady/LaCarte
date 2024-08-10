@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder aboutBuilder() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("A propos de La Carte");
-        builder.setMessage("La Carte vous permet de chercher des lieux, d'accéder à une liste en fonction de leur catégorie et de votre position et de les mettre dans vos favoris afin d'y retourner facilement.\n\n" +
+        builder.setMessage("La Carte vous permet de chercher des lieux et de les ajouter à vos favoris. Elle permet aussi de voir quels sont les endroits situés autour de vous selon une catégorie spécifique.\n\n" +
                 "Cette application a été développée par Michel P. et Naémie C.\n\n" + "Nous avons également développé un site de cuisine.");
         return builder;
     }
