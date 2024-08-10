@@ -63,6 +63,7 @@
         android:textSize="22sp"
         app:elevation="5dp"
         app:icon="@drawable/ic_favoris"
+        android:textColor="@color/black"
         app:iconPadding="-20dp"
         app:iconSize="30dp"
         app:iconTint="@color/black"
