@@ -432,6 +432,7 @@ public class SuggestionActivity extends AppCompatActivity {
 
     private void chargement() {
         Animation animationChargement = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        logoChargement.bringToFront();
         logoChargement.startAnimation(animationChargement);
         animationChargement.setAnimationListener(new Animation.AnimationListener() {
             @Override
