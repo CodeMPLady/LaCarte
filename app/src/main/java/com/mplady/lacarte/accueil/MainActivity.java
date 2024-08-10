@@ -263,13 +263,13 @@ public class MainActivity extends AppCompatActivity {
 
         switchDarkMode1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                Toast.makeText(MainActivity.this, "Dark Mode Activé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Mode sombre activé", Toast.LENGTH_SHORT).show();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 editor.putBoolean("isDarkModeOn", true);
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                Toast.makeText(MainActivity.this, "Dark Mode Désactivé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Mode sombre désactivé", Toast.LENGTH_SHORT).show();
                 editor.putBoolean("isDarkModeOn", false);
 
             }
