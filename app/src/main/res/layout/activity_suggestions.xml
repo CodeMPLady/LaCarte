@@ -75,7 +75,6 @@
             app:strokeColor="@color/black" />
 
 
-
         <ImageView
             android:id="@+id/logoChargementS"
             android:layout_width="115dp"
@@ -85,7 +84,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"/>
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/textTypeTitle"
@@ -111,10 +110,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectionRecView"
             android:layout_width="match_parent"
-            android:layout_height="733dp"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:layout_editor_absoluteX="0dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline36"
