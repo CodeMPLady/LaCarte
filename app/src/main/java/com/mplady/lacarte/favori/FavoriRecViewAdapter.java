@@ -17,10 +17,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.google.android.material.divider.MaterialDivider;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.R;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -49,7 +51,19 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
         Favori favori = favoris.get(position);
         holder.txtName.setText(favori.getNom());
-        holder.txtDescription.setText(favori.getCategorie());
+        String recupCategorieFavoris = favori.getCategorie();
+        holder.txtDescription.setText(recupCategorieFavoris);
+        System.out.println("TYPE : " + recupCategorieFavoris);
+
+        if (Objects.equals(recupCategorieFavoris, "")) {
+            holder.dividerItemFavori.setVisibility(View.GONE);
+            holder.txtDescription.setVisibility(View.GONE);
+        } else {
+            holder.txtDescription.setVisibility(View.VISIBLE);
+            holder.txtDescription.setText(recupCategorieFavoris);
+            holder.dividerItemFavori.setVisibility(View.VISIBLE);
+        }
+
         if (favori.getBitmap() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
             holder.imgLieu.setImageBitmap(bitmap);
@@ -106,12 +120,14 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
 
         private final TextView txtName, txtDescription;
         private final ImageView imgLieu;
+        private final MaterialDivider dividerItemFavori;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             imgLieu = itemView.findViewById(R.id.imgLieu);
+            dividerItemFavori = itemView.findViewById(R.id.dividerItemFavori);
         }
     }
 }
