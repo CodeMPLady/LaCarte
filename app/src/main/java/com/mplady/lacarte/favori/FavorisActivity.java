@@ -40,6 +40,7 @@ import com.mplady.lacarte.R;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -111,8 +112,16 @@ public class FavorisActivity extends AppCompatActivity {
     void openDrawer(Favori favori) {
         drawerLayout.openDrawer(GravityCompat.END);
         txtNomLieu.setText(favori.getNom());
-        chipTypeLieu.setText(favori.getCategorie());
         txtAdresseLieu.setText(favori.getAdresse());
+
+        String recupCategorieFavoriDrawer = favori.getCategorie();
+
+        if (Objects.equals(recupCategorieFavoriDrawer, "")) {
+            chipTypeLieu.setVisibility(View.GONE);
+        } else {
+            chipTypeLieu.setVisibility(View.VISIBLE);
+            chipTypeLieu.setText(recupCategorieFavoriDrawer);
+        }
 
         if (favori.getBitmap() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
@@ -266,9 +275,7 @@ public class FavorisActivity extends AppCompatActivity {
 
     private void filtre() {
         filteredFavoris.clear();
-
         boolean isAnyFilterChecked = false;
-
         for (int i = 0; i < filter.length - 1; i++) {
             if (filter[i]) {
                 isAnyFilterChecked = true;
@@ -294,7 +301,6 @@ public class FavorisActivity extends AppCompatActivity {
         } else {
             filteredFavoris.addAll(preFilteredFavoris);
         }
-
         if (filter[9])
             recreate();
         adapter.updateFavoris(filteredFavoris);
