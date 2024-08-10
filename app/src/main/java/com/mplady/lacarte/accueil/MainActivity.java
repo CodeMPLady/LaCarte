@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("search_query", query);
                 startActivity(intent);
                 searchView.clearFocus();
-                recreate();
                 return false;
             }
 
@@ -249,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setDarkMode() {
-
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn",false);

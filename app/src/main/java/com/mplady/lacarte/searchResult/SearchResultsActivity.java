@@ -107,10 +107,9 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search_results);
-        setView();
+        initView();
         callBackDatabase();
         getFavoriListInBackground();
-        initView();
         chargement();
         initMap();
         setFields(query);
@@ -168,7 +167,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                     suggestionList.clear();
                     for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                         suggestionList.add(prediction.getFullText(null).toString());
-                        //TODO: récupérer le placeID avec prediction.getPlaceId() et l'envoyer pour simplifier le code de SearchResultsActivity
                     }
                     adapter.notifyDataSetChanged();
                 }).addOnFailureListener(exception -> System.out.println("Error fetching predictions: " + exception.getMessage()));
@@ -392,6 +390,10 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void initView() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
+        decorView.setSystemUiVisibility(uiOptions);
+
         ExtendedFloatingActionButton btnYAller = findViewById(R.id.btnYAller);
         nomLieuSearch = findViewById(R.id.nomLieuSearch);
         adresseLieuSearch = findViewById(R.id.adresseLieuSearch);
@@ -410,12 +412,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientResults = Places.createClient(SearchResultsActivity.this);
-    }
-
-    private void setView() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
-        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override

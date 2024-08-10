@@ -57,9 +57,7 @@ public class FavorisActivity extends AppCompatActivity {
     private Chip chipTypeLieu;
     private Button btnFermer, btnSupprimerFavori, textNoFavoris;
     private ExtendedFloatingActionButton btnYAllerFavori;
-
     private ViewGroup mainContent;
-
     FavorisDB favorisDB;
 
     @Override
