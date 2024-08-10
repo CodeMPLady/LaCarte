@@ -208,10 +208,10 @@ public class SuggestionActivity extends AppCompatActivity {
 
         placesClientSuggestion.searchNearby(searchNearbyRequest)
                 .addOnSuccessListener(response -> {
-                    placesTrouve = response.getPlaces().stream()
-                            .filter(place -> Optional.ofNullable(place.getPrimaryType()).map(pt -> pt.contains(categorieTitle)).orElse(false))
-                            .collect(Collectors.toList());
-                    updateRecyclerView();
+                        placesTrouve = response.getPlaces().stream()
+                                .filter(place -> Optional.ofNullable(place.getPrimaryType()).map(pt -> pt.contains(categorieTitle)).orElse(false))
+                                .collect(Collectors.toList());
+                        updateRecyclerView();
                 })
                 .addOnFailureListener(response -> System.out.println("Erreur :" + response));
     }
@@ -225,7 +225,10 @@ public class SuggestionActivity extends AppCompatActivity {
     }
 
     private void updateRecyclerView() {
-        if (placesTrouve != null) {
+        if (placesTrouve.isEmpty()) {
+            ArrayList<Favori> placesVide = new ArrayList<>();
+            adapter.setSuggestions(placesVide);
+        } else {
             ArrayList<Favori> places = new ArrayList<>();
             for (Place place : placesTrouve) {
                 List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
