@@ -26,6 +26,7 @@
         android:id="@+id/logoChargement"
         android:layout_width="115dp"
         android:layout_height="115dp"
+        android:contentDescription="@string/logo_chargement"
         android:src="@mipmap/logo2fondblanc"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,14 +38,17 @@
     <ListView
         android:id="@+id/suggestionsListViewResults"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/white"
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
         android:maxHeight="250dp"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintBottom_toBottomOf="@+id/logoChargement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
 
     <androidx.appcompat.widget.SearchView
@@ -58,22 +62,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="400dp"
+        android:maxHeight="400dp"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
         app:cardElevation="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline18"
+        app:layout_constraintEnd_toStartOf="@+id/guideline25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adresseLieuSearch"
-        app:layout_constraintVertical_bias="0.37">
+        app:layout_constraintTop_toBottomOf="@+id/adresseLieuSearch">
 
         <ImageView
             android:id="@+id/placePhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/image_du_lieu_recherch"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
             android:src="@drawable/imgmapsdefaultresized" />
 
     </androidx.cardview.widget.CardView>
@@ -89,8 +99,8 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map" />
 
     <TextView
@@ -98,13 +108,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/adresse"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomLieuSearch" />
 
     <com.google.android.material.chip.Chip
@@ -112,30 +121,27 @@
         style="@style/Widget.Material3.Chip.Suggestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#E6E6E6"
-        android:text="Catégorie du lieu"
+        android:text="@string/categorie_du_lieu"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:chipStrokeColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/btnYAller"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toBottomOf="@+id/adresseLieuSearch"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintTop_toTopOf="@+id/cardView3" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/imageBtnFavoris"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="#E6E6E6"
         android:contentDescription="@string/bouton_favoris"
         app:layout_constraintBottom_toTopOf="@+id/guideline20"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline18"
         app:maxImageSize="30dp"
         app:srcCompat="@drawable/bookmarkempty"
         app:tint="#F85C2B" />
@@ -145,9 +151,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="55dp"
         android:backgroundTint="@color/white"
         android:contentDescription="@string/bouton_y_aller"
         android:maxWidth="170dp"
@@ -158,42 +161,32 @@
         app:iconSize="22dp"
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline25" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline25"
+        app:layout_constraintTop_toBottomOf="@+id/categorieLieuSearch" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="237dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.75"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="586dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="404dp" />
+        app:layout_constraintGuide_percent="0.6588103" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="217dp" />
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
