@@ -28,6 +28,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -82,7 +83,7 @@ import java.util.stream.Collectors;
 
 public class SuggestionActivity extends AppCompatActivity {
 
-    private Button textTypeTitle, selectionFAB;
+    private Button textTypeTitle, selectionFAB, buttonNoSuggestions;
     private ExtendedFloatingActionButton carteDisplay;
     private RecyclerView selectionRecView;
     private final String[] tableauSelectionCategoriesTitle = {
@@ -132,6 +133,7 @@ public class SuggestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
@@ -236,9 +238,12 @@ public class SuggestionActivity extends AppCompatActivity {
 
     private void updateRecyclerView() {
         if (placesTrouve.isEmpty()) {
+            buttonNoSuggestions.setVisibility(View.VISIBLE);
+            buttonNoSuggestions.setText("Pas de " +  categorieJolie +" dans ce périmètre");
             ArrayList<Favori> placesVide = new ArrayList<>();
             adapter.setSuggestions(placesVide);
         } else {
+            buttonNoSuggestions.setVisibility(View.GONE);
             ArrayList<Favori> places = new ArrayList<>();
             for (Place place : placesTrouve) {
                 List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
@@ -656,6 +661,7 @@ public class SuggestionActivity extends AppCompatActivity {
         fermerMap = findViewById(R.id.btnFermerMap);
         sliderRecherche = findViewById(R.id.sliderRecherche);
         mainContent = findViewById(R.id.frameSuggestions);
+        buttonNoSuggestions = findViewById(R.id.buttonNoSuggestions);
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);

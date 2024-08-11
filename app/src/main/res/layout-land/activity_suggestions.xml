@@ -99,11 +99,31 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rayon de recherche (mètres)"
+            android:text="Périmètre de recherche (mètres)"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/sliderRecherche"
             app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
             app:layout_constraintTop_toBottomOf="@+id/sliderRecherche" />
+
+        <Button
+            android:id="@+id/buttonNoSuggestions"
+            style="?attr/materialButtonOutlinedStyle"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:backgroundTint="#DFDEDE"
+            android:fontFamily="@font/carme"
+            android:text="Aucun lieu \ndans ce périmètre"
+            android:textColor="@color/darkblue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/selectionRecView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/selectionRecView"
+            app:layout_constraintVertical_bias="0.3"
+            app:strokeColor="@color/darkblue" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectionRecView"

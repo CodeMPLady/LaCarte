@@ -27,6 +27,7 @@
             android:id="@+id/tabFavoris"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:background="@drawable/rectangle_night"
             android:gravity="center_vertical"
             android:text="        FAVORIS"
@@ -100,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="110dp" />
+            app:layout_constraintGuide_begin="130dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline14"
