@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -124,6 +125,8 @@ public class SuggestionActivity extends AppCompatActivity {
     private FloatingActionButton fermerMap;
     private int rayonDeRecherche = 500;
     private Slider sliderRecherche;
+    private ViewGroup mainContent;
+
 
 
     @Override
@@ -271,27 +274,57 @@ public class SuggestionActivity extends AppCompatActivity {
         chipTypeLieuSuggestions.setText(suggestion.getCategorie());
         txtAdresseLieuSuggestions.setText(suggestion.getAdresse());
         imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
-        btnYAllerSuggestions.setOnClickListener(v -> openGoogleMaps(suggestion.getNom()));
-        btnFermerSuggestions.setOnClickListener(v -> drawerLayoutSuggestions.closeDrawer(GravityCompat.END));
 
-        if (suggestion.getPhoto() != null)
-            imgLieuDetailsSuggestions.setImageBitmap(suggestion.getPhoto());
-        else
-            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
+        drawerLayoutSuggestions.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+            }
 
-        String nomLieu = txtNomLieuSuggestions.getText().toString();
-        getFavoriListInBackground();
-        for(Favori favori : favorisList) {
-            if (favori.getNom().equals(nomLieu)) {
-                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
-                isFavorite = true;
-                break;
-            } else {
-                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
-                isFavorite = false;
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                setEnableRecursively(mainContent, false);
+                btnYAllerSuggestions.setOnClickListener(v -> openGoogleMaps(suggestion.getNom()));
+                btnFermerSuggestions.setOnClickListener(v -> drawerLayoutSuggestions.closeDrawer(GravityCompat.END));
+                if (suggestion.getPhoto() != null)
+                    imgLieuDetailsSuggestions.setImageBitmap(suggestion.getPhoto());
+                else
+                    imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
+
+                String nomLieu = txtNomLieuSuggestions.getText().toString();
+                getFavoriListInBackground();
+                for(Favori favori : favorisList) {
+                    if (favori.getNom().equals(nomLieu)) {
+                        btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
+                        isFavorite = true;
+                        break;
+                    } else {
+                        btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
+                        isFavorite = false;
+                    }
+                }
+                chipTypeLieuSuggestions.setText(suggestion.getCategorie());
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                setEnableRecursively(mainContent, true);
+                selectionRecView.setEnabled(true);
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+            }
+        });
+    }
+
+    private void setEnableRecursively(ViewGroup viewGroup, boolean enable) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View child = viewGroup.getChildAt(i);
+            child.setEnabled(enable);
+            if (child instanceof ViewGroup) {
+                setEnableRecursively((ViewGroup) child, enable);
             }
         }
-        chipTypeLieuSuggestions.setText(suggestion.getCategorie());
     }
 
     @SuppressLint("SetTextI18n")
@@ -624,6 +657,7 @@ public class SuggestionActivity extends AppCompatActivity {
         logoChargement = findViewById(R.id.logoChargementS);
         fermerMap = findViewById(R.id.btnFermerMap);
         sliderRecherche = findViewById(R.id.sliderRecherche);
+        mainContent = findViewById(R.id.frameSuggestions);
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClientSuggestion = Places.createClient(SuggestionActivity.this);

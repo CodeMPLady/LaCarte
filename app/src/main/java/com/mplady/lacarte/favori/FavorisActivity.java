@@ -88,7 +88,6 @@ public class FavorisActivity extends AppCompatActivity {
         textNoFavoris = findViewById(R.id.textNoFavoris);
 
         mainContent = findViewById(R.id.mainFrame);
-
         favorisRecView = findViewById(R.id.favorisRecView);
         adapter = new FavoriRecViewAdapter(favoris, this);
         favorisRecView.setAdapter(adapter);
