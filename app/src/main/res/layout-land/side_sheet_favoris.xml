@@ -27,13 +27,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 app:cardCornerRadius="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@+id/guideline43">
 
                 <ImageView
                     android:id="@+id/imgLieuDetails"
@@ -49,13 +46,27 @@
                 style="?attr/materialIconButtonFilledStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:backgroundTint="#980C0C"
                 app:icon="@drawable/deleteicon"
                 app:iconSize="28sp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline43"
+                app:layout_constraintEnd_toStartOf="@+id/guideline44"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.22" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -64,12 +75,12 @@
             style="?attr/materialIconButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             app:icon="@drawable/close24px"
-            app:iconTint="#9C0000"
             app:iconSize="24sp"
+            app:iconTint="#9C0000"
+            app:layout_constraintBottom_toTopOf="@+id/guideline45"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline46"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="#9C0000"
             app:strokeWidth="2dp" />
@@ -78,72 +89,71 @@
             android:id="@+id/txtNomLieu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="75dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
             android:text="Nom du lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline46"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guideline45" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_marginEnd="64dp"
             app:dividerColor="@color/black"
             app:dividerThickness="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/txtAdresseLieu"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline46"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toBottomOf="@+id/txtNomLieu" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline47" />
 
         <TextView
             android:id="@+id/txtAdresseLieu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
             android:text="Adresse"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline46"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toBottomOf="@+id/txtNomLieu" />
+            app:layout_constraintTop_toTopOf="@+id/guideline47" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipTypeLieu"
-            android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:backgroundTint="#E6E6E6"
             android:text="Catégorie du lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:visibility="visible"
             app:chipStrokeColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/btnYAllerFavori"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline16" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline46"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@+id/txtAdresseLieu"
+            app:layout_constraintVertical_bias="0.35000002" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnYAllerFavori"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="32dp"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/bouton_y_aller"
             android:maxWidth="320dp"
@@ -153,18 +163,40 @@
             app:icon="@drawable/iconnav"
             app:iconSize="20dp"
             app:iconTint="@color/black"
-            app:strokeColor="#00026E"
-            app:strokeWidth="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline16" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline46"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@+id/chipTypeLieu"
+            app:strokeColor="#00026E"
+            app:strokeWidth="1dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="350dp" />
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline45"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline47"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
