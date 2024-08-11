@@ -7,44 +7,30 @@
     android:animateLayoutChanges="true"
     android:background="#E6E6E6">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline21"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:context=".searchResult.SearchResultsActivity">
-
-    </androidx.fragment.app.FragmentContainerView>
-
     <ImageView
         android:id="@+id/logoChargement"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
         android:src="@mipmap/logo2fondblanc"
-        app:layout_constraintBottom_toBottomOf="@+id/map"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/searchViewResults"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintStart_toStartOf="@+id/searchViewResults"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/suggestionsListViewResults"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:background="@color/white"
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
         android:maxHeight="200dp"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline24"
-        app:layout_constraintStart_toStartOf="@+id/guideline23"
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toStartOf="@+id/guideline40"
+        app:layout_constraintStart_toStartOf="@+id/guideline41"
         app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
 
     <androidx.appcompat.widget.SearchView
@@ -53,17 +39,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/guideline21"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline40"
+        app:layout_constraintStart_toStartOf="@+id/guideline41"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxWidth="400dp"
+        android:maxHeight="400dp"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
         app:cardElevation="7dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintBottom_toTopOf="@+id/adresseLieuSearch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
         app:layout_constraintTop_toBottomOf="@+id/nomLieuSearch">
 
@@ -72,8 +63,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_du_lieu_recherch"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
+            android:maxWidth="400dp"
+            android:maxHeight="400dp"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
             android:src="@drawable/imgmapsdefaultresized" />
 
     </androidx.cardview.widget.CardView>
@@ -81,66 +74,42 @@
 
     <TextView
         android:id="@+id/nomLieuSearch"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/nom_du_lieu"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/adresseLieuSearch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/adresse"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/categorieLieuSearch"
         style="@style/Widget.Material3.Chip.Suggestion"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
         android:backgroundTint="#BFBFBF"
-        android:maxWidth="-70dp"
         android:text="Catégorie du lieu"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:chipEndPadding="8dp"
         app:chipStrokeColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline19"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toBottomOf="@+id/adresseLieuSearch" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline21" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/imageBtnFavoris"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#E6E6E6"
         android:contentDescription="@string/bouton_favoris"
-        app:layout_constraintEnd_toStartOf="@+id/guideline18"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintStart_toStartOf="@+id/guideline40"
         app:layout_constraintTop_toTopOf="parent"
         app:maxImageSize="30dp"
         app:srcCompat="@drawable/bookmarkempty"
@@ -148,14 +117,15 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnYAller"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/white"
         android:contentDescription="@string/bouton_y_aller"
-        android:maxWidth="120dp"
+        android:maxWidth="200dp"
+        android:maxHeight="50dp"
+        android:minWidth="130dp"
+        android:minHeight="50dp"
         android:text="@string/s_y_rendre"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -163,58 +133,51 @@
         app:iconSize="22dp"
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:layout_constraintVertical_bias="0.6" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="605dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintTop_toTopOf="@+id/guideline19" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="83dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="231dp" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="605dp" />
+        app:layout_constraintGuide_percent="0.68" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline22"
+        android:id="@+id/guideline40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="898dp" />
+        app:layout_constraintGuide_percent="0.57" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline23"
+        android:id="@+id/guideline41"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="99dp" />
+        app:layout_constraintGuide_percent="0.1" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline24"
+    <TextView
+        android:id="@+id/adresseLieuSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="527dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/adresse"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/categorieLieuSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline21" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

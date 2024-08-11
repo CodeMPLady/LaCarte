@@ -40,4 +40,6 @@
     <string name="txt_tous">TOUS</string>
     <string name="icone_mode_nuit">Icone mode nuit</string>
     <string name="icone_mode_jour">Icone mode jour</string>
+    <string name="logo_chargement">Logo Chargement</string>
+    <string name="categorie_du_lieu">Catégorie du lieu</string>
 </resources>
