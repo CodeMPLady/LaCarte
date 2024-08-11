@@ -236,6 +236,7 @@ public class SuggestionActivity extends AppCompatActivity {
         return tableauJolisTypes;
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateRecyclerView() {
         if (placesTrouve.isEmpty()) {
             buttonNoSuggestions.setVisibility(View.VISIBLE);
@@ -294,11 +295,14 @@ public class SuggestionActivity extends AppCompatActivity {
                     imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
 
                 String nomLieu = txtNomLieuSuggestions.getText().toString();
+                isFavorite = false;
+                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
                 getFavoriListInBackground();
                 for(Favori favori : favorisList) {
                     if (favori.getNom().equals(nomLieu)) {
                         btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
                         isFavorite = true;
+                        System.out.println("favori activé");
                         break;
                     } else {
                         btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
