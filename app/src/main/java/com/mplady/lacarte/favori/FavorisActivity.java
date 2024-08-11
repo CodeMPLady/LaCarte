@@ -68,7 +68,7 @@ public class FavorisActivity extends AppCompatActivity {
         initView();
         setupLayoutManager();
         callBackDatabase();
-        getFavoriListInBackground();
+        getFavoriListInBackground(true);
 
         if (favoris.isEmpty())
             textNoFavoris.setVisibility(View.VISIBLE);
@@ -142,7 +142,7 @@ public class FavorisActivity extends AppCompatActivity {
                     deleteFavoriInBackground(favori);
                     drawerLayout.closeDrawer(GravityCompat.END);
                     Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
-                    getFavoriListInBackground();
+                    getFavoriListInBackground(true);
                     recreate();
                 });
                 btnYAllerFavori.setOnClickListener(v -> openGoogleMaps(favori.getNom()));
@@ -178,6 +178,7 @@ public class FavorisActivity extends AppCompatActivity {
     }
 
     private void showDialog() {
+        getFavoriListInBackground(false);
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.fav_dialog_layout, null);
 
@@ -229,7 +230,7 @@ public class FavorisActivity extends AppCompatActivity {
         btnAnnuler.setOnClickListener(v -> dialog.dismiss());
     }
 
-    private void getFavoriListInBackground() {
+    private void getFavoriListInBackground(boolean setAdapter) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
@@ -238,7 +239,8 @@ public class FavorisActivity extends AppCompatActivity {
                 favoris.addAll(favorisDB.getFavoriDAO().getAllFavoris());
                 preFilteredFavoris = new ArrayList<>(favoris);
                 handler.post(() -> {
-                    adapter.setFavoris(favoris);
+                    if (setAdapter)
+                        adapter.setFavoris(favoris);
                     if (favoris.isEmpty())
                         textNoFavoris.setVisibility(View.VISIBLE);
                     else
@@ -309,7 +311,7 @@ public class FavorisActivity extends AppCompatActivity {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
             favorisDB.getFavoriDAO().deleteFavori(favori);
-            getFavoriListInBackground();
+            getFavoriListInBackground(true);
             executorService.shutdown();
         });
     }

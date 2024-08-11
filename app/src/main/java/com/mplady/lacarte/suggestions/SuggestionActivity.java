@@ -209,8 +209,6 @@ public class SuggestionActivity extends AppCompatActivity {
         CircularBounds circle = CircularBounds.newInstance(center, rayonDeRecherche);
         final List<String> includedTypes = Collections.singletonList(categorieTitle);
 
-        System.out.println("cat :" + categorieTitle);
-
         final SearchNearbyRequest searchNearbyRequest =
                 SearchNearbyRequest.builder(circle, placeFields)
                         .setIncludedTypes(includedTypes)

@@ -53,7 +53,6 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         holder.txtName.setText(favori.getNom());
         String recupCategorieFavoris = favori.getCategorie();
         holder.txtDescription.setText(recupCategorieFavoris);
-        System.out.println("TYPE : " + recupCategorieFavoris);
 
         if (Objects.equals(recupCategorieFavoris, "")) {
             holder.dividerItemFavori.setVisibility(View.GONE);
