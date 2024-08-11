@@ -35,20 +35,20 @@
         android:layout_height="30dp"
         android:contentDescription="@string/icone_mode_nuit"
         android:src="@drawable/darkmodeicon"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toBottomOf="@+id/switchDarkMode1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintStart_toEndOf="@+id/switchDarkMode1"
+        app:layout_constraintTop_toTopOf="@+id/switchDarkMode1" />
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:contentDescription="@string/icone_mode_jour"
         android:src="@drawable/lightmodeicon"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toBottomOf="@+id/switchDarkMode1"
         app:layout_constraintEnd_toStartOf="@+id/switchDarkMode1"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/switchDarkMode1" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabFavoris"
