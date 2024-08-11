@@ -310,7 +310,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                 String nomLieu = nomLieuSearch.getText().toString();
                 String categorieLieu = categorieLieuSearch.getText().toString();
                 String adresseLieu = adresseLieuSearch.getText().toString();
-
                 byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
 
                 Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
@@ -325,7 +324,6 @@ public class SearchResultsActivity extends FragmentActivity implements OnMapRead
                         String nomLieu = nomLieuSearch.getText().toString();
                         String categorieLieu = categorieLieuSearch.getText().toString();
                         String adresseLieu = adresseLieuSearch.getText().toString();
-
                         byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
 
                         Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);

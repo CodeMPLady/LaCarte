@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -257,6 +258,7 @@ public class SuggestionActivity extends AppCompatActivity {
                     placesClientSuggestion.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
                         bitmapClassique = fetchPhotoResponse.getBitmap();
                         resizedBitmap = Bitmap.createScaledBitmap(bitmapClassique, 400, 400, true);
+
                         Favori favori = new Favori(
                                 Objects.requireNonNull(place.getName()),
                                 categorieJolie,
@@ -277,7 +279,10 @@ public class SuggestionActivity extends AppCompatActivity {
         txtNomLieuSuggestions.setText(suggestion.getNom());
         chipTypeLieuSuggestions.setText(suggestion.getCategorie());
         txtAdresseLieuSuggestions.setText(suggestion.getAdresse());
-        imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
+        if (suggestion.getPhoto() != null)
+            imgLieuDetailsSuggestions.setImageBitmap(suggestion.getPhoto());
+        else
+            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
 
         drawerLayoutSuggestions.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -289,11 +294,6 @@ public class SuggestionActivity extends AppCompatActivity {
                 setEnableRecursively(mainContent, false);
                 btnYAllerSuggestions.setOnClickListener(v -> openGoogleMaps(suggestion.getNom()));
                 btnFermerSuggestions.setOnClickListener(v -> drawerLayoutSuggestions.closeDrawer(GravityCompat.END));
-                if (suggestion.getPhoto() != null)
-                    imgLieuDetailsSuggestions.setImageBitmap(suggestion.getPhoto());
-                else
-                    imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
-
                 String nomLieu = txtNomLieuSuggestions.getText().toString();
                 isFavorite = false;
                 btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
@@ -302,7 +302,6 @@ public class SuggestionActivity extends AppCompatActivity {
                     if (favori.getNom().equals(nomLieu)) {
                         btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
                         isFavorite = true;
-                        System.out.println("favori activé");
                         break;
                     } else {
                         btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
@@ -561,8 +560,8 @@ public class SuggestionActivity extends AppCompatActivity {
                 String nomLieu = txtNomLieuSuggestions.getText().toString();
                 String categorieLieu = chipTypeLieuSuggestions.getText().toString();
                 String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
-
-                byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
+                BitmapDrawable draw = (BitmapDrawable) imgLieuDetailsSuggestions.getDrawable();
+                byte[] bitmapData = convertBitmapToByteArray(draw.getBitmap());
 
                 Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
                 addFavoriInBackground(favori1);
@@ -576,7 +575,6 @@ public class SuggestionActivity extends AppCompatActivity {
                         String nomLieu = txtNomLieuSuggestions.getText().toString();
                         String categorieLieu = chipTypeLieuSuggestions.getText().toString();
                         String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
-
                         byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
 
                         Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);

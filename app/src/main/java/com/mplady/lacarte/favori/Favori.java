@@ -10,6 +10,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 @Entity(tableName = "Favoris")
@@ -103,6 +104,7 @@ public class Favori implements Parcelable {
                 ", Adresse='" + adresse + '\'' +
                 ", Categorie='" + categorie + '\'' +
                 ", has Photo = " + (photo != null) +
+                ", has bitmapData = " + Arrays.toString(bitmapData) +
                 ", sousCategorie='" + (sousCategorie != null) + '\'' +
                 '}';
     }
