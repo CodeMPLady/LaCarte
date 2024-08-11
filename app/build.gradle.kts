@@ -21,8 +21,8 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 19
-        versionName = "Application stabilisé et fonctionel"
+        versionCode = 20
+        versionName = "Resolution de bug mineur"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

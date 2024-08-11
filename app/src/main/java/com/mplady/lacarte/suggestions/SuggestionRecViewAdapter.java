@@ -60,14 +60,13 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
                 break;
         }
         holder.cardSuggestionCategorie.setText(tableauJolisTypes[i]);
-
+        System.out.println("txt Holder: " + holder.cardSuggestionCategorie.getText());
         holder.cardSuggestionName.setText(suggestion.getNom());
         holder.detailsFAB.setOnClickListener(v -> activity.openDrawer(suggestion));
-        if (suggestion.getPhoto() != null) {
+        if (suggestion.getPhoto() != null)
             holder.cardSuggestionImage.setImageBitmap(suggestion.getPhoto());
-        } else {
+        else
             holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
-        }
     }
 
     @Override
@@ -77,7 +76,6 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final MaterialCardView cardViewSuggestion;
         private final ImageView cardSuggestionImage;
         private final TextView cardSuggestionName;
         private final TextView cardSuggestionCategorie;
@@ -85,7 +83,6 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardViewSuggestion = itemView.findViewById(R.id.cardViewSuggestion);
             cardSuggestionImage = itemView.findViewById(R.id.cardSuggestionImage);
             cardSuggestionName = itemView.findViewById(R.id.cardSuggestionName);
             cardSuggestionCategorie = itemView.findViewById(R.id.cardSuggestionCategorie);

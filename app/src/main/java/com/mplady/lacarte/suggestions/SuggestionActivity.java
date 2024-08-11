@@ -241,7 +241,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private void updateRecyclerView() {
         if (placesTrouve.isEmpty()) {
             buttonNoSuggestions.setVisibility(View.VISIBLE);
-            buttonNoSuggestions.setText("Pas de " +  categorieJolie +" dans ce périmètre");
+            buttonNoSuggestions.setText("Pas de " +  categorieTitle +" dans ce périmètre");
             ArrayList<Favori> placesVide = new ArrayList<>();
             adapter.setSuggestions(placesVide);
         } else {
@@ -261,12 +261,13 @@ public class SuggestionActivity extends AppCompatActivity {
 
                         Favori favori = new Favori(
                                 Objects.requireNonNull(place.getName()),
-                                categorieJolie,
+                                categorieTitle,
                                 resizedBitmap,
                                 place.getAddress(),
                                 Objects.requireNonNull(place.getPlaceTypes()).get(0)
                         );
                         places.add(favori);
+                        setAdapter();
                         adapter.setSuggestions(places);
                     }).addOnFailureListener((exception) -> System.out.println("Error fetching photo: " + exception.getMessage()));
                 }
@@ -277,7 +278,14 @@ public class SuggestionActivity extends AppCompatActivity {
     void openDrawer(Favori suggestion) {
         drawerLayoutSuggestions.openDrawer(GravityCompat.END);
         txtNomLieuSuggestions.setText(suggestion.getNom());
-        chipTypeLieuSuggestions.setText(suggestion.getCategorie());
+
+        int i=0;
+        while (!suggestion.getCategorie().equals(tableauTypes[i])) {
+            i++;
+        }
+        String jolieCat = tableauJolisTypes[i];
+
+        chipTypeLieuSuggestions.setText(jolieCat);
         txtAdresseLieuSuggestions.setText(suggestion.getAdresse());
         if (suggestion.getPhoto() != null)
             imgLieuDetailsSuggestions.setImageBitmap(suggestion.getPhoto());
@@ -308,7 +316,6 @@ public class SuggestionActivity extends AppCompatActivity {
                         isFavorite = false;
                     }
                 }
-                chipTypeLieuSuggestions.setText(suggestion.getCategorie());
             }
 
             @Override
