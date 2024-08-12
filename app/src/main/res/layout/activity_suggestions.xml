@@ -21,7 +21,6 @@
                 android:id="@+id/sliderRecherche"
                 android:layout_width="229dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="8dp"
                 android:stepSize="100.0"
                 android:value="1000.0"
                 android:valueFrom="100.0"
@@ -29,7 +28,7 @@
                 app:labelBehavior="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapFAB"
+                app:layout_constraintTop_toTopOf="@+id/guideline22"
                 app:thumbColor="#490000"
                 app:tickColor="#D0C0C0"
                 app:tickVisible="false"
@@ -50,7 +49,6 @@
                 android:id="@+id/mapFAB"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="16dp"
                 android:backgroundTint="#EFEFEF"
                 android:text="CARTE"
                 android:textColor="@color/black"
@@ -58,6 +56,7 @@
                 app:icon="@drawable/iconglobe"
                 app:iconSize="30dp"
                 app:iconTint="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline36"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
@@ -69,11 +68,11 @@
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="16dp"
                 android:backgroundTint="@color/white"
                 android:text="Catégories"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline36"
                 app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
@@ -94,16 +93,16 @@
             <Button
                 android:id="@+id/textTypeTitle"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="24dp"
                 android:backgroundTint="#4158AC"
                 android:elevation="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:text="Type de lieu autour de vous"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,26 +115,25 @@
                 android:id="@+id/selectionRecView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/guideline66"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toTopOf="@+id/guideline60" />
 
             <Button
                 android:id="@+id/buttonNoSuggestions"
                 style="?attr/materialButtonOutlinedStyle"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:backgroundTint="#DFDEDE"
                 android:fontFamily="@font/carme"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="Aucun lieu \ndans ce périmètre"
                 android:textColor="@color/darkblue"
                 android:textSize="20sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/selectionRecView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +146,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="205dp" />
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.18" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.32" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.95" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

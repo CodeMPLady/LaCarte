@@ -24,12 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_marginStart="32dp"
             android:contentDescription="Image du lieu"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
             android:src="@drawable/imgmapsdefaultresized"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline83"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,45 +37,44 @@
             android:id="@+id/cardSuggestionName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/carme"
             android:text="NOM LIEU"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/guideline34"
-            app:layout_constraintStart_toEndOf="@+id/cardSuggestionImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline83"
+            app:layout_constraintTop_toTopOf="@+id/guideline84" />
 
         <TextView
             android:id="@+id/cardSuggestionCategorie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardSuggestionName"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/carme"
             android:text="TYPE LIEU"
             android:textAlignment="center"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline34"
-            app:layout_constraintStart_toEndOf="@+id/cardSuggestionImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline83"
             app:layout_constraintTop_toBottomOf="@+id/cardSuggestionName" />
 
         <Button
             android:id="@+id/detailsFAB"
             style="?attr/materialIconButtonOutlinedStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_height="40dp"
             android:contentDescription="Bouton plus"
             app:icon="@drawable/iconarrow"
+            app:iconSize="16sp"
             app:iconTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/guideline84"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline34"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/white" />
 
@@ -84,7 +83,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="306dp" />
+            app:layout_constraintGuide_percent="0.85" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline83"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline84"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

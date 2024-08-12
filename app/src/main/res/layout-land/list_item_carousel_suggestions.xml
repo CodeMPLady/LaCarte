@@ -6,8 +6,8 @@
     android:id="@+id/cardViewSuggestion"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="25dp"
     android:layout_marginStart="10dp"
+    android:layout_marginTop="25dp"
     android:layout_marginEnd="10dp"
     android:background="@color/white"
     android:elevation="5dp"
@@ -23,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_marginStart="32dp"
             android:contentDescription="Image du lieu"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
@@ -34,32 +33,34 @@
 
         <TextView
             android:id="@+id/cardSuggestionName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/carme"
             android:text="NOM LIEU"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/guideline35"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardSuggestionImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guideline74" />
 
         <TextView
             android:id="@+id/cardSuggestionCategorie"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardSuggestionName"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/carme"
             android:text="TYPE LIEU"
             android:textAlignment="center"
             android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline35"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardSuggestionImage"
             app:layout_constraintTop_toBottomOf="@+id/cardSuggestionName" />
 
@@ -67,12 +68,12 @@
             android:id="@+id/detailsFAB"
             style="?attr/materialIconButtonOutlinedStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_height="40dp"
             android:contentDescription="Bouton plus"
             app:icon="@drawable/iconarrow"
+            app:iconSize="16dp"
             app:iconTint="@color/darkblue"
+            app:layout_constraintBottom_toTopOf="@+id/guideline74"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline35"
             app:layout_constraintTop_toTopOf="parent"
@@ -83,7 +84,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="350dp" />
+            app:layout_constraintGuide_percent="0.88" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline74"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

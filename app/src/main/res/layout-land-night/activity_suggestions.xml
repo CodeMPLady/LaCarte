@@ -31,16 +31,16 @@
             <Button
                 android:id="@+id/textTypeTitle"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="150dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="150dp"
+                android:layout_marginTop="16dp"
                 android:backgroundTint="#010C33"
                 android:elevation="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:text="Type de lieu autour de vous"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -56,8 +56,8 @@
                 android:valueFrom="100.0"
                 android:valueTo="5000.0"
                 app:labelBehavior="visible"
-                app:layout_constraintEnd_toStartOf="@+id/selectionFiltresFAB"
-                app:layout_constraintStart_toEndOf="@+id/mapFAB"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
                 app:thumbColor="#490000"
                 app:tickColor="#D0C0C0"
@@ -79,7 +79,6 @@
                 android:id="@+id/mapFAB"
                 android:layout_width="180dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="16dp"
                 android:backgroundTint="#1F406A"
                 android:text="CARTE"
                 android:textColor="@color/white"
@@ -87,7 +86,8 @@
                 app:icon="@drawable/iconglobe"
                 app:iconSize="30dp"
                 app:iconTint="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/guideline31"
+                app:layout_constraintBottom_toTopOf="@+id/guideline85"
+                app:layout_constraintEnd_toStartOf="@+id/sliderRecherche"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
                 app:strokeColor="#5A5A5A"
@@ -98,29 +98,29 @@
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="180dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="16dp"
                 android:backgroundTint="#1F406A"
                 android:text="Catégories"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/mapFAB"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline31"
-                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
+                app:layout_constraintStart_toEndOf="@+id/sliderRecherche"
+                app:layout_constraintTop_toTopOf="@+id/mapFAB"
                 app:strokeColor="@color/black" />
 
             <Button
                 android:id="@+id/buttonNoSuggestions"
                 style="?attr/materialButtonOutlinedStyle"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:backgroundTint="#000023"
                 android:fontFamily="@font/carme"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="Aucun lieu \ndans ce périmètre"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/selectionRecView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +137,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/guideline85"
                 app:layout_constraintVertical_bias="0.0" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -145,7 +145,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="447dp" />
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline85"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

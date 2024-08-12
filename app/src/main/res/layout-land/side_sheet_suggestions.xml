@@ -38,7 +38,7 @@
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:contentDescription="Image du lieu"
-                    android:src="@drawable/imgmapsdefaultresized"/>
+                    android:src="@drawable/imgmapsdefaultresized" />
 
             </androidx.cardview.widget.CardView>
 
@@ -49,12 +49,12 @@
             style="?attr/materialIconButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             app:icon="@drawable/close24px"
             app:iconSize="24sp"
             app:iconTint="#9C0000"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline70"
+            app:layout_constraintEnd_toStartOf="@+id/guideline73"
+            app:layout_constraintStart_toStartOf="@+id/guideline72"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="#9C0000"
             app:strokeWidth="2dp" />
@@ -63,53 +63,52 @@
             android:id="@+id/txtNomLieuSuggestions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
             android:text="Nom du lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline72"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guideline70" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_marginEnd="64dp"
             app:dividerColor="@color/black"
             app:dividerThickness="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/txtAdresseLieuSuggestions"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline72"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toBottomOf="@+id/txtNomLieuSuggestions" />
+            app:layout_constraintTop_toTopOf="@+id/guideline71" />
 
         <TextView
             android:id="@+id/txtAdresseLieuSuggestions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
             android:text="Adresse"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline72"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toBottomOf="@+id/txtNomLieuSuggestions" />
+            app:layout_constraintTop_toTopOf="@+id/guideline71" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipTypeLieuSuggestions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:backgroundTint="#E6E6E6"
             android:text="Catégorie du lieu"
             android:textAlignment="center"
@@ -117,16 +116,15 @@
             android:textSize="20sp"
             app:chipStrokeColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/btnYAllerSuggestions"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline16" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline72"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@+id/txtAdresseLieuSuggestions" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnYAllerSuggestions"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/bouton_y_aller"
@@ -137,21 +135,20 @@
             app:icon="@drawable/iconnav"
             app:iconSize="24dp"
             app:iconTint="@color/black"
-            app:strokeColor="#00026E"
-            app:strokeWidth="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnAjouterAuxFavoris"
-            app:layout_constraintStart_toStartOf="@+id/guideline16" />
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:strokeColor="#00026E"
+            app:strokeWidth="1dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAjouterAuxFavoris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
             android:contentDescription="Bouton suppression favori"
             app:backgroundTint="#00026E"
             app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline72"
             app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions"
             app:maxImageSize="32dp"
             app:srcCompat="@drawable/bookmarkempty"
@@ -162,7 +159,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="330dp" />
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline71"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline72"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.88" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline73"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.94" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
