@@ -229,7 +229,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                         }
                     }
                     if (categorie == null)
-                        categorieLieuSearch.setVisibility(View.GONE);
+                        categorie = "Sans catégorie";
                     categorieLieuSearch.setText(categorie);
 
                     List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
