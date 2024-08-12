@@ -31,8 +31,8 @@
             <Button
                 android:id="@+id/textTypeTitle"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#000E3C"
                 android:elevation="20dp"
@@ -40,9 +40,10 @@
                 android:paddingRight="10dp"
                 android:text="Type de lieu autour de vous"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline124"
+                app:layout_constraintEnd_toStartOf="@+id/guideline122"
+                app:layout_constraintStart_toStartOf="@+id/guideline121"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
                 app:strokeColor="#171F61" />
@@ -69,7 +70,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Périmètre de recherche (mètres)"
+                android:text="Périmètre de recherche"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/sliderRecherche"
                 app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
@@ -77,35 +78,35 @@
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/mapFAB"
-                android:layout_width="180dp"
-                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:backgroundTint="#142A45"
                 android:text="CARTE"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                app:autoSizeTextType="uniform"
                 app:icon="@drawable/iconglobe"
                 app:iconSize="30dp"
                 app:iconTint="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/guideline85"
-                app:layout_constraintEnd_toStartOf="@+id/sliderRecherche"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
+                app:layout_constraintBottom_toTopOf="@+id/guideline126"
+                app:layout_constraintEnd_toStartOf="@+id/guideline121"
+                app:layout_constraintStart_toStartOf="@+id/guideline120"
+                app:layout_constraintTop_toTopOf="@+id/guideline125"
                 app:strokeColor="#5A5A5A"
                 app:strokeWidth="1dp" />
 
             <Button
                 android:id="@+id/selectionFiltresFAB"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="180dp"
-                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:backgroundTint="#142A45"
                 android:text="Catégories"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mapFAB"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/sliderRecherche"
-                app:layout_constraintTop_toTopOf="@+id/mapFAB"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline126"
+                app:layout_constraintEnd_toStartOf="@+id/guideline123"
+                app:layout_constraintStart_toStartOf="@+id/guideline122"
+                app:layout_constraintTop_toTopOf="@+id/guideline125"
                 app:strokeColor="#757575" />
 
             <Button
@@ -153,6 +154,55 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline120"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.13" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline121"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline122"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.87" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline124"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline125"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.22" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline126"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.31" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

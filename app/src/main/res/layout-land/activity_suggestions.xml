@@ -31,8 +31,8 @@
         <Button
             android:id="@+id/textTypeTitle"
             style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#4E010C"
             android:elevation="20dp"
@@ -40,44 +40,48 @@
             android:paddingRight="10dp"
             android:text="Type de lieu autour de vous"
             android:textColor="@color/white"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/guideline115"
+            app:layout_constraintEnd_toStartOf="@+id/guideline114"
+            app:layout_constraintStart_toStartOf="@+id/guideline113"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
             app:strokeColor="#880015" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/mapFAB"
-            android:layout_width="180dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:backgroundTint="#EFEFEF"
             android:text="CARTE"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            app:autoSizeTextType="uniform"
             app:icon="@drawable/iconglobe"
             app:iconSize="30dp"
             app:iconTint="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/guideline69"
-            app:layout_constraintEnd_toStartOf="@+id/sliderRecherche"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
+            app:layout_constraintBottom_toTopOf="@+id/guideline119"
+            app:layout_constraintEnd_toStartOf="@+id/guideline113"
+            app:layout_constraintStart_toStartOf="@+id/guideline116"
+            app:layout_constraintTop_toTopOf="@+id/guideline118"
             app:strokeColor="#5A5A5A"
             app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/selectionFiltresFAB"
             style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="180dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="-2dp"
+            android:layout_marginBottom="-2dp"
             android:backgroundTint="@color/white"
             android:text="Catégories"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/mapFAB"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sliderRecherche"
-            app:layout_constraintTop_toTopOf="@+id/mapFAB"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/guideline119"
+            app:layout_constraintEnd_toStartOf="@+id/guideline117"
+            app:layout_constraintStart_toStartOf="@+id/guideline114"
+            app:layout_constraintTop_toTopOf="@+id/guideline118"
+            app:layout_constraintVertical_bias="0.0"
             app:strokeColor="@color/black" />
 
         <com.google.android.material.slider.Slider
@@ -103,7 +107,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Périmètre de recherche (mètres)"
+            android:text="Périmètre de recherche"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/sliderRecherche"
             app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
@@ -155,7 +159,56 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.45" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline113"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline114"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline115"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline116"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.13" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline117"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.87" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline118"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline119"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.31" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
     <include
