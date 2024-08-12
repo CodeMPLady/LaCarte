@@ -159,6 +159,7 @@
         android:layout_height="170dp"
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline2"

@@ -145,6 +145,7 @@
         android:layout_height="170dp"
         android:divider="@color/white"
         android:dividerHeight="0.5dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
