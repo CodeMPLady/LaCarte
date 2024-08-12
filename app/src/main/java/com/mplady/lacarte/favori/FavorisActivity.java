@@ -202,15 +202,15 @@ public class FavorisActivity extends AppCompatActivity {
         FloatingActionButton btnValider = dialogView.findViewById(R.id.btnValider);
         FloatingActionButton btnAnnuler = dialogView.findViewById(R.id.btnAnnuler);
 
-        checkRestaurant.setVisibility(categories.contains("Restaurant") ? View.VISIBLE : View.GONE);
-        checkEssence.setVisibility(categories.contains("Station essence") ? View.VISIBLE : View.GONE);
-        checkSupermarche.setVisibility(categories.contains("Supermarché") ? View.VISIBLE : View.GONE);
-        checkPharmacie.setVisibility(categories.contains("Pharmacie") ? View.VISIBLE : View.GONE);
-        checkMagasin.setVisibility(categories.contains("Magasin") ? View.VISIBLE : View.GONE);
-        checkCinema.setVisibility(categories.contains("Cinéma") ? View.VISIBLE : View.GONE);
-        checkParc.setVisibility(categories.contains("Parc") ? View.VISIBLE : View.GONE);
-        checkBoulangerie.setVisibility(categories.contains("Boulangerie") ? View.VISIBLE : View.GONE);
-        checkMusee.setVisibility(categories.contains("Musée") ? View.VISIBLE : View.GONE);
+        checkRestaurant.setEnabled(categories.contains("Restaurant"));
+        checkEssence.setEnabled(categories.contains("Station essence"));
+        checkSupermarche.setEnabled(categories.contains("Supermarché"));
+        checkPharmacie.setEnabled(categories.contains("Pharmacie"));
+        checkMagasin.setEnabled(categories.contains("Magasin"));
+        checkCinema.setEnabled(categories.contains("Cinéma"));
+        checkParc.setEnabled(categories.contains("Parc"));
+        checkBoulangerie.setEnabled(categories.contains("Boulangerie"));
+        checkMusee.setEnabled(categories.contains("Musée"));
 
         AlertDialog dialog = builder.create();
         dialog.show();
