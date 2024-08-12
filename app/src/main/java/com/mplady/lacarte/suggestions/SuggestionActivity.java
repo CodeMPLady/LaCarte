@@ -138,7 +138,6 @@ public class SuggestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_suggestions);
         initViews();
         setupLayoutManager();
-        animatedBackground();
         setLocaltion();
         setTitle();
         setAdapter();
@@ -162,14 +161,6 @@ public class SuggestionActivity extends AppCompatActivity {
                 fetchNearbyPlaces(latitude, longitude);
             }
         });
-    }
-
-    private void animatedBackground() {
-        View suggestionsLayout = findViewById(R.id.mainSuggestions);
-        AnimationDrawable animationDrawable = (AnimationDrawable) suggestionsLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(1500);
-        animationDrawable.setExitFadeDuration(2000);
-        animationDrawable.start();
     }
 
     @Override

@@ -12,7 +12,7 @@
     android:background="@color/white"
     android:elevation="5dp"
     app:strokeWidth="1dp"
-    app:strokeColor="@color/darkblue"
+    app:strokeColor="@color/black"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,12 +73,12 @@
             android:textSize="8sp"
             app:icon="@drawable/iconarrow"
             app:iconSize="16sp"
-            app:iconTint="@color/darkblue"
+            app:iconTint="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline67"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline34"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/darkblue" />
+            app:strokeColor="@color/black" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline34"

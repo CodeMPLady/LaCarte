@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".suggestions.SuggestionActivity"
-    android:background="@drawable/gradient_list_suggestions">
+    android:background="@drawable/blobsuggestions1">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -95,8 +95,8 @@
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="#4158AC"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#4E010C"
                 android:elevation="20dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -108,7 +108,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-                app:strokeColor="@color/darkblue" />
+                app:strokeColor="#880015" />
 
 
             <androidx.recyclerview.widget.RecyclerView

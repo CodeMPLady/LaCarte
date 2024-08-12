@@ -11,7 +11,7 @@
     android:layout_marginEnd="10dp"
     android:background="@color/white"
     android:elevation="5dp"
-    app:strokeColor="@color/darkblue"
+    app:strokeColor="@color/black"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,12 +72,12 @@
             android:contentDescription="Bouton plus"
             app:icon="@drawable/iconarrow"
             app:iconSize="16dp"
-            app:iconTint="@color/darkblue"
+            app:iconTint="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline74"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline35"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/darkblue" />
+            app:strokeColor="@color/black" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline35"
