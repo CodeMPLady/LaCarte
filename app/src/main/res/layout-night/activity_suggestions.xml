@@ -38,7 +38,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Périmètre de recherche (mètres)"
+                android:text="Périmètre de recherche"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/sliderRecherche"
                 app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
@@ -46,18 +46,21 @@
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/mapFAB"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
                 android:backgroundTint="#142A45"
                 android:text="CARTE"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                app:autoSizeTextType="uniform"
                 app:icon="@drawable/iconglobe"
                 app:iconSize="30dp"
                 app:iconTint="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/guideline75"
                 app:layout_constraintEnd_toStartOf="@+id/guideline37"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline108"
                 app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
                 app:strokeColor="#5A5A5A"
                 app:strokeWidth="1dp" />
@@ -65,14 +68,18 @@
             <Button
                 android:id="@+id/selectionFiltresFAB"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
                 android:backgroundTint="#142A45"
                 android:text="Catégories"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline75"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline111"
                 app:layout_constraintStart_toStartOf="@+id/guideline37"
                 app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
                 app:strokeColor="#757575" />
@@ -91,8 +98,8 @@
             <Button
                 android:id="@+id/textTypeTitle"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="#000E3C"
                 android:elevation="20dp"
@@ -100,10 +107,12 @@
                 android:paddingRight="10dp"
                 android:text="Type de lieu autour de vous"
                 android:textColor="@color/white"
-                android:textSize="22sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline112"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline110"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline109"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
                 app:strokeColor="#171F61" />
@@ -152,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.18" />
+                app:layout_constraintGuide_percent="0.2" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline76"
@@ -167,6 +176,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline108"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline109"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline110"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline112"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

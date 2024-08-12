@@ -63,6 +63,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.Slider;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
@@ -150,6 +151,17 @@ public class SuggestionActivity extends AppCompatActivity {
 
     private void getRadius() {
         sliderRecherche.addOnChangeListener((slider, value, fromUser) -> rayonDeRecherche = (int) value);
+        sliderRecherche.setLabelFormatter(new LabelFormatter() {
+            @NonNull
+            @Override
+            public String getFormattedValue(float value) {
+                int intValue = (int) value;
+                if (intValue <= 1000)
+                    return intValue + "m";
+                else
+                    return value/1000 +  "km";
+            }
+        });
 
         sliderRecherche.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
             @Override
