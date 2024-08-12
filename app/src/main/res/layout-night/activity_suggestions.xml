@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".suggestions.SuggestionActivity"
-    android:background="@drawable/gradient_suggestions_night">
+    android:background="@drawable/blobsuggestionsnuit2">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,7 +48,7 @@
                 android:id="@+id/mapFAB"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:backgroundTint="#1F406A"
+                android:backgroundTint="#142A45"
                 android:text="CARTE"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -67,7 +67,7 @@
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:backgroundTint="#1F406A"
+                android:backgroundTint="#142A45"
                 android:text="Catégories"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -75,7 +75,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline37"
                 app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
-                app:strokeColor="@color/black" />
+                app:strokeColor="#757575" />
 
             <ImageView
                 android:id="@+id/logoChargementS"
@@ -93,8 +93,8 @@
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="#212D57"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#000E3C"
                 android:elevation="20dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -106,7 +106,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-                app:strokeColor="#010630" />
+                app:strokeColor="#171F61" />
 
             <Button
                 android:id="@+id/buttonNoSuggestions"
