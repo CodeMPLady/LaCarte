@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#11172B"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    tools:context=".searchResult.SearchResultsActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline20"
+        app:layout_constraintEnd_toEndOf="@+id/searchViewResults"
+        app:layout_constraintStart_toStartOf="@+id/searchViewResults"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.fragment.app.FragmentContainerView>
 
     <ImageView
         android:id="@+id/logoChargement"
@@ -21,7 +34,7 @@
     <ListView
         android:id="@+id/suggestionsListViewResults"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@color/white"

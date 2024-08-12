@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.room.Room;
@@ -58,7 +59,7 @@ import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SearchResultsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class SearchResultsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private String query, adresse, nameLieuSearch, categorie;
     private List<String> listCategories;
     private final String[] tableauCategories = {
