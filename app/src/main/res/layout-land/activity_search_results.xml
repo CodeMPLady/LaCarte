@@ -35,13 +35,11 @@
         android:id="@+id/suggestionsListViewResults"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@color/white"
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
         android:maxHeight="200dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/guideline40"
         app:layout_constraintStart_toStartOf="@+id/guideline41"
         app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
@@ -52,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/imageBtnFavoris"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

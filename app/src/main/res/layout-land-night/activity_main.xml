@@ -63,7 +63,7 @@
         android:id="@+id/searchView"
         android:layout_width="400dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:background="#939090"
         android:isScrollContainer="true"
         android:maxWidth="500dp"
@@ -146,9 +146,9 @@
         android:divider="@color/white"
         android:dividerHeight="0.5dp"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
+        app:layout_constraintEnd_toEndOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

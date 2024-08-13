@@ -114,16 +114,14 @@
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="50dp"
         android:background="#FFFFFF"
         android:isScrollContainer="true"
         android:visibility="gone"
         app:animateNavigationIcon="true"
         app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintWidth_max="700dp" />
 
@@ -147,14 +145,13 @@
         android:id="@+id/suggestionsListView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
         android:maxHeight="250dp"
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
