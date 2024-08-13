@@ -339,11 +339,29 @@ public class SuggestionActivity extends AppCompatActivity {
         FloatingActionButton btnAnnulerSelection = dialogView.findViewById(R.id.btnAnnulerSelection);
         RadioGroup radioGroupDialogSuggestions = dialogView.findViewById(R.id.radioGroupDialogSuggestions);
         RadioGroup radioGroupDialog2 = dialogView.findViewById(R.id.radioGroupDialog2);
+        RadioGroup radioGroupDialog3 = dialogView.findViewById(R.id.radioGroupDialog3);
 
         AlertDialog dialog = builder.create();
 
         final boolean[] isSettingByCode = {false};
 
+        int orientationDialog = getResources().getConfiguration().orientation;
+        if (orientationDialog == Configuration.ORIENTATION_PORTRAIT) {
+            setUpDialogPortrait(btnValiderSelection, radioGroupDialogSuggestions,
+                    radioGroupDialog2, isSettingByCode,
+                    dialogView, dialog);
+        } else {
+            setUpDialogLandscape(btnValiderSelection, radioGroupDialogSuggestions,
+                    radioGroupDialog2, radioGroupDialog3,
+                    isSettingByCode, dialogView, dialog);
+        }
+        btnAnnulerSelection.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+    }
+
+    public void setUpDialogPortrait(FloatingActionButton btnValiderSelection, RadioGroup radioGroupDialogSuggestions,
+                                    RadioGroup radioGroupDialog2, final boolean[] isSettingByCode,
+                                    View dialogView, AlertDialog dialog) {
         radioGroupDialogSuggestions.setOnCheckedChangeListener((group, checkedId) -> {
             if (!isSettingByCode[0]) {
                 if (checkedId != -1) {
@@ -364,13 +382,101 @@ public class SuggestionActivity extends AppCompatActivity {
             }
         });
 
-        btnAnnulerSelection.setOnClickListener(v -> dialog.dismiss());
         btnValiderSelection.setOnClickListener(v -> {
             int selectedIdLeft = radioGroupDialogSuggestions.getCheckedRadioButtonId();
-            int selectedIdRight = radioGroupDialog2.getCheckedRadioButtonId();
+            int selectedIdMiddle = radioGroupDialog2.getCheckedRadioButtonId();
 
             if (selectedIdLeft != -1) {
                 RadioButton selectedRadioButton = dialogView.findViewById(selectedIdLeft);
+                selectedText = selectedRadioButton.getText().toString();
+
+                int i=0;
+                while (!selectedText.equals(tableauJolisTypes[i])) {
+                    i++;
+                }
+                categorieTitle = tableauTypes[i];
+                fetchNearbyPlaces(latitude, longitude);
+                textTypeTitle.setText(tableauJolisTypes[i] + " autour de vous");
+                updateRecyclerView();
+                openMapsWithPlaces();
+            }
+
+            if (selectedIdMiddle != -1) {
+                RadioButton selectedRadioButton = dialogView.findViewById(selectedIdMiddle);
+                selectedText = selectedRadioButton.getText().toString();
+
+                int i=0;
+                while (!selectedText.equals(tableauJolisTypes[i])) {
+                    i++;
+                }
+                categorieTitle = tableauTypes[i];
+                fetchNearbyPlaces(latitude, longitude);
+                textTypeTitle.setText(tableauJolisTypes[i] + " autour de vous");
+                updateRecyclerView();
+                openMapsWithPlaces();
+            }
+            dialog.dismiss();
+        });
+    }
+
+    public void setUpDialogLandscape(FloatingActionButton btnValiderSelection, RadioGroup radioGroupDialogSuggestions,
+                                     RadioGroup radioGroupDialog2, RadioGroup radioGroupDialog3,
+                                     final boolean[] isSettingByCode, View dialogView, AlertDialog dialog) {
+        radioGroupDialogSuggestions.setOnCheckedChangeListener((group, checkedId) -> {
+            if (!isSettingByCode[0]) {
+                if (checkedId != -1) {
+                    isSettingByCode[0] = true;
+                    radioGroupDialog2.clearCheck();
+                    radioGroupDialog3.clearCheck();
+                    isSettingByCode[0] = false;
+                }
+            }
+        });
+
+        radioGroupDialog2.setOnCheckedChangeListener((group, checkedId) -> {
+            if (!isSettingByCode[0]) {
+                if (checkedId != -1) {
+                    isSettingByCode[0] = true;
+                    radioGroupDialogSuggestions.clearCheck();
+                    radioGroupDialog3.clearCheck();
+                    isSettingByCode[0] = false;
+                }
+            }
+        });
+
+        radioGroupDialog3.setOnCheckedChangeListener((group, checkedId) -> {
+            if (!isSettingByCode[0]) {
+                if (checkedId != -1) {
+                    isSettingByCode[0] = true;
+                    radioGroupDialogSuggestions.clearCheck();
+                    radioGroupDialog2.clearCheck();
+                    isSettingByCode[0] = false;
+                }
+            }
+        });
+
+        btnValiderSelection.setOnClickListener(v -> {
+            int selectedIdLeft = radioGroupDialogSuggestions.getCheckedRadioButtonId();
+            int selectedIdMiddle = radioGroupDialog2.getCheckedRadioButtonId();
+            int selectedIdRight = radioGroupDialog3.getCheckedRadioButtonId();
+
+            if (selectedIdLeft != -1) {
+                RadioButton selectedRadioButton = dialogView.findViewById(selectedIdLeft);
+                selectedText = selectedRadioButton.getText().toString();
+
+                int i=0;
+                while (!selectedText.equals(tableauJolisTypes[i])) {
+                    i++;
+                }
+                categorieTitle = tableauTypes[i];
+                fetchNearbyPlaces(latitude, longitude);
+                textTypeTitle.setText(tableauJolisTypes[i] + " autour de vous");
+                updateRecyclerView();
+                openMapsWithPlaces();
+            }
+
+            if (selectedIdMiddle != -1) {
+                RadioButton selectedRadioButton = dialogView.findViewById(selectedIdMiddle);
                 selectedText = selectedRadioButton.getText().toString();
 
                 int i=0;
@@ -400,7 +506,6 @@ public class SuggestionActivity extends AppCompatActivity {
             }
             dialog.dismiss();
         });
-        dialog.show();
     }
 
     void openMapsWithPlaces() {
