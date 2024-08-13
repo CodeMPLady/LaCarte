@@ -21,8 +21,8 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 22
-        versionName = "Bug gradle"
+        versionCode = 23
+        versionName = "Optimisation Code et média"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
