@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
@@ -48,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
     private CardView searchCardView;
     private ArrayAdapter<String> adapter;
     private ListView listView;
+    private MaterialSwitch switchDarkMode1;
+
+    private boolean isUserScrolling = false;
+
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClient;
-    private MaterialSwitch switchDarkMode1;
-    private boolean isUserScrolling = false;
     Handler handler;
     Runnable runnable;
 
@@ -62,11 +63,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        setView();
         initView();
         setCarousel();
         setSearchView();
-        btnOnClicks();
+        btnWebsiteOnClicks();
         animatedBackgroundSearchIcon();
         setDarkMode();
 
@@ -74,21 +74,9 @@ public class MainActivity extends AppCompatActivity {
         placesClient = Places.createClient(MainActivity.this);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        handler.removeCallbacks(runnable);
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (handler != null) {
-            handler.removeCallbacks(runnable);
-        }
-    }
 
-    private void btnOnClicks() {
+    private void btnWebsiteOnClicks() {
         fabAbout.setOnClickListener(v -> {
             AlertDialog.Builder builder = aboutBuilder();
             builder.setNegativeButton("Retour", (dialog, which) -> {});
@@ -258,25 +246,26 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         switchDarkMode1.setChecked(isDarkModeOn);
-
         switchDarkMode1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                Toast.makeText(MainActivity.this, "Mode sombre activé", Toast.LENGTH_SHORT).show();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 editor.putBoolean("isDarkModeOn", true);
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                Toast.makeText(MainActivity.this, "Mode sombre désactivé", Toast.LENGTH_SHORT).show();
                 editor.putBoolean("isDarkModeOn", false);
 
             }
             editor.apply();
-            System.out.println("isDarkModeOn : " + isDarkModeOn);
         });
     }
 
     private void initView() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
         listView = findViewById(R.id.suggestionsListView);
         searchView = findViewById(R.id.searchView);
         searchIcon = findViewById(R.id.searchIcon);
@@ -286,12 +275,18 @@ public class MainActivity extends AppCompatActivity {
         switchDarkMode1 = findViewById(R.id.switchDarkMode1);
     }
 
-    private void setView() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacks(runnable);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (handler != null) {
+            handler.removeCallbacks(runnable);
+        }
+    }
 
 }
