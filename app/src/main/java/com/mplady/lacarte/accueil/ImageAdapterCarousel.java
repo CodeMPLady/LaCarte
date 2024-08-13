@@ -31,6 +31,10 @@ public class ImageAdapterCarousel extends RecyclerView.Adapter<ImageAdapterCarou
         return new ViewHolder(view);
     }
 
+    /**
+     * Gère quand on va cliqué sur une image du carousel,
+     * en fonction de la position de l'image on va déterminer le type de suggestion à afficher dans SuggestionActivity.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int imageRessourceID = imageRessourceIDs[position];
