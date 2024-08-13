@@ -6,7 +6,6 @@
     <string name="DESC_logo">LOGO</string>
     <string name="DESC_recycler_carousel">Recycler Carousel</string>
     <string name="DESC_rechercher">Rechercher…</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="DESC_image_carousel">Image Carousel</string>
