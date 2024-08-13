@@ -18,17 +18,104 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchCardView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:elevation="30dp"
+        app:cardCornerRadius="25dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline3">
+
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/searchicon_main_gradient_list"
+            android:contentDescription="@string/DESC_icone_de_recherche"
+            android:padding="7dp"
+            android:src="@drawable/searchicon_main_white"
+            android:visibility="visible" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:isScrollContainer="true"
+        app:animateNavigationIcon="true"
+        app:iconifiedByDefault="false"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintWidth_max="700dp" />
+
+    <ListView
+        android:id="@+id/suggestionsListView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:divider="@color/black"
+        android:dividerHeight="0.5dp"
+        android:maxHeight="250dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCarousel"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:contentDescription="@string/DESC_recycler_carousel"
+        android:orientation="horizontal"
+        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/fabFavoris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchCardView"
+        app:layout_constraintVertical_bias="0.647" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabFavoris"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:padding="20dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:text="@string/btn_aceuil_favoris"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        app:elevation="5dp"
+        app:icon="@drawable/ic_favoris"
+        app:iconPadding="-20dp"
+        app:iconSize="30dp"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintWidth_max="300dp" />
+
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/switchDarkMode1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:thumbIconTint="#E0C4C4"
+        app:thumbTint="#DB0B0B"
+        app:trackTint="#EDE7E7"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:thumbIconTint="#E0C4C4"
-        app:thumbTint="#DB0B0B"
-        app:trackTint="#EDE7E7" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <ImageView
         android:layout_width="30dp"
@@ -50,28 +137,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/switchDarkMode1" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fabFavoris"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="#FFFFFF"
-        android:padding="20dp"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
-        android:text="@string/btn_aceuil_favoris"
-        android:textSize="22sp"
-        app:elevation="5dp"
-        app:icon="@drawable/ic_favoris"
-        android:textColor="@color/black"
-        app:iconPadding="-20dp"
-        app:iconSize="30dp"
-        app:iconTint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintWidth_max="300dp" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAbout"
         android:layout_width="wrap_content"
@@ -85,73 +150,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline6"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/searchCardView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:elevation="30dp"
-        android:visibility="visible"
-        app:cardCornerRadius="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/guideline3">
-
-        <ImageView
-            android:id="@+id/searchIcon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/searchicon_main_gradient_list"
-            android:contentDescription="@string/DESC_icone_de_recherche"
-            android:padding="7dp"
-            android:src="@drawable/searchicon_main_white"
-            android:visibility="visible" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:background="#FFFFFF"
-        android:isScrollContainer="true"
-        android:visibility="gone"
-        app:animateNavigationIcon="true"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintWidth_max="700dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerCarousel"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:contentDescription="@string/DESC_recycler_carousel"
-        android:orientation="horizontal"
-        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/fabFavoris"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCardView"
-        app:layout_constraintVertical_bias="0.647" />
-
-    <ListView
-        android:id="@+id/suggestionsListView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:divider="@color/black"
-        android:dividerHeight="0.5dp"
-        android:maxHeight="250dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
