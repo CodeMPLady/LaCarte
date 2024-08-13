@@ -16,148 +16,181 @@
         android:text="@string/filtres"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkTous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/dialogTitle"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/carme"
         android:text="@string/txt_tous"
-        android:textSize="16sp"
         app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline136"
+        app:layout_constraintEnd_toStartOf="@+id/guideline140"
+        app:layout_constraintStart_toStartOf="@+id/guideline134"
         app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkSupermache"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/checkBoulangerie"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/checkRestaurant"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/carme"
-        android:text="@string/txt_supermarket"
-        android:textSize="16sp"
+        android:text="@string/txt_bakery"
         app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkEssence"
-        app:layout_constraintTop_toBottomOf="@+id/checkEssence" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkMagasin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/checkSupermache"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_magasin"
-        android:textSize="16sp"
-        app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkPharmacie"
-        app:layout_constraintTop_toBottomOf="@+id/checkPharmacie" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+        app:layout_constraintEnd_toStartOf="@+id/guideline137"
+        app:layout_constraintStart_toStartOf="@+id/guideline134"
+        app:layout_constraintTop_toTopOf="@+id/guideline138" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkPharmacie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dialogTitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/checkSupermache"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/carme"
         android:text="@string/txt_pharmacie"
-        android:textSize="16sp"
         app:buttonTint="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintBottom_toTopOf="@+id/guideline138"
+        app:layout_constraintEnd_toStartOf="@+id/guideline141"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline136" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkRestaurant"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/dialogTitle"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_restaurant"
+        app:buttonTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline136"
+        app:layout_constraintEnd_toStartOf="@+id/guideline141"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkEssence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@id/checkTous"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/carme"
         android:text="@string/txt_station_essence"
-        android:textSize="16sp"
         app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkTous"
-        app:layout_constraintTop_toBottomOf="@+id/checkTous" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkCinema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/checkMagasin"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_cinema"
-        android:textSize="16sp"
-        app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkMagasin"
-        app:layout_constraintTop_toBottomOf="@+id/checkMagasin" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkParc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/checkSupermache"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_parc"
-        android:textSize="16sp"
-        app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkCinema"
-        app:layout_constraintTop_toBottomOf="@+id/checkCinema" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkBoulangerie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/checkCinema"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_bakery"
-        android:textSize="16sp"
-        app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkMusee"
-        app:layout_constraintTop_toBottomOf="@+id/checkMusee" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline138"
+        app:layout_constraintEnd_toStartOf="@+id/guideline137"
+        app:layout_constraintStart_toStartOf="@+id/guideline134"
+        app:layout_constraintTop_toTopOf="@+id/guideline136" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkMusee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/checkParc"
-        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/checkMagasin"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/carme"
         android:text="@string/txt_musee"
-        android:textSize="16sp"
         app:buttonTint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+        app:layout_constraintEnd_toStartOf="@+id/guideline141"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline138" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkParc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/checkSupermache"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_parc"
+        app:buttonTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+        app:layout_constraintEnd_toStartOf="@+id/guideline142"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/guideline138" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkSupermache"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/checkCinema"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_supermarket"
+        app:buttonTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline138"
+        app:layout_constraintEnd_toStartOf="@+id/guideline142"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/guideline136" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkMagasin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/checkParc"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_magasin"
+        app:buttonTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline136"
+        app:layout_constraintEnd_toStartOf="@+id/guideline142"
         app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkRestaurant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/checkCinema"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/checkBoulangerie"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/carme"
-        android:text="@string/txt_restaurant"
-        android:textSize="16sp"
+        android:text="@string/txt_cinema"
         app:buttonTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/checkSupermache"
-        app:layout_constraintTop_toBottomOf="@+id/checkSupermache" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline137"
+        app:layout_constraintStart_toStartOf="@+id/guideline134"
+        app:layout_constraintTop_toTopOf="@+id/guideline139" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline27"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline12">
@@ -170,10 +203,11 @@
             android:backgroundTint="#93EA73"
             android:contentDescription="@string/txt_bouton_de_validation"
             app:elevation="0dp"
+            app:fabCustomSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="30dp"
+            app:maxImageSize="26dp"
             app:srcCompat="@drawable/ic_valider"
             app:tint="#0F4A0B" />
 
@@ -185,10 +219,11 @@
             android:backgroundTint="#DC2F2F"
             android:contentDescription="@string/txt_bouton_d_annulation"
             app:elevation="0dp"
+            app:fabCustomSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline9"
             app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="30dp"
+            app:maxImageSize="26dp"
             app:srcCompat="@drawable/close24px"
             app:tint="@color/white" />
 
@@ -197,7 +232,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="72dp" />
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -206,27 +241,83 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="179dp" />
+        app:layout_constraintGuide_percent="0.42" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="29dp" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="319dp" />
+        app:layout_constraintGuide_percent="0.71" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="91dp" />
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline134"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline136"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline137"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.36" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline138"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline139"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.84" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline140"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.21" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline141"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline142"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
