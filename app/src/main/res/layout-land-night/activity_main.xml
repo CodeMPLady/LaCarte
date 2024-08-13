@@ -19,22 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAbout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/DESC_bouton_propos"
-        android:src="@drawable/ic_about"
-        app:backgroundTint="#2E355B"
-        app:fabCustomSize="45dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fabFavoris"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fabFavoris"
-        app:maxImageSize="32dp"
-        app:tint="@color/white" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCardView"
         android:layout_width="50dp"
@@ -56,7 +40,6 @@
             android:padding="5dp"
             android:src="@drawable/searchicon_main_black"
             android:visibility="visible" />
-
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.SearchView
@@ -74,6 +57,17 @@
         app:layout_constraintStart_toStartOf="@+id/searchCardView"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ListView
+        android:id="@+id/suggestionsListView"
+        android:layout_width="400dp"
+        android:layout_height="170dp"
+        android:divider="@color/white"
+        android:dividerHeight="0.5dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCarousel"
         android:layout_width="0dp"
@@ -83,10 +77,24 @@
         app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/fabFavoris"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         app:layout_constraintVertical_bias="0.8" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/DESC_bouton_propos"
+        android:src="@drawable/ic_about"
+        app:backgroundTint="#2E355B"
+        app:fabCustomSize="45dp"
+        app:maxImageSize="32dp"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/fabFavoris"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fabFavoris" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabFavoris"
@@ -111,13 +119,13 @@
         android:id="@+id/switchDarkMode1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:thumbIconTint="#E0C4C4"
+        app:thumbTint="#1E2239"
+        app:trackTint="#B6B6B6"
         app:layout_constraintBottom_toBottomOf="@+id/fabFavoris"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/fabFavoris"
-        app:thumbIconTint="#E0C4C4"
-        app:thumbTint="#1E2239"
-        app:trackTint="#B6B6B6" />
+        app:layout_constraintTop_toTopOf="@+id/fabFavoris" />
 
     <ImageView
         android:layout_width="30dp"
@@ -138,17 +146,6 @@
         app:layout_constraintEnd_toStartOf="@+id/switchDarkMode1"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/switchDarkMode1" />
-
-    <ListView
-        android:id="@+id/suggestionsListView"
-        android:layout_width="400dp"
-        android:layout_height="170dp"
-        android:divider="@color/white"
-        android:dividerHeight="0.5dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/searchView"
-        app:layout_constraintStart_toStartOf="@+id/searchView"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
