@@ -4,7 +4,7 @@
         android:drawable="@drawable/background_main1"
         android:duration="3000"/>
 
-    <item
+   <item
         android:drawable="@drawable/background_main2"
         android:duration="3000"/>
 

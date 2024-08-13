@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         setCarousel();
         setSearchView();
-        btnWebsiteOnClicks();
+        manageBtnOnClick();
         animatedBackgroundSearchIcon();
         setDarkMode();
 
@@ -74,22 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void btnWebsiteOnClicks() {
-        fabAbout.setOnClickListener(v -> {
-            AlertDialog.Builder builder = aboutBuilder();
-            builder.setNegativeButton("Retour", (dialog, which) -> {});
-            builder.setPositiveButton("Voir le site", (dialog, which) -> {
-                Intent intent = new Intent(MainActivity.this, Website_activity.class);
-                startActivity(intent);
-            });
-            builder.create().show();
-        });
-
-        fabFavoris.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
-            startActivity(intent);
-        });
-    }
 
     private void setSearchView() {
         adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
@@ -139,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.searchIcon);
         AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
         animationDrawable.setEnterFadeDuration(1500);
-        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(1500);
         animationDrawable.start();
     }
 
@@ -258,6 +242,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initialise les vues de l'activité ainsi que les variables des éléments visuels de l'application.
+     */
     private void initView() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -271,6 +258,27 @@ public class MainActivity extends AppCompatActivity {
         fabAbout = findViewById(R.id.fabAbout);
         searchCardView = findViewById(R.id.searchCardView);
         switchDarkMode1 = findViewById(R.id.switchDarkMode1);
+    }
+
+    /**
+     * Gère les boutons "A propos" et "Favoris" de MainActivity.
+     * Dans "A propos" créer un dialog pour envoyé l'utilisateur vers l'activité du site Websiste_activity ou non.
+     */
+    private void manageBtnOnClick() {
+        fabAbout.setOnClickListener(v -> {
+            AlertDialog.Builder builder = aboutBuilder();
+            builder.setNegativeButton("Retour", (dialog, which) -> {});
+            builder.setPositiveButton("Voir le site", (dialog, which) -> {
+                Intent intent = new Intent(MainActivity.this, Website_activity.class);
+                startActivity(intent);
+            });
+            builder.create().show();
+        });
+
+        fabFavoris.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FavorisActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
