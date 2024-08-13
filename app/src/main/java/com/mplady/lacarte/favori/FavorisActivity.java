@@ -129,7 +129,7 @@ public class FavorisActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeByteArray(place.getBitmap(), 0, place.getBitmap().length);
             imgLieuDetails.setImageBitmap(bitmap);
         } else
-            imgLieuDetails.setImageResource(R.drawable.imgmapsdefaultresized);
+            imgLieuDetails.setImageResource(R.drawable.imgmapsdefault);
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
 

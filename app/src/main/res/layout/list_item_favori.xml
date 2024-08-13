@@ -32,7 +32,7 @@
             android:layout_marginBottom="8dp"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
-            android:src="@drawable/imgmapsdefaultresized"
+            android:src="@drawable/imgmapsdefault"
             app:layout_constraintBottom_toTopOf="@+id/guideline38"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

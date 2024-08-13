@@ -68,7 +68,7 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
             Bitmap bitmap = BitmapFactory.decodeByteArray(place.getBitmap(), 0, place.getBitmap().length);
             holder.imgLieu.setImageBitmap(bitmap);
         } else {
-            holder.imgLieu.setImageResource(R.drawable.imgmapsdefaultresized);
+            holder.imgLieu.setImageResource(R.drawable.imgmapsdefault);
         }
 
         holder.itemView.setOnClickListener(v -> activity.openDrawer(place));

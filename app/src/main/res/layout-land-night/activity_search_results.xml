@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/wavesearchnuitpaysage"
+    android:background="@drawable/wave_bg_search_results_night_landscape"
     tools:context=".searchResult.SearchResultsActivity">
 
 
@@ -41,7 +41,7 @@
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
         android:maxHeight="200dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline24"
         app:layout_constraintStart_toStartOf="@+id/guideline23"
         app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_du_lieu_recherch"
-            android:src="@drawable/imgmapsdefaultresized" />
+            android:src="@drawable/imgmapsdefault" />
 
     </androidx.cardview.widget.CardView>
 

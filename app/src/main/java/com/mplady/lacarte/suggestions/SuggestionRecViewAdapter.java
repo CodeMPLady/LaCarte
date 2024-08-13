@@ -63,7 +63,7 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         if (suggestion.getPhoto() != null)
             holder.cardSuggestionImage.setImageBitmap(suggestion.getPhoto());
         else
-            holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefaultresized);
+            holder.cardSuggestionImage.setImageResource(R.drawable.imgmapsdefault);
     }
 
     @Override

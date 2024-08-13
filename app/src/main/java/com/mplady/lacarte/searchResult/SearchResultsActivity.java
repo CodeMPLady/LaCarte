@@ -172,7 +172,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String newSelectedSuggestion = suggestionList.get(position);
             newMap(newSelectedSuggestion);
-            placePhoto.setImageResource(R.drawable.imgmapsdefaultresized);
+            placePhoto.setImageResource(R.drawable.imgmapsdefault);
             setFields(newSelectedSuggestion);
             listView.setVisibility(View.GONE);
             searchViewResults.setQuery("", false);

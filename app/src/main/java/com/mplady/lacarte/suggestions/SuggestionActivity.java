@@ -278,7 +278,7 @@ public class SuggestionActivity extends AppCompatActivity {
         if (suggestion.getPhoto() != null)
             imgLieuDetailsSuggestions.setImageBitmap(suggestion.getPhoto());
         else
-            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefaultresized);
+            imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefault);
 
         drawerLayoutSuggestions.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override

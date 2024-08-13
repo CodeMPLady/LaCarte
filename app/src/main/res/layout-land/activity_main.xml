@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wavetest"
+    android:background="@drawable/wave_bg_main"
     tools:context=".accueil.MainActivity">
 
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/DESC_logo"
-        android:src="@drawable/logojourtext"
+        android:src="@drawable/logojour"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -116,10 +116,10 @@
             android:id="@+id/searchIcon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_list"
+            android:background="@drawable/searchicon_main_gradient_list"
             android:contentDescription="@string/DESC_rechercher"
             android:padding="5dp"
-            android:src="@drawable/searchiconfinal"
+            android:src="@drawable/searchicon_main_white"
             android:visibility="visible" />
 
     </androidx.cardview.widget.CardView>

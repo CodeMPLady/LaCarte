@@ -10,7 +10,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:clickable="true"
-    android:background="@drawable/bgfavoris_night_landscape">
+    android:background="@drawable/bg_favoris_night_landscape">
 
     <FrameLayout
         android:layout_width="match_parent"

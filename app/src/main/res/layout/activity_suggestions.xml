@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".suggestions.SuggestionActivity"
-    android:background="@drawable/blobsuggestions1">
+    android:background="@drawable/blob_bg_suggestions">
 
     <FrameLayout
         android:layout_width="match_parent"
