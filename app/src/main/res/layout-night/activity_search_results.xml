@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/wavesearchnuit"
+    android:background="@drawable/wave_bg_search_results_night"
     tools:context=".searchResult.SearchResultsActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -73,7 +73,7 @@
             android:contentDescription="@string/image_du_lieu_recherch"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
-            android:src="@drawable/imgmapsdefaultresized" />
+            android:src="@drawable/imgmapsdefault" />
 
     </androidx.cardview.widget.CardView>
 

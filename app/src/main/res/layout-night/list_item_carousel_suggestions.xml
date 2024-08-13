@@ -27,7 +27,7 @@
             android:contentDescription="Image du lieu"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
-            android:src="@drawable/imgmapsdefaultresized"
+            android:src="@drawable/imgmapsdefault"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline83"
             app:layout_constraintStart_toStartOf="parent"

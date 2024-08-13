@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/wavesearchpaysage"
+    android:background="@drawable/wave_bg_search_results_landscape"
     tools:context=".searchResult.SearchResultsActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -39,7 +39,7 @@
         android:divider="@color/black"
         android:dividerHeight="0.5dp"
         android:maxHeight="200dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline40"
         app:layout_constraintStart_toStartOf="@+id/guideline41"
         app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
@@ -81,7 +81,7 @@
             android:maxHeight="400dp"
             android:minWidth="100dp"
             android:minHeight="100dp"
-            android:src="@drawable/imgmapsdefaultresized" />
+            android:src="@drawable/imgmapsdefault" />
 
     </androidx.cardview.widget.CardView>
 

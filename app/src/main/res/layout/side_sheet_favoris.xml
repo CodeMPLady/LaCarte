@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="Image du lieu"
-                    android:src="@drawable/imgmapsdefaultresized" />
+                    android:src="@drawable/imgmapsdefault" />
 
             </androidx.cardview.widget.CardView>
 
