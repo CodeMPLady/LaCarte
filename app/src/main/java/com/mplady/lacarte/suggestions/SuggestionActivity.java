@@ -89,7 +89,7 @@ public class SuggestionActivity extends AppCompatActivity {
             "Pharmacies",
             "Supermarchés",
             "Boulangerie",
-            "Musee",
+            "Musée",
             "Parcs",
             "Cinémas"
     };

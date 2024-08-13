@@ -288,6 +288,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Crée un AlertDialog quand on appuie sur le bouton about et affiche le texte écrit
+     */
+
     @NonNull
     private AlertDialog.Builder aboutBuilder() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
