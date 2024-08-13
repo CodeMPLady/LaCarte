@@ -1,6 +1,5 @@
 package com.mplady.lacarte.favori;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -46,10 +45,12 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         return new ViewHolder(view);
     }
 
-    @SuppressLint("CheckResult")
+    /**
+     * Met en forme les élements de la liste des favoris en fonction de si il ont une catégorie ou non.
+     * Met sur écoute le click sur un favori pour ouvrir le drawer.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         Place place = favorises.get(position);
         holder.txtName.setText(place.getNom());
         String recupCategorieFavoris = place.getCategorie();
@@ -67,9 +68,8 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
         if (place.getBitmap() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(place.getBitmap(), 0, place.getBitmap().length);
             holder.imgLieu.setImageBitmap(bitmap);
-        } else {
+        } else
             holder.imgLieu.setImageResource(R.drawable.imgmapsdefault);
-        }
 
         holder.itemView.setOnClickListener(v -> activity.openDrawer(place));
     }
