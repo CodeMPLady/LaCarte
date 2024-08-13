@@ -3,12 +3,10 @@ package com.mplady.lacarte.suggestions;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -33,7 +31,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -85,9 +82,6 @@ import java.util.stream.Collectors;
 
 public class SuggestionActivity extends AppCompatActivity {
 
-    private Button textTypeTitle, selectionFAB, buttonNoSuggestions;
-    private ExtendedFloatingActionButton carteDisplay;
-    private RecyclerView selectionRecView;
     private final String[] tableauSelectionCategoriesTitle = {
             "Restaurants",
             "Magasins",
@@ -99,37 +93,35 @@ public class SuggestionActivity extends AppCompatActivity {
             "Parcs",
             "Cinémas"
     };
-    private String[] tableauTypes;
-    private String[] tableauJolisTypes;
-    private SuggestionRecViewAdapter adapter;
-    private PlacesClient placesClientSuggestion;
-    private List<Place> placesTrouve = new ArrayList<>();
-    private Bitmap bitmapClassique, resizedBitmap;
-    private ImageView logoChargement;
 
-    private DrawerLayout drawerLayoutSuggestions;
-    private ImageView imgLieuDetailsSuggestions;
     private TextView txtNomLieuSuggestions, txtAdresseLieuSuggestions;
-    private Chip chipTypeLieuSuggestions;
+    private ImageView logoChargement, imgLieuDetailsSuggestions;
+    private Button textTypeTitle, selectionFAB, buttonNoSuggestions, btnFermerSuggestions;
+    private ExtendedFloatingActionButton carteDisplay, btnYAllerSuggestions;
     private FloatingActionButton btnAjouterAuxFavoris;
-    private Button btnFermerSuggestions;
-    private ExtendedFloatingActionButton btnYAllerSuggestions;
-    private FusedLocationProviderClient fusedLocationClient;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private double latitude, longitude;
-
-    FavorisDB favorisDB;
-    private List<Favori> favorisList;
-    private boolean isFavorite;
-    private String categorieTitle;
+    private SuggestionRecViewAdapter adapter;
+    private RecyclerView selectionRecView;
+    private DrawerLayout drawerLayoutSuggestions;
+    private Chip chipTypeLieuSuggestions;
     private AlertDialog dialogMap;
-    SupportMapFragment mapFragment;
-    private String categorieJolie;
+    private SupportMapFragment mapFragment;
     private FloatingActionButton fermerMap;
-    private int rayonDeRecherche = 500;
     private Slider sliderRecherche;
     private ViewGroup mainContent;
-    String selectedText;
+
+    private int rayonDeRecherche = 500;
+    private double latitude, longitude;
+    private boolean isFavorite;
+    private String categorieTitle, selectedText;
+    private String[] tableauTypes, tableauJolisTypes;
+    private Bitmap bitmapClassique, resizedBitmap;
+    private List<Favori> favorisList;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    FavorisDB favorisDB;
+    private PlacesClient placesClientSuggestion;
+    private List<Place> placesTrouve = new ArrayList<>();
+    private FusedLocationProviderClient fusedLocationClient;
 
 
 
@@ -237,8 +229,6 @@ public class SuggestionActivity extends AppCompatActivity {
     private void updateRecyclerView() {
         if (placesTrouve.isEmpty()) {
             buttonNoSuggestions.setVisibility(View.VISIBLE);
-
-
             buttonNoSuggestions.setText("Pas de " +  selectedText +" dans ce périmètre");
             ArrayList<Favori> placesVide = new ArrayList<>();
             adapter.setSuggestions(placesVide);
@@ -278,9 +268,9 @@ public class SuggestionActivity extends AppCompatActivity {
         txtNomLieuSuggestions.setText(suggestion.getNom());
 
         int i=0;
-        while (!suggestion.getCategorie().equals(tableauTypes[i])) {
+        while (!suggestion.getCategorie().equals(tableauTypes[i]))
             i++;
-        }
+
         String jolieCat = tableauJolisTypes[i];
 
         chipTypeLieuSuggestions.setText(jolieCat);
@@ -388,7 +378,6 @@ public class SuggestionActivity extends AppCompatActivity {
                     i++;
                 }
                 categorieTitle = tableauTypes[i];
-                categorieJolie = selectedText;
                 fetchNearbyPlaces(latitude, longitude);
                 textTypeTitle.setText(tableauJolisTypes[i] + " autour de vous");
                 updateRecyclerView();
