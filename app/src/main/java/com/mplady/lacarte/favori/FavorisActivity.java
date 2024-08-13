@@ -36,6 +36,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.FavorisDB;
+import com.mplady.lacarte.Place;
 import com.mplady.lacarte.R;
 
 import java.util.ArrayList;
@@ -49,9 +50,9 @@ import java.util.concurrent.Executors;
 public class FavorisActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     boolean[] filter = new boolean[10];
-    ArrayList<Favori> favoris = new ArrayList<>();
-    List<Favori> preFilteredFavoris;
-    ArrayList<Favori> filteredFavoris = new ArrayList<>();
+    ArrayList<Place> favoris = new ArrayList<>();
+    List<Place> preFilteredFavorises;
+    ArrayList<Place> filteredFavorises = new ArrayList<>();
     RecyclerView favorisRecView;
     FavoriRecViewAdapter adapter;
     private ImageView imgLieuDetails;
@@ -110,12 +111,12 @@ public class FavorisActivity extends AppCompatActivity {
         favorisRecView.setLayoutManager(new GridLayoutManager(this, spanCount));
     }
 
-    void openDrawer(Favori favori) {
+    void openDrawer(Place place) {
         drawerLayout.openDrawer(GravityCompat.END);
-        txtNomLieu.setText(favori.getNom());
-        txtAdresseLieu.setText(favori.getAdresse());
+        txtNomLieu.setText(place.getNom());
+        txtAdresseLieu.setText(place.getAdresse());
 
-        String recupCategorieFavoriDrawer = favori.getCategorie();
+        String recupCategorieFavoriDrawer = place.getCategorie();
 
         if (Objects.equals(recupCategorieFavoriDrawer, "")) {
             chipTypeLieu.setVisibility(View.GONE);
@@ -124,8 +125,8 @@ public class FavorisActivity extends AppCompatActivity {
             chipTypeLieu.setText(recupCategorieFavoriDrawer);
         }
 
-        if (favori.getBitmap() != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
+        if (place.getBitmap() != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(place.getBitmap(), 0, place.getBitmap().length);
             imgLieuDetails.setImageBitmap(bitmap);
         } else
             imgLieuDetails.setImageResource(R.drawable.imgmapsdefaultresized);
@@ -141,13 +142,13 @@ public class FavorisActivity extends AppCompatActivity {
                 setEnableRecursively(mainContent, false);
                 btnFermer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.END));
                 btnSupprimerFavori.setOnClickListener(v -> {
-                    deleteFavoriInBackground(favori);
+                    deleteFavoriInBackground(place);
                     drawerLayout.closeDrawer(GravityCompat.END);
-                    Toast.makeText(FavorisActivity.this, favori.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FavorisActivity.this, place.getNom() + " supprimé de vos favoris !", Toast.LENGTH_SHORT).show();
                     getFavoriListInBackground(true);
                     recreate();
                 });
-                btnYAllerFavori.setOnClickListener(v -> openGoogleMaps(favori.getNom()));
+                btnYAllerFavori.setOnClickListener(v -> openGoogleMaps(place.getNom()));
             }
 
             @Override
@@ -173,8 +174,8 @@ public class FavorisActivity extends AppCompatActivity {
 
     private Set<String> getCategoriesFromFavoris() {
         Set<String> categories = new HashSet<>();
-        for (Favori favori : favoris) {
-            categories.add(favori.getCategorie());
+        for (Place place : favoris) {
+            categories.add(place.getCategorie());
         }
         return categories;
     }
@@ -239,7 +240,7 @@ public class FavorisActivity extends AppCompatActivity {
             try {
                 favoris.clear();
                 favoris.addAll(favorisDB.getFavoriDAO().getAllFavoris());
-                preFilteredFavoris = new ArrayList<>(favoris);
+                preFilteredFavorises = new ArrayList<>(favoris);
                 handler.post(() -> {
                     if (setAdapter)
                         adapter.setFavoris(favoris);
@@ -277,7 +278,7 @@ public class FavorisActivity extends AppCompatActivity {
     }
 
     private void filtre() {
-        filteredFavoris.clear();
+        filteredFavorises.clear();
         boolean isAnyFilterChecked = false;
         for (int i = 0; i < filter.length - 1; i++) {
             if (filter[i]) {
@@ -287,7 +288,7 @@ public class FavorisActivity extends AppCompatActivity {
         }
 
         if (isAnyFilterChecked) {
-            for (Favori fav : preFilteredFavoris) {
+            for (Place fav : preFilteredFavorises) {
                 String categorie = fav.getCategorie();
                 if ((filter[0] && "Restaurant".equals(categorie)) ||
                         (filter[1] && "Station essence".equals(categorie)) ||
@@ -298,21 +299,21 @@ public class FavorisActivity extends AppCompatActivity {
                         (filter[6] && "Parc".equals(categorie)) ||
                         (filter[7] && "Boulangerie".equals(categorie)) ||
                         (filter[8] && "Musée".equals(categorie))) {
-                    filteredFavoris.add(fav);
+                    filteredFavorises.add(fav);
                 }
             }
         } else {
-            filteredFavoris.addAll(preFilteredFavoris);
+            filteredFavorises.addAll(preFilteredFavorises);
         }
         if (filter[9])
             recreate();
-        adapter.updateFavoris(filteredFavoris);
+        adapter.updateFavoris(filteredFavorises);
     }
 
-    private void deleteFavoriInBackground(Favori favori) {
+    private void deleteFavoriInBackground(Place place) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
-            favorisDB.getFavoriDAO().deleteFavori(favori);
+            favorisDB.getFavoriDAO().deleteFavori(place);
             getFavoriListInBackground(true);
             executorService.shutdown();
         });

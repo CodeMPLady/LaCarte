@@ -192,7 +192,7 @@
             android:id="@+id/btnAjouterAuxFavoris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Bouton suppression favori"
+            android:contentDescription="Bouton suppression place"
             app:backgroundTint="#00026E"
             app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,4 +1,4 @@
-package com.mplady.lacarte.favori;
+package com.mplady.lacarte;
 
 import android.graphics.Bitmap;
 import android.os.Parcel;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity(tableName = "Favoris")
-public class Favori implements Parcelable {
+public class Place implements Parcelable {
 
     @PrimaryKey
     @ColumnInfo(name = "nomLieu")
@@ -36,19 +36,14 @@ public class Favori implements Parcelable {
     @Ignore
     private String sousCategorie;
 
-    @Ignore
-    public Favori() {
-        nom = "";
-    }
-
-    public Favori(@NonNull String nom, String categorie, byte[] bitmapData, String adresse) {
+    public Place(@NonNull String nom, String categorie, byte[] bitmapData, String adresse) {
         this.nom = nom;
         this.categorie = categorie;
         this.bitmapData = bitmapData;
         this.adresse = adresse;
     }
 
-    public Favori(@NonNull String nom, String categorie,Bitmap photo, String adresse, String sousCategorie) {
+    public Place(@NonNull String nom, String categorie, Bitmap photo, String adresse, String sousCategorie) {
         this.nom = nom;
         this.categorie = categorie;
         this.adresse = adresse;
@@ -56,22 +51,22 @@ public class Favori implements Parcelable {
         this.sousCategorie = sousCategorie;
     }
 
-    protected Favori(Parcel in) {
+    protected Place(Parcel in) {
         nom = Objects.requireNonNull(in.readString());
         categorie = in.readString();
         adresse = in.readString();
         bitmapData = in.createByteArray();
     }
 
-    public static final Creator<Favori> CREATOR = new Creator<Favori>() {
+    public static final Creator<Place> CREATOR = new Creator<Place>() {
         @Override
-        public Favori createFromParcel(Parcel in) {
-            return new Favori(in);
+        public Place createFromParcel(Parcel in) {
+            return new Place(in);
         }
 
         @Override
-        public Favori[] newArray(int size) {
-            return new Favori[size];
+        public Place[] newArray(int size) {
+            return new Place[size];
         }
     };
 

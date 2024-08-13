@@ -52,7 +52,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.CircularBounds;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
-import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.api.net.SearchNearbyRequest;
@@ -66,7 +65,7 @@ import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.PlacesClientManager;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.favori.Favori;
+import com.mplady.lacarte.Place;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -116,12 +115,12 @@ public class SuggestionActivity extends AppCompatActivity {
     private String categorieTitle, selectedText;
     private String[] tableauTypes, tableauJolisTypes;
     private Bitmap bitmapClassique, resizedBitmap;
-    private List<Favori> favorisList;
+    private List<Place> favorisList;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     FavorisDB favorisDB;
     private PlacesClient placesClientSuggestion;
-    private List<Place> placesTrouve = new ArrayList<>();
+    private List<com.google.android.libraries.places.api.model.Place> placesTrouve = new ArrayList<>();
     private FusedLocationProviderClient fusedLocationClient;
 
 
@@ -193,9 +192,9 @@ public class SuggestionActivity extends AppCompatActivity {
 
     private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
         chargement();
-        final List<Place.Field> placeFields = Arrays.asList(
-                Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,
-                Place.Field.TYPES, Place.Field.PHOTO_METADATAS, Place.Field.PRIMARY_TYPE);
+        final List<com.google.android.libraries.places.api.model.Place.Field> placeFields = Arrays.asList(
+                com.google.android.libraries.places.api.model.Place.Field.ID, com.google.android.libraries.places.api.model.Place.Field.NAME, com.google.android.libraries.places.api.model.Place.Field.ADDRESS,
+                com.google.android.libraries.places.api.model.Place.Field.TYPES, com.google.android.libraries.places.api.model.Place.Field.PHOTO_METADATAS, com.google.android.libraries.places.api.model.Place.Field.PRIMARY_TYPE);
 
         LatLng center = new LatLng(latitudeA, longitudeA);
         CircularBounds circle = CircularBounds.newInstance(center, rayonDeRecherche);
@@ -231,12 +230,12 @@ public class SuggestionActivity extends AppCompatActivity {
         if (placesTrouve.isEmpty()) {
             buttonNoSuggestions.setVisibility(View.VISIBLE);
             buttonNoSuggestions.setText("Pas de " +  selectedText +" dans ce périmètre");
-            ArrayList<Favori> placesVide = new ArrayList<>();
+            ArrayList<Place> placesVide = new ArrayList<>();
             adapter.setSuggestions(placesVide);
         } else {
             buttonNoSuggestions.setVisibility(View.GONE);
-            ArrayList<Favori> places = new ArrayList<>();
-            for (Place place : placesTrouve) {
+            ArrayList<Place> places = new ArrayList<>();
+            for (com.google.android.libraries.places.api.model.Place place : placesTrouve) {
                 List<PhotoMetadata> photoMetadataList = place.getPhotoMetadatas();
                 if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                     PhotoMetadata photoMetadata = photoMetadataList.get(0);
@@ -248,7 +247,7 @@ public class SuggestionActivity extends AppCompatActivity {
                         bitmapClassique = fetchPhotoResponse.getBitmap();
                         resizedBitmap = Bitmap.createScaledBitmap(bitmapClassique, 400, 400, true);
 
-                        Favori favori = new Favori(
+                        Place favori = new Place(
                                 Objects.requireNonNull(place.getName()),
                                 categorieTitle,
                                 resizedBitmap,
@@ -264,7 +263,7 @@ public class SuggestionActivity extends AppCompatActivity {
         }
     }
 
-    void openDrawer(Favori suggestion) {
+    void openDrawer(Place suggestion) {
         drawerLayoutSuggestions.openDrawer(GravityCompat.END);
         txtNomLieuSuggestions.setText(suggestion.getNom());
 
@@ -295,8 +294,8 @@ public class SuggestionActivity extends AppCompatActivity {
                 isFavorite = false;
                 btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
                 getFavoriListInBackground();
-                for(Favori favori : favorisList) {
-                    if (favori.getNom().equals(nomLieu)) {
+                for(Place place : favorisList) {
+                    if (place.getNom().equals(nomLieu)) {
                         btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
                         isFavorite = true;
                         break;
@@ -548,7 +547,7 @@ public class SuggestionActivity extends AppCompatActivity {
         if (placesTrouve != null && !placesTrouve.isEmpty()) {
             LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
-            for (Place place : placesTrouve) {
+            for (com.google.android.libraries.places.api.model.Place place : placesTrouve) {
                 String addressStr = place.getAddress();
                 try {
                     assert addressStr != null;
@@ -638,20 +637,20 @@ public class SuggestionActivity extends AppCompatActivity {
         });
     }
 
-    public void addFavoriInBackground(Favori favori) {
+    public void addFavoriInBackground(Place place) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
-            favorisDB.getFavoriDAO().addFavori(favori);
+            favorisDB.getFavoriDAO().addFavori(place);
             handler.post(() -> {});
         });
     }
 
-    public void deleteFavoriInBackground(Favori favori) {
+    public void deleteFavoriInBackground(Place place) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
-            favorisDB.getFavoriDAO().deleteFavori(favori);
+            favorisDB.getFavoriDAO().deleteFavori(place);
             handler.post(() -> {});
         });
     }
@@ -666,22 +665,22 @@ public class SuggestionActivity extends AppCompatActivity {
                 BitmapDrawable draw = (BitmapDrawable) imgLieuDetailsSuggestions.getDrawable();
                 byte[] bitmapData = convertBitmapToByteArray(draw.getBitmap());
 
-                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
-                addFavoriInBackground(favori1);
+                Place place1 = new Place(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                addFavoriInBackground(place1);
 
                 btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
                 isFavorite = true;
                 Toast.makeText(SuggestionActivity.this, nomLieu + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
-                for(Favori favori : favorisList){
-                    if(favori.getNom().equals(txtNomLieuSuggestions.getText().toString())){
+                for(Place place : favorisList){
+                    if(place.getNom().equals(txtNomLieuSuggestions.getText().toString())){
                         String nomLieu = txtNomLieuSuggestions.getText().toString();
                         String categorieLieu = chipTypeLieuSuggestions.getText().toString();
                         String adresseLieu = txtAdresseLieuSuggestions.getText().toString();
                         byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
 
-                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
-                        deleteFavoriInBackground(favori1);
+                        Place place1 = new Place(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                        deleteFavoriInBackground(place1);
                         break;
                     }
                 }

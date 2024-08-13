@@ -34,7 +34,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
-import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
@@ -45,7 +44,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.PlacesClientManager;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.favori.Favori;
+import com.mplady.lacarte.Place;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -94,7 +93,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
     private PlacesClient placesClientResults;
     private Bitmap bitmap, resizedBitmap;
     private FavorisDB favorisDB;
-    private List<Favori> favorisList;
+    private List<Place> favorisList;
     private ImageView logoChargement;
 
 
@@ -179,8 +178,8 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
             searchViewResults.setQuery("", false);
             searchViewResults.clearFocus();
 
-            for(Favori favori : favorisList){
-                if(favori.getNom().equals(nameLieuSearch)){
+            for(Place place : favorisList){
+                if(place.getNom().equals(nameLieuSearch)){
                     btnFavoris.setImageResource(R.drawable.bookmarkfill);
                     isFavorite = true;
                     break;
@@ -194,7 +193,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
 
     private void setFields(String query) {
         chargement();
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
+        List<com.google.android.libraries.places.api.model.Place.Field> fields = Arrays.asList(com.google.android.libraries.places.api.model.Place.Field.ID, com.google.android.libraries.places.api.model.Place.Field.NAME, com.google.android.libraries.places.api.model.Place.Field.ADDRESS, com.google.android.libraries.places.api.model.Place.Field.PHOTO_METADATAS, com.google.android.libraries.places.api.model.Place.Field.TYPES);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                 .setQuery(query)
                 .build();
@@ -204,7 +203,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                 FetchPlaceRequest requests = FetchPlaceRequest.builder(placeId, fields).build();
 
                 placesClientResults.fetchPlace(requests).addOnSuccessListener((responses) -> {
-                    Place place = responses.getPlace();
+                    com.google.android.libraries.places.api.model.Place place = responses.getPlace();
                     nameLieuSearch = place.getName();
                     nomLieuSearch.setText(nameLieuSearch);
                     adresse = place.getAddress();
@@ -239,7 +238,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                             placePhoto.setImageBitmap(resizedBitmap);
                         }).addOnFailureListener((exception) -> System.out.println("Error fetching photo"));
                     }
-                    for(Favori favori : favorisList){
+                    for(Place favori : favorisList){
                         if(favori.getNom().equals(nameLieuSearch)){
                             btnFavoris.setImageResource(R.drawable.bookmarkfill);
                             isFavorite = true;
@@ -307,22 +306,22 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                 String adresseLieu = adresseLieuSearch.getText().toString();
                 byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
 
-                Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
-                addFavoriInBackground(favori1);
+                Place place1 = new Place(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                addFavoriInBackground(place1);
 
                 btnFavoris.setImageResource(R.drawable.bookmarkfill);
                 isFavorite = true;
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
-                for(Favori favori : favorisList){
-                    if(favori.getNom().equals(nameLieuSearch)){
+                for(Place place : favorisList){
+                    if(place.getNom().equals(nameLieuSearch)){
                         String nomLieu = nomLieuSearch.getText().toString();
                         String categorieLieu = categorieLieuSearch.getText().toString();
                         String adresseLieu = adresseLieuSearch.getText().toString();
                         byte[] bitmapData = convertBitmapToByteArray(resizedBitmap);
 
-                        Favori favori1 = new Favori(nomLieu, categorieLieu, bitmapData, adresseLieu);
-                        deleteFavoriInBackground(favori1);
+                        Place place1 = new Place(nomLieu, categorieLieu, bitmapData, adresseLieu);
+                        deleteFavoriInBackground(place1);
                         break;
                     }
                 }
@@ -342,20 +341,20 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
         return outputStream.toByteArray();
     }
 
-    public void deleteFavoriInBackground(Favori favori) {
+    public void deleteFavoriInBackground(Place place) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
-            favorisDB.getFavoriDAO().deleteFavori(favori);
+            favorisDB.getFavoriDAO().deleteFavori(place);
             handler.post(() -> {});
         });
     }
 
-    public void addFavoriInBackground(Favori favori) {
+    public void addFavoriInBackground(Place place) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(() -> {
-            favorisDB.getFavoriDAO().addFavori(favori);
+            favorisDB.getFavoriDAO().addFavori(place);
             handler.post(() -> {});
         });
     }

@@ -6,22 +6,20 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.mplady.lacarte.favori.Favori;
-
 import java.util.List;
 
 @Dao
 public interface FavoriDAO {
 
     @Insert
-    void addFavori(Favori favori);
+    void addFavori(Place place);
 
     @Delete
-    void deleteFavori(Favori favori);
+    void deleteFavori(Place place);
 
     @Update
-    void updateFavori(Favori favori);
+    void updateFavori(Place place);
 
     @Query("SELECT * FROM Favoris")
-    List<Favori> getAllFavoris();
+    List<Place> getAllFavoris();
 }

@@ -19,6 +19,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.android.material.divider.MaterialDivider;
 import com.mplady.lacarte.FavorisDB;
+import com.mplady.lacarte.Place;
 import com.mplady.lacarte.R;
 
 import java.util.List;
@@ -27,12 +28,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdapter.ViewHolder>{
-    private List<Favori> favoris;
+    private List<Place> favorises;
     private final FavorisActivity activity;
     FavorisDB favorisDB;
 
-    public FavoriRecViewAdapter(List<Favori> favoris, FavorisActivity activity) {
-        this.favoris = favoris;
+    public FavoriRecViewAdapter(List<Place> favorises, FavorisActivity activity) {
+        this.favorises = favorises;
         this.activity = activity;
         callBackDatabase();
         getFavoriListInBackground();
@@ -49,9 +50,9 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Favori favori = favoris.get(position);
-        holder.txtName.setText(favori.getNom());
-        String recupCategorieFavoris = favori.getCategorie();
+        Place place = favorises.get(position);
+        holder.txtName.setText(place.getNom());
+        String recupCategorieFavoris = place.getCategorie();
         holder.txtDescription.setText(recupCategorieFavoris);
 
         if (Objects.equals(recupCategorieFavoris, "")) {
@@ -63,14 +64,14 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
             holder.dividerItemFavori.setVisibility(View.VISIBLE);
         }
 
-        if (favori.getBitmap() != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(favori.getBitmap(), 0, favori.getBitmap().length);
+        if (place.getBitmap() != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(place.getBitmap(), 0, place.getBitmap().length);
             holder.imgLieu.setImageBitmap(bitmap);
         } else {
             holder.imgLieu.setImageResource(R.drawable.imgmapsdefaultresized);
         }
 
-        holder.itemView.setOnClickListener(v -> activity.openDrawer(favori));
+        holder.itemView.setOnClickListener(v -> activity.openDrawer(place));
     }
 
     private void callBackDatabase() {
@@ -94,24 +95,24 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
     public void getFavoriListInBackground() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
-            List<Favori> favorisList = favorisDB.getFavoriDAO().getAllFavoris();
+            List<Place> favorisList = favorisDB.getFavoriDAO().getAllFavoris();
             new Handler(Looper.getMainLooper()).post(() -> setFavoris(favorisList));
         });
     }
 
     @Override
     public int getItemCount() {
-        return favoris.size();
+        return favorises.size();
     }
 
-    public void setFavoris(List<Favori> favoris) {
-        this.favoris = favoris;
+    public void setFavoris(List<Place> favorises) {
+        this.favorises = favorises;
         notifyDataSetChanged();
     }
 
-    public void updateFavoris(List<Favori> newFavoris) {
-        this.favoris.clear();
-        this.favoris.addAll(newFavoris);
+    public void updateFavoris(List<Place> newFavorises) {
+        this.favorises.clear();
+        this.favorises.addAll(newFavorises);
         notifyDataSetChanged();
     }
 

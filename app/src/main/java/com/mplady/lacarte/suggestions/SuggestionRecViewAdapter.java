@@ -11,17 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.R;
-import com.mplady.lacarte.favori.Favori;
+import com.mplady.lacarte.Place;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRecViewAdapter.ViewHolder>{
 
-    private final ArrayList<Favori> suggestions = new ArrayList<>();
+    private final ArrayList<Place> suggestions = new ArrayList<>();
     private final SuggestionActivity activity;
     private final String[] tableauTypes;
     private final String[] tableauJolisTypes;
@@ -35,7 +33,7 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
         this.tableauJolisTypes = tableauJolisTypes;
     }
 
-    public void setSuggestions(ArrayList<Favori> newSuggestions) {
+    public void setSuggestions(ArrayList<Place> newSuggestions) {
         this.suggestions.clear();
         this.suggestions.addAll(newSuggestions);
         notifyDataSetChanged();
@@ -50,7 +48,7 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Favori suggestion = suggestions.get(position);
+        Place suggestion = suggestions.get(position);
         String recupCategorieSuggestion = suggestion.getSousCategorie();
 
         i=0;
@@ -60,7 +58,6 @@ public class SuggestionRecViewAdapter extends RecyclerView.Adapter<SuggestionRec
                 break;
         }
         holder.cardSuggestionCategorie.setText(tableauJolisTypes[i]);
-        System.out.println("txt Holder: " + holder.cardSuggestionCategorie.getText());
         holder.cardSuggestionName.setText(suggestion.getNom());
         holder.detailsFAB.setOnClickListener(v -> activity.openDrawer(suggestion));
         if (suggestion.getPhoto() != null)
