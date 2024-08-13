@@ -99,6 +99,8 @@
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="-2dp"
                 android:backgroundTint="#142A45"
                 android:text="Catégories"
                 android:textColor="@color/white"

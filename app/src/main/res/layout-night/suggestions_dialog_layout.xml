@@ -9,12 +9,12 @@
         android:id="@+id/dialogSelectionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/fira_sans"
         android:text="Catégories"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline162"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,11 +24,11 @@
         android:id="@+id/radioGroupDialogSuggestions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline164"
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogSelectionTitle">
+        app:layout_constraintTop_toTopOf="@+id/guideline162">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnRestaurant"
@@ -49,50 +49,12 @@
             app:buttonTint="@color/white" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioBtnPharmacie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:paddingEnd="15dp"
-            android:text="Pharmacie"
-            android:textColor="@color/white"
-            app:buttonTint="@color/white" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnSupermache"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:paddingEnd="15dp"
             android:text="Supermarché"
-            android:textColor="@color/white"
-            app:buttonTint="@color/white" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioBtnBoulangerie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Boulangerie"
-            android:textColor="@color/white"
-            app:buttonTint="@color/white" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroupDialog2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline26"
-        app:layout_constraintTop_toBottomOf="@+id/dialogSelectionTitle">
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioBtnMagasin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Magasin"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -114,6 +76,44 @@
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupDialog2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline163"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline26"
+        app:layout_constraintTop_toTopOf="@+id/guideline162">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioBtnMagasin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Magasin"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioBtnPharmacie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Pharmacie"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioBtnBoulangerie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Boulangerie"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white" />
+
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioBtnParc"
             android:layout_width="wrap_content"
@@ -129,16 +129,14 @@
         android:id="@+id/btnValiderSelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#1A420C"
         android:contentDescription="@string/txt_bouton_de_validation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupDialogSuggestions"
+        app:layout_constraintTop_toTopOf="@+id/guideline164"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/ic_valider"
         app:tint="@color/white" />
@@ -147,16 +145,14 @@
         android:id="@+id/btnAnnulerSelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
         android:backgroundTint="#7A0B0B"
         android:contentDescription="@string/txt_bouton_d_annulation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupDialogSuggestions"
+        app:layout_constraintTop_toTopOf="@+id/guideline164"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/close24px"
         app:tint="#FFFFFF" />
@@ -166,13 +162,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="175dp" />
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline160"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline161"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline162"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline163"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.69" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline164"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.82" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
