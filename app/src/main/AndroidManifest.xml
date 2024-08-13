@@ -23,18 +23,6 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".suggestions.SuggestionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".searchResult.SearchResultsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".favori.FavorisActivity"
-            android:exported="false" />
-        <activity
-            android:name=".accueil.Website_activity"
-            android:exported="false" />
-        <activity
             android:name=".accueil.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -43,6 +31,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".searchResult.SearchResultsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".suggestions.SuggestionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".favori.FavorisActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".accueil.Website_activity"
+            android:exported="false" />
     </application>
 
 </manifest>
