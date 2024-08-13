@@ -13,9 +13,9 @@
     android:background="@drawable/bg_favoris">
 
     <FrameLayout
+        android:id="@+id/mainFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mainFrame">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,7 +35,6 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/guideline13"
                 app:layout_constraintEnd_toStartOf="@+id/guideline7"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,26 +44,22 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#950202"
                 android:contentDescription="Filtre favorises"
-                android:src="@drawable/tuneicon"
                 app:fabCustomSize="50dp"
-                app:fabSize="auto"
+                android:src="@drawable/tuneicon"
+                app:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/tabFavoris"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tabFavoris"
-                app:layout_constraintTop_toTopOf="@+id/tabFavoris"
-                app:layout_constraintVertical_bias="0.444"
-                app:tint="@color/white" />
+                app:layout_constraintTop_toTopOf="@+id/tabFavoris"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favorisRecView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_below="@+id/tabFavoris"
                 app:layout_constraintBottom_toTopOf="@+id/guideline40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline13"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="@+id/guideline13"/>
 
             <Button
                 android:id="@+id/textNoFavoris"
@@ -72,21 +67,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#DFDEDE"
-                android:fontFamily="@font/carme"
                 android:paddingStart="25dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="25dp"
                 android:paddingBottom="12dp"
-                android:text="Aucun place \npour le moment"
+                android:text="Aucun favori \npour le moment"
                 android:textColor="@color/darkblue"
                 android:textSize="20sp"
-                android:visibility="visible"
+                android:fontFamily="@font/carme"
+                app:strokeColor="@color/darkblue"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/guideline40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline13"
-                app:layout_constraintVertical_bias="0.4"
-                app:strokeColor="@color/darkblue" />
+                app:layout_constraintVertical_bias="0.4" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline7"
@@ -108,7 +103,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.95" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
@@ -117,6 +111,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="end"/>
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

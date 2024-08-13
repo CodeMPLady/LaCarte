@@ -30,6 +30,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="@string/image_du_lieu"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
             android:src="@drawable/imgmapsdefault"
@@ -46,7 +47,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/carme"
-            android:text="Nom"
+            android:text="@string/nom_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -63,11 +64,10 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
-            android:visibility="gone"
             app:dividerColor="#8A8A8A"
             app:dividerThickness="1dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
@@ -78,7 +78,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/carme"
-            android:text="Catégorie"
+            android:text="@string/categorie_du_lieu"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:visibility="visible"
@@ -102,5 +102,4 @@
             app:layout_constraintGuide_begin="226dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>

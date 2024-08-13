@@ -25,24 +25,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline15">
-
-                <ImageView
-                    android:id="@+id/imgLieuDetails"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:contentDescription="Image du lieu"
-                    android:src="@drawable/imgmapsdefault" />
-
-            </androidx.cardview.widget.CardView>
-
             <Button
                 android:id="@+id/btnSupprimerFavori"
                 style="?attr/materialIconButtonFilledStyle"
@@ -56,6 +38,23 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline56"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline15">
+
+                <ImageView
+                    android:id="@+id/imgLieuDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/image_du_lieu"
+                    android:src="@drawable/imgmapsdefault" />
+            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline15"
@@ -81,12 +80,12 @@
             app:icon="@drawable/close24px"
             app:iconSize="24sp"
             app:iconTint="@color/white"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline57"
             app:layout_constraintEnd_toStartOf="@+id/guideline92"
             app:layout_constraintStart_toStartOf="@+id/guideline58"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/white"
-            app:strokeWidth="2dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtNomLieu"
@@ -95,13 +94,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Nom du lieu"
+            android:text="@string/nom_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline58"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline57" />
 
@@ -113,7 +111,6 @@
             app:dividerColor="@color/white"
             app:dividerThickness="2dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline58"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toBottomOf="@+id/guideline59" />
 
@@ -125,7 +122,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Adresse"
+            android:text="@string/adresse_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -138,12 +135,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#272E53"
-            android:text="Catégorie du lieu"
+            android:text="@string/categorie_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:visibility="visible"
             app:chipStrokeColor="@color/white"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline58"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
@@ -155,21 +152,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:maxWidth="320dp"
             android:backgroundTint="#364073"
             android:contentDescription="@string/bouton_y_aller"
-            android:maxWidth="320dp"
             android:text="@string/s_y_rendre"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:icon="@drawable/iconnav"
             app:iconSize="20dp"
             app:iconTint="@color/white"
+            app:strokeColor="#00026E"
+            app:strokeWidth="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline58"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toBottomOf="@+id/chipTypeLieu"
-            app:strokeColor="#00026E"
-            app:strokeWidth="1dp" />
+            app:layout_constraintTop_toBottomOf="@+id/chipTypeLieu" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline16"
@@ -207,7 +204,4 @@
             app:layout_constraintGuide_percent="0.94" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </androidx.cardview.widget.CardView>

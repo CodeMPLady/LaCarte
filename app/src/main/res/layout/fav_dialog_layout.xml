@@ -21,6 +21,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline29"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnValider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#93EA73"
+            android:contentDescription="@string/txt_bouton_de_validation"
+            app:elevation="0dp"
+            app:maxImageSize="30dp"
+            app:srcCompat="@drawable/ic_valider"
+            app:tint="#0F4A0B"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAnnuler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="#DC2F2F"
+            android:contentDescription="@string/txt_bouton_d_annulation"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="parent"
+            app:maxImageSize="30dp"
+            app:srcCompat="@drawable/close24px"
+            app:tint="@color/white" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkTous"
         android:layout_width="0dp"
@@ -34,6 +81,22 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline110"
         app:layout_constraintEnd_toStartOf="@+id/guideline114"
         app:layout_constraintStart_toStartOf="@+id/guideline107"
+        app:layout_constraintTop_toTopOf="@+id/guideline29" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkRestaurant"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_restaurant"
+        app:buttonTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline110"
+        app:layout_constraintEnd_toStartOf="@+id/guideline108"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -53,6 +116,21 @@
         app:layout_constraintTop_toTopOf="@+id/guideline110" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkEssence"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_station_essence"
+        app:buttonTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline111"
+        app:layout_constraintEnd_toStartOf="@+id/guideline108"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline110" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkPharmacie"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -69,38 +147,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline111" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkRestaurant"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_restaurant"
-        app:buttonTint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/guideline110"
-        app:layout_constraintEnd_toStartOf="@+id/guideline108"
-        app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="@+id/guideline29" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkEssence"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_station_essence"
-        app:buttonTint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/guideline111"
-        app:layout_constraintEnd_toStartOf="@+id/guideline108"
-        app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="@+id/guideline110" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkSupermache"
+        android:id="@+id/checkSupermarche"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -178,53 +225,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline108"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline113" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/guideline29"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline12">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnValider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="#93EA73"
-            android:contentDescription="@string/txt_bouton_de_validation"
-            app:elevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="30dp"
-            app:srcCompat="@drawable/ic_valider"
-            app:tint="#0F4A0B" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAnnuler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="#DC2F2F"
-            android:contentDescription="@string/txt_bouton_d_annulation"
-            app:elevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="30dp"
-            app:srcCompat="@drawable/close24px"
-            app:tint="@color/white" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"

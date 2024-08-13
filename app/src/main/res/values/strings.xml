@@ -41,4 +41,6 @@
     <string name="icone_mode_jour">Icone mode jour</string>
     <string name="logo_chargement">Logo Chargement</string>
     <string name="categorie_du_lieu">Catégorie du lieu</string>
+    <string name="image_du_lieu">Image du lieu</string>
+    <string name="adresse_du_lieu">Adresse</string>
 </resources>

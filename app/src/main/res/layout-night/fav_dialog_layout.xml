@@ -22,6 +22,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline29"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnValider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#1A420C"
+            android:contentDescription="@string/txt_bouton_de_validation"
+            app:elevation="0dp"
+            app:maxImageSize="30dp"
+            app:srcCompat="@drawable/ic_valider"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAnnuler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="#7A0B0B"
+            android:contentDescription="@string/txt_bouton_d_annulation"
+            app:elevation="0dp"
+            app:maxImageSize="30dp"
+            app:srcCompat="@drawable/close24px"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkTous"
         android:layout_width="0dp"
@@ -35,43 +83,8 @@
         app:buttonTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline130"
         app:layout_constraintEnd_toStartOf="@+id/guideline129"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/guideline127"
         app:layout_constraintTop_toTopOf="@+id/guideline29" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkMagasin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@id/checkTous"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="32dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_magasin"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline131"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="@+id/guideline127"
-        app:layout_constraintTop_toTopOf="@+id/guideline130" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkPharmacie"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkRestaurant"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_pharmacie"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline132"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="@+id/guideline127"
-        app:layout_constraintTop_toTopOf="@+id/guideline131" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkRestaurant"
@@ -91,10 +104,25 @@
         app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkMagasin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="32dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_magasin"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline131"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline127"
+        app:layout_constraintTop_toTopOf="@+id/guideline130" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkEssence"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@+id/checkSupermache"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:autoSizeTextType="uniform"
@@ -103,16 +131,29 @@
         app:buttonTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline131"
         app:layout_constraintEnd_toStartOf="@+id/guideline128"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="@+id/guideline130"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/guideline130"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkSupermache"
+        android:id="@+id/checkPharmacie"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@+id/checkMagasin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_pharmacie"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline132"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline127"
+        app:layout_constraintTop_toTopOf="@+id/guideline131" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkSupermarche"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
@@ -129,7 +170,6 @@
         android:id="@+id/checkBoulangerie"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@+id/checkSupermache"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
@@ -178,7 +218,6 @@
         android:id="@+id/checkCinema"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@+id/checkBoulangerie"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
@@ -190,54 +229,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline128"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline133" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/guideline29"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline12">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnValider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="#1A420C"
-            android:contentDescription="@string/txt_bouton_de_validation"
-            app:elevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="30dp"
-            app:srcCompat="@drawable/ic_valider"
-            app:tint="@color/white" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAnnuler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="#7A0B0B"
-            android:contentDescription="@string/txt_bouton_d_annulation"
-            app:elevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="30dp"
-            app:srcCompat="@drawable/close24px"
-            app:tint="#FFFFFF" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
