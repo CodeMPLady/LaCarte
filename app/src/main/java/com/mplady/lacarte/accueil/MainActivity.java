@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 
-import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import androidx.annotation.NonNull;
@@ -31,7 +30,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
-import com.mplady.lacarte.BuildConfig;
+import com.mplady.lacarte.PlacesClientManager;
 import com.mplady.lacarte.favori.FavorisActivity;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.searchResult.SearchResultsActivity;
@@ -70,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
         animatedBackgroundSearchIcon();
         setDarkMode();
 
-        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
-        placesClient = Places.createClient(MainActivity.this);
+        placesClient = PlacesClientManager.getPlacesClient(this);
     }
 
 

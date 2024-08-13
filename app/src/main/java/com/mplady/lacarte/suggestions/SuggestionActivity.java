@@ -64,6 +64,7 @@ import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.Slider;
 import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
+import com.mplady.lacarte.PlacesClientManager;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
 
@@ -359,6 +360,7 @@ public class SuggestionActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @SuppressLint("SetTextI18n")
     public void setUpDialogPortrait(FloatingActionButton btnValiderSelection, RadioGroup radioGroupDialogSuggestions,
                                     RadioGroup radioGroupDialog2, final boolean[] isSettingByCode,
                                     View dialogView, AlertDialog dialog) {
@@ -419,6 +421,7 @@ public class SuggestionActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     public void setUpDialogLandscape(FloatingActionButton btnValiderSelection, RadioGroup radioGroupDialogSuggestions,
                                      RadioGroup radioGroupDialog2, RadioGroup radioGroupDialog3,
                                      final boolean[] isSettingByCode, View dialogView, AlertDialog dialog) {
@@ -766,7 +769,7 @@ public class SuggestionActivity extends AppCompatActivity {
         buttonNoSuggestions = findViewById(R.id.buttonNoSuggestions);
 
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
-        placesClientSuggestion = Places.createClient(SuggestionActivity.this);
+        placesClientSuggestion = PlacesClientManager.getPlacesClient(this);
     }
 
     @SuppressLint("SetTextI18n")

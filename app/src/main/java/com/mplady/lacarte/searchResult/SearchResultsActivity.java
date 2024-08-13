@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
@@ -22,7 +21,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentActivity;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
@@ -33,7 +31,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
@@ -45,8 +42,8 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mplady.lacarte.BuildConfig;
 import com.mplady.lacarte.FavorisDB;
+import com.mplady.lacarte.PlacesClientManager;
 import com.mplady.lacarte.R;
 import com.mplady.lacarte.favori.Favori;
 
@@ -92,14 +89,12 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
     private SearchView searchViewResults;
     private ListView listView;
     private GoogleMap gMap;
-    private PlacesClient placesClient;
     private ArrayAdapter<String> adapter;
     private final List<String> suggestionList = new ArrayList<>();
     private PlacesClient placesClientResults;
     private Bitmap bitmap, resizedBitmap;
     private FavorisDB favorisDB;
     private List<Favori> favorisList;
-    private ViewGroup mainContent;
     private ImageView logoChargement;
 
 
@@ -199,17 +194,16 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
 
     private void setFields(String query) {
         chargement();
-        placesClient = Places.createClient(getApplicationContext());
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                 .setQuery(query)
                 .build();
-        placesClient.findAutocompletePredictions(request).addOnSuccessListener((response) -> {
+        placesClientResults.findAutocompletePredictions(request).addOnSuccessListener((response) -> {
             for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                 String placeId = prediction.getPlaceId();
                 FetchPlaceRequest requests = FetchPlaceRequest.builder(placeId, fields).build();
 
-                placesClient.fetchPlace(requests).addOnSuccessListener((responses) -> {
+                placesClientResults.fetchPlace(requests).addOnSuccessListener((responses) -> {
                     Place place = responses.getPlace();
                     nameLieuSearch = place.getName();
                     nomLieuSearch.setText(nameLieuSearch);
@@ -239,7 +233,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                                 .setMaxWidth(500)
                                 .setMaxHeight(500)
                                 .build();
-                        placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
+                        placesClientResults.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
                             bitmap = fetchPhotoResponse.getBitmap();
                             resizedBitmap = Bitmap.createScaledBitmap(bitmap, 500, 500, true);
                             placePhoto.setImageBitmap(resizedBitmap);
@@ -401,7 +395,6 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
         searchViewResults = findViewById(R.id.searchViewResults);
         listView = findViewById(R.id.suggestionsListViewResults);
         placePhoto = findViewById(R.id.placePhoto);
-        mainContent = findViewById(R.id.mainResult);
         logoChargement = findViewById(R.id.logoChargement);
 
         btnYAller.setOnClickListener(v -> {
@@ -409,8 +402,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
             openGoogleMaps();
         });
 
-        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
-        placesClientResults = Places.createClient(SearchResultsActivity.this);
+        placesClientResults = PlacesClientManager.getPlacesClient(this);
     }
 
     @Override
