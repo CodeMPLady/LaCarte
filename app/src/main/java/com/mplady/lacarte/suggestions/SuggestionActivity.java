@@ -129,6 +129,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private int rayonDeRecherche = 500;
     private Slider sliderRecherche;
     private ViewGroup mainContent;
+    String selectedText;
 
 
 
@@ -236,7 +237,9 @@ public class SuggestionActivity extends AppCompatActivity {
     private void updateRecyclerView() {
         if (placesTrouve.isEmpty()) {
             buttonNoSuggestions.setVisibility(View.VISIBLE);
-            buttonNoSuggestions.setText("Pas de " +  categorieTitle +" dans ce périmètre");
+
+
+            buttonNoSuggestions.setText("Pas de " +  selectedText +" dans ce périmètre");
             ArrayList<Favori> placesVide = new ArrayList<>();
             adapter.setSuggestions(placesVide);
         } else {
@@ -378,13 +381,14 @@ public class SuggestionActivity extends AppCompatActivity {
 
             if (selectedIdLeft != -1) {
                 RadioButton selectedRadioButton = dialogView.findViewById(selectedIdLeft);
-                String selectedText = selectedRadioButton.getText().toString();
+                selectedText = selectedRadioButton.getText().toString();
 
                 int i=0;
                 while (!selectedText.equals(tableauJolisTypes[i])) {
                     i++;
                 }
                 categorieTitle = tableauTypes[i];
+                categorieJolie = selectedText;
                 fetchNearbyPlaces(latitude, longitude);
                 textTypeTitle.setText(tableauJolisTypes[i] + " autour de vous");
                 updateRecyclerView();
@@ -393,7 +397,7 @@ public class SuggestionActivity extends AppCompatActivity {
 
             if (selectedIdRight != -1) {
                 RadioButton selectedRadioButton = dialogView.findViewById(selectedIdRight);
-                String selectedText = selectedRadioButton.getText().toString();
+                selectedText = selectedRadioButton.getText().toString();
 
                 int i=0;
                 while (!selectedText.equals(tableauJolisTypes[i])) {
@@ -676,13 +680,13 @@ public class SuggestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
         textTypeTitle.setText(tableauSelectionCategoriesTitle[position] + " autour de vous");
+        selectedText = tableauSelectionCategoriesTitle[position];
 
         Resources res = getResources();
         tableauTypes = res.getStringArray(R.array.tableauTypesGMaps);
         tableauJolisTypes = res.getStringArray(R.array.tableauJolisTypesGMaps);
 
         categorieTitle = tableauTypes[position];
-        categorieJolie = tableauJolisTypes[position];
         selectionFAB.setOnClickListener(v -> showDialog());
     }
 }
