@@ -22,171 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkTous"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/dialogTitle"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_tous"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline143"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="@+id/guideline146"
-        app:layout_constraintTop_toTopOf="@+id/guideline27" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkBoulangerie"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkRestaurant"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_bakery"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline145"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
-        app:layout_constraintStart_toStartOf="@+id/guideline146"
-        app:layout_constraintTop_toTopOf="@+id/guideline144" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkPharmacie"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkSupermache"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_pharmacie"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline144"
-        app:layout_constraintEnd_toStartOf="@+id/guideline148"
-        app:layout_constraintStart_toStartOf="@+id/guideline147"
-        app:layout_constraintTop_toTopOf="@+id/guideline143" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkRestaurant"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@id/dialogTitle"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_restaurant"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline143"
-        app:layout_constraintEnd_toStartOf="@+id/guideline148"
-        app:layout_constraintStart_toStartOf="@+id/guideline147"
-        app:layout_constraintTop_toTopOf="@+id/guideline27" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkEssence"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@id/checkTous"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_station_essence"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline144"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
-        app:layout_constraintStart_toStartOf="@+id/guideline146"
-        app:layout_constraintTop_toTopOf="@+id/guideline143" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkMusee"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkMagasin"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_musee"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline145"
-        app:layout_constraintEnd_toStartOf="@+id/guideline148"
-        app:layout_constraintStart_toStartOf="@+id/guideline147"
-        app:layout_constraintTop_toTopOf="@+id/guideline144" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkParc"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkSupermache"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_parc"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline145"
-        app:layout_constraintEnd_toStartOf="@+id/guideline150"
-        app:layout_constraintStart_toStartOf="@+id/guideline149"
-        app:layout_constraintTop_toTopOf="@+id/guideline144" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkSupermache"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkCinema"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_supermarket"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline144"
-        app:layout_constraintEnd_toStartOf="@+id/guideline150"
-        app:layout_constraintStart_toStartOf="@+id/guideline149"
-        app:layout_constraintTop_toTopOf="@+id/guideline143" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkMagasin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkParc"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_magasin"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline143"
-        app:layout_constraintEnd_toStartOf="@+id/guideline150"
-        app:layout_constraintStart_toStartOf="@+id/guideline149"
-        app:layout_constraintTop_toTopOf="@+id/guideline27" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkCinema"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/checkBoulangerie"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/carme"
-        android:text="@string/txt_cinema"
-        app:buttonTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
-        app:layout_constraintStart_toStartOf="@+id/guideline146"
-        app:layout_constraintTop_toTopOf="@+id/guideline145" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -204,12 +39,12 @@
             android:contentDescription="@string/txt_bouton_de_validation"
             app:elevation="0dp"
             app:fabCustomSize="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="26dp"
             app:srcCompat="@drawable/ic_valider"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAnnuler"
@@ -220,12 +55,12 @@
             android:contentDescription="@string/txt_bouton_d_annulation"
             app:elevation="0dp"
             app:fabCustomSize="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="26dp"
             app:srcCompat="@drawable/close24px"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline9"
@@ -235,6 +70,161 @@
             app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkTous"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_tous"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline143"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline146"
+        app:layout_constraintTop_toTopOf="@+id/guideline27" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkRestaurant"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_restaurant"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline143"
+        app:layout_constraintEnd_toStartOf="@+id/guideline148"
+        app:layout_constraintStart_toStartOf="@+id/guideline147"
+        app:layout_constraintTop_toTopOf="@+id/guideline27" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkMagasin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_magasin"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline143"
+        app:layout_constraintEnd_toStartOf="@+id/guideline150"
+        app:layout_constraintStart_toStartOf="@+id/guideline149"
+        app:layout_constraintTop_toTopOf="@+id/guideline27" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkEssence"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_station_essence"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline144"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="@+id/guideline146"
+        app:layout_constraintTop_toTopOf="@+id/guideline143" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkPharmacie"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_pharmacie"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline144"
+        app:layout_constraintEnd_toStartOf="@+id/guideline148"
+        app:layout_constraintStart_toStartOf="@+id/guideline147"
+        app:layout_constraintTop_toTopOf="@+id/guideline143" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkSupermarche"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_supermarket"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline144"
+        app:layout_constraintEnd_toStartOf="@+id/guideline150"
+        app:layout_constraintStart_toStartOf="@+id/guideline149"
+        app:layout_constraintTop_toTopOf="@+id/guideline143" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkBoulangerie"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_bakery"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline145"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="@+id/guideline146"
+        app:layout_constraintTop_toTopOf="@+id/guideline144" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkMusee"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_musee"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline145"
+        app:layout_constraintEnd_toStartOf="@+id/guideline148"
+        app:layout_constraintStart_toStartOf="@+id/guideline147"
+        app:layout_constraintTop_toTopOf="@+id/guideline144" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkParc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_parc"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline145"
+        app:layout_constraintEnd_toStartOf="@+id/guideline150"
+        app:layout_constraintStart_toStartOf="@+id/guideline149"
+        app:layout_constraintTop_toTopOf="@+id/guideline144" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkCinema"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/carme"
+        android:text="@string/txt_cinema"
+        app:buttonTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="@+id/guideline146"
+        app:layout_constraintTop_toTopOf="@+id/guideline145" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"

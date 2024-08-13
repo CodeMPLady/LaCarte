@@ -22,23 +22,8 @@
             android:background="@drawable/gradient_drawer_favoris"
             app:layout_constraintBottom_toTopOf="@+id/guideline28"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/materialDivider"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                app:dividerColor="@color/black"
-                app:dividerThickness="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/btnSupprimerFavori"
@@ -61,12 +46,12 @@
                 app:icon="@drawable/close24px"
                 app:iconSize="24sp"
                 app:iconTint="#9C0000"
+                app:strokeColor="#9C0000"
+                app:strokeWidth="2dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline50"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline42"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="#9C0000"
-                app:strokeWidth="2dp" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="250dp"
@@ -80,10 +65,21 @@
                     android:id="@+id/imgLieuDetails"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="Image du lieu"
+                    android:contentDescription="@string/image_du_lieu"
                     android:src="@drawable/imgmapsdefault" />
-
             </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/materialDivider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:dividerColor="@color/black"
+                app:dividerThickness="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline41"
@@ -122,7 +118,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Nom du lieu"
+            android:text="@string/nom_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="28sp"
@@ -140,7 +136,6 @@
             app:dividerColor="#C5C5C5"
             app:dividerThickness="2dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline52" />
 
@@ -152,12 +147,11 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Adresse"
+            android:text="@string/adresse_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline52" />
 
@@ -166,15 +160,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#E6E6E6"
-            android:text="Catégorie du lieu"
+            android:text="@string/categorie_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:visibility="visible"
             app:chipStrokeColor="@color/black"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/btnYAllerFavori"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtAdresseLieu" />
 
@@ -183,20 +176,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:maxWidth="320dp"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/bouton_y_aller"
-            android:maxWidth="320dp"
             android:text="@string/s_y_rendre"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:icon="@drawable/iconnav"
             app:iconSize="24dp"
             app:iconTint="@color/black"
+            app:strokeColor="#00026E"
+            app:strokeWidth="1dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline49"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:strokeColor="#00026E"
-            app:strokeWidth="1dp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline49"
@@ -213,5 +206,4 @@
             app:layout_constraintGuide_percent="0.56" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

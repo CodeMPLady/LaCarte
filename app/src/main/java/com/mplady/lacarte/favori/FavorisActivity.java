@@ -189,7 +189,7 @@ public class FavorisActivity extends AppCompatActivity {
 
         CheckBox checkRestaurant = dialogView.findViewById(R.id.checkRestaurant);
         CheckBox checkEssence = dialogView.findViewById(R.id.checkEssence);
-        CheckBox checkSupermarche = dialogView.findViewById(R.id.checkSupermache);
+        CheckBox checkSupermarche = dialogView.findViewById(R.id.checkSupermarche);
         CheckBox checkPharmacie = dialogView.findViewById(R.id.checkPharmacie);
         CheckBox checkMagasin = dialogView.findViewById(R.id.checkMagasin);
         CheckBox checkCinema = dialogView.findViewById(R.id.checkCinema);
