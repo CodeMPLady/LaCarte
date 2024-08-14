@@ -37,9 +37,8 @@
                     android:id="@+id/imgLieuDetailsSuggestions"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:contentDescription="Image du lieu"
+                    android:contentDescription="@string/image_du_lieu"
                     android:src="@drawable/imgmapsdefault" />
-
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -52,12 +51,12 @@
             app:icon="@drawable/close24px"
             app:iconSize="24sp"
             app:iconTint="#9C0000"
+            app:strokeColor="#9C0000"
+            app:strokeWidth="2dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline70"
             app:layout_constraintEnd_toStartOf="@+id/guideline73"
             app:layout_constraintStart_toStartOf="@+id/guideline72"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="#9C0000"
-            app:strokeWidth="2dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtNomLieuSuggestions"
@@ -66,7 +65,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Nom du lieu"
+            android:text="@string/nom_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -84,7 +83,6 @@
             app:dividerColor="@color/black"
             app:dividerThickness="2dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline72"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline71" />
 
@@ -96,12 +94,11 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Adresse"
+            android:text="@string/adresse"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline72"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline71" />
 
@@ -110,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#E6E6E6"
-            android:text="Catégorie du lieu"
+            android:text="@string/categorie_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -135,24 +132,24 @@
             app:icon="@drawable/iconnav"
             app:iconSize="24dp"
             app:iconTint="@color/black"
+            app:strokeColor="#00026E"
+            app:strokeWidth="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnAjouterAuxFavoris"
-            app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:strokeColor="#00026E"
-            app:strokeWidth="1dp" />
+            app:layout_constraintStart_toStartOf="@+id/guideline16" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAjouterAuxFavoris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Bouton suppression place"
+            android:contentDescription="@string/bouton_favoris"
             app:backgroundTint="#00026E"
-            app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
-            app:layout_constraintEnd_toStartOf="@+id/guideline72"
-            app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions"
             app:maxImageSize="32dp"
             app:srcCompat="@drawable/bookmarkempty"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
+            app:layout_constraintEnd_toStartOf="@+id/guideline72"
+            app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline16"
@@ -190,6 +187,4 @@
             app:layout_constraintGuide_percent="0.94" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.cardview.widget.CardView>

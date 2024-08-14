@@ -38,9 +38,8 @@
                     android:id="@+id/imgLieuDetailsSuggestions"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:contentDescription="Image du lieu"
+                    android:contentDescription="@string/image_du_lieu"
                     android:src="@drawable/imgmapsdefault" />
-
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -53,12 +52,12 @@
             app:icon="@drawable/close24px"
             app:iconSize="24sp"
             app:iconTint="@color/white"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline86"
             app:layout_constraintEnd_toStartOf="@+id/guideline89"
             app:layout_constraintStart_toStartOf="@+id/guideline88"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/white"
-            app:strokeWidth="2dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtNomLieuSuggestions"
@@ -67,7 +66,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Nom du lieu"
+            android:text="@string/nom_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -85,7 +84,6 @@
             app:dividerColor="#C5C5C5"
             app:dividerThickness="2dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline88"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toBottomOf="@+id/guideline87" />
 
@@ -97,7 +95,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
-            android:text="Adresse"
+            android:text="@string/adresse"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -110,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#272E53"
-            android:text="Catégorie du lieu"
+            android:text="@string/categorie_du_lieu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -143,15 +141,15 @@
             android:id="@+id/btnAjouterAuxFavoris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Bouton suppression place"
+            android:contentDescription="@string/bouton_favoris"
             app:backgroundTint="#272E53"
+            app:maxImageSize="32dp"
+            app:srcCompat="@drawable/bookmarkempty"
+            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
             app:layout_constraintEnd_toStartOf="@+id/guideline88"
             app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions"
-            app:layout_constraintVertical_bias="0.0"
-            app:maxImageSize="32dp"
-            app:srcCompat="@drawable/bookmarkempty"
-            app:tint="@color/white" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline16"
@@ -189,6 +187,4 @@
             app:layout_constraintGuide_percent="0.94" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.cardview.widget.CardView>

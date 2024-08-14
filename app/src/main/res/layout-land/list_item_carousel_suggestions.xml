@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:contentDescription="Image du lieu"
+            android:contentDescription="@string/image_du_lieu"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
             android:src="@drawable/imgmapsdefault"
@@ -38,7 +38,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/carme"
-            android:text="NOM LIEU"
+            android:text="@string/nom_lieu_maj"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -55,7 +55,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/carme"
-            android:text="TYPE LIEU"
+            android:text="@string/type_lieu_maj"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -69,15 +69,15 @@
             style="?attr/materialIconButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:contentDescription="Bouton plus"
+            android:contentDescription="@string/DESC_bouton_open_drawer"
             app:icon="@drawable/iconarrow"
             app:iconSize="16dp"
             app:iconTint="@color/black"
+            app:strokeColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline74"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline35"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/black" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline35"
@@ -93,8 +93,5 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>
-

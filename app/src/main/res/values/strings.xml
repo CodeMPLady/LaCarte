@@ -1,46 +1,65 @@
 <resources>
+    <!--Main Activity-->
     <string name="app_name">LaCarte</string>
-    <string name="btn_aceuil_favoris">Favoris</string>
+    <string name="btn_acceuil_favoris">Favoris</string>
+
+    <!--Content Description-->
     <string name="DESC_bouton_propos">Bouton à propos</string>
-    <string name="DESC_bouton_stats">Bouton stats</string>
     <string name="DESC_logo">LOGO</string>
     <string name="DESC_recycler_carousel">Recycler Carousel</string>
     <string name="DESC_rechercher">Rechercher…</string>
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="DESC_image_carousel">Image Carousel</string>
     <string name="DESC_icone_de_recherche">Icone de recherche</string>
-    <string name="txtPlacelistitemstat">Nom</string>
-    <string name="imgplacestat">imgPlaceStat</string>
-    <string name="categorie_placeStat">Catégorie</string>
-    <string name="nombre_de_visites_stat">Nombre de visites</string>
-    <string name="txt_StatTitle">STATISTIQUES</string>
-    <string name="Title_restaurants">RESTAURANTS</string>
-    <string name="google_maps_key">@null</string>
-    <string name="image_du_lieu_recherch">Image du lieu recherché</string>
+    <string name="image_du_lieu">Image du lieu</string>
+    <string name="image_du_lieu_search">Image du lieu recherché</string>
+    <string name="bouton_favoris">Bouton favoris</string>
+    <string name="bouton_y_aller">Bouton y aller</string>
+    <string name="DESC_bouton_de_validation">Bouton de validation</string>
+    <string name="DESC_bouton_d_annulation">Bouton d\'annulation</string>
+    <string name="DESC_icone_mode_nuit">Icone mode nuit</string>
+    <string name="DESC_icone_mode_jour">Icone mode jour</string>
+    <string name="DESC_logo_chargement">Logo Chargement</string>
+    <string name="DESC_bouton_open_drawer">Bouton open drawer</string>
+    <string name="DESC_bouton_filtres_favoris">Filtres favoris</string>
+
+    <!--Favoris Activity-->
+    <string name="filtres">Filtres</string>
+    <string name="filtre_restaurant">Restaurants</string>
+    <string name="filtre_supermarche">Supermarchés</string>
+    <string name="filtre_magasin">Magasins</string>
+    <string name="filtre_pharmacie">Pharmacies</string>
+    <string name="filtre_station_essence">Stations essence</string>
+    <string name="filtre_boulangerie">Boulangeries</string>
+    <string name="filtre_musee">Musées</string>
+    <string name="filtre_parc">Parcs</string>
+    <string name="filtre_cinema">Cinémas</string>
+    <string name="filtre_tous">Tous</string>
+    <string name="aucun_favori">Aucun favori \npour le moment</string>
+    <string name="arrow_favoris">"         FAVORIS"</string>
+
+    <!--Texts and Titles-->
     <string name="nom_du_lieu">Nom du lieu</string>
     <string name="adresse">Adresse</string>
     <string name="cat_gorie_du_lieu">Catégorie du lieu</string>
-    <string name="bouton_favoris">Bouton favorises</string>
-    <string name="bouton_y_aller">Bouton y aller</string>
     <string name="s_y_rendre">S\'y rendre</string>
-    <string name="filtres">Filtres</string>
-    <string name="txt_restaurant">Restaurants</string>
-    <string name="txt_supermarket">Supermarchés</string>
-    <string name="txt_magasin">Magasins</string>
-    <string name="txt_pharmacie">Pharmacies</string>
-    <string name="txt_station_essence">Stations essence</string>
-    <string name="txt_bouton_de_validation">Bouton de validation</string>
-    <string name="txt_bouton_d_annulation">Bouton d\'annulation</string>
-    <string name="txt_bakery">Boulangeries</string>
-    <string name="txt_musee">Musées</string>
-    <string name="txt_parc">Parcs</string>
-    <string name="txt_cinema">Cinémas</string>
-    <string name="txt_tous">Tous</string>
-    <string name="icone_mode_nuit">Icone mode nuit</string>
-    <string name="icone_mode_jour">Icone mode jour</string>
-    <string name="logo_chargement">Logo Chargement</string>
     <string name="categorie_du_lieu">Catégorie du lieu</string>
-    <string name="image_du_lieu">Image du lieu</string>
     <string name="adresse_du_lieu">Adresse</string>
+    <string name="type_lieu">Type de lieu autour de vous</string>
+    <string name="nom_lieu_maj">NOM LIEU</string>
+    <string name="type_lieu_maj">TYPE LIEU</string>
+
+    <!--Suggestions Activity-->
+    <string name="categories_title_dialog">Catégories</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="station_essence">Station essence</string>
+    <string name="supermarche">Supermarché</string>
+    <string name="musee">Musée</string>
+    <string name="cinema">Cinéma</string>
+    <string name="magasin">Magasin</string>
+    <string name="pharmacie">Pharmacie</string>
+    <string name="boulangerie">Boulangerie</string>
+    <string name="parc">Parc</string>
+    <string name="carte">CARTE</string>
+    <string name="perimetre">Périmètre de recherche</string>
+    <string name="aucun_lieu">Aucun lieu \ndans ce périmètre</string>
 </resources>

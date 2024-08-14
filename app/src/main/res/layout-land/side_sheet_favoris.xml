@@ -96,6 +96,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline47"
             app:layout_constraintEnd_toStartOf="@+id/guideline46"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline45" />
@@ -108,6 +109,7 @@
             android:layout_marginEnd="64dp"
             app:dividerColor="@color/black"
             app:dividerThickness="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtAdresseLieu"
             app:layout_constraintEnd_toStartOf="@+id/guideline46"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toBottomOf="@+id/guideline47" />
@@ -117,7 +119,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/fira_sans"
             android:text="@string/adresse_du_lieu"
@@ -126,7 +128,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline46"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toTopOf="@+id/guideline47" />
+            app:layout_constraintTop_toTopOf="@+id/materialDivider2" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipTypeLieu"

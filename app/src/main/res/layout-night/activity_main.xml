@@ -56,18 +56,6 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintWidth_max="700dp" />
 
-    <ListView
-        android:id="@+id/suggestionsListView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:divider="@color/white"
-        android:dividerHeight="0.5dp"
-        android:maxHeight="250dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCarousel"
         android:layout_width="0dp"
@@ -81,6 +69,18 @@
         app:layout_constraintTop_toBottomOf="@+id/searchCardView"
         app:layout_constraintVertical_bias="0.64" />
 
+    <ListView
+        android:id="@+id/suggestionsListView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:divider="@color/white"
+        android:dividerHeight="0.5dp"
+        android:maxHeight="250dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabFavoris"
         android:layout_width="0dp"
@@ -90,7 +90,7 @@
         android:padding="20dp"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
-        android:text="@string/btn_aceuil_favoris"
+        android:text="@string/btn_acceuil_favoris"
         android:textColor="@color/white"
         android:textSize="22sp"
         app:elevation="5dp"
@@ -118,7 +118,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:contentDescription="@string/icone_mode_nuit"
+        android:contentDescription="@string/DESC_icone_mode_nuit"
         android:src="@drawable/darkmodeicon"
         app:layout_constraintBottom_toBottomOf="@+id/switchDarkMode1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +128,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:contentDescription="@string/icone_mode_jour"
+        android:contentDescription="@string/DESC_icone_mode_jour"
         android:src="@drawable/lightmodeicon"
         app:layout_constraintBottom_toBottomOf="@+id/switchDarkMode1"
         app:layout_constraintEnd_toStartOf="@+id/switchDarkMode1"

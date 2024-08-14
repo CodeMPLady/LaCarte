@@ -10,13 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans"
-        android:text="Catégories"
+        android:text="@string/categories_title_dialog"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline162"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +25,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline164"
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline162">
 
@@ -35,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Restaurant"
+            android:text="@string/restaurant"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -44,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Station essence"
+            android:text="@string/station_essence"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -53,8 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:paddingEnd="15dp"
-            android:text="Supermarché"
+            android:text="@string/supermarche"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -63,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Musée"
+            android:text="@string/musee"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -72,10 +69,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Cinéma"
+            android:text="@string/cinema"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
-
     </RadioGroup>
 
     <RadioGroup
@@ -92,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Magasin"
+            android:text="@string/magasin"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -101,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Pharmacie"
+            android:text="@string/pharmacie"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -110,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Boulangerie"
+            android:text="@string/boulangerie"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
 
@@ -119,10 +115,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Parc"
+            android:text="@string/parc"
             android:textColor="@color/white"
             app:buttonTint="@color/white" />
-
     </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -131,15 +126,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#1A420C"
-        android:contentDescription="@string/txt_bouton_de_validation"
+        android:contentDescription="@string/DESC_bouton_de_validation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toTopOf="@+id/guideline164"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/ic_valider"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toTopOf="@+id/guideline164" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAnnulerSelection"
@@ -147,15 +142,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:backgroundTint="#7A0B0B"
-        android:contentDescription="@string/txt_bouton_d_annulation"
+        android:contentDescription="@string/DESC_bouton_d_annulation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toTopOf="@+id/guideline164"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/close24px"
-        app:tint="#FFFFFF" />
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toTopOf="@+id/guideline164" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline26"
@@ -205,5 +200,4 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.82" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

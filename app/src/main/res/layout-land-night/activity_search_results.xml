@@ -23,7 +23,7 @@
         android:id="@+id/logoChargement"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:contentDescription="@string/logo_chargement"
+        android:contentDescription="@string/DESC_logo_chargement"
         android:src="@mipmap/logoround"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="@+id/searchViewResults"
@@ -102,7 +102,7 @@
             android:id="@+id/placePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/image_du_lieu_recherch"
+            android:contentDescription="@string/image_du_lieu_search"
             android:src="@drawable/imgmapsdefault" />
     </androidx.cardview.widget.CardView>
 

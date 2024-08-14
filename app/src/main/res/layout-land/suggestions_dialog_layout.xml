@@ -10,13 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans"
-        android:text="Catégories"
+        android:text="@string/categories_title_dialog"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline155"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +25,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline156"
         app:layout_constraintEnd_toStartOf="@+id/guideline30"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline26"
         app:layout_constraintTop_toTopOf="@+id/guideline155">
 
@@ -34,7 +32,7 @@
             android:id="@+id/radioBtnRestaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Restaurant"
+            android:text="@string/restaurant"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
 
@@ -42,7 +40,7 @@
             android:id="@+id/radioBtnPharmacie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pharmacie"
+            android:text="@string/pharmacie"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
 
@@ -50,10 +48,9 @@
             android:id="@+id/radioBtnMusee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Musée"
+            android:text="@string/musee"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
-
     </RadioGroup>
 
     <RadioGroup
@@ -62,7 +59,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline156"
         app:layout_constraintEnd_toStartOf="@+id/guideline154"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline30"
         app:layout_constraintTop_toTopOf="@+id/guideline155">
 
@@ -70,7 +66,7 @@
             android:id="@+id/radioBtnMagasin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Magasin"
+            android:text="@string/magasin"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
 
@@ -78,8 +74,7 @@
             android:id="@+id/radioBtnSupermache"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingEnd="15dp"
-            android:text="Supermarché"
+            android:text="@string/supermarche"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
 
@@ -87,12 +82,10 @@
             android:id="@+id/radioBtnParc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Parc"
+            android:text="@string/parc"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
-
     </RadioGroup>
-
 
     <RadioGroup
         android:id="@+id/radioGroupDialog3"
@@ -107,7 +100,7 @@
             android:id="@+id/radioBtnEssence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Station essence"
+            android:text="@string/station_essence"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
 
@@ -115,7 +108,7 @@
             android:id="@+id/radioBtnBoulangerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Boulangerie"
+            android:text="@string/boulangerie"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
 
@@ -123,11 +116,9 @@
             android:id="@+id/radioBtnCinema"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cinéma"
+            android:text="@string/cinema"
             android:textSize="14sp"
             app:buttonTint="@color/black" />
-
-
     </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -136,15 +127,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:backgroundTint="#609E4A"
-        android:contentDescription="@string/txt_bouton_de_validation"
+        android:contentDescription="@string/DESC_bouton_de_validation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline159"
-        app:layout_constraintTop_toTopOf="@+id/guideline156"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/ic_valider"
-        app:tint="#082506" />
+        app:tint="#082506"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline159"
+        app:layout_constraintTop_toTopOf="@+id/guideline156" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAnnulerSelection"
@@ -152,15 +143,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:backgroundTint="#9E1010"
-        android:contentDescription="@string/txt_bouton_d_annulation"
+        android:contentDescription="@string/DESC_bouton_d_annulation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline159"
-        app:layout_constraintTop_toTopOf="@+id/guideline156"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/close24px"
-        app:tint="#FFFFFF" />
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline159"
+        app:layout_constraintTop_toTopOf="@+id/guideline156" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline26"
@@ -210,5 +201,4 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans"
-        android:text="Catégories"
+        android:text="@string/categories_title_dialog"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -26,7 +26,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline32"
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline151"
         app:layout_constraintTop_toTopOf="@+id/guideline135">
 
@@ -35,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Restaurant"
+            android:text="@string/restaurant"
             app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -43,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Station essence"
+            android:text="@string/station_essence"
             app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -51,8 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:paddingEnd="15dp"
-            android:text="Supermarché"
+            android:text="@string/supermarche"
             app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -60,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Musée"
+            android:text="@string/musee"
             app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -68,9 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Cinéma"
+            android:text="@string/cinema"
             app:buttonTint="@color/black" />
-
     </RadioGroup>
 
     <RadioGroup
@@ -87,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Magasin"
+            android:text="@string/magasin"
             app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -95,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Pharmacie"
+            android:text="@string/pharmacie"
             app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -103,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Boulangerie"
+            android:text="@string/boulangerie"
             app:buttonTint="@color/black" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -111,9 +108,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Parc"
+            android:text="@string/parc"
             app:buttonTint="@color/black" />
-
     </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -124,15 +120,15 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#609E4A"
-        android:contentDescription="@string/txt_bouton_de_validation"
+        android:contentDescription="@string/DESC_bouton_de_validation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline157"
-        app:layout_constraintTop_toTopOf="@+id/guideline32"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/ic_valider"
-        app:tint="#082506" />
+        app:tint="#082506"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline157"
+        app:layout_constraintTop_toTopOf="@+id/guideline32" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAnnulerSelection"
@@ -142,15 +138,15 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#9E1010"
-        android:contentDescription="@string/txt_bouton_d_annulation"
+        android:contentDescription="@string/DESC_bouton_d_annulation"
         app:elevation="0dp"
         app:fabCustomSize="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline157"
-        app:layout_constraintTop_toTopOf="@+id/guideline32"
         app:maxImageSize="26dp"
         app:srcCompat="@drawable/close24px"
-        app:tint="#FFFFFF" />
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline157"
+        app:layout_constraintTop_toTopOf="@+id/guideline32" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline26"

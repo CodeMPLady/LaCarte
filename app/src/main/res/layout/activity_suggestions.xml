@@ -9,94 +9,13 @@
     android:background="@drawable/blob_bg_suggestions">
 
     <FrameLayout
+        android:id="@+id/frameSuggestions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/frameSuggestions">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <com.google.android.material.slider.Slider
-                android:id="@+id/sliderRecherche"
-                android:layout_width="229dp"
-                android:layout_height="34dp"
-                android:stepSize="100.0"
-                android:value="1000.0"
-                android:valueFrom="200.0"
-                android:valueTo="5000.0"
-                app:labelBehavior="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline22"
-                app:thumbColor="#490000"
-                app:tickColor="#D0C0C0"
-                app:tickVisible="false"
-                app:trackColorActive="#950000"
-                app:trackColorInactive="#F8D8D8" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Périmètre de recherche"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/sliderRecherche"
-                app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
-                app:layout_constraintTop_toBottomOf="@+id/sliderRecherche" />
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/mapFAB"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="#EFEFEF"
-                android:text="CARTE"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                app:icon="@drawable/iconglobe"
-                app:iconSize="30dp"
-                app:iconTint="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/guideline22"
-                app:layout_constraintEnd_toStartOf="@+id/guideline36"
-                app:layout_constraintStart_toStartOf="@+id/guideline106"
-                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
-                app:strokeColor="#5A5A5A"
-                app:strokeWidth="1dp" />
-
-
-            <Button
-                android:id="@+id/selectionFiltresFAB"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/white"
-                android:text="Catégories"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toTopOf="@+id/guideline22"
-                app:layout_constraintEnd_toStartOf="@+id/guideline107"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline36"
-                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
-                app:layout_constraintVertical_bias="0.515"
-                app:strokeColor="@color/black" />
-
-            <ImageView
-                android:id="@+id/logoChargementS"
-                android:layout_width="115dp"
-                android:layout_height="115dp"
-                android:src="@mipmap/logo2fondblanc"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
 
             <Button
                 android:id="@+id/textTypeTitle"
@@ -108,17 +27,93 @@
                 android:elevation="20dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Type de lieu autour de vous"
+                android:text="@string/type_lieu"
                 android:textColor="@color/white"
                 app:autoSizeTextType="uniform"
+                app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+                app:strokeColor="#880015"
                 app:layout_constraintBottom_toTopOf="@+id/guideline103"
                 app:layout_constraintEnd_toStartOf="@+id/guideline105"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/guideline104"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-                app:strokeColor="#880015" />
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/mapFAB"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#EFEFEF"
+                android:text="@string/carte"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                app:icon="@drawable/iconglobe"
+                app:iconSize="30dp"
+                app:iconTint="@color/black"
+                app:strokeColor="#5A5A5A"
+                app:strokeWidth="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline22"
+                app:layout_constraintEnd_toStartOf="@+id/guideline36"
+                app:layout_constraintStart_toStartOf="@+id/guideline106"
+                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle" />
+
+            <Button
+                android:id="@+id/selectionFiltresFAB"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/white"
+                android:text="@string/categories_title_dialog"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                app:strokeColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/guideline22"
+                app:layout_constraintEnd_toStartOf="@+id/guideline107"
+                app:layout_constraintStart_toStartOf="@+id/guideline36"
+                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"/>
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderRecherche"
+                android:layout_width="229dp"
+                android:layout_height="34dp"
+                android:stepSize="100.0"
+                android:value="1000.0"
+                android:valueFrom="200.0"
+                android:valueTo="5000.0"
+                app:labelBehavior="visible"
+                app:thumbColor="#490000"
+                app:tickColor="#D0C0C0"
+                app:tickVisible="false"
+                app:trackColorActive="#950000"
+                app:trackColorInactive="#F8D8D8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline22"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/perimetre"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/sliderRecherche"
+                app:layout_constraintStart_toStartOf="@+id/sliderRecherche"
+                app:layout_constraintTop_toBottomOf="@+id/sliderRecherche" />
+
+            <ImageView
+                android:id="@+id/logoChargementS"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
+                android:contentDescription="@string/DESC_logo_chargement"
+                android:src="@mipmap/logo2fondblanc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/selectionRecView"
@@ -126,7 +121,6 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline66"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline60" />
 
@@ -136,19 +130,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#DFDEDE"
-                android:fontFamily="@font/carme"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="Aucun lieu \ndans ce périmètre"
+                android:text="@string/aucun_lieu"
                 android:textColor="@color/darkblue"
                 android:textSize="20sp"
+                android:fontFamily="@font/carme"
+                app:strokeColor="@color/darkblue"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/selectionRecView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/selectionRecView"
-                app:layout_constraintVertical_bias="0.3"
-                app:strokeColor="@color/darkblue" />
+                app:layout_constraintVertical_bias="0.3" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline36"
@@ -212,7 +206,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.9" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
@@ -221,5 +214,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="end"/>
-
 </androidx.drawerlayout.widget.DrawerLayout>
