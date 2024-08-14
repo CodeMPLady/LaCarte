@@ -17,19 +17,28 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </androidx.fragment.app.FragmentContainerView>
 
     <ImageView
         android:id="@+id/logoChargement"
         android:layout_width="115dp"
         android:layout_height="115dp"
+        android:contentDescription="@string/logo_chargement"
         android:src="@mipmap/logo2fondblanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/searchViewResults"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/searchViewResults"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ListView
         android:id="@+id/suggestionsListViewResults"
@@ -44,17 +53,36 @@
         app:layout_constraintStart_toStartOf="@+id/guideline41"
         app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchViewResults"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/imageBtnFavoris"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
+        android:backgroundTint="#E6E6E6"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/bookmarkempty"
+        app:tint="#F85C2B"
+        android:contentDescription="@string/bouton_favoris"
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="@+id/guideline40"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.appcompat.widget.SearchView>
+    <TextView
+        android:id="@+id/nomLieuSearch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/nom_du_lieu"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/guideline101"
+        app:layout_constraintEnd_toStartOf="@+id/guideline103"
+        app:layout_constraintStart_toStartOf="@+id/guideline21"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -77,31 +105,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_du_lieu_recherch"
-            android:maxWidth="400dp"
-            android:maxHeight="400dp"
-            android:minWidth="100dp"
-            android:minHeight="100dp"
             android:src="@drawable/imgmapsdefault" />
-
     </androidx.cardview.widget.CardView>
 
-
     <TextView
-        android:id="@+id/nomLieuSearch"
+        android:id="@+id/adresseLieuSearch"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/nom_du_lieu"
+        android:layout_marginBottom="8dp"
+        android:text="@string/adresse"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textStyle="bold"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guideline101"
+        app:layout_constraintBottom_toTopOf="@+id/categorieLieuSearch"
         app:layout_constraintEnd_toStartOf="@+id/guideline103"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline100" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/categorieLieuSearch"
@@ -109,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#BFBFBF"
-        android:text="Catégorie du lieu"
+        android:text="@string/categorie_du_lieu"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -117,20 +138,6 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline19"
         app:layout_constraintEnd_toStartOf="@+id/guideline103"
         app:layout_constraintStart_toStartOf="@+id/guideline21" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/imageBtnFavoris"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#E6E6E6"
-        android:contentDescription="@string/bouton_favoris"
-        app:layout_constraintEnd_toStartOf="@+id/guideline21"
-        app:layout_constraintStart_toStartOf="@+id/guideline40"
-        app:layout_constraintTop_toTopOf="parent"
-        app:maxImageSize="30dp"
-        app:srcCompat="@drawable/bookmarkempty"
-        app:tint="#F85C2B" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnYAller"
@@ -181,22 +188,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
-
-    <TextView
-        android:id="@+id/adresseLieuSearch"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/adresse"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/categorieLieuSearch"
-        app:layout_constraintEnd_toStartOf="@+id/guideline103"
-        app:layout_constraintStart_toStartOf="@+id/guideline21"
-        app:layout_constraintTop_toTopOf="@+id/guideline100" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline100"

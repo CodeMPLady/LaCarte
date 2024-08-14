@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainResult"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -17,17 +18,26 @@
         app:layout_constraintEnd_toEndOf="@+id/searchViewResults"
         app:layout_constraintStart_toStartOf="@+id/searchViewResults"
         app:layout_constraintTop_toTopOf="parent">
-
     </androidx.fragment.app.FragmentContainerView>
 
     <ImageView
         android:id="@+id/logoChargement"
         android:layout_width="115dp"
         android:layout_height="115dp"
+        android:contentDescription="@string/logo_chargement"
         android:src="@mipmap/logoround"
         app:layout_constraintBottom_toTopOf="@+id/guideline20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:background="#434343"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,20 +56,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchViewResults" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchViewResults"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:background="#434343"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="400dp"
+        android:maxHeight="400dp"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
         app:cardElevation="7dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline94"
         app:layout_constraintEnd_toStartOf="@+id/guideline25"
@@ -71,10 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_du_lieu_recherch"
-            android:maxWidth="400dp"
-            android:maxHeight="400dp"
             android:src="@drawable/imgmapsdefault" />
-
     </androidx.cardview.widget.CardView>
 
 
@@ -118,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:backgroundTint="#263360"
-        android:text="Catégorie du lieu"
+        android:text="@string/categorie_du_lieu"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -126,20 +127,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
         app:layout_constraintTop_toTopOf="@+id/cardView4" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/imageBtnFavoris"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#E3E3E3"
-        android:contentDescription="@string/bouton_favoris"
-        app:layout_constraintBottom_toTopOf="@+id/guideline20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:maxImageSize="30dp"
-        app:srcCompat="@drawable/bookmarkempty"
-        app:tint="#F85C2B" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnYAller"
@@ -158,6 +145,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
         app:layout_constraintTop_toBottomOf="@+id/categorieLieuSearch" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/imageBtnFavoris"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#E3E3E3"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/bookmarkempty"
+        app:tint="#F85C2B"
+        android:contentDescription="@string/bouton_favoris"
+        app:layout_constraintBottom_toTopOf="@+id/guideline20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline18" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"
