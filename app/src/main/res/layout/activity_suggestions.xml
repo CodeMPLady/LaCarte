@@ -41,7 +41,7 @@
                 android:id="@+id/mapFAB"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="#EFEFEF"
@@ -51,12 +51,12 @@
                 app:icon="@drawable/iconglobe"
                 app:iconSize="30dp"
                 app:iconTint="@color/black"
-                app:strokeColor="#5A5A5A"
-                app:strokeWidth="1dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline36"
                 app:layout_constraintStart_toStartOf="@+id/guideline106"
-                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
+                app:strokeColor="#5A5A5A"
+                app:strokeWidth="1dp" />
 
             <Button
                 android:id="@+id/selectionFiltresFAB"
@@ -64,17 +64,17 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
                 android:backgroundTint="@color/white"
                 android:text="@string/categories_title_dialog"
                 android:textColor="@color/black"
                 app:autoSizeTextType="uniform"
-                app:strokeColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline107"
                 app:layout_constraintStart_toStartOf="@+id/guideline36"
-                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"/>
+                app:layout_constraintTop_toBottomOf="@+id/textTypeTitle"
+                app:strokeColor="@color/black" />
 
             <com.google.android.material.slider.Slider
                 android:id="@+id/sliderRecherche"

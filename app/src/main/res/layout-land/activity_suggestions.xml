@@ -46,14 +46,16 @@
             android:textColor="@color/black"
             app:autoSizeTextType="uniform"
             app:icon="@drawable/iconglobe"
-            app:iconSize="30dp"
+            app:iconSize="28dp"
             app:iconTint="@color/black"
-            app:strokeColor="#5A5A5A"
-            app:strokeWidth="1dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline119"
             app:layout_constraintEnd_toStartOf="@+id/guideline113"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline116"
-            app:layout_constraintTop_toTopOf="@+id/guideline118" />
+            app:layout_constraintTop_toTopOf="@+id/guideline118"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="#5A5A5A"
+            app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/selectionFiltresFAB"
@@ -182,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.13" />
+            app:layout_constraintGuide_percent="0.12" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline117"
