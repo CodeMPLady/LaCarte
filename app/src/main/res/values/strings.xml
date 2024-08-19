@@ -1,6 +1,6 @@
 <resources>
     <!--Main Activity-->
-    <string name="app_name">LaCarte</string>
+    <string name="app_name">La Map</string>
     <string name="btn_acceuil_favoris">Favoris</string>
 
     <!--Content Description-->

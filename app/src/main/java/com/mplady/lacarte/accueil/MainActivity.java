@@ -310,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
         handler.removeCallbacks(runnable);
     }
 
+
     /**
      * Arrête l'animation du carousel.
      */
