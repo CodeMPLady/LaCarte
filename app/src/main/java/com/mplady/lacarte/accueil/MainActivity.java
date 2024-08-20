@@ -295,9 +295,9 @@ public class MainActivity extends AppCompatActivity {
     @NonNull
     private AlertDialog.Builder aboutBuilder() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("A propos de La Carte");
-        builder.setMessage("La Carte vous permet de chercher des lieux et de les ajouter à vos favoris. Elle permet aussi de voir quels sont les endroits situés autour de vous selon une catégorie spécifique.\n\n" +
-                "Cette application a été développée par Michel P. et Naémie C.\n\n" + "Nous avons également développé un site de cuisine.");
+        builder.setTitle("A propos de La Map");
+        builder.setMessage("La Map vous permet de chercher des lieux et de les ajouter à vos favoris. Elle permet aussi de voir quels sont les endroits situés autour de vous selon une catégorie spécifique.\n\n" +
+                "Cette application a été développée par Michel P. et Naémie C.\n\n" + "Si vous êtes intéressés par la cuisine, nous avons également développé un site de recettes.");
         return builder;
     }
 
