@@ -168,5 +168,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.82" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Recherche :"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/searchCardView"
+        app:layout_constraintEnd_toStartOf="@+id/searchCardView"
+        app:layout_constraintTop_toTopOf="@+id/searchCardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
