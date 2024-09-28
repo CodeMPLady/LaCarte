@@ -93,7 +93,6 @@ public class SuggestionActivity extends AppCompatActivity {
             "Parcs",
             "Cinémas"
     };
-
     private TextView txtNomLieuSuggestions, txtAdresseLieuSuggestions;
     private ImageView logoChargement, imgLieuDetailsSuggestions;
     private Button textTypeTitle, selectionFAB, buttonNoSuggestions, btnFermerSuggestions;
@@ -122,7 +121,6 @@ public class SuggestionActivity extends AppCompatActivity {
     private PlacesClient placesClientSuggestion;
     private List<com.google.android.libraries.places.api.model.Place> placesTrouve = new ArrayList<>();
     private FusedLocationProviderClient fusedLocationClient;
-
 
 
     @Override
@@ -171,7 +169,12 @@ public class SuggestionActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_suggestions);
+        initViews();
         setupLayoutManager();
+        recreate();
+        //TODO: faire en sorte que le drawer ne devienne pas vide quand on change d'orientation sans avoir configChanges dans le manifest pour garder le drawer ouvert malgré le changement d'orientation
+
     }
 
     private void setupLayoutManager() {

@@ -1,5 +1,7 @@
 package com.mplady.lacarte.favori;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -72,6 +74,11 @@ public class FavoriRecViewAdapter extends RecyclerView.Adapter<FavoriRecViewAdap
             holder.imgLieu.setImageResource(R.drawable.imgmapsdefault);
 
         holder.itemView.setOnClickListener(v -> activity.openDrawer(place));
+       // if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            //fais en sorte ici que le drawer ne devienne pas vide quand je change d'orientation
+
+
+
     }
 
     private void callBackDatabase() {

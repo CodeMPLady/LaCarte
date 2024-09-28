@@ -116,7 +116,10 @@ public class FavorisActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_favoris);
+        initView();
         setupLayoutManager();
+        //TODO: faire en sorte que le drawer ne devienne pas vide quand on change d'orientation sans avoir configChanges dans le manifest pour garder le drawer ouvert malgré le changement d'orientation
     }
 
     /**
@@ -334,6 +337,7 @@ public class FavorisActivity extends AppCompatActivity {
 
             @Override
             public void onDrawerStateChanged(int newState) {
+                System.out.println("changement!!!");
             }
         });
     }

@@ -38,10 +38,12 @@
 
         <activity
             android:name=".suggestions.SuggestionActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
 
         <activity
             android:name=".favori.FavorisActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
 
         <activity
