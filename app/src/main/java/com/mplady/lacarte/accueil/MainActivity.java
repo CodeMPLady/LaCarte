@@ -1,11 +1,18 @@
 package com.mplady.lacarte.accueil;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
@@ -246,26 +253,40 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn",false);
 
-        if (isDarkModeOn)
+        if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         switchDarkMode1.setChecked(isDarkModeOn);
         switchDarkMode1.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                editor.putBoolean("isDarkModeOn", true);
-
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                editor.putBoolean("isDarkModeOn", false);
-
-            }
-            editor.apply();
+            animateModeChange(isChecked, editor);
         });
     }
 
+    private void animateModeChange(boolean isChecked, SharedPreferences.Editor editor) {
+        final View contentView = findViewById(android.R.id.content);
+
+        contentView.animate()
+                .alpha(0f)
+                .setDuration(500)
+                .withEndAction(() -> {
+                    if (isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        editor.putBoolean("isDarkModeOn", true);
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        editor.putBoolean("isDarkModeOn", false);
+                    }
+                    editor.apply();
+                    contentView.animate()
+                            .alpha(1f)
+                            .setDuration(500)
+                            .start();
+                })
+                .start();
+    }
 
     /**
      * Gère les boutons "A propos" et "Favoris" de MainActivity.
