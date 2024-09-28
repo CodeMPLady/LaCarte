@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp"
-    android:layout_marginStart="25dp"
-    android:layout_marginEnd="25dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:layout_marginTop="5dp"
     android:background="@color/white"
     android:elevation="5dp"
@@ -17,21 +17,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/cardSuggestionImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:contentDescription="@string/image_du_lieu"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
             android:src="@drawable/imgmapsdefault"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline172"
             app:layout_constraintEnd_toStartOf="@+id/guideline68"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guideline171" />
 
         <TextView
             android:id="@+id/cardSuggestionName"
@@ -59,7 +58,7 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline172"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline68"
             app:layout_constraintTop_toBottomOf="@+id/cardSuggestionName" />
@@ -73,11 +72,11 @@
             app:icon="@drawable/iconarrow"
             app:iconSize="16sp"
             app:iconTint="@color/black"
-            app:strokeColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline67"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline34"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/black" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline34"
@@ -98,7 +97,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_percent="0.53" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline171"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.065" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline172"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.935" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

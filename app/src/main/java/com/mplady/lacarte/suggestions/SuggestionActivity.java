@@ -240,8 +240,8 @@ public class SuggestionActivity extends AppCompatActivity {
                 if (photoMetadataList != null && !photoMetadataList.isEmpty()) {
                     PhotoMetadata photoMetadata = photoMetadataList.get(0);
                     FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                            .setMaxWidth(400)
-                            .setMaxHeight(400)
+                            //.setMaxWidth(400)
+                            //.setMaxHeight(400)
                             .build();
                     placesClientSuggestion.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
                         bitmapClassique = fetchPhotoResponse.getBitmap();
