@@ -252,6 +252,9 @@ public class FavorisActivity extends AppCompatActivity {
                 break;
             }
         }
+        if (!isAnyFilterChecked)
+            recreate();
+
         if (isAnyFilterChecked) {
             for (Place fav : preFilteredFavorises) {
                 String categorie = fav.getCategorie();
@@ -279,9 +282,8 @@ public class FavorisActivity extends AppCompatActivity {
      */
     private Set<String> getCategoriesFromFavoris() {
         Set<String> categories = new HashSet<>();
-        for (Place place : favoris) {
+        for (Place place : favoris)
             categories.add(place.getCategorie());
-        }
         return categories;
     }
 
@@ -297,9 +299,9 @@ public class FavorisActivity extends AppCompatActivity {
 
         String recupCategorieFavoriDrawer = place.getCategorie();
 
-        if (Objects.equals(recupCategorieFavoriDrawer, "")) {
+        if (Objects.equals(recupCategorieFavoriDrawer, ""))
             chipTypeLieu.setVisibility(View.GONE);
-        } else {
+        else {
             chipTypeLieu.setVisibility(View.VISIBLE);
             chipTypeLieu.setText(recupCategorieFavoriDrawer);
         }
@@ -349,9 +351,8 @@ public class FavorisActivity extends AppCompatActivity {
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
             View child = viewGroup.getChildAt(i);
             child.setEnabled(enable);
-            if (child instanceof ViewGroup) {
+            if (child instanceof ViewGroup)
                 setEnableRecursively((ViewGroup) child, enable);
-            }
         }
     }
 
@@ -362,9 +363,9 @@ public class FavorisActivity extends AppCompatActivity {
         Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + lieu);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+        if (mapIntent.resolveActivity(getPackageManager()) != null)
             startActivity(mapIntent);
-        } else {
+        else {
             Uri webIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" + lieu);
             Intent webIntent = new Intent(Intent.ACTION_VIEW, webIntentUri);
             startActivity(webIntent);

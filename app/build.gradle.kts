@@ -21,8 +21,8 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 26
-        versionName = "La Map version finale"
+        versionCode = 27
+        versionName = "animation and clarification added"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
