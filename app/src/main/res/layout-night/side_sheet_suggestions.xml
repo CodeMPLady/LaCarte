@@ -34,12 +34,12 @@
                 app:icon="@drawable/close24px"
                 app:iconSize="24sp"
                 app:iconTint="@color/white"
-                app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline80"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline79"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewImage"
@@ -174,22 +174,24 @@
             app:iconSize="24dp"
             app:iconTint="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/guideline82"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline175" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnAjouterAuxFavoris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/bouton_favoris"
             app:backgroundTint="#272E53"
-            app:maxImageSize="32dp"
-            app:srcCompat="@drawable/bookmarkempty"
-            app:tint="@color/white"
+            android:text="@string/btn_acceuil_favoris"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnYAllerSuggestions"
-            app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions" />
+            app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions"
+            app:maxImageSize="32dp"
+            app:icon="@drawable/bookmarkempty"
+            app:iconTint="@color/white" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline81"
@@ -204,6 +206,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.94" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline175"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -40,7 +40,6 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mplady.lacarte.FavorisDB;
 import com.mplady.lacarte.PlacesClientManager;
 import com.mplady.lacarte.R;
@@ -84,7 +83,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
     private TextView nomLieuSearch, adresseLieuSearch;
     private Chip categorieLieuSearch;
     private ImageView placePhoto;
-    private FloatingActionButton btnFavoris;
+    private ExtendedFloatingActionButton btnFavoris;
     private SearchView searchViewResults;
     private ListView listView;
     private GoogleMap gMap;
@@ -180,11 +179,11 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
 
             for(Place place : favorisList){
                 if(place.getNom().equals(nameLieuSearch)){
-                    btnFavoris.setImageResource(R.drawable.bookmarkfill);
+                    btnFavoris.setIconResource(R.drawable.bookmarkfill);
                     isFavorite = true;
                     break;
                 } else {
-                    btnFavoris.setImageResource(R.drawable.bookmarkempty);
+                    btnFavoris.setIconResource(R.drawable.bookmarkempty);
                     isFavorite = false;
                 }
             }
@@ -240,11 +239,11 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                     }
                     for(Place favori : favorisList){
                         if(favori.getNom().equals(nameLieuSearch)){
-                            btnFavoris.setImageResource(R.drawable.bookmarkfill);
+                            btnFavoris.setIconResource(R.drawable.bookmarkfill);
                             isFavorite = true;
                             break;
                         } else {
-                            btnFavoris.setImageResource(R.drawable.bookmarkempty);
+                            btnFavoris.setIconResource(R.drawable.bookmarkempty);
                             isFavorite = false;
                         }
                     }
@@ -309,7 +308,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                 Place place1 = new Place(nomLieu, categorieLieu, bitmapData, adresseLieu);
                 addFavoriInBackground(place1);
 
-                btnFavoris.setImageResource(R.drawable.bookmarkfill);
+                btnFavoris.setIconResource(R.drawable.bookmarkfill);
                 isFavorite = true;
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
@@ -325,7 +324,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
                         break;
                     }
                 }
-                btnFavoris.setImageResource(R.drawable.bookmarkempty);
+                btnFavoris.setIconResource(R.drawable.bookmarkempty);
                 isFavorite = false;
                 Toast.makeText(SearchResultsActivity.this, nameLieuSearch + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }

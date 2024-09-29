@@ -23,12 +23,12 @@
         android:id="@+id/searchCardView"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="16dp"
         android:elevation="30dp"
         android:visibility="visible"
         app:cardCornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerCarousel"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toEndOf="@+id/textRecherche"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -50,9 +50,9 @@
         android:background="#FFFFFF"
         android:isScrollContainer="true"
         android:maxWidth="500dp"
+        android:visibility="gone"
         app:animateNavigationIcon="true"
         app:iconifiedByDefault="false"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/searchCardView"
         app:layout_constraintStart_toStartOf="@+id/searchCardView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -90,12 +90,12 @@
         android:src="@drawable/ic_about"
         app:backgroundTint="#A61F1F"
         app:fabCustomSize="45dp"
-        app:maxImageSize="32dp"
-        app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fabFavoris"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fabFavoris" />
+        app:layout_constraintTop_toTopOf="@+id/fabFavoris"
+        app:maxImageSize="32dp"
+        app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabFavoris"
@@ -120,13 +120,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
-        app:thumbIconTint="#E0C4C4"
-        app:thumbTint="#DB0B0B"
-        app:trackTint="#EDE7E7"
         app:layout_constraintBottom_toBottomOf="@+id/fabFavoris"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/fabFavoris" />
+        app:layout_constraintTop_toTopOf="@+id/fabFavoris"
+        app:thumbIconTint="#E0C4C4"
+        app:thumbTint="#DB0B0B"
+        app:trackTint="#EDE7E7" />
 
     <ImageView
         android:layout_width="30dp"
@@ -168,16 +168,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.82" />
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textRecherche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Recherche :"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/searchCardView"
-        app:layout_constraintEnd_toStartOf="@+id/searchCardView"
-        app:layout_constraintTop_toTopOf="@+id/searchCardView" />
+        android:text="Recherche"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerCarousel"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

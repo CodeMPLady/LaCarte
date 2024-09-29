@@ -18,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ListView listView;
     private MaterialSwitch switchDarkMode1;
+    private TextView textRecherche;
 
     private boolean isUserScrolling = false;
 
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         fabAbout = findViewById(R.id.fabAbout);
         searchCardView = findViewById(R.id.searchCardView);
         switchDarkMode1 = findViewById(R.id.switchDarkMode1);
+        textRecherche = findViewById(R.id.textRecherche);
 
         placesClient = PlacesClientManager.getPlacesClient(this);
     }
@@ -121,6 +124,13 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, R.layout.list_item_suggestions, suggestionList);
         listView.setAdapter(adapter);
         searchIcon.setOnClickListener(v -> toggleSearchView());
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleSearchView();
+                textRecherche.setVisibility(View.GONE);
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

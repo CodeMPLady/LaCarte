@@ -22,14 +22,13 @@
         android:id="@+id/searchCardView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:elevation="30dp"
         android:visibility="visible"
         app:cardCornerRadius="25dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3">
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/textRecherche">
 
         <ImageView
             android:id="@+id/searchIcon"
@@ -49,9 +48,9 @@
         android:layout_marginTop="24dp"
         android:background="@color/white"
         android:isScrollContainer="true"
+        android:visibility="gone"
         app:animateNavigationIcon="true"
         app:iconifiedByDefault="false"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
@@ -94,8 +93,8 @@
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:text="@string/btn_acceuil_favoris"
-        android:textSize="22sp"
         android:textColor="@color/black"
+        android:textSize="22sp"
         app:elevation="5dp"
         app:icon="@drawable/ic_favoris"
         app:iconPadding="-20dp"
@@ -110,13 +109,13 @@
         android:id="@+id/switchDarkMode1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:thumbIconTint="#E0C4C4"
-        app:thumbTint="#DB0B0B"
-        app:trackTint="#EDE7E7"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:thumbIconTint="#E0C4C4"
+        app:thumbTint="#DB0B0B"
+        app:trackTint="#EDE7E7" />
 
     <ImageView
         android:layout_width="30dp"
@@ -144,13 +143,13 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/DESC_bouton_propos"
         android:src="@drawable/ic_about"
-        app:tint="@color/white"
         app:backgroundTint="#A61F1F"
         app:fabCustomSize="45dp"
-        app:maxImageSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:maxImageSize="32dp"
+        app:tint="@color/white" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -197,15 +196,16 @@
         app:layout_constraintGuide_percent="0.6" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textRecherche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Recherche :"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/searchCardView"
-        app:layout_constraintEnd_toStartOf="@+id/searchCardView"
-        app:layout_constraintTop_toTopOf="@+id/searchCardView" />
+        android:layout_marginTop="16dp"
+        android:text="Recherche"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,8 +17,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline20"
         app:layout_constraintEnd_toEndOf="@+id/searchViewResults"
         app:layout_constraintStart_toStartOf="@+id/searchViewResults"
-        app:layout_constraintTop_toTopOf="parent">
-    </androidx.fragment.app.FragmentContainerView>
+        app:layout_constraintTop_toTopOf="parent"></androidx.fragment.app.FragmentContainerView>
 
     <ImageView
         android:id="@+id/logoChargement"
@@ -29,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewResults"
@@ -146,19 +145,21 @@
         app:layout_constraintStart_toStartOf="@+id/guideline25"
         app:layout_constraintTop_toBottomOf="@+id/categorieLieuSearch" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/imageBtnFavoris"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
         android:backgroundTint="#E6E6E6"
-        app:maxImageSize="30dp"
-        app:srcCompat="@drawable/bookmarkempty"
-        app:tint="#F85C2B"
         android:contentDescription="@string/bouton_favoris"
+        android:text="@string/btn_acceuil_favoris"
+        android:textColor="#AC0505"
+        app:icon="@drawable/bookmarkempty"
+        app:iconTint="#F85C2B"
         app:layout_constraintBottom_toTopOf="@+id/guideline20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline18" />
+        app:maxImageSize="30dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"

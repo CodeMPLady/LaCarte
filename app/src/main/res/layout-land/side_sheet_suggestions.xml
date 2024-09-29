@@ -138,15 +138,18 @@
             app:layout_constraintEnd_toStartOf="@+id/btnAjouterAuxFavoris"
             app:layout_constraintStart_toStartOf="@+id/guideline16" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnAjouterAuxFavoris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/bouton_favoris"
             app:backgroundTint="#00026E"
             app:maxImageSize="32dp"
-            app:srcCompat="@drawable/bookmarkempty"
-            app:tint="@color/white"
+            android:text="@string/btn_acceuil_favoris"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:icon="@drawable/bookmarkempty"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/btnYAllerSuggestions"
             app:layout_constraintEnd_toStartOf="@+id/guideline72"
             app:layout_constraintTop_toTopOf="@+id/btnYAllerSuggestions" />

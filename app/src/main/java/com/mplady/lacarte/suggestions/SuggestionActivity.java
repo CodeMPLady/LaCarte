@@ -96,8 +96,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private TextView txtNomLieuSuggestions, txtAdresseLieuSuggestions;
     private ImageView logoChargement, imgLieuDetailsSuggestions;
     private Button textTypeTitle, selectionFAB, buttonNoSuggestions, btnFermerSuggestions;
-    private ExtendedFloatingActionButton carteDisplay, btnYAllerSuggestions;
-    private FloatingActionButton btnAjouterAuxFavoris;
+    private ExtendedFloatingActionButton carteDisplay, btnYAllerSuggestions, btnAjouterAuxFavoris;
     private SuggestionRecViewAdapter adapter;
     private RecyclerView selectionRecView;
     private DrawerLayout drawerLayoutSuggestions;
@@ -295,15 +294,15 @@ public class SuggestionActivity extends AppCompatActivity {
                 btnFermerSuggestions.setOnClickListener(v -> drawerLayoutSuggestions.closeDrawer(GravityCompat.END));
                 String nomLieu = txtNomLieuSuggestions.getText().toString();
                 isFavorite = false;
-                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
+                btnAjouterAuxFavoris.setIconResource(R.drawable.bookmarkempty);
                 getFavoriListInBackground();
                 for(Place place : favorisList) {
                     if (place.getNom().equals(nomLieu)) {
-                        btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
+                        btnAjouterAuxFavoris.setIconResource(R.drawable.bookmarkfill);
                         isFavorite = true;
                         break;
                     } else {
-                        btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
+                        btnAjouterAuxFavoris.setIconResource(R.drawable.bookmarkempty);
                         isFavorite = false;
                     }
                 }
@@ -671,7 +670,7 @@ public class SuggestionActivity extends AppCompatActivity {
                 Place place1 = new Place(nomLieu, categorieLieu, bitmapData, adresseLieu);
                 addFavoriInBackground(place1);
 
-                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkfill);
+                btnAjouterAuxFavoris.setIconResource(R.drawable.bookmarkfill);
                 isFavorite = true;
                 Toast.makeText(SuggestionActivity.this, nomLieu + " ajouté aux favoris !", Toast.LENGTH_SHORT).show();
             } else {
@@ -687,7 +686,7 @@ public class SuggestionActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                btnAjouterAuxFavoris.setImageResource(R.drawable.bookmarkempty);
+                btnAjouterAuxFavoris.setIconResource(R.drawable.bookmarkempty);
                 isFavorite = false;
                 Toast.makeText(SuggestionActivity.this, txtNomLieuSuggestions.getText().toString() + " retiré des favoris !", Toast.LENGTH_SHORT).show();
             }
