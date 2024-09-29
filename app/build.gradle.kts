@@ -21,7 +21,7 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 27
+        versionCode = 28
         versionName = "animation and clarification added"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
