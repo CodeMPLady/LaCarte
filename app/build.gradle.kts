@@ -12,7 +12,7 @@ plugins {
 
 android {
     namespace = "com.mplady.lacarte"
-    compileSdk = 34
+    compileSdk = 36
 
     android.buildFeatures.buildConfig = true
 
@@ -20,9 +20,9 @@ android {
     defaultConfig {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 28
-        versionName = "animation and clarification added"
+        targetSdk = 36
+        versionCode = 29
+        versionName = "Update sdk"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
