@@ -21,8 +21,8 @@ android {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
         targetSdk = 36
-        versionCode = 29
-        versionName = "Update sdk"
+        versionCode = 30
+        versionName = "Bug open drawer->googleMap"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
