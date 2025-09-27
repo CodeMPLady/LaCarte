@@ -57,6 +57,9 @@ public class FavorisActivity extends AppCompatActivity {
     private Chip chipTypeLieu;
     private DrawerLayout drawerLayout;
     private ViewGroup mainContent;
+    private DrawerLayout.DrawerListener drawerListener;
+
+    private int x;
 
     boolean[] filter = new boolean[10];
 
@@ -74,7 +77,6 @@ public class FavorisActivity extends AppCompatActivity {
         getFavoriListInBackground(true);
         initView();
         setupLayoutManager();
-
     }
 
     /**
@@ -312,8 +314,10 @@ public class FavorisActivity extends AppCompatActivity {
         } else
             imgLieuDetails.setImageResource(R.drawable.imgmapsdefault);
 
-        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+        if (drawerListener != null)
+            drawerLayout.removeDrawerListener(drawerListener);
 
+        drawerListener = new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
             }
@@ -330,6 +334,7 @@ public class FavorisActivity extends AppCompatActivity {
                     recreate();
                 });
                 btnYAllerFavori.setOnClickListener(v -> openGoogleMaps(place.getNom()));
+                System.out.println("place : " + place.getNom());
             }
 
             @Override
@@ -339,9 +344,9 @@ public class FavorisActivity extends AppCompatActivity {
 
             @Override
             public void onDrawerStateChanged(int newState) {
-                System.out.println("changement!!!");
             }
-        });
+        };
+        drawerLayout.addDrawerListener(drawerListener);
     }
 
     /**

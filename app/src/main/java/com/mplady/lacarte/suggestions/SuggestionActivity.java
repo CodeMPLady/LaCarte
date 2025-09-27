@@ -115,6 +115,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private Bitmap bitmapClassique, resizedBitmap;
     private List<Place> favorisList;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private DrawerLayout.DrawerListener drawerListener;
 
     FavorisDB favorisDB;
     private PlacesClient placesClientSuggestion;
@@ -282,7 +283,10 @@ public class SuggestionActivity extends AppCompatActivity {
         else
             imgLieuDetailsSuggestions.setImageResource(R.drawable.imgmapsdefault);
 
-        drawerLayoutSuggestions.addDrawerListener(new DrawerLayout.DrawerListener() {
+        if (drawerListener != null)
+            drawerLayoutSuggestions.removeDrawerListener(drawerListener);
+
+        drawerListener = new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
             }
@@ -317,7 +321,8 @@ public class SuggestionActivity extends AppCompatActivity {
             @Override
             public void onDrawerStateChanged(int newState) {
             }
-        });
+        };
+        drawerLayoutSuggestions.addDrawerListener(drawerListener);
     }
 
     private void setEnableRecursively(ViewGroup viewGroup, boolean enable) {
