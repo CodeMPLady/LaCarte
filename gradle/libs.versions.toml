@@ -1,33 +1,25 @@
 [versions]
-agp = "8.13.0"
-firebaseBom = "33.1.0"
-glide = "4.16.0"
-googlePlaces = "2.5.0"
+agp = "9.2.0"
+glide = "5.0.7"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-appcompat = "1.6.1"
-material = "1.12.0"
-navigationFragment = "2.7.7"
-navigationUi = "2.7.7"
-activity = "1.9.0"
-constraintlayout = "2.1.4"
-placesVersion = "2.4.0"
+junitVersion = "1.3.0"
+espressoCore = "3.7.0"
+appcompat = "1.7.1"
+material = "1.13.0"
+navigationFragment = "2.9.8"
+navigationUi = "2.9.8"
+activity = "1.13.0"
+constraintlayout = "2.2.1"
 playServicesLocation = "21.3.0"
-playServicesMapsVersion = "17.0.0"
-playServicesPlaces = "18.0.0"
-roomCompiler = "2.6.1"
-roomRuntime = "2.6.1"
+roomCompiler = "2.8.4"
+roomRuntime = "2.8.4"
 secretsGradlePlugin = "2.0.1"
-playServicesMaps = "18.2.0"
-playServicesFitness = "21.2.0"
-places = "3.5.0"
-fragment = "1.7.1"
-firebaseCrashlyticsBuildtools = "3.0.2"
+playServicesMaps = "20.0.0"
+playServicesFitness = "21.3.0"
+places = "5.2.0"
+fragment = "1.8.9"
 
 [libraries]
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -38,11 +30,7 @@ navigation-fragment = { group = "androidx.navigation", name = "navigation-fragme
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-places-v240 = { module = "com.google.android.libraries.places:places", version.ref = "placesVersion" }
-places-v250 = { module = "com.google.android.libraries.places:places", version.ref = "googlePlaces" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
-play-services-maps-v1700 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
-play-services-places = { module = "com.google.android.gms:play-services-places", version.ref = "playServicesPlaces" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
@@ -50,7 +38,6 @@ play-services-maps = { group = "com.google.android.gms", name = "play-services-m
 play-services-fitness = { group = "com.google.android.gms", name = "play-services-fitness", version.ref = "playServicesFitness" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
 fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
-firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

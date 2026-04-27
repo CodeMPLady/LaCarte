@@ -6,8 +6,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -94,6 +92,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
     private FavorisDB favorisDB;
     private List<Place> favorisList;
     private ImageView logoChargement;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 
     @Override
@@ -192,7 +191,7 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
 
     private void setFields(String query) {
         chargement();
-        List<com.google.android.libraries.places.api.model.Place.Field> fields = Arrays.asList(com.google.android.libraries.places.api.model.Place.Field.ID, com.google.android.libraries.places.api.model.Place.Field.NAME, com.google.android.libraries.places.api.model.Place.Field.ADDRESS, com.google.android.libraries.places.api.model.Place.Field.PHOTO_METADATAS, com.google.android.libraries.places.api.model.Place.Field.TYPES);
+        List<com.google.android.libraries.places.api.model.Place.Field> fields = Arrays.asList(com.google.android.libraries.places.api.model.Place.Field.ID, com.google.android.libraries.places.api.model.Place.Field.DISPLAY_NAME, com.google.android.libraries.places.api.model.Place.Field.FORMATTED_ADDRESS, com.google.android.libraries.places.api.model.Place.Field.PHOTO_METADATAS, com.google.android.libraries.places.api.model.Place.Field.TYPES);
         FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
                 .setQuery(query)
                 .build();
@@ -203,9 +202,9 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
 
                 placesClientResults.fetchPlace(requests).addOnSuccessListener((responses) -> {
                     com.google.android.libraries.places.api.model.Place place = responses.getPlace();
-                    nameLieuSearch = place.getName();
+                    nameLieuSearch = place.getDisplayName();
                     nomLieuSearch.setText(nameLieuSearch);
-                    adresse = place.getAddress();
+                    adresse = place.getFormattedAddress();
                     adresseLieuSearch.setText(adresse);
                     listCategories = place.getPlaceTypes();
                     assert listCategories != null;
@@ -341,30 +340,15 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
     }
 
     public void deleteFavoriInBackground(Place place) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisDB.getFavoriDAO().deleteFavori(place);
-            handler.post(() -> {});
-        });
+        executorService.execute(() -> favorisDB.getFavoriDAO().deleteFavori(place));
     }
 
     public void addFavoriInBackground(Place place) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisDB.getFavoriDAO().addFavori(place);
-            handler.post(() -> {});
-        });
+        executorService.execute(() -> favorisDB.getFavoriDAO().addFavori(place));
     }
 
     public void getFavoriListInBackground() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisList = favorisDB.getFavoriDAO().getAllFavoris();
-            handler.post(() -> {});
-        });
+        executorService.execute(() -> favorisList = favorisDB.getFavoriDAO().getAllFavoris());
     }
 
     private void openGoogleMaps() {
@@ -420,5 +404,11 @@ public class SearchResultsActivity extends AppCompatActivity implements OnMapRea
         } catch (IOException e) {
             System.out.println("Geocoder error: " + e.getMessage());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executorService.shutdown();
     }
 }

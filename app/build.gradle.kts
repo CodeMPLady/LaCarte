@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.ApplicationExtension
 import java.util.Properties
 
 val secretPropsFile = rootProject.file("secrets.properties")
@@ -10,26 +11,26 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
-android {
+configure<ApplicationExtension> {
     namespace = "com.mplady.lacarte"
-    compileSdk = 36
+    compileSdk = 37
 
-    android.buildFeatures.buildConfig = true
+    buildFeatures {
+        buildConfig = true
+    }
 
 
     defaultConfig {
         applicationId = "com.mplady.lacarte"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 30
         versionName = "Bug open drawer->googleMap"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val properties = Properties()
-        properties.load(project.rootProject.file("secrets.properties").inputStream())
-        buildConfigField("String", "MAPS_API_KEY", "\"${secretProps["MAPS_API_KEY"]}\"")
-        val apiKey = properties.getProperty("MAPS_API_KEY") ?: ""
+        val apiKey = secretProps.getProperty("MAPS_API_KEY") ?: ""
+        buildConfigField("String", "MAPS_API_KEY", "\"$apiKey\"")
         manifestPlaceholders["MAPS_API_KEY"] = apiKey
     }
 

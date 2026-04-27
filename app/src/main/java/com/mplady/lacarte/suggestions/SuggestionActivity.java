@@ -13,8 +13,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +119,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private PlacesClient placesClientSuggestion;
     private List<com.google.android.libraries.places.api.model.Place> placesTrouve = new ArrayList<>();
     private FusedLocationProviderClient fusedLocationClient;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 
     @Override
@@ -142,16 +141,12 @@ public class SuggestionActivity extends AppCompatActivity {
 
     private void getRadius() {
         sliderRecherche.addOnChangeListener((slider, value, fromUser) -> rayonDeRecherche = (int) value);
-        sliderRecherche.setLabelFormatter(new LabelFormatter() {
-            @NonNull
-            @Override
-            public String getFormattedValue(float value) {
-                int intValue = (int) value;
-                if (intValue <= 1000)
-                    return intValue + "m";
-                else
-                    return value/1000 +  "km";
-            }
+        sliderRecherche.setLabelFormatter(value -> {
+            int intValue = (int) value;
+            if (intValue <= 1000)
+                return intValue + "m";
+            else
+                return value/1000 +  "km";
         });
 
         sliderRecherche.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
@@ -196,7 +191,7 @@ public class SuggestionActivity extends AppCompatActivity {
     private void fetchNearbyPlaces(double latitudeA, double longitudeA) {
         chargement();
         final List<com.google.android.libraries.places.api.model.Place.Field> placeFields = Arrays.asList(
-                com.google.android.libraries.places.api.model.Place.Field.ID, com.google.android.libraries.places.api.model.Place.Field.NAME, com.google.android.libraries.places.api.model.Place.Field.ADDRESS,
+                com.google.android.libraries.places.api.model.Place.Field.ID, com.google.android.libraries.places.api.model.Place.Field.DISPLAY_NAME, com.google.android.libraries.places.api.model.Place.Field.FORMATTED_ADDRESS,
                 com.google.android.libraries.places.api.model.Place.Field.TYPES, com.google.android.libraries.places.api.model.Place.Field.PHOTO_METADATAS, com.google.android.libraries.places.api.model.Place.Field.PRIMARY_TYPE);
 
         LatLng center = new LatLng(latitudeA, longitudeA);
@@ -251,10 +246,10 @@ public class SuggestionActivity extends AppCompatActivity {
                         resizedBitmap = Bitmap.createScaledBitmap(bitmapClassique, 400, 400, true);
 
                         Place favori = new Place(
-                                Objects.requireNonNull(place.getName()),
+                                Objects.requireNonNull(place.getDisplayName()),
                                 categorieTitle,
                                 resizedBitmap,
-                                place.getAddress(),
+                                place.getFormattedAddress(),
                                 Objects.requireNonNull(place.getPlaceTypes()).get(0)
                         );
                         places.add(favori);
@@ -555,14 +550,14 @@ public class SuggestionActivity extends AppCompatActivity {
             LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
             for (com.google.android.libraries.places.api.model.Place place : placesTrouve) {
-                String addressStr = place.getAddress();
+                String addressStr = place.getFormattedAddress();
                 try {
                     assert addressStr != null;
                     List<Address> addresses = geocoder.getFromLocationName(addressStr, 1);
                     if (addresses != null && !addresses.isEmpty()) {
                         Address address = addresses.get(0);
                         LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
-                        googleMap.addMarker(new MarkerOptions().position(location).title(place.getName()));
+                        googleMap.addMarker(new MarkerOptions().position(location).title(place.getDisplayName()));
                         boundsBuilder.include(location);
                     } else
                         System.out.println("No address found for: " + addressStr);
@@ -636,30 +631,15 @@ public class SuggestionActivity extends AppCompatActivity {
     }
 
     public void getFavoriListInBackground() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisList = favorisDB.getFavoriDAO().getAllFavoris();
-            handler.post(() -> {});
-        });
+        executorService.execute(() -> favorisList = favorisDB.getFavoriDAO().getAllFavoris());
     }
 
     public void addFavoriInBackground(Place place) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisDB.getFavoriDAO().addFavori(place);
-            handler.post(() -> {});
-        });
+        executorService.execute(() -> favorisDB.getFavoriDAO().addFavori(place));
     }
 
     public void deleteFavoriInBackground(Place place) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(() -> {
-            favorisDB.getFavoriDAO().deleteFavori(place);
-            handler.post(() -> {});
-        });
+        executorService.execute(() -> favorisDB.getFavoriDAO().deleteFavori(place));
     }
 
     private void ajouterAuxFavoris() {
@@ -791,5 +771,11 @@ public class SuggestionActivity extends AppCompatActivity {
 
         categorieTitle = tableauTypes[position];
         selectionFAB.setOnClickListener(v -> showDialog());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executorService.shutdown();
     }
 }
